@@ -69,12 +69,28 @@
   padding-top: 8px;
 }
 
-.client-cards .client-cards-cta {
+/* "Know More": outline pill at rest, fills red with white text on hover
+   (eased in/out). Selectors include `a.button` to win over the global
+   button.secondary styling in styles.css. */
+.client-cards a.button.client-cards-cta {
   padding: 0.4em 1.2em;
   border-radius: 2.4em;
   border-width: 1px;
+  border-color: var(--color-gray-900);
+  background: transparent;
+  color: var(--color-gray-900);
   font-size: var(--detail-size-s);
   font-weight: var(--font-weight-medium);
+  transition: background-color 0.25s ease-in-out, border-color 0.25s ease-in-out,
+    color 0.25s ease-in-out;
+}
+
+.client-cards a.button.client-cards-cta:hover,
+.client-cards a.button.client-cards-cta:focus-visible {
+  border-color: var(--color-red-1000);
+  background: var(--color-red-1000);
+  color: var(--color-white);
+  text-decoration: none;
 }
 
 /* ===================== base variant: grid ===================== */
@@ -142,8 +158,12 @@
   color: var(--color-gray-700);
 }
 
-/* view all button on the light panel: dark pill */
+/* view all button: dark pill at rest; on hover it fills red and reveals a
+   trailing arrow (same behaviour as the profile carousel). */
 .client-cards.carousel .carousel-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
   border: 1px solid transparent;
   border-radius: 2.4em;
   padding: 0.6em 1.5em;
@@ -151,13 +171,36 @@
   color: var(--color-white);
   font-size: var(--detail-size-m);
   font-weight: var(--font-weight-medium);
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, gap 0.2s ease;
+}
+
+/* trailing arrow (drawn in the current text color): hidden at rest,
+   collapsed to zero width so it takes no space until hover. */
+.client-cards.carousel .carousel-view-all::after {
+  content: "";
+  width: 0;
+  height: 1.1em;
+  background: currentcolor;
+  opacity: 0;
+  mask: var(--client-cards-arrow-mask) center / contain no-repeat;
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask: var(--client-cards-arrow-mask) center / contain no-repeat;
+  transition: width 0.2s ease, opacity 0.2s ease;
+
+  --client-cards-arrow-mask: url('../../icons/arrow-right.svg');
 }
 
 .client-cards.carousel .carousel-view-all:hover {
-  background: var(--color-black);
+  gap: 0.6em;
+  background: var(--color-red-1000);
   color: var(--color-white);
   text-decoration: none;
+}
+
+.client-cards.carousel .carousel-view-all:hover::after {
+  width: 1.1em;
+  opacity: 1;
 }
 
 @media (width >= 600px) {
