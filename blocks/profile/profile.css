@@ -157,9 +157,11 @@
   opacity: 0.9;
 }
 
-/* carousel cards are portrait (3:4) per Figma, vs the square base grid */
+/* carousel cards are portrait (3:4) per Figma, vs the square base grid,
+   with a subtle light frame around each image. */
 .profile.carousel .profile-card-image {
   aspect-ratio: 3 / 4;
+  border: 1px solid rgb(255 255 255 / 35%);
 }
 
 /* on the gradient, cards' name/role become white */
@@ -172,12 +174,12 @@
   opacity: 0.85;
 }
 
-/* view all button on gradient: white pill */
+/* view all button on gradient: solid dark pill per Figma */
 .profile.carousel .carousel-view-all {
-  border: 1px solid var(--color-white);
+  border: 1px solid transparent;
   border-radius: 2.4em;
   padding: 0.5em 1.4em;
-  background: transparent;
+  background: var(--color-gray-900);
   color: var(--color-white);
   font-size: var(--detail-size-m);
   font-weight: var(--font-weight-medium);
@@ -185,8 +187,8 @@
 }
 
 .profile.carousel .carousel-view-all:hover {
-  background: var(--color-white);
-  color: var(--color-gray-900);
+  background: var(--color-black);
+  color: var(--color-white);
   text-decoration: none;
 }
 

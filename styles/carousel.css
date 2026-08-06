@@ -81,9 +81,12 @@
   width: 40px;
   height: 40px;
   padding: 0;
-  border: 1px solid var(--carousel-nav-border, rgb(255 255 255 / 45%));
+
+  /* Plain arrows by default (no ring/fill). Consumers can theme the button
+     chrome via these custom properties without touching this rule. */
+  border: 1px solid var(--carousel-nav-border, transparent);
   border-radius: 50%;
-  background: transparent;
+  background: var(--carousel-nav-bg, transparent);
   color: inherit;
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease,
@@ -100,9 +103,9 @@
   cursor: default;
 }
 
+/* subtle feedback on hover: a faint translucent halo, not a hard fill */
 .carousel .carousel-nav-button:hover:not(:disabled) {
-  border-color: currentcolor;
-  background: currentcolor;
+  background: var(--carousel-nav-bg-hover, rgb(255 255 255 / 15%));
 }
 
 .carousel .carousel-nav-icon {
@@ -122,11 +125,6 @@
 
 .carousel .carousel-nav-next .carousel-nav-icon {
   --carousel-arrow-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>');
-}
-
-/* Invert the icon (drawn with currentcolor) when the button fills on hover. */
-.carousel .carousel-nav-button:hover:not(:disabled) .carousel-nav-icon {
-  filter: invert(1);
 }
 
 /* ----- viewport + scrolling track ----- */
