@@ -1,0 +1,149 @@
+/*
+ * testimonial block
+ *  A single-testimonial-at-a-time carousel: a quote on the left and a portrait
+ *  (with name/title overlay) on the right, with prev/next navigation at the
+ *  bottom-left. Uses the shared carousel utility (scripts/carousel.js +
+ *  styles/carousel.css) with navPosition: 'bottom'.
+ *
+ *  The block is designed to sit on a colored/gradient section background
+ *  (applied at the section level via section metadata), so its text and chrome
+ *  default to white. The background image and large watermark text seen in the
+ *  design are intentionally section-level concerns and are not part of the
+ *  block.
+ */
+
+.testimonial {
+  --testimonial-quote-color: var(--color-white);
+  --testimonial-radius: 16px;
+
+  color: var(--color-white);
+}
+
+/* nav arrows inherit white on the colored section */
+.testimonial .carousel {
+  color: var(--color-white);
+
+  --carousel-nav-bg-hover: rgb(255 255 255 / 15%);
+}
+
+/* ----- one testimonial: quote (left) + media (right) ----- */
+.testimonial .testimonial-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  margin: 0;
+  align-items: center;
+}
+
+/* ----- quote ----- */
+.testimonial .testimonial-quote {
+  position: relative;
+  margin: 0;
+  padding: 40px 0 0;
+  font-size: var(--body-size-s);
+  line-height: var(--line-height-400);
+  color: var(--testimonial-quote-color);
+}
+
+/* decorative opening quotation mark */
+.testimonial .testimonial-quote::before {
+  content: "\201C";
+  position: absolute;
+  top: -0.2em;
+  left: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 4rem;
+  line-height: 1;
+  color: rgb(255 255 255 / 60%);
+}
+
+.testimonial .testimonial-quote :first-child {
+  margin-top: 0;
+}
+
+.testimonial .testimonial-quote :last-child {
+  margin-bottom: 0;
+}
+
+/* closing quotation mark after the last paragraph */
+.testimonial .testimonial-quote::after {
+  content: "\201D";
+  display: block;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 4rem;
+  line-height: 0;
+  margin-top: 0.6em;
+  color: rgb(255 255 255 / 60%);
+}
+
+.testimonial .testimonial-quote strong,
+.testimonial .testimonial-quote b {
+  font-weight: var(--font-weight-bold);
+}
+
+/* ----- media: portrait + attribution overlay ----- */
+.testimonial .testimonial-media {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--testimonial-radius);
+  border: 1px solid rgb(255 255 255 / 45%);
+  aspect-ratio: 3 / 4;
+}
+
+.testimonial .testimonial-media picture,
+.testimonial .testimonial-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* name + title overlaid at the bottom of the photo */
+.testimonial .testimonial-attribution {
+  position: absolute;
+  inset: auto 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 40px 24px 20px;
+  text-align: center;
+  color: var(--color-white);
+  background: linear-gradient(to top, rgb(0 0 0 / 55%) 0%, rgb(0 0 0 / 0%) 100%);
+}
+
+.testimonial .testimonial-name {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-size-s);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-400);
+}
+
+.testimonial .testimonial-role {
+  margin: 0;
+  font-size: var(--detail-size-s);
+  line-height: var(--line-height-200);
+  opacity: 0.85;
+}
+
+/* ----- spacing between the item and the bottom nav ----- */
+.testimonial .carousel[data-nav-position="bottom"] > .carousel-nav {
+  margin-top: 8px;
+}
+
+/* ===================== responsive ===================== */
+@media (width >= 900px) {
+  .testimonial .testimonial-item {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 56px;
+  }
+
+  .testimonial .testimonial-quote {
+    font-size: var(--body-size-m);
+  }
+
+  .testimonial .testimonial-media {
+    max-width: 380px;
+    margin-left: auto;
+  }
+}

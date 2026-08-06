@@ -27,6 +27,8 @@
  * @property {'left'|'center'|'right'} [align='left']  Text alignment for the
  *   intro (title & description) at the top.
  * @property {string} [label='carousel']  Accessible label for the region.
+ * @property {'top'|'bottom'} [navPosition='top']  Where the prev/next nav is
+ *   rendered: in the top bar (default) or below the track (bottom-left).
  */
 
 let carouselSeq = 0;
@@ -88,6 +90,7 @@ export default function createCarousel(children, options = {}) {
     step = 1,
     align = 'left',
     label = 'carousel',
+    navPosition = 'top',
   } = options;
 
   carouselSeq += 1;
@@ -95,31 +98,39 @@ export default function createCarousel(children, options = {}) {
 
   const carousel = document.createElement('div');
   carousel.className = 'carousel';
+  carousel.dataset.navPosition = navPosition;
   carousel.setAttribute('role', 'region');
   carousel.setAttribute('aria-roledescription', 'carousel');
   carousel.setAttribute('aria-label', label);
 
-  // --- top: intro (title/desc) + navigation -----------------------------
-  const top = document.createElement('div');
-  top.className = 'carousel-top';
-  // `align` drives the top-bar layout: a centered intro floats the nav to the
-  // far right (absolute), while left/right keep intro and nav on the same row.
-  top.dataset.align = align;
-
-  const intro = document.createElement('div');
-  intro.className = 'carousel-intro';
-  intro.dataset.align = align;
-  if (heading) intro.append(heading);
-  top.append(intro);
-
+  // Navigation (prev/next). Placed in the top bar by default, or below the
+  // track when navPosition is 'bottom'.
   const nav = document.createElement('div');
   nav.className = 'carousel-nav';
   const prev = createArrow('prev');
   const next = createArrow('next');
   nav.append(prev, next);
-  top.append(nav);
 
-  carousel.append(top);
+  // --- top: intro (title/desc) + (optionally) navigation ----------------
+  // Skip the top bar entirely when there is nothing to put in it (no heading
+  // and the nav lives at the bottom).
+  if (heading || navPosition === 'top') {
+    const top = document.createElement('div');
+    top.className = 'carousel-top';
+    // `align` drives the top-bar layout: a centered intro floats the nav to
+    // the far right (absolute), while left/right keep intro and nav on a row.
+    top.dataset.align = align;
+
+    const intro = document.createElement('div');
+    intro.className = 'carousel-intro';
+    intro.dataset.align = align;
+    if (heading) intro.append(heading);
+    top.append(intro);
+
+    if (navPosition === 'top') top.append(nav);
+
+    carousel.append(top);
+  }
 
   // --- viewport + track --------------------------------------------------
   const viewport = document.createElement('div');
@@ -139,6 +150,11 @@ export default function createCarousel(children, options = {}) {
 
   prev.setAttribute('aria-controls', track.id);
   next.setAttribute('aria-controls', track.id);
+
+  // --- bottom navigation (below the track) ------------------------------
+  if (navPosition === 'bottom') {
+    carousel.append(nav);
+  }
 
   // --- optional "view all" ----------------------------------------------
   if (viewAll && viewAll.href) {

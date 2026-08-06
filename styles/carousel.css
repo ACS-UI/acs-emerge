@@ -66,6 +66,11 @@
   display: none;
 }
 
+/* bottom navigation: rendered below the track, left-aligned */
+.carousel[data-nav-position="bottom"] > .carousel-nav {
+  justify-content: flex-start;
+}
+
 /* centered-intro layout floats the nav to the far right of the top bar */
 .carousel .carousel-top[data-align="center"] .carousel-nav {
   position: absolute;
