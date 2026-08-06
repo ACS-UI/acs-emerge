@@ -102,6 +102,9 @@ export default function createCarousel(children, options = {}) {
   // --- top: intro (title/desc) + navigation -----------------------------
   const top = document.createElement('div');
   top.className = 'carousel-top';
+  // `align` drives the top-bar layout: a centered intro floats the nav to the
+  // far right (absolute), while left/right keep intro and nav on the same row.
+  top.dataset.align = align;
 
   const intro = document.createElement('div');
   intro.className = 'carousel-intro';

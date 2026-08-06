@@ -131,8 +131,11 @@
   --carousel-gap: var(--profile-gap);
 }
 
-/* intro (eyebrow + heading), centered per Figma */
+/* intro (eyebrow + heading), centered per Figma in a narrow column so the
+   headline wraps to ~3 lines and the nav can float to the right of it. */
 .profile.carousel .carousel-intro {
+  max-width: 34rem;
+  margin-inline: auto;
   color: var(--color-white);
 }
 
@@ -140,8 +143,8 @@
 .profile.carousel .carousel-intro h3 {
   margin: 8px 0 0;
   color: var(--color-white);
-  font-size: var(--heading-size-xl);
-  line-height: var(--line-height-900);
+  font-size: var(--heading-size-l);
+  line-height: var(--line-height-700);
 }
 
 /* eyebrow: first short paragraph above the heading */
@@ -152,6 +155,11 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   opacity: 0.9;
+}
+
+/* carousel cards are portrait (3:4) per Figma, vs the square base grid */
+.profile.carousel .profile-card-image {
+  aspect-ratio: 3 / 4;
 }
 
 /* on the gradient, cards' name/role become white */

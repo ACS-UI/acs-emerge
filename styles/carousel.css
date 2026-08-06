@@ -25,6 +25,15 @@
   gap: 24px;
 }
 
+/* Centered intro: the intro spans the full width and is centered, while the
+   nav floats to the far right, vertically centered against the heading
+   (the nav positioning lives with the other .carousel-nav rules below). */
+.carousel .carousel-top[data-align="center"] {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
 .carousel .carousel-intro {
   flex: 1 1 auto;
   min-width: 0;
@@ -57,6 +66,14 @@
   display: none;
 }
 
+/* centered-intro layout floats the nav to the far right of the top bar */
+.carousel .carousel-top[data-align="center"] .carousel-nav {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
 .carousel .carousel-nav-button {
   display: inline-flex;
   align-items: center;
@@ -64,12 +81,13 @@
   width: 40px;
   height: 40px;
   padding: 0;
-  border: 1px solid currentcolor;
+  border: 1px solid var(--carousel-nav-border, rgb(255 255 255 / 45%));
   border-radius: 50%;
   background: transparent;
   color: inherit;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease, opacity 0.2s ease;
 }
 
 .carousel .carousel-nav-button:focus-visible {
@@ -78,11 +96,12 @@
 }
 
 .carousel .carousel-nav-button:disabled {
-  opacity: 0.35;
+  opacity: 0.4;
   cursor: default;
 }
 
 .carousel .carousel-nav-button:hover:not(:disabled) {
+  border-color: currentcolor;
   background: currentcolor;
 }
 
