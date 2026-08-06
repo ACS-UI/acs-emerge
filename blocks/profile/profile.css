@@ -39,23 +39,24 @@
   object-fit: cover;
 }
 
-/* hover reveal overlay — soft darkening at the bottom that keeps the photo
-   clearly visible, with bold white text sitting in the lower third. */
+/* hover reveal overlay — a frosted-glass band anchored to the bottom of the
+   card (backdrop blur + translucent tint), so the photo stays clear above it
+   while the bold white text sits on the glass. */
 .profile .profile-card-overlay {
   position: absolute;
-  inset: 0;
+  inset: auto 0 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   gap: 8px;
-  padding: 24px;
+  padding: 20px 24px;
   color: var(--color-white);
-  background: linear-gradient(
-    to top,
-    rgb(0 0 0 / 55%) 0%,
-    rgb(0 0 0 / 30%) 35%,
-    rgb(0 0 0 / 0%) 65%
-  );
+  background: rgb(0 0 0 / 25%);
+  backdrop-filter: blur(14px) saturate(130%);
+  border-top: 1px solid rgb(255 255 255 / 25%);
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+
   opacity: 0;
   transition: opacity 0.3s ease;
 }
