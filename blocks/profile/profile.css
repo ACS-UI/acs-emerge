@@ -40,22 +40,26 @@
 }
 
 /* hover reveal overlay — a frosted-glass band anchored to the bottom of the
-   card (backdrop blur + translucent tint), so the photo stays clear above it
-   while the bold white text sits on the glass. */
+   card (backdrop blur + translucent tint). A vertical gradient mask feathers
+   the whole band (blur + tint together) from transparent at the top to solid
+   at the bottom, so there is no hard edge — the glass fades into the photo. */
 .profile .profile-card-overlay {
   position: absolute;
   inset: auto 0 0;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 20px 24px;
+  padding: 40px 24px 24px;
   color: var(--color-white);
   background: rgb(0 0 0 / 25%);
   backdrop-filter: blur(14px) saturate(130%);
-  border-top: 1px solid rgb(255 255 255 / 25%);
+  mask: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, #000 70%);
 
   /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-backdrop-filter: blur(14px) saturate(130%);
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, #000 70%);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
