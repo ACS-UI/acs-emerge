@@ -1,0 +1,199 @@
+/*
+ * profile block
+ *  - base variant : responsive grid of profile cards (image + name + role),
+ *    with a bio revealed over the image on hover/focus.
+ *  - carousel variant (`.profile.carousel`) : the same cards inside the shared
+ *    carousel utility, on a brand gradient, with intro + top-right nav + view-all.
+ *
+ * Shared carousel styles live in styles/carousel.css (loaded by profile.js
+ * for the carousel variant).
+ */
+
+.profile {
+  --profile-card-radius: 12px;
+  --profile-gap: 24px;
+  --profile-name-color: var(--color-gray-900);
+  --profile-role-color: var(--color-gray-600);
+}
+
+/* ===================== cards (shared by both variants) ===================== */
+.profile .profile-card {
+  display: flex;
+  flex-direction: column;
+  outline: none;
+}
+
+.profile .profile-card-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--profile-card-radius);
+  aspect-ratio: 1 / 1;
+  background: var(--color-gray-100);
+}
+
+.profile .profile-card-image picture,
+.profile .profile-card-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* hover reveal overlay */
+.profile .profile-card-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 20px;
+  color: var(--color-white);
+  background: linear-gradient(
+    to top,
+    rgb(0 0 0 / 85%) 0%,
+    rgb(0 0 0 / 55%) 45%,
+    rgb(0 0 0 / 0%) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.profile .profile-card-overlay :first-child { margin-top: 0; }
+.profile .profile-card-overlay :last-child { margin-bottom: 0; }
+
+.profile .profile-card-overlay p {
+  font-size: var(--body-size-s);
+  line-height: var(--line-height-200);
+}
+
+.profile .profile-card:hover .profile-card-overlay,
+.profile .profile-card:focus-within .profile-card-overlay,
+.profile .profile-card:focus .profile-card-overlay {
+  opacity: 1;
+}
+
+/* name + role (always visible, below the image) */
+.profile .profile-card-body {
+  padding: 12px 4px 0;
+}
+
+.profile .profile-card-name {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-size-s);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-400);
+  color: var(--profile-name-color);
+}
+
+.profile .profile-card-role {
+  margin: 2px 0 0;
+  font-size: var(--detail-size-m);
+  line-height: var(--line-height-200);
+  color: var(--profile-role-color);
+}
+
+/* ===================== base variant: grid ===================== */
+.profile .profile-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--profile-gap);
+}
+
+@media (width >= 600px) {
+  .profile .profile-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  .profile .profile-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ===================== carousel variant ===================== */
+
+/* full-bleed brand gradient panel */
+.profile.carousel {
+  padding: 48px 24px;
+  border-radius: 16px;
+  background: linear-gradient(120deg, #e5322d 0%, #d81f8c 55%, #9c1fb5 100%);
+  color: var(--color-white);
+}
+
+/* carousel layout vars must sit on the utility's own `.carousel` element,
+   otherwise its base `--carousel-visible: 1` (set directly on it) wins over
+   any value inherited from the block. */
+.profile.carousel .carousel {
+  --carousel-visible: 1;
+  --carousel-gap: var(--profile-gap);
+}
+
+/* intro (eyebrow + heading), centered per Figma */
+.profile.carousel .carousel-intro {
+  color: var(--color-white);
+}
+
+.profile.carousel .carousel-intro h2,
+.profile.carousel .carousel-intro h3 {
+  margin: 8px 0 0;
+  color: var(--color-white);
+  font-size: var(--heading-size-xl);
+  line-height: var(--line-height-900);
+}
+
+/* eyebrow: first short paragraph above the heading */
+.profile.carousel .carousel-intro p {
+  margin: 0;
+  font-size: var(--detail-size-m);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+/* on the gradient, cards' name/role become white */
+.profile.carousel .profile-card-name,
+.profile.carousel .profile-card-role {
+  color: var(--color-white);
+}
+
+.profile.carousel .profile-card-role {
+  opacity: 0.85;
+}
+
+/* view all button on gradient: white pill */
+.profile.carousel .carousel-view-all {
+  border: 1px solid var(--color-white);
+  border-radius: 2.4em;
+  padding: 0.5em 1.4em;
+  background: transparent;
+  color: var(--color-white);
+  font-size: var(--detail-size-m);
+  font-weight: var(--font-weight-medium);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.profile.carousel .carousel-view-all:hover {
+  background: var(--color-white);
+  color: var(--color-gray-900);
+  text-decoration: none;
+}
+
+@media (width >= 600px) {
+  .profile.carousel .carousel {
+    --carousel-visible: 2;
+  }
+}
+
+@media (width >= 900px) {
+  .profile.carousel {
+    padding: 56px 48px;
+  }
+
+  .profile.carousel .carousel {
+    --carousel-visible: 3;
+  }
+}
