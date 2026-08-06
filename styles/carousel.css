@@ -59,7 +59,7 @@
 .carousel .carousel-nav {
   display: flex;
   flex: 0 0 auto;
-  gap: 12px;
+  gap: var(--carousel-nav-gap, 4px);
 }
 
 .carousel .carousel-nav[hidden] {
