@@ -182,39 +182,49 @@
   opacity: 0.85;
 }
 
-/* view all button on gradient: solid red pill with a trailing arrow */
+/* view all button: dark pill at rest; on hover it fills red and reveals a
+   trailing arrow. */
 .profile.carousel .carousel-view-all {
   display: inline-flex;
   align-items: center;
-  gap: 0.6em;
+  gap: 0;
   border: 1px solid transparent;
   border-radius: 2.4em;
   padding: 0.6em 1.5em;
-  background: var(--color-red-1000);
+  background: var(--color-gray-900);
   color: var(--color-white);
   font-size: var(--detail-size-m);
   font-weight: var(--font-weight-medium);
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, gap 0.2s ease;
 }
 
-/* trailing arrow (drawn in the current text color) */
+/* trailing arrow (drawn in the current text color): hidden at rest,
+   collapsed to zero width so it takes no space until hover. */
 .profile.carousel .carousel-view-all::after {
   content: "";
-  width: 1.1em;
+  width: 0;
   height: 1.1em;
   background: currentcolor;
+  opacity: 0;
   mask: var(--profile-arrow-mask) center / contain no-repeat;
 
   /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-mask: var(--profile-arrow-mask) center / contain no-repeat;
+  transition: width 0.2s ease, opacity 0.2s ease;
 
   --profile-arrow-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>');
 }
 
 .profile.carousel .carousel-view-all:hover {
-  background: var(--color-red-900);
+  gap: 0.6em;
+  background: var(--color-red-1000);
   color: var(--color-white);
   text-decoration: none;
+}
+
+.profile.carousel .carousel-view-all:hover::after {
+  width: 1.1em;
+  opacity: 1;
 }
 
 @media (width >= 600px) {
