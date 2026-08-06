@@ -39,7 +39,8 @@
   object-fit: cover;
 }
 
-/* hover reveal overlay */
+/* hover reveal overlay — soft darkening at the bottom that keeps the photo
+   clearly visible, with bold white text sitting in the lower third. */
 .profile .profile-card-overlay {
   position: absolute;
   inset: 0;
@@ -47,13 +48,13 @@
   flex-direction: column;
   justify-content: flex-end;
   gap: 8px;
-  padding: 20px;
+  padding: 24px;
   color: var(--color-white);
   background: linear-gradient(
     to top,
-    rgb(0 0 0 / 85%) 0%,
-    rgb(0 0 0 / 55%) 45%,
-    rgb(0 0 0 / 0%) 100%
+    rgb(0 0 0 / 55%) 0%,
+    rgb(0 0 0 / 30%) 35%,
+    rgb(0 0 0 / 0%) 65%
   );
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -64,6 +65,7 @@
 
 .profile .profile-card-overlay p {
   font-size: var(--body-size-s);
+  font-weight: var(--font-weight-bold);
   line-height: var(--line-height-200);
 }
 
@@ -180,20 +182,37 @@
   opacity: 0.85;
 }
 
-/* view all button on gradient: solid dark pill per Figma */
+/* view all button on gradient: solid red pill with a trailing arrow */
 .profile.carousel .carousel-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
   border: 1px solid transparent;
   border-radius: 2.4em;
-  padding: 0.5em 1.4em;
-  background: var(--color-gray-900);
+  padding: 0.6em 1.5em;
+  background: var(--color-red-1000);
   color: var(--color-white);
   font-size: var(--detail-size-m);
   font-weight: var(--font-weight-medium);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+/* trailing arrow (drawn in the current text color) */
+.profile.carousel .carousel-view-all::after {
+  content: "";
+  width: 1.1em;
+  height: 1.1em;
+  background: currentcolor;
+  mask: var(--profile-arrow-mask) center / contain no-repeat;
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask: var(--profile-arrow-mask) center / contain no-repeat;
+
+  --profile-arrow-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>');
+}
+
 .profile.carousel .carousel-view-all:hover {
-  background: var(--color-black);
+  background: var(--color-red-900);
   color: var(--color-white);
   text-decoration: none;
 }
