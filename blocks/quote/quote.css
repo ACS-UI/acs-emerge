@@ -1,0 +1,103 @@
+/* ==========================================================================
+   quote — block-scoped design tokens (extracted from design)
+   ========================================================================== */
+.quote {
+  /* colors */
+  --quote-frame-color: #e30613;
+  --quote-text-color: #1a1a2e;
+  --quote-mark-color: #1a1a2e;
+
+  /* typography */
+  --quote-text-size: var(--heading-font-size-s);
+  --quote-attribution-size: var(--body-font-size-xs);
+  --quote-mark-size: 64px;
+
+  /* layout */
+  --quote-gap: 48px;
+  --quote-frame-width: 18px;
+  --quote-image-ratio: 1 / 1;
+}
+
+.quote .quote-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--quote-gap);
+  align-items: center;
+}
+
+/* --------------------------------------------------------------------------
+   Portrait with red frame
+   -------------------------------------------------------------------------- */
+.quote .quote-image {
+  background-color: var(--quote-frame-color);
+  padding: var(--quote-frame-width);
+  line-height: 0;
+}
+
+.quote .quote-image picture,
+.quote .quote-image img {
+  display: block;
+  width: 100%;
+}
+
+.quote .quote-image img {
+  aspect-ratio: var(--quote-image-ratio);
+  object-fit: cover;
+}
+
+/* --------------------------------------------------------------------------
+   Quote text
+   -------------------------------------------------------------------------- */
+.quote .quote-body {
+  position: relative;
+  color: var(--quote-text-color);
+}
+
+.quote .quote-body blockquote {
+  position: relative;
+  margin: 0;
+  padding: calc(var(--quote-mark-size) * 0.6) 0;
+  font-size: var(--quote-text-size);
+  line-height: 1.5;
+}
+
+/* decorative opening/closing quotation marks */
+.quote .quote-body blockquote::before,
+.quote .quote-body blockquote::after {
+  position: absolute;
+  color: var(--quote-mark-color);
+  font-family: var(--heading-font-family);
+  font-size: var(--quote-mark-size);
+  line-height: 1;
+}
+
+.quote .quote-body blockquote::before {
+  content: '\201C';
+  top: 0;
+  left: 0;
+}
+
+.quote .quote-body blockquote::after {
+  content: '\201D';
+  right: 0;
+  bottom: 0;
+}
+
+.quote .quote-body blockquote p {
+  margin: 0;
+}
+
+.quote .quote-body .quote-attribution {
+  margin: 16px 0 0;
+  font-size: var(--quote-attribution-size);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Desktop — portrait left, quote right
+   ========================================================================== */
+@media (width >= 900px) {
+  .quote .quote-row {
+    grid-template-columns: minmax(0, 420px) 1fr;
+  }
+}
