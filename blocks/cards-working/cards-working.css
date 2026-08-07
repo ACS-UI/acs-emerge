@@ -1,0 +1,172 @@
+/* ==========================================================================
+   cards-working — block-scoped design tokens (extracted from design)
+   ========================================================================== */
+.cards-working,
+.cards-working-container .default-content-wrapper {
+  /* colors */
+  --cw-eyebrow-color: #6a6a6a;
+  --cw-heading-color: #1a1a2e;
+  --cw-accent-color: #e6007e;
+  --cw-card-title-color: #fff;
+  --cw-card-text-color: rgb(255 255 255 / 90%);
+  --cw-card-overlay: linear-gradient(
+    to top,
+    rgb(0 0 0 / 82%) 0%,
+    rgb(0 0 0 / 55%) 32%,
+    rgb(0 0 0 / 5%) 70%,
+    rgb(0 0 0 / 0%) 100%
+  );
+
+  /* typography */
+  --cw-eyebrow-size: var(--body-font-size-xs);
+  --cw-eyebrow-spacing: 0.12em;
+  --cw-heading-size: var(--heading-font-size-xl);
+  --cw-card-title-size: var(--heading-font-size-m);
+  --cw-card-text-size: var(--body-font-size-xs);
+
+  /* layout */
+  --cw-card-radius: 18px;
+  --cw-card-gap: 20px;
+  --cw-card-tilt: 4deg;
+  --cw-card-ratio: 3 / 4;
+  --cw-card-pad: 24px;
+}
+
+/* ==========================================================================
+   Cards
+   ========================================================================== */
+.cards-working ul {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--cw-card-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards-working .cards-working-card {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: var(--cw-card-ratio);
+  border-radius: var(--cw-card-radius);
+  box-shadow: 0 18px 40px rgb(0 0 0 / 18%);
+  isolation: isolate;
+}
+
+.cards-working .cards-working-card-image {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  line-height: 0;
+}
+
+.cards-working .cards-working-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* dark gradient so overlaid white text stays legible */
+.cards-working .cards-working-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--cw-card-overlay);
+}
+
+.cards-working .cards-working-card-body {
+  position: absolute;
+  inset: auto 0 0;
+  padding: var(--cw-card-pad);
+  color: var(--cw-card-text-color);
+}
+
+.cards-working .cards-working-card-body h3 {
+  margin: 0 0 8px;
+  color: var(--cw-card-title-color);
+  font-size: var(--cw-card-title-size);
+  line-height: 1.2;
+}
+
+.cards-working .cards-working-card-body p {
+  margin: 0;
+  font-size: var(--cw-card-text-size);
+  line-height: 1.45;
+}
+
+/* ==========================================================================
+   Section default content — eyebrow + headline
+   ========================================================================== */
+.cards-working-container .default-content-wrapper {
+  text-align: center;
+}
+
+.cards-working-container .default-content-wrapper > p:first-child {
+  margin: 0 0 12px;
+  color: var(--cw-eyebrow-color);
+  font-size: var(--cw-eyebrow-size);
+  font-weight: 600;
+  letter-spacing: var(--cw-eyebrow-spacing);
+  text-transform: uppercase;
+}
+
+.cards-working-container .default-content-wrapper h2 {
+  max-width: 760px;
+  margin: 0 auto;
+  color: var(--cw-heading-color);
+  font-size: var(--cw-heading-size);
+  line-height: 1.2;
+}
+
+/* pink accent divider below the headline */
+.cards-working-container .default-content-wrapper h2::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 3px;
+  margin: 24px auto 0;
+  background-color: var(--cw-accent-color);
+  border-radius: 3px;
+}
+
+/* ==========================================================================
+   Desktop — three overlapping, alternately tilted cards
+   ========================================================================== */
+@media (width >= 900px) {
+  .cards-working ul {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap: 0;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .cards-working .cards-working-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* outer cards tilt outward; center card sits flat and slightly larger */
+  .cards-working .cards-working-card:first-child {
+    transform: rotate(calc(-1 * var(--cw-card-tilt)));
+    z-index: 1;
+    margin-right: -24px;
+  }
+
+  .cards-working .cards-working-card:nth-child(2) {
+    z-index: 3;
+    transform: scale(1.06);
+  }
+
+  .cards-working .cards-working-card:last-child {
+    transform: rotate(var(--cw-card-tilt));
+    z-index: 1;
+    margin-left: -24px;
+  }
+
+  .cards-working .cards-working-card:hover {
+    transform: translateY(-6px) rotate(0deg) scale(1.06);
+    z-index: 4;
+    box-shadow: 0 26px 54px rgb(0 0 0 / 26%);
+  }
+}
