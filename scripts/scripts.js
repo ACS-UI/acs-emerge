@@ -10,6 +10,9 @@ import {
   loadSections,
   loadCSS,
   buildBlock,
+  readBlockConfig,
+  toClassName,
+  toCamelCase,
 } from './aem.js';
 
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
@@ -143,6 +146,36 @@ function decorateButtons(main) {
 }
 
 /**
+ * Applies authored `Section Metadata` to its section: the `Style` values become
+ * classes on the section, and every other key becomes a `data-*` attribute
+ * (e.g. `Background Text` -> `data-background-text`). This is handled here (not
+ * in aem.js) because this project's decorateSections does not process it.
+ * @param {Element} main The container element
+ */
+function decorateSectionMetadata(main) {
+  main.querySelectorAll(':scope > .section > div > .section-metadata').forEach((meta) => {
+    const section = meta.closest('.section');
+    const config = readBlockConfig(meta);
+    Object.entries(config).forEach(([key, value]) => {
+      if (!value) return;
+      if (key === 'style') {
+        value
+          .split(',')
+          .map((s) => toClassName(s.trim()))
+          .filter(Boolean)
+          .forEach((cls) => section.classList.add(cls));
+      } else {
+        section.dataset[toCamelCase(key)] = value;
+      }
+    });
+    // remove the metadata block (and its now-empty wrapper) from the DOM
+    const wrapper = meta.parentElement;
+    meta.remove();
+    if (wrapper && !wrapper.children.length) wrapper.remove();
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -151,6 +184,7 @@ export function decorateMain(main) {
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
+  decorateSectionMetadata(main);
   decorateBlocks(main);
   decorateButtons(main);
 }

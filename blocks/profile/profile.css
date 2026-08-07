@@ -121,11 +121,10 @@
 
 /* ===================== carousel variant ===================== */
 
-/* full-bleed brand gradient panel */
+/* The gradient panel now lives at the section level (Section Metadata
+   "Style: bg-leadership"), so the block itself is transparent and inherits
+   the white text colour from the section. */
 .profile.carousel {
-  padding: 48px 24px;
-  border-radius: 16px;
-  background: linear-gradient(120deg, #e5322d 0%, #d81f8c 55%, #9c1fb5 100%);
   color: var(--color-white);
 }
 
@@ -238,10 +237,6 @@
 }
 
 @media (width >= 900px) {
-  .profile.carousel {
-    padding: 56px 48px;
-  }
-
   .profile.carousel .carousel {
     --carousel-visible: 3;
   }
