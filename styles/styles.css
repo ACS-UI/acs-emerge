@@ -379,7 +379,7 @@ main .section[data-background-text]::before {
   line-height: 0.9;
   letter-spacing: -0.02em;
   white-space: nowrap;
-  color: rgb(255 255 255 / 8%);
+  color: rgb(255 255 255 / 16%);
   pointer-events: none;
   user-select: none;
 }
