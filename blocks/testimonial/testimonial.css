@@ -164,6 +164,11 @@
 
 /* ===================== responsive ===================== */
 @media (width >= 900px) {
+  /* 116px inset on both sides on desktop per Figma */
+  .testimonial {
+    padding-inline: 116px;
+  }
+
   .testimonial .testimonial-item {
     grid-template-columns: 1.1fr 0.9fr;
     gap: 56px;
