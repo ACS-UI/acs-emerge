@@ -32,6 +32,9 @@ indices:
   leaders:
     include:
       - '/leaders/**'
+    exclude:
+      # the /leaders listing page is not a person; keep it out of the index
+      - '/leaders'
     target: /leaders/query-index.json
     properties:
       title:
@@ -65,6 +68,9 @@ indices:
   clients:
     include:
       - '/clients/**'
+    exclude:
+      # the /clients listing page is not a client entry; keep it out
+      - '/clients'
     target: /clients/query-index.json
     properties:
       title:
