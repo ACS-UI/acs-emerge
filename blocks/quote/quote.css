@@ -25,13 +25,47 @@
   --quote-gap: 40px;
   --quote-content-max: 488px;
   --quote-image-col: 49%;
+
+  /* decorative background watermark ("Reflections / BY MANOJ") */
+  --quote-watermark-color: #e9e9e9;
+  --quote-watermark-weight: 800;
+  --quote-watermark-size: clamp(72px, 20vw, 250px);
+  --quote-watermark-line: 1;
+
+  position: relative;
 }
 
 .quote .quote-row {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--quote-gap);
   align-items: center;
+}
+
+/* --------------------------------------------------------------------------
+   Background watermark — oversized text sitting behind the photo + quote
+   -------------------------------------------------------------------------- */
+.quote .quote-watermark {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: var(--quote-font);
+  font-size: var(--quote-watermark-size);
+  font-weight: var(--quote-watermark-weight);
+  line-height: var(--quote-watermark-line);
+  letter-spacing: 0;
+  color: var(--quote-watermark-color);
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
 }
 
 /* --------------------------------------------------------------------------
