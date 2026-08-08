@@ -40,6 +40,10 @@
   --cw-card-frame: 4px;
   --cw-card-tilt: 12deg;
   --cw-card-overlap: 44px;
+
+  /* a 384x557 card rotated 12deg overhangs its layout box by ~34px top/bottom;
+     reserve that so the visible gap above/below the cards matches the design */
+  --cw-card-rotation-overhang: 34px;
   --cw-card-shadow:
     0 0 0 1px rgb(0 0 0 / 4%),
     0 1px 2px rgb(0 0 0 / 6%),
@@ -203,7 +207,10 @@ main .cards-working-container {
     justify-content: center;
     gap: 0;
     max-width: 1216px;
-    margin: 0 auto;
+
+    /* top/bottom margin absorbs the rotated cards' overhang so the visible
+       gap to the headline (and section padding below) stays correct */
+    margin: var(--cw-card-rotation-overhang) auto;
   }
 
   .cards-working .cards-working-card {
