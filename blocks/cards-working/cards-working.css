@@ -19,7 +19,10 @@
   --cw-eyebrow-weight: 700;
   --cw-eyebrow-spacing: 0.04em;
 
-  /* headline */
+  /* headline — Figma uses Adobe Clean (not condensed) at weight 500; the
+     project's --heading-font-family is Roboto Condensed, which renders too
+     dense, so use the regular (non-condensed) body font here. */
+  --cw-heading-font: var(--body-font-family);
   --cw-heading-color: #000;
   --cw-heading-size: 45px;
   --cw-heading-line: 52px;
@@ -97,6 +100,7 @@ main .cards-working-container {
 
 .cards-working .cards-working-card {
   position: relative;
+  box-sizing: border-box;
   width: 100%;
   max-width: var(--cw-card-width);
   aspect-ratio: var(--cw-card-ratio);
@@ -178,6 +182,7 @@ main .cards-working-container {
   max-width: var(--cw-heading-max);
   margin: 0 auto;
   color: var(--cw-heading-color);
+  font-family: var(--cw-heading-font);
   font-size: var(--cw-heading-size-mobile);
   font-weight: var(--cw-heading-weight);
   line-height: var(--cw-heading-line-mobile);
@@ -194,7 +199,7 @@ main .cards-working-container {
 
   .cards-working ul {
     grid-template-columns: repeat(3, auto);
-    align-items: center;
+    align-items: start;
     justify-content: center;
     gap: 0;
     max-width: 1216px;
