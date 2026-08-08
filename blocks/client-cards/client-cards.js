@@ -103,7 +103,9 @@ function buildCard(row) {
  */
 export default async function decorate(block) {
   const isCarousel = block.classList.contains('carousel');
-  const { intro, viewAll } = isCarousel ? extractConfig(block) : { intro: null, viewAll: false };
+  // Both variants may author an intro (eyebrow + heading + subheading) as the
+  // first text-only row; the carousel centres it, the base grid left-aligns it.
+  const { intro, viewAll } = extractConfig(block);
 
   const rows = [...block.children];
   const cards = rows
@@ -125,6 +127,21 @@ export default async function decorate(block) {
     const grid = document.createElement('div');
     grid.className = 'client-cards-grid';
     cards.forEach((card) => grid.append(card));
-    block.replaceChildren(grid);
+
+    block.replaceChildren();
+    if (intro) {
+      const introEl = document.createElement('div');
+      introEl.className = 'client-cards-intro';
+      introEl.append(intro);
+      if (viewAll && viewAll.href) {
+        const link = document.createElement('a');
+        link.className = 'button client-cards-view-all';
+        link.href = viewAll.href;
+        link.textContent = viewAll.text || 'View All';
+        introEl.append(link);
+      }
+      block.append(introEl);
+    }
+    block.append(grid);
   }
 }

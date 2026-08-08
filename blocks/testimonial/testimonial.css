@@ -22,12 +22,11 @@
   color: var(--color-white);
 }
 
-/* nav arrows inherit white on the colored section; 24px gap per Figma */
+/* nav arrows inherit white on the colored section */
 .testimonial .carousel {
   color: var(--color-white);
 
   --carousel-nav-bg-hover: rgb(255 255 255 / 15%);
-  --carousel-nav-gap: 24px;
 }
 
 /* ----- one testimonial: quote (left) + media (right) ----- */
@@ -49,16 +48,18 @@
   color: var(--testimonial-quote-color);
 }
 
-/* decorative opening quotation mark */
+/* decorative opening quotation mark (glyph icon), top-left */
 .testimonial .testimonial-quote::before {
-  content: "\201C";
-  position: absolute;
-  top: -0.2em;
-  left: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 4rem;
-  line-height: 1;
-  color: rgb(255 255 255 / 60%);
+  content: "";
+  display: block;
+  width: 40px;
+  height: 32px;
+  margin-bottom: 16px;
+  background: rgb(255 255 255 / 80%);
+  mask: url('../../icons/quote-open.svg') left top / contain no-repeat;
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask: url('../../icons/quote-open.svg') left top / contain no-repeat;
 }
 
 .testimonial .testimonial-quote :first-child {
@@ -69,15 +70,19 @@
   margin-bottom: 0;
 }
 
-/* closing quotation mark after the last paragraph */
+/* closing quotation mark (glyph icon), bottom-right per Figma */
 .testimonial .testimonial-quote::after {
-  content: "\201D";
+  content: "";
   display: block;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 4rem;
-  line-height: 0;
-  margin-top: 0.6em;
-  color: rgb(255 255 255 / 60%);
+  width: 40px;
+  height: 32px;
+  margin-top: 24px;
+  margin-left: auto;
+  background: rgb(255 255 255 / 80%);
+  mask: url('../../icons/quote-close.svg') right bottom / contain no-repeat;
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask: url('../../icons/quote-close.svg') right bottom / contain no-repeat;
 }
 
 .testimonial .testimonial-quote strong,

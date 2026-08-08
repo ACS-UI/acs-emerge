@@ -1,0 +1,212 @@
+/*
+ * success block (success stories)
+ *  - base variant : responsive grid of story cards (cover image, title,
+ *    description, tag pills), left-aligned.
+ *  - carousel variant (`.success.carousel`) : cards inside the shared carousel
+ *    utility with a centered intro + top-right nav + view-all.
+ *  - parallax variant (`.success.parallax`) : staggered columns that drift on
+ *    scroll (inspired by the Orionix "featured work" layout).
+ *
+ * Shared carousel styles live in styles/carousel.css (loaded by success.js for
+ * the carousel variant). The large background watermark seen in the parallax
+ * design is a section-level concern (Section Metadata "Background Text").
+ */
+
+.success {
+  --success-radius: 16px;
+  --success-gap: 24px;
+  --success-title-color: var(--color-gray-900);
+  --success-desc-color: var(--color-gray-700);
+}
+
+/* ===================== cards (shared by all variants) ===================== */
+.success .success-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+}
+
+.success .success-card-image {
+  overflow: hidden;
+  border-radius: var(--success-radius);
+  aspect-ratio: 4 / 3;
+  background: var(--color-gray-100);
+}
+
+.success .success-card-image picture,
+.success .success-card-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.success .success-card-title {
+  margin: 4px 0 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--title-size-xxl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-500);
+  color: var(--success-title-color);
+}
+
+.success .success-card-desc {
+  margin: 0;
+  font-size: var(--detail-size-m);
+  line-height: var(--line-height-200);
+  color: var(--success-desc-color);
+}
+
+/* tag pills */
+.success .success-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.success .success-card-tag {
+  padding: 0.35em 0.9em;
+  border: 1px solid var(--color-gray-300);
+  border-radius: 2.4em;
+  font-size: var(--detail-size-s);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-800);
+}
+
+/* ===================== intro (base + parallax) ===================== */
+.success .success-intro {
+  margin-bottom: 40px;
+  max-width: 40rem;
+}
+
+.success .success-intro h2,
+.success .success-intro h3 {
+  margin: 8px 0 0;
+  font-size: var(--heading-size-xl);
+  line-height: var(--line-height-800);
+  color: var(--color-gray-900);
+}
+
+.success .success-intro p {
+  margin: 12px 0 0;
+  font-size: var(--body-size-m);
+  line-height: var(--line-height-400);
+  color: var(--color-gray-700);
+}
+
+.success .success-intro p:first-child {
+  margin: 0;
+  font-size: var(--detail-size-m);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gray-600);
+}
+
+.success .success-view-all {
+  margin-top: 20px;
+  border: 1px solid var(--color-gray-900);
+  border-radius: 2.4em;
+  padding: 0.5em 1.4em;
+  background: transparent;
+  color: var(--color-gray-900);
+  font-size: var(--detail-size-m);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ===================== base variant: grid ===================== */
+.success .success-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--success-gap);
+}
+
+@media (width >= 600px) {
+  .success .success-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  .success .success-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ===================== carousel variant ===================== */
+.success.carousel .carousel {
+  --carousel-visible: 1;
+  --carousel-gap: var(--success-gap);
+}
+
+.success.carousel .carousel-intro {
+  max-width: 34rem;
+  margin-inline: auto;
+}
+
+.success.carousel .carousel-intro h2,
+.success.carousel .carousel-intro h3 {
+  margin: 8px 0 0;
+  font-size: var(--heading-size-l);
+  line-height: var(--line-height-700);
+  color: var(--color-gray-900);
+}
+
+.success.carousel .carousel-intro p {
+  margin: 0;
+  font-size: var(--detail-size-m);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gray-600);
+}
+
+@media (width >= 600px) {
+  .success.carousel .carousel {
+    --carousel-visible: 2;
+  }
+}
+
+@media (width >= 900px) {
+  .success.carousel .carousel {
+    --carousel-visible: 3;
+  }
+}
+
+/* ===================== parallax variant ===================== */
+.success .success-parallax {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--success-gap);
+  align-items: start;
+}
+
+.success .success-parallax-column {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  will-change: transform;
+}
+
+/* stagger: offset alternate columns downward for the woven look */
+@media (width >= 900px) {
+  .success .success-parallax {
+    grid-template-columns: repeat(var(--success-parallax-columns, 2), 1fr);
+    gap: 56px;
+  }
+
+  .success .success-parallax-column:nth-child(even) {
+    margin-top: 96px;
+  }
+}
+
+/* honour reduced motion: no transform drift */
+@media (prefers-reduced-motion: reduce) {
+  .success .success-parallax-column {
+    transform: none !important;
+  }
+}

@@ -101,6 +101,50 @@
 }
 
 /* ===================== base variant: grid ===================== */
+
+/* intro (eyebrow + heading + subheading) above the grid, left-aligned */
+.profile .profile-intro {
+  margin-bottom: 40px;
+  max-width: 40rem;
+}
+
+.profile .profile-intro h2,
+.profile .profile-intro h3 {
+  margin: 8px 0 0;
+  font-size: var(--heading-size-xl);
+  line-height: var(--line-height-800);
+  color: var(--color-gray-900);
+}
+
+/* subheading / body paragraphs */
+.profile .profile-intro p {
+  margin: 12px 0 0;
+  font-size: var(--body-size-m);
+  line-height: var(--line-height-400);
+  color: var(--color-gray-700);
+}
+
+/* eyebrow: the first paragraph, above the heading */
+.profile .profile-intro p:first-child {
+  margin: 0;
+  font-size: var(--detail-size-m);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gray-600);
+}
+
+.profile .profile-view-all {
+  margin-top: 20px;
+  border: 1px solid var(--color-gray-900);
+  border-radius: 2.4em;
+  padding: 0.5em 1.4em;
+  background: transparent;
+  color: var(--color-gray-900);
+  font-size: var(--detail-size-m);
+  font-weight: var(--font-weight-medium);
+}
+
 .profile .profile-grid {
   display: grid;
   grid-template-columns: 1fr;
