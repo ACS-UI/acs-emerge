@@ -1,0 +1,185 @@
+/*
+ * testimonial block
+ *  A single-testimonial-at-a-time carousel: a quote on the left and a portrait
+ *  (with name/title overlay) on the right, with prev/next navigation at the
+ *  bottom-left. Uses the shared carousel utility (scripts/carousel.js +
+ *  styles/carousel.css) with navPosition: 'bottom'.
+ *
+ *  The block is designed to sit on a colored/gradient section background
+ *  (applied at the section level via section metadata), so its text and chrome
+ *  default to white. The background image and large watermark text seen in the
+ *  design are intentionally section-level concerns and are not part of the
+ *  block.
+ */
+
+.testimonial {
+  --testimonial-quote-color: var(--color-white);
+
+  /* card radius per Figma (24px outer, 20px inner content wrap) */
+  --testimonial-radius: 24px;
+  --testimonial-inner-radius: 20px;
+
+  color: var(--color-white);
+}
+
+/* nav arrows inherit white on the colored section */
+.testimonial .carousel {
+  color: var(--color-white);
+
+  --carousel-nav-bg-hover: rgb(255 255 255 / 15%);
+}
+
+/* ----- one testimonial: quote (left) + media (right) ----- */
+.testimonial .testimonial-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  margin: 0;
+  align-items: center;
+}
+
+/* ----- quote ----- */
+.testimonial .testimonial-quote {
+  position: relative;
+  margin: 0;
+  padding: 40px 0 0;
+  font-size: var(--body-size-s);
+  line-height: var(--line-height-400);
+  color: var(--testimonial-quote-color);
+}
+
+/* decorative opening quotation mark (glyph icon), top-left */
+.testimonial .testimonial-quote::before {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 32px;
+  margin-bottom: 16px;
+  background: rgb(255 255 255 / 80%);
+  mask: url('../../icons/quote-open.svg') left top / contain no-repeat;
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask: url('../../icons/quote-open.svg') left top / contain no-repeat;
+}
+
+.testimonial .testimonial-quote :first-child {
+  margin-top: 0;
+}
+
+.testimonial .testimonial-quote :last-child {
+  margin-bottom: 0;
+}
+
+/* closing quotation mark (glyph icon), bottom-right per Figma */
+.testimonial .testimonial-quote::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 32px;
+  margin-top: 24px;
+  margin-left: auto;
+  background: rgb(255 255 255 / 80%);
+  mask: url('../../icons/quote-close.svg') right bottom / contain no-repeat;
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask: url('../../icons/quote-close.svg') right bottom / contain no-repeat;
+}
+
+.testimonial .testimonial-quote strong,
+.testimonial .testimonial-quote b {
+  font-weight: var(--font-weight-bold);
+}
+
+/* ----- media: white card holding the portrait + attribution overlay -----
+   Per Figma: a white card (radius 24) with a layered shadow, and an inner
+   content wrap (radius 20, 4px inset) that clips the photo. */
+.testimonial .testimonial-media {
+  position: relative;
+  width: 100%;
+  padding: 4px;
+  border-radius: var(--testimonial-radius);
+  background: var(--color-white);
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 4%),
+    0 1px 2px rgb(0 0 0 / 6%),
+    0 4px 6px rgb(0 0 0 / 4%),
+    0 40px 40px -24px rgb(0 0 0 / 6%);
+  aspect-ratio: 384 / 557;
+}
+
+.testimonial .testimonial-media picture {
+  position: absolute;
+  inset: 4px;
+  display: block;
+  overflow: hidden;
+  border-radius: var(--testimonial-inner-radius);
+  background: var(--color-gray-1000);
+}
+
+.testimonial .testimonial-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* name + title overlaid at the bottom of the photo */
+.testimonial .testimonial-attribution {
+  position: absolute;
+  inset: auto 4px 4px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 40px 24px 24px;
+  text-align: center;
+  color: var(--color-white);
+  border-radius: 0 0 var(--testimonial-inner-radius) var(--testimonial-inner-radius);
+  background: linear-gradient(to top, rgb(0 0 0 / 70%) 0%, rgb(0 0 0 / 0%) 100%);
+}
+
+/* Name — Title/XXXL: 25/30, medium */
+.testimonial .testimonial-name {
+  margin: 0;
+  font-family: var(--title-font-family);
+  font-size: var(--title-size-xxxl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-600);
+}
+
+/* Role — Title/M: 16/20, bold */
+.testimonial .testimonial-role {
+  margin: 0;
+  font-family: var(--title-font-family);
+  font-size: var(--title-size-m);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-200);
+  opacity: 0.85;
+}
+
+/* ----- spacing between the item and the bottom nav ----- */
+.testimonial .carousel[data-nav-position="bottom"] > .carousel-nav {
+  margin-top: 8px;
+}
+
+/* ===================== responsive ===================== */
+@media (width >= 900px) {
+  /* 116px inset on both sides on desktop per Figma */
+  .testimonial {
+    padding-inline: 116px;
+  }
+
+  .testimonial .testimonial-item {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 56px;
+  }
+
+  .testimonial .testimonial-quote {
+    font-size: var(--body-size-m);
+  }
+
+  .testimonial .testimonial-media {
+    max-width: 384px;
+    margin-left: auto;
+  }
+}

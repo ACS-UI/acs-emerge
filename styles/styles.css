@@ -326,3 +326,62 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+
+/*
+ * Section background themes (applied via Section Metadata "Style").
+ * These paint a full-bleed gradient panel and flip content to white; blocks
+ * inside (e.g. profile/testimonial carousels) stay transparent and inherit it.
+ */
+main .section.bg-leadership,
+main .section.bg-testimonial {
+  position: relative;
+  margin: 0;
+  padding: 48px 0;
+  color: var(--color-white);
+  overflow: hidden;
+}
+
+main .section.bg-leadership {
+  background: linear-gradient(120deg, #e5322d 0%, #d81f8c 55%, #9c1fb5 100%);
+}
+
+main .section.bg-testimonial {
+  background: linear-gradient(120deg, #7b2ff7 0%, #6a1fd0 50%, #4a2ee0 100%);
+}
+
+@media (width >= 900px) {
+  main .section.bg-leadership,
+  main .section.bg-testimonial {
+    padding: 64px 0;
+  }
+}
+
+/*
+ * Section background watermark text (applied via Section Metadata
+ * "Background Text"). Renders a large, faint word behind the section content.
+ */
+main .section[data-background-text] > div {
+  position: relative;
+  z-index: 1;
+}
+
+main .section[data-background-text]::before {
+  content: attr(data-background-text);
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-black, 900);
+  font-size: clamp(6rem, 22vw, 20rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-align: center;
+  overflow-wrap: anywhere;
+  color: rgb(255 255 255 / 16%);
+  pointer-events: none;
+  user-select: none;
+}

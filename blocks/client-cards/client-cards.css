@@ -1,0 +1,264 @@
+/*
+ * client-cards block
+ *  - base variant : responsive grid of client cards (logo + title + description
+ *    + "Know More" CTA), left-aligned, on white cards.
+ *  - carousel variant (`.client-cards.carousel`) : the same cards inside the
+ *    shared carousel utility, on a light panel, with a centered intro +
+ *    top-right nav + view-all.
+ *
+ * Shared carousel styles live in styles/carousel.css (loaded by client-cards.js
+ * for the carousel variant).
+ */
+
+.client-cards {
+  --client-cards-radius: 12px;
+  --client-cards-gap: 24px;
+  --client-cards-title-color: var(--color-gray-900);
+  --client-cards-desc-color: var(--color-gray-700);
+  --client-cards-border: var(--color-gray-200);
+}
+
+/* ===================== cards (shared by both variants) ===================== */
+.client-cards .client-cards-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 24px;
+  border: 1px solid var(--client-cards-border);
+  border-radius: var(--client-cards-radius);
+  background: var(--color-white);
+  text-align: left;
+}
+
+.client-cards .client-cards-logo {
+  display: flex;
+  align-items: center;
+  height: 37px;
+}
+
+.client-cards .client-cards-logo picture,
+.client-cards .client-cards-logo img {
+  width: auto;
+  max-width: 60%;
+  height: 37px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.client-cards .client-cards-title {
+  margin: 4px 0 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-size-s);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-400);
+  color: var(--client-cards-title-color);
+}
+
+.client-cards .client-cards-desc {
+  margin: 0;
+  font-size: var(--detail-size-m);
+  line-height: var(--line-height-200);
+  color: var(--client-cards-desc-color);
+}
+
+/* CTA button sits at the bottom of the card */
+.client-cards .client-cards-actions {
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+/* "Know More": outline pill at rest, fills red with white text on hover
+   (eased in/out). Selectors include `a.button` to win over the global
+   button.secondary styling in styles.css. */
+.client-cards a.button.client-cards-cta {
+  padding: 0.4em 1.2em;
+  border-radius: 2.4em;
+  border-width: 1px;
+  border-color: var(--color-gray-900);
+  background: transparent;
+  color: var(--color-gray-900);
+  font-size: var(--detail-size-s);
+  font-weight: var(--font-weight-medium);
+  transition: background-color 0.25s ease-in-out, border-color 0.25s ease-in-out,
+    color 0.25s ease-in-out;
+}
+
+.client-cards a.button.client-cards-cta:hover,
+.client-cards a.button.client-cards-cta:focus-visible {
+  border-color: var(--color-red-1000);
+  background: var(--color-red-1000);
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+/* ===================== base variant: grid ===================== */
+
+/* intro (eyebrow + heading + subheading) above the grid, left-aligned */
+.client-cards .client-cards-intro {
+  margin-bottom: 40px;
+  max-width: 40rem;
+}
+
+.client-cards .client-cards-intro h2,
+.client-cards .client-cards-intro h3 {
+  margin: 8px 0 0;
+  font-size: var(--heading-size-xl);
+  line-height: var(--line-height-800);
+  color: var(--color-gray-900);
+}
+
+/* subheading / body paragraphs */
+.client-cards .client-cards-intro p {
+  margin: 12px 0 0;
+  font-size: var(--body-size-m);
+  line-height: var(--line-height-400);
+  color: var(--color-gray-700);
+}
+
+/* eyebrow: the first paragraph, above the heading */
+.client-cards .client-cards-intro p:first-child {
+  margin: 0;
+  font-size: var(--detail-size-m);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gray-600);
+}
+
+.client-cards .client-cards-view-all {
+  margin-top: 20px;
+  border: 1px solid var(--color-gray-900);
+  border-radius: 2.4em;
+  padding: 0.5em 1.4em;
+  background: transparent;
+  color: var(--color-gray-900);
+  font-size: var(--detail-size-m);
+  font-weight: var(--font-weight-medium);
+}
+
+.client-cards .client-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--client-cards-gap);
+}
+
+@media (width >= 768px) {
+  .client-cards .client-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 1024px) {
+  .client-cards .client-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ===================== carousel variant ===================== */
+
+/* light panel */
+.client-cards.carousel {
+  padding: 48px 24px;
+  border-radius: 16px;
+  background: var(--color-gray-100);
+}
+
+/* carousel layout vars must sit on the utility's own `.carousel` element,
+   otherwise its base `--carousel-visible: 1` (set directly on it) wins over
+   any value inherited from the block. */
+.client-cards.carousel .carousel {
+  --carousel-visible: 1;
+  --carousel-gap: var(--client-cards-gap);
+  --carousel-nav-bg-hover: rgb(0 0 0 / 8%);
+
+  /* dark nav arrows on the light panel */
+  color: var(--color-gray-900);
+}
+
+/* intro (eyebrow + heading), centered per Figma in a narrow column */
+.client-cards.carousel .carousel-intro {
+  max-width: 34rem;
+  margin-inline: auto;
+  color: var(--color-gray-900);
+}
+
+.client-cards.carousel .carousel-intro h2,
+.client-cards.carousel .carousel-intro h3 {
+  margin: 8px 0 0;
+  font-size: var(--heading-size-l);
+  line-height: var(--line-height-700);
+  color: var(--color-gray-900);
+}
+
+/* eyebrow: first short paragraph above the heading */
+.client-cards.carousel .carousel-intro p {
+  margin: 0;
+  font-size: var(--detail-size-m);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gray-700);
+}
+
+/* view all button: dark pill at rest; on hover it fills red and reveals a
+   trailing arrow (same behaviour as the profile carousel). */
+.client-cards.carousel .carousel-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid transparent;
+  border-radius: 2.4em;
+  padding: 0.6em 1.5em;
+  background: var(--color-gray-900);
+  color: var(--color-white);
+  font-size: var(--detail-size-m);
+  font-weight: var(--font-weight-medium);
+  transition: background-color 0.2s ease, color 0.2s ease, gap 0.2s ease;
+}
+
+/* trailing arrow (drawn in the current text color): hidden at rest,
+   collapsed to zero width so it takes no space until hover. */
+.client-cards.carousel .carousel-view-all::after {
+  content: "";
+  width: 0;
+  height: 1.1em;
+  background: currentcolor;
+  opacity: 0;
+  mask: var(--client-cards-arrow-mask) center / contain no-repeat;
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask: var(--client-cards-arrow-mask) center / contain no-repeat;
+  transition: width 0.2s ease, opacity 0.2s ease;
+
+  --client-cards-arrow-mask: url('../../icons/arrow-right.svg');
+}
+
+.client-cards.carousel .carousel-view-all:hover {
+  gap: 0.6em;
+  background: var(--color-red-1000);
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.client-cards.carousel .carousel-view-all:hover::after {
+  width: 1.1em;
+  opacity: 1;
+}
+
+@media (width >= 768px) {
+  .client-cards.carousel .carousel {
+    --carousel-visible: 2;
+  }
+}
+
+@media (width >= 1024px) {
+  .client-cards.carousel {
+    padding: 56px 48px;
+  }
+
+  .client-cards.carousel .carousel {
+    --carousel-visible: 3;
+  }
+}
