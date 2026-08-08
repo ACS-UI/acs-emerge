@@ -9,6 +9,7 @@
   /* section */
   --cw-section-bg: #f3f3f3;
   --cw-section-pad-y: 60px;
+  --cw-section-gap: 40px;
   --cw-header-gap: 8px;
 
   /* eyebrow ("WORKING THE EMERGE WAY") */
@@ -65,9 +66,20 @@
    Section shell — light-grey background behind header + cards
    ========================================================================== */
 main .cards-working-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--cw-section-gap);
   margin: 0;
   padding: var(--cw-section-pad-y) 0;
   background: var(--cw-section-bg);
+}
+
+/* the two EDS-generated wrappers span the section width */
+.cards-working-container > .default-content-wrapper,
+.cards-working-container > .cards-working-wrapper {
+  width: 100%;
+  margin: 0;
 }
 
 /* ==========================================================================
