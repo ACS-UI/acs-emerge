@@ -1,35 +1,73 @@
 /* ==========================================================================
-   cards-working — block-scoped design tokens (extracted from design)
+   cards-working — block-scoped design tokens (aligned to Figma layer spec)
+   Note: Figma uses 'Adobe Clean Spectrum VF'; this project ships Roboto /
+   Roboto Condensed, so we keep the project font families and match the
+   exact sizes / weights / colors from the design.
    ========================================================================== */
-.cards-working,
-.cards-working-container .default-content-wrapper {
-  /* colors */
-  --cw-eyebrow-color: #6a6a6a;
-  --cw-heading-color: #1a1a2e;
-  --cw-accent-color: #e6007e;
-  --cw-card-title-color: #fff;
-  --cw-card-text-color: rgb(255 255 255 / 90%);
+.cards-working-container,
+.cards-working {
+  /* section */
+  --cw-section-bg: #f3f3f3;
+  --cw-section-pad-y: 60px;
+  --cw-header-gap: 8px;
+
+  /* eyebrow ("WORKING THE EMERGE WAY") */
+  --cw-eyebrow-color: #505050;
+  --cw-eyebrow-size: 20px;
+  --cw-eyebrow-line: 24px;
+  --cw-eyebrow-weight: 700;
+  --cw-eyebrow-spacing: 0.04em;
+
+  /* headline */
+  --cw-heading-color: #000;
+  --cw-heading-size: 45px;
+  --cw-heading-line: 52px;
+  --cw-heading-weight: 500;
+  --cw-heading-max: 800px;
+  --cw-heading-size-mobile: 32px;
+  --cw-heading-line-mobile: 38px;
+
+  /* card shell */
+  --cw-card-width: 384px;
+  --cw-card-ratio: 384 / 557;
+  --cw-card-bg: #fff;
+  --cw-card-radius: 24px;
+  --cw-card-inner-radius: 20px;
+  --cw-card-frame: 4px;
+  --cw-card-tilt: 12deg;
+  --cw-card-overlap: 44px;
+  --cw-card-shadow:
+    0 0 0 1px rgb(0 0 0 / 4%),
+    0 1px 2px rgb(0 0 0 / 6%),
+    0 4px 6px rgb(0 0 0 / 4%),
+    0 40px 40px -24px rgb(0 0 0 / 6%);
   --cw-card-overlay: linear-gradient(
     to top,
-    rgb(0 0 0 / 82%) 0%,
-    rgb(0 0 0 / 55%) 32%,
-    rgb(0 0 0 / 5%) 70%,
+    rgb(0 0 0 / 78%) 0%,
+    rgb(0 0 0 / 55%) 28%,
+    rgb(0 0 0 / 8%) 62%,
     rgb(0 0 0 / 0%) 100%
   );
 
-  /* typography */
-  --cw-eyebrow-size: var(--body-font-size-xs);
-  --cw-eyebrow-spacing: 0.12em;
-  --cw-heading-size: var(--heading-font-size-xl);
-  --cw-card-title-size: var(--heading-font-size-m);
-  --cw-card-text-size: var(--body-font-size-xs);
+  /* card content */
+  --cw-card-title-color: #fff;
+  --cw-card-title-size: 28px;
+  --cw-card-title-line: 32px;
+  --cw-card-title-weight: 500;
+  --cw-card-text-color: #fff;
+  --cw-card-text-size: 18px;
+  --cw-card-text-line: 1.5;
+  --cw-card-content-gap: 8px;
+  --cw-card-pad: 30px;
+}
 
-  /* layout */
-  --cw-card-radius: 18px;
-  --cw-card-gap: 20px;
-  --cw-card-tilt: 4deg;
-  --cw-card-ratio: 3 / 4;
-  --cw-card-pad: 24px;
+/* ==========================================================================
+   Section shell — light-grey background behind header + cards
+   ========================================================================== */
+main .cards-working-container {
+  margin: 0;
+  padding: var(--cw-section-pad-y) 0;
+  background: var(--cw-section-bg);
 }
 
 /* ==========================================================================
@@ -38,25 +76,30 @@
 .cards-working ul {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--cw-card-gap);
+  gap: 24px;
   margin: 0;
   padding: 0;
   list-style: none;
+  justify-items: center;
 }
 
 .cards-working .cards-working-card {
   position: relative;
-  overflow: hidden;
+  width: 100%;
+  max-width: var(--cw-card-width);
   aspect-ratio: var(--cw-card-ratio);
+  padding: var(--cw-card-frame);
+  background: var(--cw-card-bg);
   border-radius: var(--cw-card-radius);
-  box-shadow: 0 18px 40px rgb(0 0 0 / 18%);
-  isolation: isolate;
+  box-shadow: var(--cw-card-shadow);
 }
 
+/* image sits inside the white frame, clipped to the inner radius */
 .cards-working .cards-working-card-image {
   position: absolute;
-  inset: 0;
-  z-index: -1;
+  inset: var(--cw-card-frame);
+  overflow: hidden;
+  border-radius: var(--cw-card-inner-radius);
   line-height: 0;
 }
 
@@ -66,107 +109,113 @@
   object-fit: cover;
 }
 
-/* dark gradient so overlaid white text stays legible */
-.cards-working .cards-working-card::after {
+/* dark gradient at the base keeps the overlaid white text legible */
+.cards-working .cards-working-card-image::after {
   content: '';
   position: absolute;
   inset: 0;
-  z-index: -1;
   background: var(--cw-card-overlay);
 }
 
 .cards-working .cards-working-card-body {
   position: absolute;
-  inset: auto 0 0;
+  inset: auto var(--cw-card-frame) var(--cw-card-frame);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cw-card-content-gap);
   padding: var(--cw-card-pad);
   color: var(--cw-card-text-color);
 }
 
 .cards-working .cards-working-card-body h3 {
-  margin: 0 0 8px;
+  margin: 0;
   color: var(--cw-card-title-color);
   font-size: var(--cw-card-title-size);
-  line-height: 1.2;
+  font-weight: var(--cw-card-title-weight);
+  line-height: var(--cw-card-title-line);
 }
 
 .cards-working .cards-working-card-body p {
   margin: 0;
   font-size: var(--cw-card-text-size);
-  line-height: 1.45;
+  line-height: var(--cw-card-text-line);
 }
 
 /* ==========================================================================
    Section default content — eyebrow + headline
    ========================================================================== */
 .cards-working-container .default-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--cw-header-gap);
   text-align: center;
 }
 
 .cards-working-container .default-content-wrapper > p:first-child {
-  margin: 0 0 12px;
+  margin: 0;
   color: var(--cw-eyebrow-color);
   font-size: var(--cw-eyebrow-size);
-  font-weight: 600;
+  font-weight: var(--cw-eyebrow-weight);
+  line-height: var(--cw-eyebrow-line);
   letter-spacing: var(--cw-eyebrow-spacing);
   text-transform: uppercase;
 }
 
 .cards-working-container .default-content-wrapper h2 {
-  max-width: 760px;
+  max-width: var(--cw-heading-max);
   margin: 0 auto;
   color: var(--cw-heading-color);
-  font-size: var(--cw-heading-size);
-  line-height: 1.2;
-}
-
-/* pink accent divider below the headline */
-.cards-working-container .default-content-wrapper h2::after {
-  content: '';
-  display: block;
-  width: 40px;
-  height: 3px;
-  margin: 24px auto 0;
-  background-color: var(--cw-accent-color);
-  border-radius: 3px;
+  font-size: var(--cw-heading-size-mobile);
+  font-weight: var(--cw-heading-weight);
+  line-height: var(--cw-heading-line-mobile);
 }
 
 /* ==========================================================================
-   Desktop — three overlapping, alternately tilted cards
+   Desktop — three overlapping cards, outer two tilted ±12°
    ========================================================================== */
 @media (width >= 900px) {
+  .cards-working-container .default-content-wrapper h2 {
+    font-size: var(--cw-heading-size);
+    line-height: var(--cw-heading-line);
+  }
+
   .cards-working ul {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, auto);
     align-items: center;
+    justify-content: center;
     gap: 0;
-    max-width: 1000px;
+    max-width: 1216px;
     margin: 0 auto;
   }
 
   .cards-working .cards-working-card {
+    width: var(--cw-card-width);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  /* outer cards tilt outward; center card sits flat and slightly larger */
+  /* outer cards tilt outward and tuck under the flat center card */
   .cards-working .cards-working-card:first-child {
-    transform: rotate(calc(-1 * var(--cw-card-tilt)));
     z-index: 1;
-    margin-right: -24px;
+    margin-right: calc(-1 * var(--cw-card-overlap));
+    transform: rotate(calc(-1 * var(--cw-card-tilt)));
   }
 
   .cards-working .cards-working-card:nth-child(2) {
     z-index: 3;
-    transform: scale(1.06);
   }
 
   .cards-working .cards-working-card:last-child {
-    transform: rotate(var(--cw-card-tilt));
     z-index: 1;
-    margin-left: -24px;
+    margin-left: calc(-1 * var(--cw-card-overlap));
+    transform: rotate(var(--cw-card-tilt));
   }
 
   .cards-working .cards-working-card:hover {
-    transform: translateY(-6px) rotate(0deg) scale(1.06);
     z-index: 4;
-    box-shadow: 0 26px 54px rgb(0 0 0 / 26%);
+    transform: translateY(-6px) rotate(0deg);
+    box-shadow:
+      0 0 0 1px rgb(0 0 0 / 4%),
+      0 24px 48px -12px rgb(0 0 0 / 20%);
   }
 }
