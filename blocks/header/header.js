@@ -137,6 +137,22 @@ export default async function decorate(block) {
     brandLink.closest('.button-container').className = '';
   }
 
+  // When the brand is authored as a logo image followed by wordmark text, the
+  // pipeline leaves the text as a sibling of the (image-only) link. Fold the
+  // whole brand paragraph's contents into the single link so the logo + text
+  // are one clickable home link.
+  const brandAnchor = navBrand.querySelector('a[href]');
+  if (brandAnchor) {
+    const brandParagraph = brandAnchor.closest('p') || navBrand;
+    const siblings = [...brandParagraph.childNodes].filter((node) => node !== brandAnchor);
+    const hasStrayContent = siblings.some(
+      (node) => node.textContent.trim() || node.nodeName === 'PICTURE' || node.nodeName === 'IMG',
+    );
+    if (hasStrayContent) {
+      siblings.forEach((node) => brandAnchor.append(node));
+    }
+  }
+
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
