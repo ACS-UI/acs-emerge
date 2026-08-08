@@ -13,25 +13,35 @@
  */
 
 .success {
-  --success-radius: 16px;
-  --success-gap: 24px;
-  --success-title-color: var(--color-gray-900);
-  --success-desc-color: var(--color-gray-700);
+  --success-radius: 24px;
+  --success-inner-radius: 20px;
+  --success-gap: 32px;
+  --success-title-color: var(--color-gray-1000);
+  --success-desc-color: var(--color-gray-500);
 }
 
 /* ===================== cards (shared by all variants) ===================== */
 .success .success-card {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   height: 100%;
 }
 
+/* white card-wrap (radius 24 + layered shadow) with an inner image clipped at
+   radius 20, per Figma */
 .success .success-card-image {
+  position: relative;
   overflow: hidden;
+  padding: 4px;
   border-radius: var(--success-radius);
-  aspect-ratio: 4 / 3;
-  background: var(--color-gray-100);
+  aspect-ratio: 4 / 5;
+  background: var(--color-white);
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 4%),
+    0 1px 2px rgb(0 0 0 / 8%),
+    0 4px 6px rgb(0 0 0 / 4%),
+    0 20px 20px -24px rgb(0 0 0 / 8%);
 }
 
 .success .success-card-image picture,
@@ -39,26 +49,29 @@
   display: block;
   width: 100%;
   height: 100%;
+  border-radius: var(--success-inner-radius);
   object-fit: cover;
 }
 
+/* title — Heading/L: 28/32, medium */
 .success .success-card-title {
   margin: 4px 0 0;
   font-family: var(--heading-font-family);
-  font-size: var(--title-size-xxl);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-500);
+  font-size: var(--heading-size-l);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-700);
   color: var(--success-title-color);
 }
 
+/* description — Body/M: 16/24, grey */
 .success .success-card-desc {
   margin: 0;
-  font-size: var(--detail-size-m);
-  line-height: var(--line-height-200);
+  font-size: var(--body-size-m);
+  line-height: var(--line-height-400);
   color: var(--success-desc-color);
 }
 
-/* tag pills */
+/* tag pills — white with shadow, Body/S: 14/21, black text */
 .success .success-card-tags {
   display: flex;
   flex-wrap: wrap;
@@ -69,26 +82,32 @@
 }
 
 .success .success-card-tag {
-  padding: 0.35em 0.9em;
-  border: 1px solid var(--color-gray-300);
-  border-radius: 2.4em;
-  font-size: var(--detail-size-s);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-gray-800);
+  padding: 4px 12px;
+  border-radius: 100px;
+  background: var(--color-white);
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 4%),
+    0 1px 2px rgb(0 0 0 / 8%),
+    0 4px 6px rgb(0 0 0 / 4%);
+  font-size: var(--body-size-s);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-100);
+  color: var(--color-gray-1000);
 }
 
 /* ===================== intro (base + parallax) ===================== */
 .success .success-intro {
   margin-bottom: 40px;
-  max-width: 40rem;
+  max-width: 50rem;
 }
 
+/* Heading/XXXXL per Figma — scaled down on mobile, full size on desktop */
 .success .success-intro h2,
 .success .success-intro h3 {
   margin: 8px 0 0;
   font-size: var(--heading-size-xl);
-  line-height: var(--line-height-800);
-  color: var(--color-gray-900);
+  line-height: var(--line-height-900);
+  color: var(--color-gray-1000);
 }
 
 .success .success-intro p {
@@ -125,15 +144,22 @@
   gap: var(--success-gap);
 }
 
-@media (width >= 600px) {
+@media (width >= 768px) {
   .success .success-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (width >= 900px) {
+@media (width >= 1024px) {
   .success .success-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* full Heading/XXXXL (73/84) on desktop */
+  .success:not(.carousel) .success-intro h2,
+  .success:not(.carousel) .success-intro h3 {
+    font-size: var(--heading-size-xxxxl);
+    line-height: var(--line-height-1500);
   }
 }
 
@@ -165,13 +191,13 @@
   color: var(--color-gray-600);
 }
 
-@media (width >= 600px) {
+@media (width >= 768px) {
   .success.carousel .carousel {
     --carousel-visible: 2;
   }
 }
 
-@media (width >= 900px) {
+@media (width >= 1024px) {
   .success.carousel .carousel {
     --carousel-visible: 3;
   }
@@ -193,7 +219,7 @@
 }
 
 /* stagger: offset alternate columns downward for the woven look */
-@media (width >= 900px) {
+@media (width >= 1024px) {
   .success .success-parallax {
     grid-template-columns: repeat(var(--success-parallax-columns, 2), 1fr);
     gap: 56px;
