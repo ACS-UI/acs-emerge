@@ -1,0 +1,68 @@
+version: 1
+
+indices:
+  # Default site-wide index: one row per published page, exposed at
+  # /query-index.json. Blocks can fetch this to build listings dynamically.
+  default:
+    include:
+      - '/**'
+    exclude:
+      - '/drafts/**'
+      - '/**/fragments/**'
+    target: /query-index.json
+    properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, 'content')
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, 'content')
+      image:
+        select: head > meta[property="og:image"]
+        value: attribute(el, 'content')
+      lastModified:
+        select: none
+        value: parseTimestamp(headers('last-modified'), 'ddd, DD MMM YYYY hh:mm:ss GMT')
+      robots:
+        select: head > meta[name="robots"]
+        value: attribute(el, 'content')
+
+  # Leadership profiles: one row per leader page under /leaders/, feeding a
+  # future query-index-driven profile block.
+  leaders:
+    include:
+      - '/leaders/**'
+    target: /leaders/query-index.json
+    properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, 'content')
+      role:
+        select: head > meta[name="role"]
+        value: attribute(el, 'content')
+      image:
+        select: head > meta[property="og:image"]
+        value: attribute(el, 'content')
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, 'content')
+
+  # Clients: one row per client page under /clients/, feeding a future
+  # query-index-driven client-cards block.
+  clients:
+    include:
+      - '/clients/**'
+    target: /clients/query-index.json
+    properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, 'content')
+      logo:
+        select: head > meta[name="logo"]
+        value: attribute(el, 'content')
+      image:
+        select: head > meta[property="og:image"]
+        value: attribute(el, 'content')
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, 'content')
