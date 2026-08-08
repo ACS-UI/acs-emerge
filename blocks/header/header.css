@@ -1,9 +1,45 @@
-/* header and nav layout */
+/* header and nav layout
+   Aligned to Figma "Header" spec: 96px tall, white brand + light-grey links
+   in Adobe Clean Spectrum VF (with a project-font fallback, since that font
+   is not bundled here).
+
+   The bar is a TRANSPARENT overlay only when the page's first section is a
+   hero-banner (so it floats over the hero video, as in the design). On every
+   other page it falls back to a solid dark bar so the white/grey nav text
+   stays readable over light content. */
+header {
+  /* Figma header height (was 64px) */
+  --nav-height: 96px;
+
+  /* Figma design font */
+  --nav-font: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+
+  /* Figma colors */
+  --nav-brand-color: #fff;
+  --nav-link-color: #c6c6c6;
+
+  /* solid backdrop used on pages that do NOT open with a hero */
+  --nav-solid-bg: #1a1a2e;
+}
+
+/* default: solid dark bar, in normal flow (header reserves --nav-height
+   from styles.css). White/grey text reads against the dark background. */
 header .nav-wrapper {
-  background-color: var(--background-color);
+  position: relative;
   width: 100%;
   z-index: 2;
-  position: fixed;
+  background-color: var(--nav-solid-bg);
+}
+
+/* hero pages: transparent bar overlaying the first section (the hero video) */
+body:has(main > .hero-banner-container:first-child) > header {
+  height: 0;
+}
+
+body:has(main > .hero-banner-container:first-child) .nav-wrapper {
+  position: absolute;
+  inset: 0 0 auto;
+  background-color: transparent;
 }
 
 header nav {
@@ -18,7 +54,8 @@ header nav {
   max-width: 1248px;
   height: var(--nav-height);
   padding: 0 24px;
-  font-family: var(--body-font-family);
+  font-family: var(--nav-font);
+  color: var(--nav-brand-color);
 }
 
 header nav[aria-expanded='true'] {
@@ -28,13 +65,13 @@ header nav[aria-expanded='true'] {
     'tools tools' var(--nav-height) / auto 1fr;
   overflow-y: auto;
   min-height: 100dvh;
+
+  /* opaque backdrop for the open mobile menu so links stay legible even when
+     the closed bar is a transparent overlay */
+  background-color: var(--nav-solid-bg);
 }
 
 @media (width >= 900px) {
-  header .nav-wrapper {
-    position: relative;
-  }
-
   header nav {
     display: flex;
     justify-content: space-between;
@@ -46,6 +83,7 @@ header nav[aria-expanded='true'] {
   header nav[aria-expanded='true'] {
     min-height: 0;
     overflow: visible;
+    background-color: inherit;
   }
 }
 
@@ -64,6 +102,7 @@ header nav .nav-hamburger {
   height: 22px;
   display: flex;
   align-items: center;
+  color: var(--nav-brand-color);
 }
 
 header nav .nav-hamburger button {
@@ -72,7 +111,7 @@ header nav .nav-hamburger button {
   border: 0;
   border-radius: 0;
   padding: 0;
-  background-color: var(--background-color);
+  background-color: transparent;
   color: inherit;
   overflow: initial;
   text-overflow: initial;
@@ -139,13 +178,18 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   }
 }
 
-/* brand */
+/* brand — Figma "ACS GDC HUB": 18px/22px, 700, white */
 header .nav-brand {
   grid-area: brand;
-  flex-basis: 128px;
-  font-size: var(--heading-font-size-s);
+  flex-basis: 155px;
+  font-size: 18px;
   font-weight: 700;
-  line-height: 1;
+  line-height: 22px;
+  color: var(--nav-brand-color);
+}
+
+header .nav-brand a:any-link {
+  color: var(--nav-brand-color);
 }
 
 header nav .nav-brand img {
@@ -153,12 +197,13 @@ header nav .nav-brand img {
   height: auto;
 }
 
-/* sections */
+/* sections — Figma nav links: 16px/20px, 700, #C6C6C6, 16px gap */
 header nav .nav-sections {
   grid-area: sections;
   flex: 1 1 auto;
   display: none;
   visibility: hidden;
+  color: var(--nav-link-color);
 }
 
 header nav[aria-expanded='true'] .nav-sections {
@@ -170,11 +215,12 @@ header nav[aria-expanded='true'] .nav-sections {
 header nav .nav-sections ul {
   list-style: none;
   padding-left: 0;
-  font-size: var(--body-font-size-s);
+  font-size: 16px;
+  line-height: 20px;
 }
 
 header nav .nav-sections ul > li {
-  font-weight: 500;
+  font-weight: 700;
 }
 
 header nav .nav-sections ul > li > ul {
@@ -198,39 +244,24 @@ header nav .nav-sections ul > li > ul > li {
 
   header nav .nav-sections .nav-drop {
     position: relative;
-    padding-right: 16px;
     cursor: pointer;
   }
 
+  /* Figma hides the dropdown chevron (chevron-down: display none) */
   header nav .nav-sections .nav-drop::after {
-    content: '';
-    display: inline-block;
-    position: absolute;
-    top: 0.5em;
-    right: 2px;
-    transform: rotate(135deg);
-    width: 6px;
-    height: 6px;
-    border: 2px solid currentcolor;
-    border-radius: 0 1px 0 0;
-    border-width: 2px 2px 0 0;
-  }
-
-  header nav .nav-sections .nav-drop[aria-expanded='true']::after {
-    top: unset;
-    bottom: 0.5em;
-    transform: rotate(315deg);
+    display: none;
   }
 
   header nav .nav-sections ul {
     display: flex;
-    gap: 24px;
+    gap: 16px;
     margin: 0;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li {
     flex: 0 1 auto;
     position: relative;
+    padding: 8px;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
@@ -262,6 +293,7 @@ header nav .nav-sections ul > li > ul > li {
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
+    color: var(--text-color);
     padding: 8px 0;
   }
 }
