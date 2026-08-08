@@ -1,6 +1,81 @@
 import { createOptimizedPicture, loadCSS } from '../../scripts/aem.js';
 
 /**
+ * If the block is authored as *only* a link to a query-index sheet (no images),
+ * returns that URL so the cards can be pulled from the index instead of from
+ * authored rows.
+ * @param {Element} block The profile block.
+ * @returns {string|null} The query-index URL, or null for authored content.
+ */
+function getIndexLink(block) {
+  if (block.querySelector('picture, img')) return null;
+  const links = [...block.querySelectorAll('a[href]')];
+  const indexLink = links.find((a) => /query-index\.json(\?|$)/.test(a.getAttribute('href') || a.href));
+  return indexLink ? indexLink.href : null;
+}
+
+/**
+ * Fetches a query-index sheet's rows.
+ * @param {string} url The query-index.json URL.
+ * @returns {Promise<object[]>} Rows (empty array on failure).
+ */
+async function fetchIndexRows(url) {
+  try {
+    const resp = await fetch(url);
+    if (!resp.ok) return [];
+    const json = await resp.json();
+    return json.data || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+/**
+ * Builds a profile card from an index row, mirroring buildCard's DOM so both
+ * authored and index-driven cards style identically. Uses the full-size
+ * `image` column (not the small `thumbnail`).
+ * @param {object} row An index row (title, role, image, description).
+ * @returns {HTMLElement} The card article.
+ */
+function buildCardFromData(row) {
+  const card = document.createElement('article');
+  card.className = 'profile-card';
+  card.tabIndex = 0;
+
+  const media = document.createElement('div');
+  media.className = 'profile-card-image';
+  if (row.image) {
+    media.append(createOptimizedPicture(row.image, row.title || '', false, [{ width: '750' }]));
+  }
+  const overlay = document.createElement('div');
+  overlay.className = 'profile-card-overlay';
+  if (row.description) {
+    const bio = document.createElement('p');
+    bio.textContent = row.description;
+    overlay.append(bio);
+  }
+  media.append(overlay);
+
+  const body = document.createElement('div');
+  body.className = 'profile-card-body';
+  if (row.title) {
+    const name = document.createElement('h3');
+    name.className = 'profile-card-name';
+    name.textContent = row.title;
+    body.append(name);
+  }
+  if (row.role) {
+    const role = document.createElement('p');
+    role.className = 'profile-card-role';
+    role.textContent = row.role;
+    body.append(role);
+  }
+
+  card.append(media, body);
+  return card;
+}
+
+/**
  * Extracts an optional heading/description "intro" from the first authored row
  * when it has no image (used by the carousel variant for the top-left text).
  * @param {Element} block The profile block.
@@ -100,10 +175,19 @@ export default async function decorate(block) {
   // first text-only row; the carousel centres it, the base grid left-aligns it.
   const { intro, viewAll } = extractConfig(block);
 
-  const rows = [...block.children];
-  const cards = rows
-    .filter((row) => row.querySelector('picture, img') || row.textContent.trim())
-    .map((row) => buildCard(row));
+  // Data source: pull cards from a query-index sheet when the block is authored
+  // as only a link to one; otherwise build them from the authored rows.
+  const indexUrl = getIndexLink(block);
+  let cards;
+  if (indexUrl) {
+    const dataRows = await fetchIndexRows(indexUrl);
+    cards = dataRows.map((row) => buildCardFromData(row));
+  } else {
+    const rows = [...block.children];
+    cards = rows
+      .filter((row) => row.querySelector('picture, img') || row.textContent.trim())
+      .map((row) => buildCard(row));
+  }
 
   if (isCarousel) {
     await loadCSS(`${window.hlx.codeBasePath}/styles/carousel.css`);
