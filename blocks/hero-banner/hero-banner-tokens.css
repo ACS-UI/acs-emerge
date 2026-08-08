@@ -1,0 +1,26 @@
+/* blocks/hero-banner/hero-banner-tokens.css */
+
+/* Values extracted from hero-banner-measurements.txt (Figma node 15979:3612).
+   The frame is video-only, so tokens cover just the background media. */
+
+.hero-banner {
+  /* ===== LAYOUT & DIMENSIONS ===== */
+  --hero-banner-max-width: 1280px;
+
+  /* Video/frame intrinsic ratio: 1280 x 720 = 16 / 9 */
+  --hero-banner-aspect-ratio: 16 / 9;
+
+  /* ===== BACKGROUND MEDIA (video / image) ===== */
+  --hero-banner-media-object-fit: cover;
+
+  /* Brand gradient placeholder: shown behind the video while it loads and as a
+     no-video fallback. Built from global brand color tokens (blue->magenta->coral)
+     so it tracks the active theme. */
+  --hero-banner-placeholder-bg: linear-gradient(
+    115deg,
+    var(--color-blue-1300) 0%,
+    var(--color-magenta-1000) 45%,
+    var(--color-magenta-900) 66%,
+    var(--color-red-900) 100%
+  );
+}

@@ -1,0 +1,34 @@
+VISUAL MEASUREMENT CHECKLIST FOR hero-banner
+================================================
+Extracted from Figma node: 15979:3612 (HeroBanner)
+File: orYlw2Ani5PMc1XdczWNlu
+Date: 2026-08-04 (revised 2026-08-05)
+
+VISIBILITY CORRECTION (2026-08-05, confirmed by designer)
+- The Figma frame renders a BACKGROUND VIDEO ONLY.
+- The subheading text and "Know More" button present in the file's layer data
+  are HIDDEN layers and are NOT visible in the composite. They are intentionally
+  NOT used. The button node's two arrow icons (20px/24px) are likewise hidden.
+- Only the visible element (the background video) is migrated.
+
+Frame: HeroBanner 1280 x 720
+Visible content:
+  - Bg (15985:3762) — full-bleed background VIDEO fill (gradient + "EMERGE."
+    wordmark + butterfly animation). Rendered as autoplay/loop/muted <video>.
+
+BACKGROUND MEDIA
+[x] Media type: video (source: Figma Bg node is a Video fill, 1280x720)
+[x] Video behavior: autoplay + loop + muted + playsinline (source: standard AEM background-video pattern; no controls)
+[x] Video object-fit: cover (source: full-bleed background covering the frame)
+[x] Aspect ratio: 16 / 9 (source: frame 1280 x 720)
+[x] Poster/fallback: optional <picture> image used as poster + no-JS fallback (source: progressive enhancement)
+[x] Loading fallback: brand gradient placeholder behind the video (blue->magenta->coral)
+
+LAYOUT & DIMENSIONS
+[x] Container width: 1280px (source: frame HeroBanner width in metadata)
+[x] Container height: 720px (source: frame HeroBanner height in metadata)
+[x] Full-bleed: block breaks out of the section max-width, no padding
+
+NOT USED (hidden layers)
+[x] Subheading text (15979:3684): hidden — not rendered
+[x] Button_PrimaryBlack (15979:3685) incl. 20px/24px arrow icons: hidden — not rendered

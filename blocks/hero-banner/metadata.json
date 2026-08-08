@@ -1,0 +1,42 @@
+{
+  "variantName": "hero-banner",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-08-04T00:00:00.000Z",
+  "sourceContext": {
+    "source": "figma",
+    "figmaFileKey": "orYlw2Ani5PMc1XdczWNlu",
+    "figmaNodeId": "15979:3612",
+    "figmaNodeName": "HeroBanner",
+    "figmaUrl": "https://figma.com/design/orYlw2Ani5PMc1XdczWNlu?node-id=15979-3612"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "accent",
+    "density": "spacious",
+    "purpose": "hero",
+    "imagePattern": "video"
+  },
+  "contentPattern": {
+    "structure": "full-bleed background video only (no overlaid text or CTA)",
+    "buttonCount": 0,
+    "imageCount": 0,
+    "videoCount": 1,
+    "backgroundMedia": "video"
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "hero sections",
+      "full-bleed autoplaying background video with no overlaid content"
+    ],
+    "notSuitableFor": [
+      "heroes that need overlaid text or a CTA (this variant is video-only)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": [
+      "drafts/hero-banner"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-04T00:00:00.000Z"
+  }
+}
