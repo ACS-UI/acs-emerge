@@ -44,17 +44,4 @@ export default function decorate(block) {
       attribution.className = 'quote-attribution';
     }
   }
-
-  // Decorative oversized background watermark, sitting behind the photo and
-  // quote. Real text (not an image), hidden from assistive tech and inert to
-  // pointer input so it never interferes with foreground content.
-  const watermark = document.createElement('div');
-  watermark.className = 'quote-watermark';
-  watermark.setAttribute('aria-hidden', 'true');
-  ['Reflections', 'BY MANOJ'].forEach((line) => {
-    const span = document.createElement('span');
-    span.textContent = line;
-    watermark.append(span);
-  });
-  block.prepend(watermark);
 }
