@@ -6,6 +6,11 @@
    ========================================================================== */
 .cards-working-container,
 .cards-working {
+  /* fonts — Figma design uses Adobe Clean Spectrum VF. That font is not
+     bundled in this project, so we request it first and fall back to the
+     project fonts; it renders in Adobe Clean wherever that font is loaded. */
+  --cw-font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+
   /* section */
   --cw-section-bg: #f3f3f3;
   --cw-section-pad-y: 60px;
@@ -19,10 +24,8 @@
   --cw-eyebrow-weight: 700;
   --cw-eyebrow-spacing: 0.04em;
 
-  /* headline — Figma uses Adobe Clean (not condensed) at weight 500; the
-     project's --heading-font-family is Roboto Condensed, which renders too
-     dense, so use the regular (non-condensed) body font here. */
-  --cw-heading-font: var(--body-font-family);
+  /* headline */
+  --cw-heading-font: var(--cw-font-family);
   --cw-heading-color: #000;
   --cw-heading-size: 45px;
   --cw-heading-line: 52px;
@@ -32,8 +35,9 @@
   --cw-heading-line-mobile: 38px;
 
   /* card shell */
-  --cw-card-width: 384px;
-  --cw-card-ratio: 384 / 557;
+  --cw-card-width: 376px;
+  --cw-card-height: 549px;
+  --cw-card-ratio: 376 / 549;
   --cw-card-bg: #fff;
   --cw-card-radius: 24px;
   --cw-card-inner-radius: 20px;
@@ -67,6 +71,10 @@
   --cw-card-text-line: 1.5;
   --cw-card-content-gap: 8px;
   --cw-card-pad: 30px;
+
+  /* blurred backdrop panel behind the card text (Figma "Rectangle 2") */
+  --cw-card-backdrop-bg: rgb(0 0 0 / 10%);
+  --cw-card-backdrop-blur: 10px;
 }
 
 /* ==========================================================================
@@ -140,11 +148,27 @@ main .cards-working-container {
 .cards-working .cards-working-card-body {
   position: absolute;
   inset: auto var(--cw-card-frame) var(--cw-card-frame);
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: var(--cw-card-content-gap);
   padding: var(--cw-card-pad);
+  font-family: var(--cw-font-family);
   color: var(--cw-card-text-color);
+}
+
+/* blurred translucent panel sitting behind the title + description */
+.cards-working .cards-working-card-body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--cw-card-backdrop-bg);
+  border-radius: 0 0 var(--cw-card-inner-radius) var(--cw-card-inner-radius);
+  backdrop-filter: blur(var(--cw-card-backdrop-blur));
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-backdrop-filter: blur(var(--cw-card-backdrop-blur));
 }
 
 .cards-working .cards-working-card-body h3 {
@@ -215,10 +239,12 @@ main .cards-working-container {
 
   .cards-working .cards-working-card {
     width: var(--cw-card-width);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: var(--cw-card-height);
+    aspect-ratio: auto;
   }
 
-  /* outer cards tilt outward and tuck under the flat center card */
+  /* Stacking order (per design): left card is under the center card, which
+     is under the right card — so z-index climbs left → center → right. */
   .cards-working .cards-working-card:first-child {
     z-index: 1;
     margin-right: calc(-1 * var(--cw-card-overlap));
@@ -226,20 +252,12 @@ main .cards-working-container {
   }
 
   .cards-working .cards-working-card:nth-child(2) {
-    z-index: 3;
+    z-index: 2;
   }
 
   .cards-working .cards-working-card:last-child {
-    z-index: 1;
+    z-index: 3;
     margin-left: calc(-1 * var(--cw-card-overlap));
     transform: rotate(var(--cw-card-tilt));
-  }
-
-  .cards-working .cards-working-card:hover {
-    z-index: 4;
-    transform: translateY(-6px) rotate(0deg);
-    box-shadow:
-      0 0 0 1px rgb(0 0 0 / 4%),
-      0 24px 48px -12px rgb(0 0 0 / 20%);
   }
 }
