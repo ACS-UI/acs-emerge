@@ -1,20 +1,30 @@
 /* ==========================================================================
-   quote — block-scoped design tokens (extracted from design)
-   The portrait already includes its red frame and a transparent background,
+   quote — aligned to Figma "NotefromManoj" layer spec.
+   The portrait already includes its red frame on a transparent background,
    so the block renders it as-is (no CSS frame, no cropping).
+   Figma design font is 'Adobe Clean Spectrum VF' (not bundled in this
+   project) — requested first with a project-font fallback.
    ========================================================================== */
 .quote {
-  /* colors */
-  --quote-text-color: #1a1a2e;
-  --quote-mark-color: #1a1a2e;
+  /* fonts */
+  --quote-font: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
 
-  /* typography */
-  --quote-text-size: var(--heading-font-size-s);
-  --quote-attribution-size: var(--body-font-size-xs);
-  --quote-mark-size: 64px;
+  /* colors — Figma quote text & marks are pure black */
+  --quote-text-color: #000;
+  --quote-mark-color: #000;
+
+  /* typography (mobile-first; desktop sizes overridden below) */
+  --quote-text-size: 24px;
+  --quote-text-line: 30px;
+  --quote-text-weight: 400;
+  --quote-mark-size: 52px;
+  --quote-mark-line: 1.15;
+  --quote-mark-weight: 400;
 
   /* layout */
   --quote-gap: 40px;
+  --quote-content-max: 488px;
+  --quote-image-col: 49%;
 }
 
 .quote .quote-row {
@@ -43,25 +53,29 @@
    -------------------------------------------------------------------------- */
 .quote .quote-body {
   position: relative;
+  max-width: var(--quote-content-max);
+  font-family: var(--quote-font);
   color: var(--quote-text-color);
 }
 
 .quote .quote-body blockquote {
   position: relative;
   margin: 0;
-  padding: calc(var(--quote-mark-size) * 0.7) 0;
+  padding: calc(var(--quote-mark-size) * 0.75) 0;
   font-size: var(--quote-text-size);
-  line-height: 1.5;
+  font-weight: var(--quote-text-weight);
+  line-height: var(--quote-text-line);
 }
 
-/* decorative opening/closing quotation marks */
+/* decorative opening/closing quotation marks (Figma: 73px, weight 400) */
 .quote .quote-body blockquote::before,
 .quote .quote-body blockquote::after {
   position: absolute;
   color: var(--quote-mark-color);
-  font-family: var(--heading-font-family);
+  font-family: var(--quote-font);
   font-size: var(--quote-mark-size);
-  line-height: 1;
+  font-weight: var(--quote-mark-weight);
+  line-height: var(--quote-mark-line);
 }
 
 .quote .quote-body blockquote::before {
@@ -80,18 +94,30 @@
   margin: 0;
 }
 
+/* opening phrase stays bold via authored <strong>; base text is regular */
+.quote .quote-body blockquote strong {
+  font-weight: 700;
+}
+
 .quote .quote-body .quote-attribution {
   margin: 16px 0 0;
-  font-size: var(--quote-attribution-size);
+  font-size: var(--body-font-size-xs);
   font-weight: 600;
 }
 
 /* ==========================================================================
-   Desktop — portrait left, quote right
+   Desktop — portrait left (~592px), quote right (488px), 64px gap
    ========================================================================== */
 @media (width >= 900px) {
+  .quote {
+    --quote-text-size: 36px;
+    --quote-text-line: 42px;
+    --quote-mark-size: 73px;
+    --quote-gap: 64px;
+  }
+
   .quote .quote-row {
-    grid-template-columns: minmax(0, 45%) 1fr;
-    gap: 56px;
+    grid-template-columns: minmax(0, var(--quote-image-col)) minmax(0, 1fr);
+    align-items: center;
   }
 }
