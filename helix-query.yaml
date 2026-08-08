@@ -40,8 +40,21 @@ indices:
       role:
         select: head > meta[name="role"]
         value: attribute(el, 'content')
+      # image: the large portrait authored inside the profile-details block
+      # (og:image is auto-derived from the first content image), used when a
+      # block needs the full-size photo.
       image:
         select: head > meta[property="og:image"]
+        value: attribute(el, 'content')
+      # thumbnail: a separate, smaller portrait authored as page metadata,
+      # used for reportee cards where the big image is too large.
+      thumbnail:
+        select: head > meta[name="thumbnail"]
+        value: attribute(el, 'content')
+      # reportees: comma-separated list of leader page paths that report to
+      # this person; lets a block reconstruct the full hierarchy for ordering.
+      reportees:
+        select: head > meta[name="reportees"]
         value: attribute(el, 'content')
       description:
         select: head > meta[name="description"]
