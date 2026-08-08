@@ -329,29 +329,37 @@ main .section.highlight {
 
 /*
  * Section background themes (applied via Section Metadata "Style").
- * These paint a full-bleed gradient panel and flip content to white; blocks
- * inside (e.g. profile/testimonial carousels) stay transparent and inherit it.
+ * `bg-leadership` and `bg-testimonial` share the brand gradient and flip
+ * content to white; `bg-clients` is a muted grey panel with dark text.
+ * Blocks inside (profile/testimonial/client carousels) stay transparent and
+ * inherit the section colour.
  */
 main .section.bg-leadership,
-main .section.bg-testimonial {
+main .section.bg-testimonial,
+main .section.bg-clients {
   position: relative;
   margin: 0;
   padding: 48px 0;
-  color: var(--color-white);
   overflow: hidden;
 }
 
-main .section.bg-leadership {
-  background: linear-gradient(120deg, #e5322d 0%, #d81f8c 55%, #9c1fb5 100%);
-}
-
+/* gradient panels — white text */
+main .section.bg-leadership,
 main .section.bg-testimonial {
-  background: linear-gradient(120deg, #7b2ff7 0%, #6a1fd0 50%, #4a2ee0 100%);
+  color: var(--color-text-static-white);
+  background: linear-gradient(95.72deg, #d73220 0%, #d92361 39.94%, #7155fa 121.02%);
 }
 
-@media (width >= 900px) {
+/* muted grey panel (clients) — static-black text */
+main .section.bg-clients {
+  color: var(--color-text-static-black);
+  background: #f3f3f3;
+}
+
+@media (width >= 1024px) {
   main .section.bg-leadership,
-  main .section.bg-testimonial {
+  main .section.bg-testimonial,
+  main .section.bg-clients {
     padding: 64px 0;
   }
 }
@@ -384,4 +392,27 @@ main .section[data-background-text]::before {
   color: rgb(255 255 255 / 16%);
   pointer-events: none;
   user-select: none;
+}
+
+/*
+ * Centered carousel intro (opt-in via Section Metadata "Style: center").
+ * By default a carousel's intro is left-aligned; adding `center` to the
+ * section centers the intro text and floats the nav to the far right.
+ */
+main .section.center .carousel-top {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+main .section.center .carousel-intro {
+  margin-inline: auto;
+  text-align: center;
+}
+
+main .section.center .carousel-top .carousel-nav {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
 }

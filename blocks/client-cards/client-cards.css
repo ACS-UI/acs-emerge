@@ -158,12 +158,9 @@
 
 /* ===================== carousel variant ===================== */
 
-/* light panel */
-.client-cards.carousel {
-  padding: 48px 24px;
-  border-radius: 16px;
-  background: var(--color-gray-100);
-}
+/* The background panel and text colour now live at the section level
+   (Section Metadata "Style: bg-clients"), so the block is transparent and
+   inherits the section's colour. */
 
 /* carousel layout vars must sit on the utility's own `.carousel` element,
    otherwise its base `--carousel-visible: 1` (set directly on it) wins over
@@ -172,16 +169,12 @@
   --carousel-visible: 1;
   --carousel-gap: var(--client-cards-gap);
   --carousel-nav-bg-hover: rgb(0 0 0 / 8%);
-
-  /* dark nav arrows on the light panel */
-  color: var(--color-gray-900);
 }
 
-/* intro (eyebrow + heading), centered per Figma in a narrow column */
+/* intro (eyebrow + heading); left-aligned by default, centered opt-in at the
+   section level (Section Metadata "Style: center"). */
 .client-cards.carousel .carousel-intro {
   max-width: 34rem;
-  margin-inline: auto;
-  color: var(--color-gray-900);
 }
 
 .client-cards.carousel .carousel-intro h2,
@@ -189,7 +182,6 @@
   margin: 8px 0 0;
   font-size: var(--heading-size-l);
   line-height: var(--line-height-700);
-  color: var(--color-gray-900);
 }
 
 /* eyebrow: first short paragraph above the heading */
@@ -199,7 +191,7 @@
   font-weight: var(--font-weight-bold);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-gray-700);
+  opacity: 0.7;
 }
 
 /* view all button: dark pill at rest; on hover it fills red and reveals a

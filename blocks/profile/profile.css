@@ -165,12 +165,9 @@
 
 /* ===================== carousel variant ===================== */
 
-/* The gradient panel now lives at the section level (Section Metadata
-   "Style: bg-leadership"), so the block itself is transparent and inherits
-   the white text colour from the section. */
-.profile.carousel {
-  color: var(--color-white);
-}
+/* The background panel and text colour now live at the section level
+   (Section Metadata "Style: bg-leadership" etc.), so the block itself is
+   transparent and inherits the section's colour. */
 
 /* carousel layout vars must sit on the utility's own `.carousel` element,
    otherwise its base `--carousel-visible: 1` (set directly on it) wins over
@@ -180,18 +177,15 @@
   --carousel-gap: var(--profile-gap);
 }
 
-/* intro (eyebrow + heading), centered per Figma in a narrow column so the
-   headline wraps to ~3 lines and the nav can float to the right of it. */
+/* intro (eyebrow + heading); left-aligned by default. A centered layout is
+   opt-in at the section level (Section Metadata "Style: center"). */
 .profile.carousel .carousel-intro {
   max-width: 34rem;
-  margin-inline: auto;
-  color: var(--color-white);
 }
 
 .profile.carousel .carousel-intro h2,
 .profile.carousel .carousel-intro h3 {
   margin: 8px 0 0;
-  color: var(--color-white);
   font-size: var(--heading-size-l);
   line-height: var(--line-height-700);
 }
@@ -219,10 +213,11 @@
   object-fit: fill;
 }
 
-/* on the gradient, cards' name/role become white */
+/* cards' name/role inherit the section colour (white on gradient panels,
+   dark on a grey panel) */
 .profile.carousel .profile-card-name,
 .profile.carousel .profile-card-role {
-  color: var(--color-white);
+  color: inherit;
 }
 
 .profile.carousel .profile-card-role {
