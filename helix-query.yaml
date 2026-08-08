@@ -51,6 +51,11 @@ indices:
       thumbnail:
         select: head > meta[name="thumbnail"]
         value: attribute(el, 'content')
+      # reportees: comma-separated list of leader page paths that report to
+      # this person; lets a block reconstruct the full hierarchy for ordering.
+      reportees:
+        select: head > meta[name="reportees"]
+        value: attribute(el, 'content')
       description:
         select: head > meta[name="description"]
         value: attribute(el, 'content')

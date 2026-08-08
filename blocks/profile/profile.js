@@ -31,6 +31,48 @@ async function fetchIndexRows(url) {
 }
 
 /**
+ * Orders index rows top-down by org hierarchy, breadth-first:
+ * top-level leaders (nobody's reportee) first, then all their direct
+ * reportees, then the next level, etc. Rows are matched to each other by
+ * `path`; a row's `reportees` is a comma-separated list of leader paths.
+ * Any rows not reachable from a root (or with no hierarchy data) are appended
+ * in their original order so nothing is silently dropped.
+ * @param {object[]} rows The index rows.
+ * @returns {object[]} Rows in breadth-first hierarchy order.
+ */
+function orderByHierarchy(rows) {
+  const byPath = new Map(rows.map((r) => [r.path, r]));
+  const childPaths = (row) => (row.reportees || '')
+    .split(',')
+    .map((p) => p.trim())
+    .filter(Boolean);
+
+  // A row is a "root" if no other row lists it as a reportee.
+  const reportedTo = new Set();
+  rows.forEach((r) => childPaths(r).forEach((p) => reportedTo.add(p)));
+  const roots = rows.filter((r) => !reportedTo.has(r.path));
+
+  const ordered = [];
+  const seen = new Set();
+  // Seed the queue with roots (fall back to all rows if there are no roots,
+  // e.g. a cycle or missing hierarchy data).
+  const queue = [...(roots.length ? roots : rows)];
+  while (queue.length) {
+    const row = queue.shift();
+    if (!row || seen.has(row.path)) continue; // eslint-disable-line no-continue
+    seen.add(row.path);
+    ordered.push(row);
+    childPaths(row).forEach((p) => {
+      const child = byPath.get(p);
+      if (child && !seen.has(child.path)) queue.push(child);
+    });
+  }
+  // Append anything not reached (defensive: no data / disconnected).
+  rows.forEach((r) => { if (!seen.has(r.path)) ordered.push(r); });
+  return ordered;
+}
+
+/**
  * Builds a profile card from an index row, mirroring buildCard's DOM so both
  * authored and index-driven cards style identically. Uses the full-size
  * `image` column (not the small `thumbnail`).
@@ -180,7 +222,19 @@ export default async function decorate(block) {
   const indexUrl = getIndexLink(block);
   let cards;
   if (indexUrl) {
-    const dataRows = await fetchIndexRows(indexUrl);
+    let dataRows = await fetchIndexRows(indexUrl);
+    // Exclude the current page's own leader (don't show the card for the
+    // detail page you are viewing). Match tolerantly: index paths are
+    // site-root (e.g. /leaders/x) while the served path may carry a prefix
+    // (e.g. /content/leaders/x locally).
+    const currentPath = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '');
+    dataRows = dataRows.filter((row) => {
+      const p = (row.path || '').replace(/\/$/, '');
+      if (!p) return true;
+      return p !== currentPath && !currentPath.endsWith(p);
+    });
+    // Order top-down by org hierarchy (breadth-first).
+    dataRows = orderByHierarchy(dataRows);
     cards = dataRows.map((row) => buildCardFromData(row));
   } else {
     const rows = [...block.children];
