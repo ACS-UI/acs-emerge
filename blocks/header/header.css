@@ -178,23 +178,35 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   }
 }
 
-/* brand — Figma "ACS GDC HUB": 18px/22px, 700, white */
+/* brand — Figma "Logo": Adobe mark (40x39) + "ACS GDC HUB" wordmark, 8px gap */
 header .nav-brand {
   grid-area: brand;
-  flex-basis: 155px;
   font-size: 18px;
   font-weight: 700;
   line-height: 22px;
   color: var(--nav-brand-color);
 }
 
+/* lay out the authored logo mark + wordmark on one row */
+header .nav-brand p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 header .nav-brand a:any-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   color: var(--nav-brand-color);
 }
 
+/* Adobe logo mark (icon or image) */
+header nav .nav-brand .icon,
 header nav .nav-brand img {
-  width: 128px;
-  height: auto;
+  width: 40px;
+  height: 39px;
+  flex: none;
 }
 
 /* sections — Figma nav links: 16px/20px, 700, #C6C6C6, 16px gap */
