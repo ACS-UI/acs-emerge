@@ -360,3 +360,8 @@ main .section[data-background-text]::before {
   pointer-events: none;
   user-select: none;
 }
+
+/* Grey watermark variant — apply via Section Metadata "Style": bg-text-grey */
+main .section.bg-text-grey[data-background-text]::before {
+  color: rgb(0 0 0 / 8%);
+}
