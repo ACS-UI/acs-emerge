@@ -1,0 +1,122 @@
+.gallery-carousel {
+  /* colors */
+  --gc-arrow-bg: rgb(255 255 255 / 90%);
+  --gc-arrow-color: #1a1a2e;
+  --gc-dot-color: #c6c6c6;
+  --gc-dot-active-color: #1a1a2e;
+
+  /* layout */
+  --gc-radius: 24px;
+  --gc-gap: 24px;
+  --gc-peek: 0px;
+
+  position: relative;
+}
+
+/* scrollable, snapping track */
+.gallery-carousel .gallery-carousel-track {
+  display: flex;
+  gap: var(--gc-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.gallery-carousel .gallery-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-carousel .gallery-carousel-slide {
+  flex: 0 0 calc(100% - var(--gc-peek));
+  scroll-snap-align: center;
+  line-height: 0;
+}
+
+.gallery-carousel .gallery-carousel-slide picture,
+.gallery-carousel .gallery-carousel-slide img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--gc-radius);
+}
+
+/* --------------------------------------------------------------------------
+   Arrows
+   -------------------------------------------------------------------------- */
+.gallery-carousel .gallery-carousel-nav {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  pointer-events: none;
+}
+
+.gallery-carousel .gallery-carousel-arrow {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--gc-arrow-bg);
+  color: var(--gc-arrow-color);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 20%);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.gallery-carousel .gallery-carousel-arrow::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: solid currentcolor;
+  border-width: 2px 2px 0 0;
+}
+
+.gallery-carousel .gallery-carousel-prev::before {
+  transform: translateX(2px) rotate(-135deg);
+}
+
+.gallery-carousel .gallery-carousel-next::before {
+  transform: translateX(-2px) rotate(45deg);
+}
+
+/* --------------------------------------------------------------------------
+   Dots
+   -------------------------------------------------------------------------- */
+.gallery-carousel .gallery-carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.gallery-carousel .gallery-carousel-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--gc-dot-color);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.gallery-carousel .gallery-carousel-dot[aria-current='true'] {
+  background: var(--gc-dot-active-color);
+  transform: scale(1.3);
+}
+
+/* --------------------------------------------------------------------------
+   Desktop — show a peek of the next slide, as in the design
+   -------------------------------------------------------------------------- */
+@media (width >= 900px) {
+  .gallery-carousel {
+    --gc-peek: 96px;
+  }
+}
