@@ -177,7 +177,7 @@
 /* ===================== carousel variant ===================== */
 
 /* The background panel and text colour now live at the section level
-   (Section Metadata "Style: bg-leadership" etc.), so the block itself is
+   (Section Metadata "Style: bg-gradient" etc.), so the block itself is
    transparent and inherits the section's colour. */
 
 /* carousel layout vars must sit on the utility's own `.carousel` element,

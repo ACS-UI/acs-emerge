@@ -327,8 +327,39 @@ main .section.highlight {
   padding: 40px 0;
 }
 
-div.section[data-background-text] {
+/*
+ * Section background themes (applied via Section Metadata "Style").
+ * Generic, colour-based names so any block can reuse them:
+ *   `bg-gradient` — brand gradient panel, white text.
+ *   `bg-muted`    — muted grey (#F3F3F3) panel, static-black text.
+ * Blocks inside (profile/testimonial/client carousels) stay transparent and
+ * inherit the section colour.
+ */
+main .section.bg-gradient,
+main .section.bg-muted {
   position: relative;
+  margin: 0;
+  padding: 48px 0;
+  overflow: hidden;
+}
+
+/* gradient panel — white text */
+main .section.bg-gradient {
+  color: var(--color-text-static-white);
+  background: linear-gradient(95.72deg, #d73220 0%, #d92361 39.94%, #7155fa 121.02%);
+}
+
+/* muted grey panel — static-black text */
+main .section.bg-muted {
+  color: var(--color-text-static-black);
+  background: #f3f3f3;
+}
+
+@media (width >= 1024px) {
+  main .section.bg-gradient,
+  main .section.bg-muted {
+    padding: 64px 0;
+  }
 }
 
 /*
