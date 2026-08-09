@@ -1,0 +1,112 @@
+.client-detail {
+  /* colors */
+  --cd-heading-color: #6a6a6a;
+  --cd-text-color: var(--text-color);
+  --cd-rule-color: #e6e6e6;
+
+  /* typography */
+  --cd-eyebrow-size: var(--body-font-size-xs);
+  --cd-eyebrow-spacing: 0.08em;
+  --cd-about-size: var(--body-font-size-m);
+
+  /* layout */
+  --cd-gap: 40px;
+  --cd-hero-radius: 8px;
+  --cd-logo-height: 56px;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--cd-gap);
+}
+
+/* --------------------------------------------------------------------------
+   Logo
+   -------------------------------------------------------------------------- */
+.client-detail .client-detail-logo {
+  line-height: 0;
+}
+
+.client-detail .client-detail-logo img {
+  width: auto;
+  height: var(--cd-logo-height);
+  max-width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   Hero image
+   -------------------------------------------------------------------------- */
+.client-detail .client-detail-hero {
+  line-height: 0;
+}
+
+.client-detail .client-detail-hero img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--cd-hero-radius);
+}
+
+/* --------------------------------------------------------------------------
+   Content — Details + About
+   -------------------------------------------------------------------------- */
+.client-detail .client-detail-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--cd-gap);
+}
+
+/* shared eyebrow heading style for "DETAILS" and "ABOUT THE CLIENT" */
+.client-detail .client-detail-info-heading,
+.client-detail .client-detail-about-heading {
+  margin: 0 0 20px;
+  color: var(--cd-heading-color);
+  font-size: var(--cd-eyebrow-size);
+  font-weight: 700;
+  letter-spacing: var(--cd-eyebrow-spacing);
+  text-transform: uppercase;
+}
+
+/* details definition list: label left, value right, ruled rows */
+.client-detail .client-detail-info dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
+.client-detail .client-detail-info dt,
+.client-detail .client-detail-info dd {
+  margin: 0;
+  padding: 14px 0;
+  border-top: 1px solid var(--cd-rule-color);
+  color: var(--cd-text-color);
+}
+
+.client-detail .client-detail-info dt {
+  text-align: left;
+}
+
+.client-detail .client-detail-info dd {
+  text-align: right;
+  font-weight: 700;
+}
+
+.client-detail .client-detail-info dl > dt:last-of-type,
+.client-detail .client-detail-info dl > dd:last-of-type {
+  border-bottom: 1px solid var(--cd-rule-color);
+}
+
+/* about text */
+.client-detail .client-detail-about p:not(.client-detail-about-heading) {
+  margin: 0;
+  font-size: var(--cd-about-size);
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   Desktop — Details left, About right
+   -------------------------------------------------------------------------- */
+@media (width >= 900px) {
+  .client-detail .client-detail-content {
+    grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+    gap: 64px;
+  }
+}
