@@ -3,22 +3,27 @@
   --challenge-font: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
 
   /* colors */
-  --challenge-number-color: #e6e6e6;
+  --challenge-number-color: #dadada;
   --challenge-label-color: #000;
-  --challenge-text-color: #505050;
+  --challenge-text-color: #000;
   --challenge-rule-color: #e1e1e1;
 
   /* typography */
-  --challenge-number-size: clamp(72px, 9vw, 110px);
-  --challenge-number-weight: 700;
-  --challenge-label-size: var(--body-font-size-xs);
-  --challenge-label-spacing: 0.08em;
-  --challenge-text-size: var(--body-font-size-s);
+  --challenge-number-size: clamp(96px, 12vw, 160px);
+  --challenge-number-weight: 500;
+  --challenge-label-size: 20px;
+  --challenge-label-line: 24px;
+  --challenge-label-weight: 700;
+  --challenge-text-size: 25px;
+  --challenge-text-line: 1.5;
+  --challenge-text-weight: 400;
 
   /* layout */
-  --challenge-number-col: 240px;
-  --challenge-col-gap: 40px;
-  --challenge-row-pad: 32px;
+  --challenge-number-col: 488px;
+  --challenge-col-gap: 32px;
+  --challenge-content-gap: 16px;
+  --challenge-content-max: 696px;
+  --challenge-row-pad: 60px;
 
   font-family: var(--challenge-font);
 }
@@ -29,21 +34,17 @@
   list-style: none;
 }
 
-/* one row per challenge item, separated by a subtle rule */
+/* one row per challenge item, each with a bottom rule */
 .challenge .challenge-item {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--challenge-col-gap);
   align-items: center;
   padding: var(--challenge-row-pad) 0;
-  border-top: 1px solid var(--challenge-rule-color);
-}
-
-.challenge .challenge-item:last-child {
   border-bottom: 1px solid var(--challenge-rule-color);
 }
 
-/* large faint number */
+/* large faint number (Figma "Nos": 160px, weight 500, #DADADA) */
 .challenge .challenge-number {
   margin: 0;
   color: var(--challenge-number-color);
@@ -54,30 +55,37 @@
 
 /* label + description */
 .challenge .challenge-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--challenge-content-gap);
+  max-width: var(--challenge-content-max);
   color: var(--challenge-text-color);
 }
 
+/* label — Figma Title/XL: 20px/24px, 700, black */
 .challenge .challenge-body .challenge-label {
-  margin: 0 0 12px;
+  margin: 0;
   color: var(--challenge-label-color);
   font-size: var(--challenge-label-size);
-  font-weight: 700;
-  letter-spacing: var(--challenge-label-spacing);
-  text-transform: uppercase;
+  font-weight: var(--challenge-label-weight);
+  line-height: var(--challenge-label-line);
 }
 
+/* description — Figma Body/XXXL: 25px, 400, 150% */
 .challenge .challenge-body p:not(.challenge-label) {
   margin: 0;
   font-size: var(--challenge-text-size);
-  line-height: 1.5;
+  font-weight: var(--challenge-text-weight);
+  line-height: var(--challenge-text-line);
 }
 
 /* --------------------------------------------------------------------------
-   Desktop — number column beside the text
+   Desktop — number column beside the text (Figma: row, 32px gap)
    -------------------------------------------------------------------------- */
 @media (width >= 900px) {
   .challenge .challenge-item {
     grid-template-columns: var(--challenge-number-col) minmax(0, 1fr);
+    padding: var(--challenge-row-pad) 0;
   }
 
   .challenge .challenge-number {
