@@ -12,10 +12,6 @@ function goToSlide(block, index) {
   const target = slides[clamped];
   track.scrollTo({ left: target.offsetLeft - track.offsetLeft, behavior: 'smooth' });
   block.dataset.activeSlide = clamped;
-
-  block.querySelectorAll('.gallery-carousel-dot').forEach((dot, i) => {
-    dot.setAttribute('aria-current', i === clamped ? 'true' : 'false');
-  });
 }
 
 /**
@@ -49,14 +45,16 @@ export default function decorate(block) {
   });
 
   const slideCount = track.children.length;
-  block.replaceChildren(track);
-  if (slideCount <= 1) return; // no controls needed for a single image
+  if (slideCount <= 1) {
+    block.replaceChildren(track);
+    return; // no controls needed for a single image
+  }
 
   block.dataset.activeSlide = 0;
 
-  // Prev / next arrow buttons.
-  const nav = document.createElement('div');
-  nav.className = 'gallery-carousel-nav';
+  // Prev / next arrows, right-aligned above the track.
+  const controls = document.createElement('div');
+  controls.className = 'gallery-carousel-arrows';
   ['prev', 'next'].forEach((dir) => {
     const btn = document.createElement('button');
     btn.type = 'button';
@@ -66,36 +64,18 @@ export default function decorate(block) {
       const active = Number(block.dataset.activeSlide) || currentIndex(track);
       goToSlide(block, active + (dir === 'next' ? 1 : -1));
     });
-    nav.append(btn);
+    controls.append(btn);
   });
-  block.append(nav);
 
-  // Dot indicators.
-  const dots = document.createElement('div');
-  dots.className = 'gallery-carousel-dots';
-  [...track.children].forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.type = 'button';
-    dot.className = 'gallery-carousel-dot';
-    dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
-    dot.setAttribute('aria-current', i === 0 ? 'true' : 'false');
-    dot.addEventListener('click', () => goToSlide(block, i));
-    dots.append(dot);
-  });
-  block.append(dots);
+  block.replaceChildren(controls, track);
 
-  // Keep dot state in sync when the user scrolls/swipes directly.
+  // Track the active slide as the user scrolls/swipes directly.
   let scrollTimer;
   track.addEventListener('scroll', () => {
     clearTimeout(scrollTimer);
     scrollTimer = setTimeout(() => {
       const idx = currentIndex(track);
-      if (idx >= 0) {
-        block.dataset.activeSlide = idx;
-        block.querySelectorAll('.gallery-carousel-dot').forEach((dot, i) => {
-          dot.setAttribute('aria-current', i === idx ? 'true' : 'false');
-        });
-      }
+      if (idx >= 0) block.dataset.activeSlide = idx;
     }, 100);
   });
 }

@@ -1,9 +1,6 @@
 .gallery-carousel {
   /* colors */
-  --gc-arrow-bg: rgb(255 255 255 / 90%);
-  --gc-arrow-color: #1a1a2e;
-  --gc-dot-color: #c6c6c6;
-  --gc-dot-active-color: #1a1a2e;
+  --gc-arrow-color: #000;
 
   /* slide (Figma Rectangle 26/27: 1008x567, radius 24, drop-shadow) */
   --gc-slide-ratio: 1008 / 567;
@@ -13,8 +10,8 @@
   /* layout — 32px gap between slides; next slide peeks on the right */
   --gc-gap: 32px;
   --gc-slide-width: 100%;
-
-  position: relative;
+  --gc-arrow-size: 40px;
+  --gc-arrow-gap: 24px;
 }
 
 /* scrollable, snapping track */
@@ -55,36 +52,34 @@
 }
 
 /* --------------------------------------------------------------------------
-   Arrows
+   Arrows — right-aligned pair above the track (Figma "arrows": 40x40, 24 gap)
    -------------------------------------------------------------------------- */
-.gallery-carousel .gallery-carousel-nav {
-  position: absolute;
-  inset: 0;
+.gallery-carousel .gallery-carousel-arrows {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 12px;
-  pointer-events: none;
+  justify-content: flex-end;
+  gap: var(--gc-arrow-gap);
+  margin-bottom: 24px;
 }
 
 .gallery-carousel .gallery-carousel-arrow {
-  width: 44px;
-  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--gc-arrow-size);
+  height: var(--gc-arrow-size);
   padding: 0;
   border: 0;
-  border-radius: 50%;
-  background: var(--gc-arrow-bg);
+  background: transparent;
   color: var(--gc-arrow-color);
-  box-shadow: 0 2px 8px rgb(0 0 0 / 20%);
   cursor: pointer;
-  pointer-events: auto;
 }
 
+/* chevron glyph (Figma Vector) */
 .gallery-carousel .gallery-carousel-arrow::before {
   content: '';
   display: inline-block;
-  width: 10px;
-  height: 10px;
+  width: 11px;
+  height: 11px;
   border: solid currentcolor;
   border-width: 2px 2px 0 0;
 }
@@ -95,32 +90,6 @@
 
 .gallery-carousel .gallery-carousel-next::before {
   transform: translateX(-2px) rotate(45deg);
-}
-
-/* --------------------------------------------------------------------------
-   Dots
-   -------------------------------------------------------------------------- */
-.gallery-carousel .gallery-carousel-dots {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 20px;
-}
-
-.gallery-carousel .gallery-carousel-dot {
-  width: 8px;
-  height: 8px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: var(--gc-dot-color);
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-.gallery-carousel .gallery-carousel-dot[aria-current='true'] {
-  background: var(--gc-dot-active-color);
-  transform: scale(1.3);
 }
 
 /* --------------------------------------------------------------------------
