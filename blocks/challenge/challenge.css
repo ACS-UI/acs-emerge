@@ -1,0 +1,86 @@
+.challenge {
+  /* fonts — Figma design uses Adobe Clean Spectrum VF (not bundled here) */
+  --challenge-font: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+
+  /* colors */
+  --challenge-number-color: #e6e6e6;
+  --challenge-label-color: #000;
+  --challenge-text-color: #505050;
+  --challenge-rule-color: #e1e1e1;
+
+  /* typography */
+  --challenge-number-size: clamp(72px, 9vw, 110px);
+  --challenge-number-weight: 700;
+  --challenge-label-size: var(--body-font-size-xs);
+  --challenge-label-spacing: 0.08em;
+  --challenge-text-size: var(--body-font-size-s);
+
+  /* layout */
+  --challenge-number-col: 240px;
+  --challenge-col-gap: 40px;
+  --challenge-row-pad: 32px;
+
+  font-family: var(--challenge-font);
+}
+
+.challenge ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* one row per challenge item, separated by a subtle rule */
+.challenge .challenge-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--challenge-col-gap);
+  align-items: center;
+  padding: var(--challenge-row-pad) 0;
+  border-top: 1px solid var(--challenge-rule-color);
+}
+
+.challenge .challenge-item:last-child {
+  border-bottom: 1px solid var(--challenge-rule-color);
+}
+
+/* large faint number */
+.challenge .challenge-number {
+  margin: 0;
+  color: var(--challenge-number-color);
+  font-size: var(--challenge-number-size);
+  font-weight: var(--challenge-number-weight);
+  line-height: 1;
+}
+
+/* label + description */
+.challenge .challenge-body {
+  color: var(--challenge-text-color);
+}
+
+.challenge .challenge-body .challenge-label {
+  margin: 0 0 12px;
+  color: var(--challenge-label-color);
+  font-size: var(--challenge-label-size);
+  font-weight: 700;
+  letter-spacing: var(--challenge-label-spacing);
+  text-transform: uppercase;
+}
+
+.challenge .challenge-body p:not(.challenge-label) {
+  margin: 0;
+  font-size: var(--challenge-text-size);
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   Desktop — number column beside the text
+   -------------------------------------------------------------------------- */
+@media (width >= 900px) {
+  .challenge .challenge-item {
+    grid-template-columns: var(--challenge-number-col) minmax(0, 1fr);
+  }
+
+  .challenge .challenge-number {
+    text-align: center;
+  }
+}
