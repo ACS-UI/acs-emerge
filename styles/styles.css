@@ -383,6 +383,7 @@ main .section.center .carousel-top .carousel-nav {
   right: 0;
   transform: translateY(-50%);
 }
+
 /* Grey watermark variant — apply via Section Metadata "Style": bg-text-grey */
 main .section.bg-text-grey[data-background-text]::before {
   color: rgb(0 0 0 / 8%);
