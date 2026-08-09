@@ -361,6 +361,29 @@ main .section[data-background-text]::before {
   user-select: none;
 }
 
+/*
+ * Centered carousel intro (opt-in via Section Metadata "Style: center").
+ * By default a carousel's intro is left-aligned; adding `center` to the
+ * section centers the intro text and floats the nav to the far right.
+ */
+main .section.center .carousel-top {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+main .section.center .carousel-intro {
+  margin-inline: auto;
+  text-align: center;
+}
+
+main .section.center .carousel-top .carousel-nav {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
 /* Grey watermark variant — apply via Section Metadata "Style": bg-text-grey */
 main .section.bg-text-grey[data-background-text]::before {
   color: rgb(0 0 0 / 8%);

@@ -1,6 +1,123 @@
 import { createOptimizedPicture, loadCSS } from '../../scripts/aem.js';
 
 /**
+ * If the block is authored as *only* a link to a query-index sheet (no images),
+ * returns that URL so the cards can be pulled from the index instead of from
+ * authored rows.
+ * @param {Element} block The profile block.
+ * @returns {string|null} The query-index URL, or null for authored content.
+ */
+function getIndexLink(block) {
+  if (block.querySelector('picture, img')) return null;
+  const links = [...block.querySelectorAll('a[href]')];
+  const indexLink = links.find((a) => /query-index\.json(\?|$)/.test(a.getAttribute('href') || a.href));
+  return indexLink ? indexLink.href : null;
+}
+
+/**
+ * Fetches a query-index sheet's rows.
+ * @param {string} url The query-index.json URL.
+ * @returns {Promise<object[]>} Rows (empty array on failure).
+ */
+async function fetchIndexRows(url) {
+  try {
+    const resp = await fetch(url);
+    if (!resp.ok) return [];
+    const json = await resp.json();
+    return json.data || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+/**
+ * Orders index rows top-down by org hierarchy, breadth-first:
+ * top-level leaders (nobody's reportee) first, then all their direct
+ * reportees, then the next level, etc. Rows are matched to each other by
+ * `path`; a row's `reportees` is a comma-separated list of leader paths.
+ * Any rows not reachable from a root (or with no hierarchy data) are appended
+ * in their original order so nothing is silently dropped.
+ * @param {object[]} rows The index rows.
+ * @returns {object[]} Rows in breadth-first hierarchy order.
+ */
+function orderByHierarchy(rows) {
+  const byPath = new Map(rows.map((r) => [r.path, r]));
+  const childPaths = (row) => (row.reportees || '')
+    .split(',')
+    .map((p) => p.trim())
+    .filter(Boolean);
+
+  // A row is a "root" if no other row lists it as a reportee.
+  const reportedTo = new Set();
+  rows.forEach((r) => childPaths(r).forEach((p) => reportedTo.add(p)));
+  const roots = rows.filter((r) => !reportedTo.has(r.path));
+
+  const ordered = [];
+  const seen = new Set();
+  // Seed the queue with roots (fall back to all rows if there are no roots,
+  // e.g. a cycle or missing hierarchy data).
+  const queue = [...(roots.length ? roots : rows)];
+  while (queue.length) {
+    const row = queue.shift();
+    if (!row || seen.has(row.path)) continue; // eslint-disable-line no-continue
+    seen.add(row.path);
+    ordered.push(row);
+    childPaths(row).forEach((p) => {
+      const child = byPath.get(p);
+      if (child && !seen.has(child.path)) queue.push(child);
+    });
+  }
+  // Append anything not reached (defensive: no data / disconnected).
+  rows.forEach((r) => { if (!seen.has(r.path)) ordered.push(r); });
+  return ordered;
+}
+
+/**
+ * Builds a profile card from an index row, mirroring buildCard's DOM so both
+ * authored and index-driven cards style identically. Uses the full-size
+ * `image` column (not the small `thumbnail`).
+ * @param {object} row An index row (title, role, image, description).
+ * @returns {HTMLElement} The card article.
+ */
+function buildCardFromData(row) {
+  const card = document.createElement('article');
+  card.className = 'profile-card';
+  card.tabIndex = 0;
+
+  const media = document.createElement('div');
+  media.className = 'profile-card-image';
+  if (row.image) {
+    media.append(createOptimizedPicture(row.image, row.title || '', false, [{ width: '750' }]));
+  }
+  const overlay = document.createElement('div');
+  overlay.className = 'profile-card-overlay';
+  if (row.description) {
+    const bio = document.createElement('p');
+    bio.textContent = row.description;
+    overlay.append(bio);
+  }
+  media.append(overlay);
+
+  const body = document.createElement('div');
+  body.className = 'profile-card-body';
+  if (row.title) {
+    const name = document.createElement('h3');
+    name.className = 'profile-card-name';
+    name.textContent = row.title;
+    body.append(name);
+  }
+  if (row.role) {
+    const role = document.createElement('p');
+    role.className = 'profile-card-role';
+    role.textContent = row.role;
+    body.append(role);
+  }
+
+  card.append(media, body);
+  return card;
+}
+
+/**
  * Extracts an optional heading/description "intro" from the first authored row
  * when it has no image (used by the carousel variant for the top-left text).
  * @param {Element} block The profile block.
@@ -100,10 +217,31 @@ export default async function decorate(block) {
   // first text-only row; the carousel centres it, the base grid left-aligns it.
   const { intro, viewAll } = extractConfig(block);
 
-  const rows = [...block.children];
-  const cards = rows
-    .filter((row) => row.querySelector('picture, img') || row.textContent.trim())
-    .map((row) => buildCard(row));
+  // Data source: pull cards from a query-index sheet when the block is authored
+  // as only a link to one; otherwise build them from the authored rows.
+  const indexUrl = getIndexLink(block);
+  let cards;
+  if (indexUrl) {
+    let dataRows = await fetchIndexRows(indexUrl);
+    // Exclude the current page's own leader (don't show the card for the
+    // detail page you are viewing). Match tolerantly: index paths are
+    // site-root (e.g. /leaders/x) while the served path may carry a prefix
+    // (e.g. /content/leaders/x locally).
+    const currentPath = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '');
+    dataRows = dataRows.filter((row) => {
+      const p = (row.path || '').replace(/\/$/, '');
+      if (!p) return true;
+      return p !== currentPath && !currentPath.endsWith(p);
+    });
+    // Order top-down by org hierarchy (breadth-first).
+    dataRows = orderByHierarchy(dataRows);
+    cards = dataRows.map((row) => buildCardFromData(row));
+  } else {
+    const rows = [...block.children];
+    cards = rows
+      .filter((row) => row.querySelector('picture, img') || row.textContent.trim())
+      .map((row) => buildCard(row));
+  }
 
   if (isCarousel) {
     await loadCSS(`${window.hlx.codeBasePath}/styles/carousel.css`);
@@ -112,7 +250,7 @@ export default async function decorate(block) {
       heading: intro || undefined,
       viewAll,
       step: 1,
-      align: 'center',
+      align: 'left',
       label: 'Leadership profiles',
     });
     block.replaceChildren(carousel);

@@ -173,7 +173,7 @@ export default async function decorate(block) {
       heading: intro || undefined,
       viewAll,
       step: 1,
-      align: 'center',
+      align: 'left',
       label: 'Success stories',
     });
     block.replaceChildren(carousel);

@@ -124,11 +124,23 @@
   -webkit-mask: var(--carousel-arrow-mask) center / contain no-repeat;
 }
 
+/* Default arrows (used on grey / no-colour sections): solid arrows. */
 .carousel .carousel-nav-prev .carousel-nav-icon {
-  --carousel-arrow-mask: url('../icons/arrow-left.svg');
+  --carousel-arrow-mask: url('../icons/arrow-left-solid.svg');
 }
 
 .carousel .carousel-nav-next .carousel-nav-icon {
+  --carousel-arrow-mask: url('../icons/arrow-right-solid.svg');
+}
+
+/* On gradient sections, use the lighter line-style arrows. */
+main .section.bg-leadership .carousel .carousel-nav-prev .carousel-nav-icon,
+main .section.bg-testimonial .carousel .carousel-nav-prev .carousel-nav-icon {
+  --carousel-arrow-mask: url('../icons/arrow-left.svg');
+}
+
+main .section.bg-leadership .carousel .carousel-nav-next .carousel-nav-icon,
+main .section.bg-testimonial .carousel .carousel-nav-next .carousel-nav-icon {
   --carousel-arrow-mask: url('../icons/arrow-right.svg');
 }
 
