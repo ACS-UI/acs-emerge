@@ -327,41 +327,8 @@ main .section.highlight {
   padding: 40px 0;
 }
 
-/*
- * Section background themes (applied via Section Metadata "Style").
- * `bg-leadership` and `bg-testimonial` share the brand gradient and flip
- * content to white; `bg-clients` is a muted grey panel with dark text.
- * Blocks inside (profile/testimonial/client carousels) stay transparent and
- * inherit the section colour.
- */
-main .section.bg-leadership,
-main .section.bg-testimonial,
-main .section.bg-clients {
+div.section[data-background-text] {
   position: relative;
-  margin: 0;
-  padding: 48px 0;
-  overflow: hidden;
-}
-
-/* gradient panels — white text */
-main .section.bg-leadership,
-main .section.bg-testimonial {
-  color: var(--color-text-static-white);
-  background: linear-gradient(95.72deg, #d73220 0%, #d92361 39.94%, #7155fa 121.02%);
-}
-
-/* muted grey panel (clients) — static-black text */
-main .section.bg-clients {
-  color: var(--color-text-static-black);
-  background: #f3f3f3;
-}
-
-@media (width >= 1024px) {
-  main .section.bg-leadership,
-  main .section.bg-testimonial,
-  main .section.bg-clients {
-    padding: 64px 0;
-  }
 }
 
 /*
@@ -415,4 +382,7 @@ main .section.center .carousel-top .carousel-nav {
   top: 50%;
   right: 0;
   transform: translateY(-50%);
+/* Grey watermark variant — apply via Section Metadata "Style": bg-text-grey */
+main .section.bg-text-grey[data-background-text]::before {
+  color: rgb(0 0 0 / 8%);
 }

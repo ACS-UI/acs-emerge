@@ -1,0 +1,37 @@
+/* Import component-specific tokens */
+@import url('./hero-banner-tokens.css');
+
+/* hero-banner block styles */
+.hero-banner-container .hero-banner-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+/*
+ * Full-bleed background video hero. The source Figma frame is video-only,
+ * so this block renders just the video (no overlaid text or CTA).
+ */
+.hero-banner {
+  position: relative;
+  overflow: hidden;
+
+  /* Brand gradient shows while the video loads and as a no-video fallback. */
+  background: var(--hero-banner-placeholder-bg);
+  aspect-ratio: var(--hero-banner-aspect-ratio);
+}
+
+/* Full-bleed media (video or poster image) fills the block */
+.hero-banner picture,
+.hero-banner video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: var(--hero-banner-media-object-fit);
+  box-sizing: border-box;
+}
+
+.hero-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: var(--hero-banner-media-object-fit);
+}
