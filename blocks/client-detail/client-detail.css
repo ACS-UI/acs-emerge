@@ -1,22 +1,37 @@
 .client-detail {
-  /* colors */
-  --cd-heading-color: #6a6a6a;
-  --cd-text-color: var(--text-color);
-  --cd-rule-color: #e6e6e6;
+  /* fonts — Figma design uses Adobe Clean Spectrum VF (not bundled here);
+     requested first with a project-font fallback. */
+  --cd-font: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
 
-  /* typography */
-  --cd-eyebrow-size: var(--body-font-size-xs);
-  --cd-eyebrow-spacing: 0.08em;
-  --cd-about-size: var(--body-font-size-m);
+  /* colors */
+  --cd-heading-color: #000;
+  --cd-label-color: #505050;
+  --cd-value-color: #000;
+  --cd-rule-color: #e1e1e1;
+  --cd-about-color: #000;
+
+  /* typography (Title/XL for headings + rows, Body/XXXL for about) */
+  --cd-title-size: 20px;
+  --cd-title-line: 24px;
+  --cd-title-weight: 700;
+  --cd-about-size: 25px;
+  --cd-about-line: 1.5;
+  --cd-about-weight: 400;
 
   /* layout */
-  --cd-gap: 40px;
-  --cd-hero-radius: 8px;
+  --cd-section-gap: 40px;
+  --cd-content-gap: 136px;
+  --cd-col-gap: 16px;
+  --cd-row-gap: 32px;
+  --cd-row-pad: 8px;
+  --cd-details-width: 384px;
+  --cd-hero-radius: 24px;
   --cd-logo-height: 56px;
 
   display: flex;
   flex-direction: column;
-  gap: var(--cd-gap);
+  gap: var(--cd-section-gap);
+  font-family: var(--cd-font);
 }
 
 /* --------------------------------------------------------------------------
@@ -33,7 +48,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   Hero image
+   Hero image (Figma "banner": 1216x608, radius 24)
    -------------------------------------------------------------------------- */
 .client-detail .client-detail-hero {
   line-height: 0;
@@ -51,62 +66,69 @@
 .client-detail .client-detail-content {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--cd-gap);
+  gap: var(--cd-content-gap);
+  align-items: start;
 }
 
-/* shared eyebrow heading style for "DETAILS" and "ABOUT THE CLIENT" */
+.client-detail .client-detail-info,
+.client-detail .client-detail-about {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cd-col-gap);
+}
+
+/* section headings ("DETAILS" / "ABOUT THE CLIENT") — Figma Title/XL, black */
 .client-detail .client-detail-info-heading,
 .client-detail .client-detail-about-heading {
-  margin: 0 0 20px;
+  margin: 0;
   color: var(--cd-heading-color);
-  font-size: var(--cd-eyebrow-size);
-  font-weight: 700;
-  letter-spacing: var(--cd-eyebrow-spacing);
-  text-transform: uppercase;
+  font-size: var(--cd-title-size);
+  font-weight: var(--cd-title-weight);
+  line-height: var(--cd-title-line);
 }
 
-/* details definition list: label left, value right, ruled rows */
+/* details definition list: one ruled row per pair, label left / value right */
 .client-detail .client-detail-info dl {
   margin: 0;
   display: grid;
   grid-template-columns: 1fr auto;
+  column-gap: var(--cd-row-gap);
 }
 
 .client-detail .client-detail-info dt,
 .client-detail .client-detail-info dd {
   margin: 0;
-  padding: 14px 0;
-  border-top: 1px solid var(--cd-rule-color);
-  color: var(--cd-text-color);
+  padding: var(--cd-row-pad) 0;
+  border-bottom: 1px solid var(--cd-rule-color);
+  font-size: var(--cd-title-size);
+  font-weight: var(--cd-title-weight);
+  line-height: var(--cd-title-line);
 }
 
 .client-detail .client-detail-info dt {
   text-align: left;
+  color: var(--cd-label-color);
 }
 
 .client-detail .client-detail-info dd {
   text-align: right;
-  font-weight: 700;
+  color: var(--cd-value-color);
 }
 
-.client-detail .client-detail-info dl > dt:last-of-type,
-.client-detail .client-detail-info dl > dd:last-of-type {
-  border-bottom: 1px solid var(--cd-rule-color);
-}
-
-/* about text */
+/* about text — Figma Body/XXXL */
 .client-detail .client-detail-about p:not(.client-detail-about-heading) {
   margin: 0;
+  color: var(--cd-about-color);
   font-size: var(--cd-about-size);
-  line-height: 1.5;
+  font-weight: var(--cd-about-weight);
+  line-height: var(--cd-about-line);
 }
 
 /* --------------------------------------------------------------------------
-   Desktop — Details left, About right
+   Desktop — Details (384px) left, About right, 136px gap
    -------------------------------------------------------------------------- */
 @media (width >= 900px) {
   .client-detail .client-detail-content {
-    grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
-    gap: 64px;
+    grid-template-columns: var(--cd-details-width) minmax(0, 1fr);
   }
 }
