@@ -259,6 +259,11 @@ export default async function decorate(block) {
   let cards;
   if (indexUrl) {
     let dataRows = await fetchIndexRows(indexUrl);
+    // Temporary: drop the listing/folder pages (e.g. /leaders, /clients) that
+    // the query-index still returns until the index is rebuilt with the
+    // folder-page exclude live. Belt-and-braces alongside the helix-query fix.
+    const listingPaths = ['/leaders', '/clients', '/success-stories'];
+    dataRows = dataRows.filter((row) => !listingPaths.includes((row.path || '').replace(/\/$/, '')));
     // Exclude the current page's own leader (don't show the card for the
     // detail page you are viewing). Match tolerantly: index paths are
     // site-root (e.g. /leaders/x) while the served path may carry a prefix

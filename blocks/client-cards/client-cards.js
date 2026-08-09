@@ -194,7 +194,11 @@ export default async function decorate(block) {
   const indexUrl = getIndexLink(block);
   let cards;
   if (indexUrl) {
-    const dataRows = await fetchIndexRows(indexUrl);
+    let dataRows = await fetchIndexRows(indexUrl);
+    // Temporary: drop the listing/folder pages the index still returns until
+    // it is rebuilt with the folder-page exclude live.
+    const listingPaths = ['/leaders', '/clients', '/success-stories'];
+    dataRows = dataRows.filter((row) => !listingPaths.includes((row.path || '').replace(/\/$/, '')));
     cards = dataRows.map((row) => buildCardFromData(row));
   } else {
     const rows = [...block.children];
