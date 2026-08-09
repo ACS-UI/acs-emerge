@@ -30,10 +30,12 @@ indices:
   # Leadership profiles: one row per leader page under /leaders/, feeding a
   # future query-index-driven profile block.
   leaders:
+    # `/leaders/**` matches the folder page `/leaders` itself, so require a
+    # child segment to index only the individual leader detail pages.
     include:
-      - '/leaders/**'
+      - '/leaders/*'
     exclude:
-      # the /leaders listing page is not a person; keep it out of the index
+      # belt-and-braces: keep the /leaders listing page out of the index
       - '/leaders'
     target: /leaders/query-index.json
     properties:
@@ -66,10 +68,10 @@ indices:
   # Clients: one row per client page under /clients/, feeding a future
   # query-index-driven client-cards block.
   clients:
+    # require a child segment so the folder page `/clients` is not indexed
     include:
-      - '/clients/**'
+      - '/clients/*'
     exclude:
-      # the /clients listing page is not a client entry; keep it out
       - '/clients'
     target: /clients/query-index.json
     properties:
