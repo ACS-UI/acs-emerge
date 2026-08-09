@@ -5,10 +5,14 @@
   --gc-dot-color: #c6c6c6;
   --gc-dot-active-color: #1a1a2e;
 
-  /* layout */
+  /* slide (Figma Rectangle 26/27: 1008x567, radius 24, drop-shadow) */
+  --gc-slide-ratio: 1008 / 567;
   --gc-radius: 24px;
-  --gc-gap: 24px;
-  --gc-peek: 0px;
+  --gc-shadow: 0 12px 50px rgb(0 0 0 / 15%);
+
+  /* layout — 32px gap between slides; next slide peeks on the right */
+  --gc-gap: 32px;
+  --gc-slide-width: 100%;
 
   position: relative;
 }
@@ -30,8 +34,12 @@
 }
 
 .gallery-carousel .gallery-carousel-slide {
-  flex: 0 0 calc(100% - var(--gc-peek));
-  scroll-snap-align: center;
+  flex: 0 0 var(--gc-slide-width);
+  scroll-snap-align: start;
+  aspect-ratio: var(--gc-slide-ratio);
+  overflow: hidden;
+  border-radius: var(--gc-radius);
+  box-shadow: var(--gc-shadow);
   line-height: 0;
 }
 
@@ -39,8 +47,11 @@
 .gallery-carousel .gallery-carousel-slide img {
   display: block;
   width: 100%;
-  height: auto;
-  border-radius: var(--gc-radius);
+  height: 100%;
+
+  /* fixed-ratio slide, cropped from the top like the Figma screenshots */
+  object-fit: cover;
+  object-position: top;
 }
 
 /* --------------------------------------------------------------------------
@@ -113,10 +124,10 @@
 }
 
 /* --------------------------------------------------------------------------
-   Desktop — show a peek of the next slide, as in the design
+   Desktop — slide ~79% wide (1008/1280) so the next slide peeks, as designed
    -------------------------------------------------------------------------- */
 @media (width >= 900px) {
   .gallery-carousel {
-    --gc-peek: 96px;
+    --gc-slide-width: 78.75%;
   }
 }
