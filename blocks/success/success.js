@@ -29,6 +29,94 @@ function extractConfig(block) {
 }
 
 /**
+ * If the block is authored as *only* a link to a query-index sheet (no images),
+ * returns that URL so cards are pulled from the index instead of authored rows.
+ * @param {Element} block The success block.
+ * @returns {string|null} The query-index URL, or null for authored content.
+ */
+function getIndexLink(block) {
+  if (block.querySelector('picture, img')) return null;
+  const links = [...block.querySelectorAll('a[href]')];
+  const indexLink = links.find((a) => /query-index\.json(\?|$)/.test(a.getAttribute('href') || a.href));
+  return indexLink ? indexLink.href : null;
+}
+
+/**
+ * Fetches a query-index sheet's rows.
+ * @param {string} url The query-index.json URL.
+ * @returns {Promise<object[]>} Rows (empty array on failure).
+ */
+async function fetchIndexRows(url) {
+  try {
+    const resp = await fetch(url);
+    if (!resp.ok) return [];
+    const json = await resp.json();
+    return json.data || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+/**
+ * Builds a success-story card from an index row, wrapped in a link to the
+ * story's detail page (the row path).
+ *
+ * Index columns: path, title, image, description, tags (comma-separated).
+ * @param {object} row An index row.
+ * @returns {HTMLElement} The link-wrapped card.
+ */
+function buildCardFromData(row) {
+  const card = document.createElement('article');
+  card.className = 'success-card';
+
+  const media = document.createElement('div');
+  media.className = 'success-card-image';
+  if (row.image) {
+    media.append(createOptimizedPicture(row.image, row.title || '', false, [{ width: '750' }]));
+  }
+  card.append(media);
+
+  const body = document.createElement('div');
+  body.className = 'success-card-body';
+  if (row.title) {
+    const h = document.createElement('h3');
+    h.className = 'success-card-title';
+    h.textContent = row.title;
+    body.append(h);
+  }
+  if (row.description) {
+    const p = document.createElement('p');
+    p.className = 'success-card-desc';
+    p.textContent = row.description;
+    body.append(p);
+  }
+  // tags come from the index `tags` column (sourced from the `services`
+  // metadata, since `tags` is a reserved metadata key).
+  const tagValues = (row.tags || row.services || '').split(',').map((t) => t.trim()).filter(Boolean);
+  if (tagValues.length) {
+    const tags = document.createElement('ul');
+    tags.className = 'success-card-tags';
+    tagValues.forEach((t) => {
+      const tag = document.createElement('li');
+      tag.className = 'success-card-tag';
+      tag.textContent = t;
+      tags.append(tag);
+    });
+    body.append(tags);
+  }
+  card.append(body);
+
+  if (row.path) {
+    const link = document.createElement('a');
+    link.className = 'success-card-link';
+    link.href = row.path;
+    link.append(card);
+    return link;
+  }
+  return card;
+}
+
+/**
  * Turns one authored row into a success-story card.
  *
  * Authored content model (per row / per story):
@@ -61,6 +149,9 @@ function buildCard(row) {
   const body = document.createElement('div');
   body.className = 'success-card-body';
 
+  // An authored link (in the body cell) is the card's detail-page target; its
+  // text is not rendered separately — the whole card becomes the link.
+  let href = '';
   if (bodyCell) {
     const nodes = [...bodyCell.children];
     const heading = nodes.find((n) => /^H[1-6]$/.test(n.tagName));
@@ -71,9 +162,11 @@ function buildCard(row) {
 
     // A trailing UL is treated as the tag list.
     const tagList = nodes.find((n) => n.tagName === 'UL');
+    const cta = bodyCell.querySelector('a[href]');
+    href = cta ? cta.getAttribute('href') : '';
 
     nodes
-      .filter((n) => n !== heading && n !== tagList && n.textContent.trim())
+      .filter((n) => n !== heading && n !== tagList && !n.contains(cta) && n.textContent.trim())
       .forEach((p) => {
         p.classList.add('success-card-desc');
         body.append(p);
@@ -93,6 +186,15 @@ function buildCard(row) {
   }
 
   card.append(body);
+
+  // wrap in the detail-page link when authored
+  if (href) {
+    const link = document.createElement('a');
+    link.className = 'success-card-link';
+    link.href = href;
+    link.append(card);
+    return link;
+  }
   return card;
 }
 
@@ -161,10 +263,24 @@ export default async function decorate(block) {
   const isParallax = block.classList.contains('parallax');
   const { intro, viewAll } = extractConfig(block);
 
-  const rows = [...block.children];
-  const cards = rows
-    .filter((row) => row.querySelector('picture, img') || row.textContent.trim())
-    .map((row) => buildCard(row));
+  // Data source: pull cards from a query-index sheet when the block is authored
+  // as only a link to one; otherwise build them from the authored rows. Either
+  // way each card links to its detail page.
+  const indexUrl = getIndexLink(block);
+  let cards;
+  if (indexUrl) {
+    let dataRows = await fetchIndexRows(indexUrl);
+    // Temporary: drop the listing/folder pages the index still returns until
+    // it is rebuilt with the folder-page exclude live.
+    const listingPaths = ['/leaders', '/clients', '/success-stories'];
+    dataRows = dataRows.filter((row) => !listingPaths.includes((row.path || '').replace(/\/$/, '')));
+    cards = dataRows.map((row) => buildCardFromData(row));
+  } else {
+    const rows = [...block.children];
+    cards = rows
+      .filter((row) => row.querySelector('picture, img') || row.textContent.trim())
+      .map((row) => buildCard(row));
+  }
 
   if (isCarousel) {
     await loadCSS(`${window.hlx.codeBasePath}/styles/carousel.css`);

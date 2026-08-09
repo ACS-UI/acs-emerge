@@ -133,14 +133,14 @@
   --carousel-arrow-mask: url('../icons/arrow-right-solid.svg');
 }
 
-/* On gradient sections, use the lighter line-style arrows. */
-main .section.bg-leadership .carousel .carousel-nav-prev .carousel-nav-icon,
-main .section.bg-testimonial .carousel .carousel-nav-prev .carousel-nav-icon {
+/* On coloured (gradient) sections, use the lighter line-style arrows. */
+main .section.bg-gradient-a .carousel .carousel-nav-prev .carousel-nav-icon,
+main .section.bg-gradient-b .carousel .carousel-nav-prev .carousel-nav-icon {
   --carousel-arrow-mask: url('../icons/arrow-left.svg');
 }
 
-main .section.bg-leadership .carousel .carousel-nav-next .carousel-nav-icon,
-main .section.bg-testimonial .carousel .carousel-nav-next .carousel-nav-icon {
+main .section.bg-gradient-a .carousel .carousel-nav-next .carousel-nav-icon,
+main .section.bg-gradient-b .carousel .carousel-nav-next .carousel-nav-icon {
   --carousel-arrow-mask: url('../icons/arrow-right.svg');
 }
 

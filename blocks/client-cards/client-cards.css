@@ -18,6 +18,18 @@
   --client-cards-border: var(--color-gray-200);
 }
 
+/* card link wrapper: make the whole card clickable without changing styling */
+.client-cards .client-cards-card-link {
+  display: block;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.client-cards .client-cards-card-link:hover {
+  text-decoration: none;
+}
+
 /* ===================== cards (shared by both variants) ===================== */
 .client-cards .client-cards-card {
   display: flex;
@@ -159,7 +171,7 @@
 /* ===================== carousel variant ===================== */
 
 /* The background panel and text colour now live at the section level
-   (Section Metadata "Style: bg-clients"), so the block is transparent and
+   (Section Metadata "Style: bg-muted"), so the block is transparent and
    inherits the section's colour. */
 
 /* carousel layout vars must sit on the utility's own `.carousel` element,

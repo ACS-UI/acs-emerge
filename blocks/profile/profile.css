@@ -16,6 +16,17 @@
   --profile-role-color: var(--color-gray-600);
 }
 
+/* card link wrapper: make the whole card clickable without changing styling */
+.profile .profile-card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.profile .profile-card-link:hover {
+  text-decoration: none;
+}
+
 /* ===================== cards (shared by both variants) ===================== */
 .profile .profile-card {
   display: flex;
@@ -166,7 +177,7 @@
 /* ===================== carousel variant ===================== */
 
 /* The background panel and text colour now live at the section level
-   (Section Metadata "Style: bg-leadership" etc.), so the block itself is
+   (Section Metadata "Style: bg-gradient" etc.), so the block itself is
    transparent and inherits the section's colour. */
 
 /* carousel layout vars must sit on the utility's own `.carousel` element,
@@ -279,4 +290,70 @@
   .profile.carousel .carousel {
     --carousel-visible: 3;
   }
+}
+
+/* ===================== overlap variant ===================== */
+
+/*
+ * The bio (quote), a thin white divider, and the name + designation all sit in
+ * an always-visible frosted-glass band at the bottom of the image. Combinable
+ * with `carousel`. Unlike the base card, nothing is revealed on hover — the
+ * overlay is persistent.
+ */
+.profile.overlap .profile-card-image {
+  aspect-ratio: 3 / 4;
+}
+
+/* persistent glass overlay (override the base hover overlay) */
+/* stylelint-disable-next-line no-descending-specificity */
+.profile.overlap .profile-card-overlay {
+  gap: 12px;
+  padding: 24px;
+  opacity: 1;
+  background: rgb(0 0 0 / 28%);
+  backdrop-filter: blur(12px) saturate(130%);
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-backdrop-filter: blur(12px) saturate(130%);
+
+  /* no feathering mask — a clean glass band with a solid extent */
+  mask: none;
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask: none;
+}
+
+/* the bio / quote text */
+.profile.overlap .profile-card-overlay p {
+  font-size: var(--body-size-s);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-300);
+  color: var(--color-white);
+}
+
+/* thin white separator between the quote and the name/designation */
+.profile.overlap .profile-card-divider {
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin: 4px 0;
+  background: rgb(255 255 255 / 40%);
+}
+
+/* name + designation inside the overlay */
+.profile.overlap .profile-card-overlay .profile-card-name {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-size-s);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-400);
+  color: var(--color-white);
+}
+
+.profile.overlap .profile-card-overlay .profile-card-role {
+  margin: 0;
+  font-size: var(--detail-size-m);
+  line-height: var(--line-height-200);
+  color: var(--color-white);
+  opacity: 0.85;
 }
