@@ -134,11 +134,13 @@
 }
 
 /* On coloured (gradient) sections, use the lighter line-style arrows. */
-main .section.bg-gradient .carousel .carousel-nav-prev .carousel-nav-icon {
+main .section.bg-gradient-a .carousel .carousel-nav-prev .carousel-nav-icon,
+main .section.bg-gradient-b .carousel .carousel-nav-prev .carousel-nav-icon {
   --carousel-arrow-mask: url('../icons/arrow-left.svg');
 }
 
-main .section.bg-gradient .carousel .carousel-nav-next .carousel-nav-icon {
+main .section.bg-gradient-a .carousel .carousel-nav-next .carousel-nav-icon,
+main .section.bg-gradient-b .carousel .carousel-nav-next .carousel-nav-icon {
   --carousel-arrow-mask: url('../icons/arrow-right.svg');
 }
 
