@@ -61,6 +61,9 @@ function buildCard(row) {
   const body = document.createElement('div');
   body.className = 'success-card-body';
 
+  // An authored link (in the body cell) is the card's detail-page target; its
+  // text is not rendered separately — the whole card becomes the link.
+  let href = '';
   if (bodyCell) {
     const nodes = [...bodyCell.children];
     const heading = nodes.find((n) => /^H[1-6]$/.test(n.tagName));
@@ -71,9 +74,11 @@ function buildCard(row) {
 
     // A trailing UL is treated as the tag list.
     const tagList = nodes.find((n) => n.tagName === 'UL');
+    const cta = bodyCell.querySelector('a[href]');
+    href = cta ? cta.getAttribute('href') : '';
 
     nodes
-      .filter((n) => n !== heading && n !== tagList && n.textContent.trim())
+      .filter((n) => n !== heading && n !== tagList && !n.contains(cta) && n.textContent.trim())
       .forEach((p) => {
         p.classList.add('success-card-desc');
         body.append(p);
@@ -93,6 +98,15 @@ function buildCard(row) {
   }
 
   card.append(body);
+
+  // wrap in the detail-page link when authored
+  if (href) {
+    const link = document.createElement('a');
+    link.className = 'success-card-link';
+    link.href = href;
+    link.append(card);
+    return link;
+  }
   return card;
 }
 

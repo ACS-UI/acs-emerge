@@ -79,7 +79,7 @@ function orderByHierarchy(rows) {
  * @param {object} row An index row (title, role, image, description).
  * @returns {HTMLElement} The card article.
  */
-function buildCardFromData(row) {
+function buildCardFromData(row, overlap = false) {
   const card = document.createElement('article');
   card.className = 'profile-card';
   card.tabIndex = 0;
@@ -91,29 +91,44 @@ function buildCardFromData(row) {
   }
   const overlay = document.createElement('div');
   overlay.className = 'profile-card-overlay';
-  if (row.description) {
-    const bio = document.createElement('p');
-    bio.textContent = row.description;
-    overlay.append(bio);
-  }
   media.append(overlay);
 
-  const body = document.createElement('div');
-  body.className = 'profile-card-body';
-  if (row.title) {
-    const name = document.createElement('h3');
-    name.className = 'profile-card-name';
-    name.textContent = row.title;
-    body.append(name);
-  }
-  if (row.role) {
-    const role = document.createElement('p');
-    role.className = 'profile-card-role';
-    role.textContent = row.role;
-    body.append(role);
+  const name = document.createElement('h3');
+  name.className = 'profile-card-name';
+  name.textContent = row.title || '';
+  const role = document.createElement('p');
+  role.className = 'profile-card-role';
+  role.textContent = row.role || '';
+  const bio = document.createElement('p');
+  bio.textContent = row.description || '';
+
+  if (overlap) {
+    if (row.description) overlay.append(bio);
+    if (row.title || row.role) {
+      const divider = document.createElement('span');
+      divider.className = 'profile-card-divider';
+      overlay.append(divider);
+    }
+    if (row.title) overlay.append(name);
+    if (row.role) overlay.append(role);
+    card.append(media);
+  } else {
+    if (row.description) overlay.append(bio);
+    const body = document.createElement('div');
+    body.className = 'profile-card-body';
+    if (row.title) body.append(name);
+    if (row.role) body.append(role);
+    card.append(media, body);
   }
 
-  card.append(media, body);
+  // wrap the whole card in a link to its detail page (the index row path)
+  if (row.path) {
+    const link = document.createElement('a');
+    link.className = 'profile-card-link';
+    link.href = row.path;
+    link.append(card);
+    return link;
+  }
   return card;
 }
 
@@ -158,7 +173,7 @@ function extractConfig(block) {
  * @param {Element} row The authored row.
  * @returns {HTMLElement} The card article.
  */
-function buildCard(row) {
+function buildCard(row, overlap = false) {
   const cells = [...row.children];
   const card = document.createElement('article');
   card.className = 'profile-card';
@@ -167,7 +182,7 @@ function buildCard(row) {
   const imageCell = cells.find((c) => c.querySelector('picture, img'));
   const bodyCell = cells.find((c) => c !== imageCell && c.textContent.trim());
 
-  // --- media (image + hover overlay) ---
+  // --- media (image + overlay) ---
   const media = document.createElement('div');
   media.className = 'profile-card-image';
   const img = imageCell?.querySelector('img');
@@ -178,29 +193,47 @@ function buildCard(row) {
   overlay.className = 'profile-card-overlay';
   media.append(overlay);
 
-  // --- body (name + role, always visible) ---
+  // --- body (name + role, always visible below the image) ---
   const body = document.createElement('div');
   body.className = 'profile-card-body';
 
+  let name;
+  let role;
+  let bio = [];
   if (bodyCell) {
     const nodes = [...bodyCell.children];
     const heading = nodes.find((n) => /^H[1-6]$/.test(n.tagName));
     const paragraphs = nodes.filter((n) => n !== heading && n.textContent.trim());
-
     if (heading) {
       heading.classList.add('profile-card-name');
-      body.append(heading);
+      name = heading;
     }
-    // First paragraph is the role (stays visible); the rest is hover bio.
     if (paragraphs.length) {
-      const [role, ...bio] = paragraphs;
+      [role, ...bio] = paragraphs;
       role.classList.add('profile-card-role');
-      body.append(role);
-      bio.forEach((p) => overlay.append(p));
     }
   }
 
-  card.append(media, body);
+  if (overlap) {
+    // Everything sits in the always-visible glass overlay: bio (quote), then a
+    // thin divider, then name + designation.
+    bio.forEach((p) => overlay.append(p));
+    if (name || role) {
+      const divider = document.createElement('span');
+      divider.className = 'profile-card-divider';
+      overlay.append(divider);
+    }
+    if (name) overlay.append(name);
+    if (role) overlay.append(role);
+    card.append(media);
+  } else {
+    // Default: name/role below the image; bio revealed over the image on hover.
+    if (name) body.append(name);
+    if (role) body.append(role);
+    bio.forEach((p) => overlay.append(p));
+    card.append(media, body);
+  }
+
   return card;
 }
 
@@ -213,6 +246,9 @@ function buildCard(row) {
  */
 export default async function decorate(block) {
   const isCarousel = block.classList.contains('carousel');
+  // `overlap` variant: name/role/bio sit in an always-visible glass overlay on
+  // the image (can be combined with `carousel`).
+  const isOverlap = block.classList.contains('overlap');
   // Both variants may author an intro (eyebrow + heading + subheading) as the
   // first text-only row; the carousel centres it, the base grid left-aligns it.
   const { intro, viewAll } = extractConfig(block);
@@ -235,12 +271,12 @@ export default async function decorate(block) {
     });
     // Order top-down by org hierarchy (breadth-first).
     dataRows = orderByHierarchy(dataRows);
-    cards = dataRows.map((row) => buildCardFromData(row));
+    cards = dataRows.map((row) => buildCardFromData(row, isOverlap));
   } else {
     const rows = [...block.children];
     cards = rows
       .filter((row) => row.querySelector('picture, img') || row.textContent.trim())
-      .map((row) => buildCard(row));
+      .map((row) => buildCard(row, isOverlap));
   }
 
   if (isCarousel) {

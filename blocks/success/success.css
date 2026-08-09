@@ -20,6 +20,18 @@
   --success-desc-color: var(--color-gray-500);
 }
 
+/* card link wrapper: make the whole card clickable without changing styling */
+.success .success-card-link {
+  display: block;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.success .success-card-link:hover {
+  text-decoration: none;
+}
+
 /* ===================== cards (shared by all variants) ===================== */
 .success .success-card {
   display: flex;

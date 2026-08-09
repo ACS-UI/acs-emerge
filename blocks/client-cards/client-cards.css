@@ -18,6 +18,18 @@
   --client-cards-border: var(--color-gray-200);
 }
 
+/* card link wrapper: make the whole card clickable without changing styling */
+.client-cards .client-cards-card-link {
+  display: block;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.client-cards .client-cards-card-link:hover {
+  text-decoration: none;
+}
+
 /* ===================== cards (shared by both variants) ===================== */
 .client-cards .client-cards-card {
   display: flex;
