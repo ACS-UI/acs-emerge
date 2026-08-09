@@ -30,10 +30,12 @@ indices:
   # Leadership profiles: one row per leader page under /leaders/, feeding a
   # future query-index-driven profile block.
   leaders:
+    # `/leaders/**` matches the folder page `/leaders` itself, so require a
+    # child segment to index only the individual leader detail pages.
     include:
-      - '/leaders/**'
+      - '/leaders/*'
     exclude:
-      # the /leaders listing page is not a person; keep it out of the index
+      # belt-and-braces: keep the /leaders listing page out of the index
       - '/leaders'
     target: /leaders/query-index.json
     properties:
@@ -66,10 +68,10 @@ indices:
   # Clients: one row per client page under /clients/, feeding a future
   # query-index-driven client-cards block.
   clients:
+    # require a child segment so the folder page `/clients` is not indexed
     include:
-      - '/clients/**'
+      - '/clients/*'
     exclude:
-      # the /clients listing page is not a client entry; keep it out
       - '/clients'
     target: /clients/query-index.json
     properties:
@@ -84,4 +86,29 @@ indices:
         value: attribute(el, 'content')
       description:
         select: head > meta[name="description"]
+        value: attribute(el, 'content')
+
+  # Success stories: one row per case-study page under /success-stories/,
+  # feeding the query-index-driven success block. Cards link to these pages.
+  success:
+    # require a child segment so the folder page `/success-stories` is not indexed
+    include:
+      - '/success-stories/*'
+    exclude:
+      - '/success-stories'
+    target: /success-stories/query-index.json
+    properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, 'content')
+      image:
+        select: head > meta[property="og:image"]
+        value: attribute(el, 'content')
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, 'content')
+      # tags: sourced from the `services` metadata (comma-separated), since
+      # `tags` is a reserved metadata key. Exposed as the `tags` column.
+      tags:
+        select: head > meta[name="services"]
         value: attribute(el, 'content')
