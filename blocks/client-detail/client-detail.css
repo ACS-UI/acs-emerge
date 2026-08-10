@@ -1,0 +1,134 @@
+.client-detail {
+  /* fonts — Figma design uses Adobe Clean Spectrum VF (not bundled here);
+     requested first with a project-font fallback. */
+  --cd-font: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+
+  /* colors */
+  --cd-heading-color: #000;
+  --cd-label-color: #505050;
+  --cd-value-color: #000;
+  --cd-rule-color: #e1e1e1;
+  --cd-about-color: #000;
+
+  /* typography (Title/XL for headings + rows, Body/XXXL for about) */
+  --cd-title-size: 20px;
+  --cd-title-line: 24px;
+  --cd-title-weight: 700;
+  --cd-about-size: 25px;
+  --cd-about-line: 1.5;
+  --cd-about-weight: 400;
+
+  /* layout */
+  --cd-section-gap: 40px;
+  --cd-content-gap: 136px;
+  --cd-col-gap: 16px;
+  --cd-row-gap: 32px;
+  --cd-row-pad: 8px;
+  --cd-details-width: 384px;
+  --cd-hero-radius: 24px;
+  --cd-logo-height: 56px;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--cd-section-gap);
+  font-family: var(--cd-font);
+}
+
+/* --------------------------------------------------------------------------
+   Logo
+   -------------------------------------------------------------------------- */
+.client-detail .client-detail-logo {
+  line-height: 0;
+}
+
+.client-detail .client-detail-logo img {
+  width: auto;
+  height: var(--cd-logo-height);
+  max-width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   Hero image (Figma "banner": 1216x608, radius 24)
+   -------------------------------------------------------------------------- */
+.client-detail .client-detail-hero {
+  line-height: 0;
+}
+
+.client-detail .client-detail-hero img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--cd-hero-radius);
+}
+
+/* --------------------------------------------------------------------------
+   Content — Details + About
+   -------------------------------------------------------------------------- */
+.client-detail .client-detail-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--cd-content-gap);
+  align-items: start;
+}
+
+.client-detail .client-detail-info,
+.client-detail .client-detail-about {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cd-col-gap);
+}
+
+/* section headings ("DETAILS" / "ABOUT THE CLIENT") — Figma Title/XL, black */
+.client-detail .client-detail-info-heading,
+.client-detail .client-detail-about-heading {
+  margin: 0;
+  color: var(--cd-heading-color);
+  font-size: var(--cd-title-size);
+  font-weight: var(--cd-title-weight);
+  line-height: var(--cd-title-line);
+}
+
+/* details definition list: one ruled row per pair, label left / value right */
+.client-detail .client-detail-info dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: var(--cd-row-gap);
+}
+
+.client-detail .client-detail-info dt,
+.client-detail .client-detail-info dd {
+  margin: 0;
+  padding: var(--cd-row-pad) 0;
+  border-bottom: 1px solid var(--cd-rule-color);
+  font-size: var(--cd-title-size);
+  font-weight: var(--cd-title-weight);
+  line-height: var(--cd-title-line);
+}
+
+.client-detail .client-detail-info dt {
+  text-align: left;
+  color: var(--cd-label-color);
+}
+
+.client-detail .client-detail-info dd {
+  text-align: right;
+  color: var(--cd-value-color);
+}
+
+/* about text — Figma Body/XXXL */
+.client-detail .client-detail-about p:not(.client-detail-about-heading) {
+  margin: 0;
+  color: var(--cd-about-color);
+  font-size: var(--cd-about-size);
+  font-weight: var(--cd-about-weight);
+  line-height: var(--cd-about-line);
+}
+
+/* --------------------------------------------------------------------------
+   Desktop — Details (384px) left, About right, 136px gap
+   -------------------------------------------------------------------------- */
+@media (width >= 900px) {
+  .client-detail .client-detail-content {
+    grid-template-columns: var(--cd-details-width) minmax(0, 1fr);
+  }
+}

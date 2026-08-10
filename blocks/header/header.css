@@ -1,12 +1,12 @@
-/* header and nav layout
-   Aligned to Figma "Header" spec: 96px tall, white brand + light-grey links
-   in Adobe Clean Spectrum VF (with a project-font fallback, since that font
-   is not bundled here).
+/* header and nav layout — Figma "Header" spec: 96px tall, Adobe Clean
+   Spectrum VF (with a project-font fallback, since that font is not bundled).
 
-   The bar is a TRANSPARENT overlay only when the page's first section is a
-   hero-banner (so it floats over the hero video, as in the design). On every
-   other page it falls back to a solid dark bar so the white/grey nav text
-   stays readable over light content. */
+   Two variants:
+   - DEFAULT (all pages except the homepage hero): light bar — white
+     background, black brand, grey (#505050) links, 1px #E1E1E1 bottom rule.
+   - HERO pages (first section is a hero-banner, i.e. the homepage): a
+     transparent bar overlaying the hero video, with a white brand and
+     light-grey links. */
 header {
   /* Figma header height (was 64px) */
   --nav-height: 96px;
@@ -14,25 +14,32 @@ header {
   /* Figma design font */
   --nav-font: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
 
-  /* Figma colors */
-  --nav-brand-color: #fff;
-  --nav-link-color: #c6c6c6;
+  /* default (light) variant colors */
+  --nav-bg: #fff;
+  --nav-brand-color: #000;
+  --nav-link-color: #505050;
+  --nav-border: 1px solid #e1e1e1;
 
-  /* solid backdrop used on pages that do NOT open with a hero */
-  --nav-solid-bg: #1a1a2e;
+  /* opaque backdrop for the open mobile menu */
+  --nav-menu-bg: #fff;
 }
 
-/* default: solid dark bar, in normal flow (header reserves --nav-height
-   from styles.css). White/grey text reads against the dark background. */
+/* default: light bar in normal flow (header reserves --nav-height from
+   styles.css), with a bottom rule. */
 header .nav-wrapper {
   position: relative;
   width: 100%;
   z-index: 2;
-  background-color: var(--nav-solid-bg);
+  background-color: var(--nav-bg);
+  border-bottom: var(--nav-border);
 }
 
-/* hero pages: transparent bar overlaying the first section (the hero video) */
+/* hero pages (homepage): transparent overlay over the hero, white text */
 body:has(main > .hero-banner-container:first-child) > header {
+  --nav-brand-color: #fff;
+  --nav-link-color: #c6c6c6;
+  --nav-menu-bg: #1a1a2e;
+
   height: 0;
 }
 
@@ -40,6 +47,7 @@ body:has(main > .hero-banner-container:first-child) .nav-wrapper {
   position: absolute;
   inset: 0 0 auto;
   background-color: transparent;
+  border-bottom: 0;
 }
 
 header nav {
@@ -68,7 +76,7 @@ header nav[aria-expanded='true'] {
 
   /* opaque backdrop for the open mobile menu so links stay legible even when
      the closed bar is a transparent overlay */
-  background-color: var(--nav-solid-bg);
+  background-color: var(--nav-menu-bg);
 }
 
 @media (width >= 900px) {
