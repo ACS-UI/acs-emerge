@@ -216,7 +216,7 @@
   --success-arrow-mask: url('../../icons/arrow-right.svg');
 }
 
-.success .success-view-all:hover {
+.success a.button.success-view-all:hover {
   gap: 0.6em;
   background: var(--color-red-1000);
   color: var(--color-white);
