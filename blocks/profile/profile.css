@@ -34,11 +34,15 @@
   outline: none;
 }
 
+/* No fixed aspect-ratio: forcing a box shape and cropping to fit (object-fit:
+   cover) cuts off heads/shoulders whenever a photo's own framing doesn't
+   match. Instead the box takes on the image's own natural proportions at
+   its rendered width — same approach already used by the carousel variant
+   below, just applied here too so the base grid never crops either. */
 .profile .profile-card-image {
   position: relative;
   overflow: hidden;
   border-radius: var(--profile-card-radius);
-  aspect-ratio: 1 / 1;
   background: var(--color-gray-100);
 }
 
@@ -46,8 +50,7 @@
 .profile .profile-card-image img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
 }
 
 /* hover reveal overlay — a frosted-glass band anchored to the bottom of the
@@ -197,8 +200,10 @@
 .profile.carousel .carousel-intro h2,
 .profile.carousel .carousel-intro h3 {
   margin: 8px 0 0;
-  font-size: var(--heading-size-l);
-  line-height: var(--line-height-700);
+  max-height: 488px;
+  font-size: 45px;
+  font-weight: 500;
+  line-height: 52px;
 }
 
 /* eyebrow: first short paragraph above the heading */

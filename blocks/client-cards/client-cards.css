@@ -39,8 +39,13 @@
   box-sizing: border-box;
   padding: 24px;
   border: 1px solid var(--client-cards-border);
-  border-radius: var(--client-cards-radius);
+  border-radius: 24px;
   background: var(--color-white);
+  box-shadow:
+    0 0 0 0 rgb(0 0 0 / 8%),
+    0 0 0 rgb(0 0 0 / 16%),
+    0 8px 16px rgb(0 0 0 / 12%),
+    0 24px 24px -20px rgb(0 0 0 / 24%);
   text-align: left;
 }
 
@@ -183,6 +188,20 @@
   --carousel-nav-bg-hover: rgb(0 0 0 / 8%);
 }
 
+/* Scoped fix (client-cards only, not the shared carousel utility): the
+   viewport's overflow:hidden and the track's overflow-x:auto (which implies
+   overflow-y:auto) clip the card's box-shadow top/bottom. Relax only the
+   vertical axis here — horizontal clipping still needs to stay for the
+   slide-scrolling mechanism. */
+.client-cards.carousel .carousel-viewport {
+  overflow: visible;
+}
+
+.client-cards.carousel .carousel-track {
+  overflow: auto visible;
+  padding: 24px 0;
+}
+
 /* intro (eyebrow + heading); left-aligned by default, centered opt-in at the
    section level (Section Metadata "Style: center"). */
 .client-cards.carousel .carousel-intro {
@@ -192,8 +211,10 @@
 .client-cards.carousel .carousel-intro h2,
 .client-cards.carousel .carousel-intro h3 {
   margin: 8px 0 0;
-  font-size: var(--heading-size-l);
-  line-height: var(--line-height-700);
+  max-height: 488px;
+  font-size: 45px;
+  font-weight: 500;
+  line-height: 52px;
 }
 
 /* eyebrow: first short paragraph above the heading */

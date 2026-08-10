@@ -53,6 +53,22 @@ export default function decorate(block) {
     ul.append(li);
   });
 
+  // Decorative butterfly graphic, anchored after the second row (see
+  // cards-emerge.css — the list reserves a right-hand gutter the same width
+  // as the image so surrounding row text never sits behind it). Appended
+  // inside the second <li> (rather than as a sibling in the <ul>) to keep
+  // the list markup valid; it's still positioned relative to the whole list.
+  const secondItem = ul.children[1];
+  if (secondItem) {
+    const butterfly = document.createElement('img');
+    butterfly.className = 'cards-emerge-butterfly';
+    butterfly.src = `${window.hlx.codeBasePath}/icons/butterfly.png`;
+    butterfly.alt = '';
+    butterfly.setAttribute('aria-hidden', 'true');
+    butterfly.loading = 'lazy';
+    secondItem.append(butterfly);
+  }
+
   block.textContent = '';
   block.append(intro, ul);
 }

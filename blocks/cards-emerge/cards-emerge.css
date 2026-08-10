@@ -19,7 +19,7 @@
   flex-direction: column;
   gap: var(--cards-emerge-intro-gap);
   max-width: var(--cards-emerge-intro-max-width);
-  margin: 0 auto var(--cards-emerge-intro-margin-bottom);
+  margin: 0 auto 40px;
   text-align: center;
 }
 
@@ -44,20 +44,35 @@
 
 /* ===== Acronym list ===== */
 .cards-emerge .cards-emerge-list {
+  position: relative;
   list-style: none;
   margin: 0 auto;
   padding: 0;
-  max-width: var(--cards-emerge-list-max-width);
+  max-width: 420px;
   display: flex;
   flex-direction: column;
   gap: var(--cards-emerge-list-gap);
 }
 
 .cards-emerge .cards-emerge-item {
+  position: relative;
   display: grid;
   grid-template-columns: var(--cards-emerge-letter-col-width) 1fr;
   align-items: center;
   column-gap: var(--cards-emerge-row-gap);
+}
+
+/* Decorative butterfly graphic (icons/butterfly.png). It's nested inside
+   the second row's <li> (see cards-emerge.js) and absolutely positioned
+   against that row itself (now position:relative, above) so it sits
+   vertically centered beside the second row specifically, not at a guessed
+   offset from the top of the whole list. Only shown from the tablet/desktop
+   breakpoint down below, where the list gains a right-hand gutter (see the
+   media query) so row text isn't laid out fully underneath it; on narrow
+   mobile widths there's no room for the gutter, so the image is hidden
+   there instead of squeezing the text column. */
+.cards-emerge .cards-emerge-butterfly {
+  display: none;
 }
 
 .cards-emerge .cards-emerge-letter {
@@ -72,6 +87,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--cards-emerge-title-subtitle-gap);
+  padding: 12px 0;
 }
 
 .cards-emerge .cards-emerge-body :is(h1, h2, h3, h4, h5, h6, p:first-child) {
@@ -95,15 +111,40 @@
   .cards-emerge .cards-emerge-intro h1,
   .cards-emerge .cards-emerge-intro h2,
   .cards-emerge .cards-emerge-intro h3 {
+    margin-inline: auto;
     font-size: var(--cards-emerge-heading-size-desktop);
+    line-height: var(--cards-emerge-heading-line-height-desktop);
   }
 
   .cards-emerge .cards-emerge-list {
-    gap: var(--cards-emerge-list-gap-desktop);
+    gap: 16px;
+
+    /* Reserve only half the butterfly's width as a guaranteed-clear gutter —
+       the graphic itself is still full width, so it intentionally overlaps
+       the other half onto the row by design (a deliberate bleed, not a
+       clipping accident). */
+
+    /* padding-right: calc(var(--cards-emerge-butterfly-width) / 2); */
   }
 
   .cards-emerge .cards-emerge-item {
     grid-template-columns: var(--cards-emerge-letter-col-width-desktop) 1fr;
+  }
+
+  /* Vertically centered beside the second row (its containing <li> is the
+     position:relative anchor — see the base .cards-emerge-item rule). */
+  .cards-emerge .cards-emerge-butterfly {
+    display: block;
+    position: absolute;
+    top: -50%;
+    right: -80px;
+    transform: translateY(-50%);
+
+    /* width: var(--cards-emerge-butterfly-width); */
+
+    /* height: var(--cards-emerge-butterfly-height); */
+    object-fit: contain;
+    pointer-events: none;
   }
 
   .cards-emerge .cards-emerge-letter {
