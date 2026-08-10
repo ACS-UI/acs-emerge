@@ -123,6 +123,7 @@
        the graphic itself is still full width, so it intentionally overlaps
        the other half onto the row by design (a deliberate bleed, not a
        clipping accident). */
+
     /* padding-right: calc(var(--cards-emerge-butterfly-width) / 2); */
   }
 
@@ -138,7 +139,9 @@
     top: -50%;
     right: -80px;
     transform: translateY(-50%);
+
     /* width: var(--cards-emerge-butterfly-width); */
+
     /* height: var(--cards-emerge-butterfly-height); */
     object-fit: contain;
     pointer-events: none;

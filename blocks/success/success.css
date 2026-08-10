@@ -52,6 +52,7 @@
 
 .success.parallax .success-card {
   max-width: var(--success-card-max-width);
+
   /* override the shared height:100% above — that's for equal-height cards
      in the grid/carousel's row; the zigzag needs each card sized by its own
      content so success.js can measure a real height. */
@@ -339,6 +340,7 @@
 }
 
 /* ===================== parallax variant ===================== */
+
 /* below the desktop breakpoint, success.js clears the inline positioning it
    sets at desktop, and cards fall back to this plain stacked flow in
    natural authored order. */
