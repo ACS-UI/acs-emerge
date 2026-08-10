@@ -4,8 +4,11 @@
  *    description, tag pills), left-aligned.
  *  - carousel variant (`.success.carousel`) : cards inside the shared carousel
  *    utility with a centered intro + top-right nav + view-all.
- *  - parallax variant (`.success.parallax`) : staggered columns that drift on
- *    scroll (inspired by the Orionix "featured work" layout).
+ *  - parallax variant (`.success.parallax`) : a zigzag staircase (JS-
+ *    positioned in success.js) where each card starts where the previous
+ *    card's text begins, alternating which screen edge it hugs. Each card's
+ *    image also pans within its own clipped frame as it scrolls through the
+ *    viewport, rather than the whole card moving.
  *
  * Shared carousel styles live in styles/carousel.css (loaded by success.js for
  * the carousel variant). The large background watermark seen in the parallax
@@ -16,6 +19,7 @@
   --success-radius: 24px;
   --success-inner-radius: 20px;
   --success-gap: 32px;
+  --success-card-max-width: 384px;
   --success-title-color: var(--color-gray-1000);
   --success-desc-color: var(--color-gray-500);
 }
@@ -32,12 +36,26 @@
   text-decoration: none;
 }
 
+.success.parallax .success-card-link {
+  /* same height:100% override as .success-card below — avoids the same
+     circular sizing issue when this link is the positioned zigzag item. */
+  height: auto;
+}
+
 /* ===================== cards (shared by all variants) ===================== */
 .success .success-card {
   display: flex;
   flex-direction: column;
   gap: 16px;
   height: 100%;
+}
+
+.success.parallax .success-card {
+  max-width: var(--success-card-max-width);
+  /* override the shared height:100% above — that's for equal-height cards
+     in the grid/carousel's row; the zigzag needs each card sized by its own
+     content so success.js can measure a real height. */
+  height: auto;
 }
 
 /* white card-wrap (radius 24 + layered shadow) with an inner image clipped at
@@ -63,6 +81,31 @@
   height: 100%;
   border-radius: var(--success-inner-radius);
   object-fit: cover;
+}
+
+/* parallax variant: clipped frame with an oversized (130%), scroll-panned
+   picture. The 15% overhang on each side is the max travel before an edge
+   would show — see the transform math in success.js. */
+.success .success-card-image-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--success-inner-radius);
+}
+
+.success .success-card-image-inner picture {
+  position: absolute;
+  inset: -15% 0;
+  height: 130%;
+  border-radius: 0;
+  will-change: transform;
+}
+
+.success .success-card-image-inner img {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
 }
 
 /* title — Heading/L: 28/32, medium */
@@ -138,15 +181,50 @@
   color: var(--color-gray-600);
 }
 
-.success .success-view-all {
-  margin-top: 20px;
-  border: 1px solid var(--color-gray-900);
+/* dark pill at rest; on hover it fills red and reveals a trailing arrow
+   (same treatment as the carousel's view-all button). */
+.success a.button.success-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  margin-top: 16px;
+  border: 1px solid transparent;
   border-radius: 2.4em;
-  padding: 0.5em 1.4em;
-  background: transparent;
-  color: var(--color-gray-900);
+  padding: 0.6em 1.5em;
+  background: var(--color-gray-900);
+  color: var(--color-white);
   font-size: var(--detail-size-m);
   font-weight: var(--font-weight-medium);
+  transition: background-color 0.2s ease, color 0.2s ease, gap 0.2s ease;
+}
+
+/* trailing arrow (drawn in the current text color): hidden at rest,
+   collapsed to zero width so it takes no space until hover. */
+.success .success-view-all::after {
+  content: "";
+  width: 0;
+  height: 1.1em;
+  background: currentcolor;
+  opacity: 0;
+  mask: var(--success-arrow-mask) center / contain no-repeat;
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask: var(--success-arrow-mask) center / contain no-repeat;
+  transition: width 0.2s ease, opacity 0.2s ease;
+
+  --success-arrow-mask: url('../../icons/arrow-right.svg');
+}
+
+.success .success-view-all:hover {
+  gap: 0.6em;
+  background: var(--color-red-1000);
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.success .success-view-all:hover::after {
+  width: 1.1em;
+  opacity: 1;
 }
 
 /* ===================== base variant: grid ===================== */
@@ -202,6 +280,52 @@
   color: var(--color-gray-600);
 }
 
+/* view all button: dark pill at rest; on hover it fills red and reveals a
+   trailing arrow (same treatment as the profile/client-cards carousels).
+   Only renders when the author includes a trailing link in the intro. */
+.success.carousel .carousel-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid transparent;
+  border-radius: 2.4em;
+  padding: 0.6em 1.5em;
+  background: var(--color-gray-900);
+  color: var(--color-white);
+  font-size: var(--detail-size-m);
+  font-weight: var(--font-weight-medium);
+  transition: background-color 0.2s ease, color 0.2s ease, gap 0.2s ease;
+}
+
+/* trailing arrow (drawn in the current text color): hidden at rest,
+   collapsed to zero width so it takes no space until hover. */
+.success.carousel .carousel-view-all::after {
+  content: "";
+  width: 0;
+  height: 1.1em;
+  background: currentcolor;
+  opacity: 0;
+  mask: var(--success-arrow-mask) center / contain no-repeat;
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask: var(--success-arrow-mask) center / contain no-repeat;
+  transition: width 0.2s ease, opacity 0.2s ease;
+
+  --success-arrow-mask: url('../../icons/arrow-right.svg');
+}
+
+.success.carousel .carousel-view-all:hover {
+  gap: 0.6em;
+  background: var(--color-red-1000);
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.success.carousel .carousel-view-all:hover::after {
+  width: 1.1em;
+  opacity: 1;
+}
+
 @media (width >= 768px) {
   .success.carousel .carousel {
     --carousel-visible: 2;
@@ -215,35 +339,41 @@
 }
 
 /* ===================== parallax variant ===================== */
+/* below the desktop breakpoint, success.js clears the inline positioning it
+   sets at desktop, and cards fall back to this plain stacked flow in
+   natural authored order. */
 .success .success-parallax {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--success-gap);
-  align-items: start;
-}
-
-.success .success-parallax-column {
   display: flex;
   flex-direction: column;
-  gap: 56px;
-  will-change: transform;
+  gap: var(--success-gap);
 }
 
-/* stagger: offset alternate columns downward for the woven look */
+/* zigzag staircase (desktop only): success.js positions each card's
+   top/left/right so it starts exactly where the previous card's text
+   begins, alternating which screen edge it hugs (50px/100px insets, by
+   original authored order — see layoutZigzag in success.js). */
 @media (width >= 1024px) {
+  /* contained: the insets success.js applies are relative to the block's
+     own (normal, centered-section) edges, not the true screen edge. */
   .success .success-parallax {
-    grid-template-columns: repeat(var(--success-parallax-columns, 2), 1fr);
-    gap: 56px;
+    position: relative;
   }
 
-  .success .success-parallax-column:nth-child(even) {
-    margin-top: 96px;
+  /* Target only direct children of the wrap (whichever success.js actually
+     appends — a bare .success-card, or a .success-card-link wrapping one).
+     A plain descendant selector would also match a .success-card *nested*
+     inside a .success-card-link, double-applying position:absolute to both
+     the outer link and the inner card. */
+  .success .success-parallax > .success-card,
+  .success .success-parallax > .success-card-link {
+    position: absolute;
+    width: var(--success-card-max-width);
   }
 }
 
-/* honour reduced motion: no transform drift */
+/* honour reduced motion: no transform drift on the scroll-panned image */
 @media (prefers-reduced-motion: reduce) {
-  .success .success-parallax-column {
+  .success .success-card-image-inner picture {
     transform: none !important;
   }
 }

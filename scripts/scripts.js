@@ -150,6 +150,11 @@ function decorateButtons(main) {
  * classes on the section, and every other key becomes a `data-*` attribute
  * (e.g. `Background Text` -> `data-background-text`). This is handled here (not
  * in aem.js) because this project's decorateSections does not process it.
+ *
+ * `Background Image` is also bridged into a `--section-background-image` CSS
+ * custom property (as `url(...)`) so styles.css can paint it — CSS `attr()`
+ * isn't reliably supported for the `background-image` property itself, only
+ * for `content`.
  * @param {Element} main The container element
  */
 function decorateSectionMetadata(main) {
@@ -165,7 +170,11 @@ function decorateSectionMetadata(main) {
           .filter(Boolean)
           .forEach((cls) => section.classList.add(cls));
       } else {
-        section.dataset[toCamelCase(key)] = value;
+        const camelKey = toCamelCase(key);
+        section.dataset[camelKey] = value;
+        if (camelKey === 'backgroundImage') {
+          section.style.setProperty('--section-background-image', `url(${value})`);
+        }
       }
     });
     // remove the metadata block (and its now-empty wrapper) from the DOM

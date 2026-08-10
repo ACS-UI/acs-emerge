@@ -34,7 +34,8 @@
   --cards-emerge-subtitle-line-height: var(--line-height-100);
 
   /* ===== TYPOGRAPHY (desktop overrides, applied via media query) ===== */
-  --cards-emerge-heading-size-desktop: var(--heading-size-l);
+  --cards-emerge-heading-size-desktop: 45px;
+  --cards-emerge-heading-line-height-desktop: 52px;
   --cards-emerge-letter-size-desktop: var(--font-size-1100);
   --cards-emerge-title-size-desktop: var(--title-size-l);
 
@@ -43,12 +44,16 @@
   --cards-emerge-section-padding-inline: 20px;
   --cards-emerge-intro-gap: 12px;
   --cards-emerge-intro-margin-bottom: 32px;
-  --cards-emerge-intro-max-width: 640px;
+  --cards-emerge-intro-max-width: 800px;
   --cards-emerge-list-gap: 20px;
-  --cards-emerge-list-max-width: 620px;
+  --cards-emerge-list-max-width: 600px;
   --cards-emerge-row-gap: 16px;
   --cards-emerge-title-subtitle-gap: 4px;
   --cards-emerge-letter-col-width: 44px;
+
+  /* butterfly graphic gutter — matches icons/butterfly.png's native 172x200 */
+  --cards-emerge-butterfly-width: 172px;
+  --cards-emerge-butterfly-height: 200px;
 
   /* ===== SPACING (desktop overrides) ===== */
   --cards-emerge-list-gap-desktop: 24px;

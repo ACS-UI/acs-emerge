@@ -23,4 +23,16 @@ export default function decorate(block) {
     .replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
 
   block.replaceChildren(ul);
+
+  // One-time entrance: adds .cards-working-tilted the first time the block
+  // scrolls into view, triggering the CSS transition from a lesser starting
+  // tilt to the outer cards' final rotation (see cards-working.css). The
+  // observer disconnects immediately after, so this never plays again.
+  const observer = new IntersectionObserver((entries) => {
+    if (entries.some((entry) => entry.isIntersecting)) {
+      block.classList.add('cards-working-tilted');
+      observer.disconnect();
+    }
+  }, { threshold: 0.3 });
+  observer.observe(block);
 }
