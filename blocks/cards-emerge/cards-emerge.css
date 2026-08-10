@@ -10,7 +10,6 @@
 /* ===== Block container ===== */
 .cards-emerge {
   padding: var(--cards-emerge-section-padding-block) var(--cards-emerge-section-padding-inline);
-  background: var(--cards-emerge-bg);
 }
 
 /* ===== Intro (eyebrow + heading), centered ===== */
