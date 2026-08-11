@@ -1,6 +1,6 @@
 .gallery-carousel {
   /* colors */
-  --gc-arrow-color: #000;
+  --gc-arrow-color: var(--color-black);
 
   /* slide (Figma Rectangle 26/27: 1008x567, radius 24, drop-shadow) */
   --gc-slide-ratio: 1008 / 567;
@@ -12,6 +12,7 @@
   --gc-slide-width: 100%;
   --gc-arrow-size: 40px;
   --gc-arrow-gap: 24px;
+  --gc-arrows-margin-bottom: 24px;
 }
 
 /* scrollable, snapping track */
@@ -51,14 +52,12 @@
   object-position: top;
 }
 
-/* --------------------------------------------------------------------------
-   Arrows — right-aligned pair above the track (Figma "arrows": 40x40, 24 gap)
-   -------------------------------------------------------------------------- */
+/* Arrows: right-aligned pair above the track (Figma "arrows": 40x40, 24 gap) */
 .gallery-carousel .gallery-carousel-arrows {
   display: flex;
   justify-content: flex-end;
   gap: var(--gc-arrow-gap);
-  margin-bottom: 24px;
+  margin-bottom: var(--gc-arrows-margin-bottom);
 }
 
 .gallery-carousel .gallery-carousel-arrow {
@@ -92,9 +91,7 @@
   transform: translateX(-2px) rotate(45deg);
 }
 
-/* --------------------------------------------------------------------------
-   Desktop — slide ~79% wide (1008/1280) so the next slide peeks, as designed
-   -------------------------------------------------------------------------- */
+/* Desktop: slide ~79% wide (1008/1280) so the next slide peeks, as designed */
 @media (width >= 900px) {
   .gallery-carousel {
     --gc-slide-width: 78.75%;

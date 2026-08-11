@@ -1,44 +1,41 @@
 /* ==========================================================================
    cards-working — block-scoped design tokens (aligned to Figma layer spec)
-   Note: Figma uses 'Adobe Clean Spectrum VF'; this project ships Roboto /
-   Roboto Condensed, so we keep the project font families and match the
-   exact sizes / weights / colors from the design.
    ========================================================================== */
 .cards-working-container,
 .cards-working {
-  /* fonts — Figma design uses Adobe Clean Spectrum VF. That font is not
-     bundled in this project, so we request it first and fall back to the
-     project fonts; it renders in Adobe Clean wherever that font is loaded. */
+  /* Figma uses Adobe Clean Spectrum VF, not bundled here — request it first, fall back to project fonts */
   --cw-font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
 
   /* section */
-  --cw-section-bg: #f3f3f3;
+  --cw-section-bg: var(--color-gray-75);
   --cw-section-pad-y: 60px;
   --cw-section-gap: 40px;
   --cw-header-gap: 8px;
+  --cw-cards-gap: 24px;
+  --cw-cards-max-width: 1216px;
 
   /* eyebrow ("WORKING THE EMERGE WAY") */
-  --cw-eyebrow-color: #505050;
-  --cw-eyebrow-size: 20px;
-  --cw-eyebrow-line: 24px;
-  --cw-eyebrow-weight: 700;
+  --cw-eyebrow-color: var(--color-gray-700);
+  --cw-eyebrow-size: var(--font-size-400);
+  --cw-eyebrow-line: var(--line-height-400);
+  --cw-eyebrow-weight: var(--font-weight-bold);
   --cw-eyebrow-spacing: 0.04em;
 
   /* headline */
   --cw-heading-font: var(--cw-font-family);
-  --cw-heading-color: #000;
-  --cw-heading-size: 45px;
-  --cw-heading-line: 52px;
-  --cw-heading-weight: 500;
+  --cw-heading-color: var(--color-gray-1000);
+  --cw-heading-size: var(--heading-size-xxl);
+  --cw-heading-line: var(--line-height-1100);
+  --cw-heading-weight: var(--font-weight-medium);
   --cw-heading-max: 800px;
-  --cw-heading-size-mobile: 32px;
+  --cw-heading-size-mobile: var(--font-size-800);
   --cw-heading-line-mobile: 38px;
 
   /* card shell */
   --cw-card-width: 376px;
   --cw-card-height: 549px;
   --cw-card-ratio: 376 / 549;
-  --cw-card-bg: #fff;
+  --cw-card-bg: var(--color-white);
   --cw-card-radius: 24px;
   --cw-card-inner-radius: 20px;
   --cw-card-frame: 4px;
@@ -62,12 +59,12 @@
   );
 
   /* card content */
-  --cw-card-title-color: #fff;
-  --cw-card-title-size: 28px;
-  --cw-card-title-line: 32px;
-  --cw-card-title-weight: 500;
-  --cw-card-text-color: #fff;
-  --cw-card-text-size: 18px;
+  --cw-card-title-color: var(--color-white);
+  --cw-card-title-size: var(--heading-size-l);
+  --cw-card-title-line: var(--line-height-700);
+  --cw-card-title-weight: var(--font-weight-medium);
+  --cw-card-text-color: var(--color-white);
+  --cw-card-text-size: var(--body-size-l);
   --cw-card-text-line: 1.5;
   --cw-card-content-gap: 8px;
   --cw-card-pad: 30px;
@@ -104,7 +101,7 @@ main .cards-working-container {
 .cards-working ul {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
+  gap: var(--cw-cards-gap);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -232,7 +229,7 @@ main .cards-working-container {
     align-items: start;
     justify-content: center;
     gap: 0;
-    max-width: 1216px;
+    max-width: var(--cw-cards-max-width);
 
     /* top/bottom margin absorbs the rotated cards' overhang so the visible
        gap to the headline (and section padding below) stays correct */
@@ -245,20 +242,12 @@ main .cards-working-container {
     aspect-ratio: auto;
   }
 
-  /* Stacking order (per design): left card is under the center card, which
-     is under the right card — so z-index climbs left → center → right.
-     Outer cards pivot from the bottom corner nearest the center card (not
-     the center of the card) — left card rotates anticlockwise from its
-     bottom-right corner, right card rotates clockwise from its bottom-left
-     corner — so the two outer cards fan out from where they meet the
-     center card at the bottom.
-
-     Entrance animation: both start at a lesser tilt and rotate to their
-     final angle once the section first scrolls into view — cards-working.js
-     adds .cards-working-tilted via an IntersectionObserver that disconnects
-     after firing once, so this only plays the first time, never again. */
+  /* z-index climbs left→center→right (per design); outer cards pivot from the
+     bottom corner nearest center so they fan out from where they meet it */
   .cards-working .cards-working-card:first-child,
   .cards-working .cards-working-card:last-child {
+    /* one-time entrance from a lesser tilt, triggered by cards-working.js
+       adding .cards-working-tilted via a single-fire IntersectionObserver */
     transition: transform 1s ease-out;
   }
 

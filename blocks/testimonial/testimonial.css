@@ -1,15 +1,6 @@
 /*
- * testimonial block
- *  A single-testimonial-at-a-time carousel: a quote on the left and a portrait
- *  (with name/title overlay) on the right, with prev/next navigation at the
- *  bottom-left. Uses the shared carousel utility (scripts/carousel.js +
- *  styles/carousel.css) with navPosition: 'bottom'.
- *
- *  The block is designed to sit on a colored/gradient section background
- *  (applied at the section level via section metadata), so its text and chrome
- *  default to white. The background image and large watermark text seen in the
- *  design are intentionally section-level concerns and are not part of the
- *  block.
+ * testimonial block: single-item quote+portrait carousel (scripts/carousel.js).
+ * Sits on a colored/gradient section background; bg image/watermark text are section-level, not part of this block.
  */
 
 .testimonial {
@@ -18,6 +9,16 @@
   /* card radius per Figma (24px outer, 20px inner content wrap) */
   --testimonial-radius: 24px;
   --testimonial-inner-radius: 20px;
+  --testimonial-gap: 32px;
+  --testimonial-gap-desktop: 56px;
+  --testimonial-quote-padding-top: 40px;
+  --testimonial-quote-mark-gap: 16px;
+  --testimonial-quote-mark-margin-top: 24px;
+  --testimonial-attribution-gap: 8px;
+  --testimonial-attribution-padding: 40px 24px 24px;
+  --testimonial-nav-margin-top: 8px;
+  --testimonial-padding-inline: 116px;
+  --testimonial-media-max-width: 384px;
 
   color: var(--color-white);
 }
@@ -33,7 +34,7 @@
 .testimonial .testimonial-item {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 32px;
+  gap: var(--testimonial-gap);
   margin: 0;
   align-items: center;
 }
@@ -42,7 +43,7 @@
 .testimonial .testimonial-quote {
   position: relative;
   margin: 0;
-  padding: 40px 0 0;
+  padding: var(--testimonial-quote-padding-top) 0 0;
   font-size: var(--body-size-s);
   line-height: var(--line-height-400);
   color: var(--testimonial-quote-color);
@@ -54,7 +55,7 @@
   display: block;
   width: 40px;
   height: 32px;
-  margin-bottom: 16px;
+  margin-bottom: var(--testimonial-quote-mark-gap);
   background: rgb(255 255 255 / 80%);
   mask: url('../../icons/quote-open.svg') left top / contain no-repeat;
 
@@ -76,7 +77,7 @@
   display: block;
   width: 40px;
   height: 32px;
-  margin-top: 24px;
+  margin-top: var(--testimonial-quote-mark-margin-top);
   margin-left: auto;
   background: rgb(255 255 255 / 80%);
   mask: url('../../icons/quote-close.svg') right bottom / contain no-repeat;
@@ -90,9 +91,7 @@
   font-weight: var(--font-weight-bold);
 }
 
-/* ----- media: white card holding the portrait + attribution overlay -----
-   Per Figma: a white card (radius 24) with a layered shadow, and an inner
-   content wrap (radius 20, 4px inset) that clips the photo. */
+/* media: white card (Figma radius 24) with layered shadow; inner wrap (radius 20, 4px inset) clips the photo */
 .testimonial .testimonial-media {
   position: relative;
   width: 100%;
@@ -130,8 +129,8 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 40px 24px 24px;
+  gap: var(--testimonial-attribution-gap);
+  padding: var(--testimonial-attribution-padding);
   text-align: center;
   color: var(--color-white);
   border-radius: 0 0 var(--testimonial-inner-radius) var(--testimonial-inner-radius);
@@ -159,19 +158,19 @@
 
 /* ----- spacing between the item and the bottom nav ----- */
 .testimonial .carousel[data-nav-position="bottom"] > .carousel-nav {
-  margin-top: 8px;
+  margin-top: var(--testimonial-nav-margin-top);
 }
 
 /* ===================== responsive ===================== */
 @media (width >= 900px) {
-  /* 116px inset on both sides on desktop per Figma */
+  /* inset on both sides on desktop per Figma */
   .testimonial {
-    padding-inline: 116px;
+    padding-inline: var(--testimonial-padding-inline);
   }
 
   .testimonial .testimonial-item {
     grid-template-columns: 1.1fr 0.9fr;
-    gap: 56px;
+    gap: var(--testimonial-gap-desktop);
   }
 
   .testimonial .testimonial-quote {
@@ -179,7 +178,7 @@
   }
 
   .testimonial .testimonial-media {
-    max-width: 384px;
+    max-width: var(--testimonial-media-max-width);
     margin-left: auto;
   }
 }

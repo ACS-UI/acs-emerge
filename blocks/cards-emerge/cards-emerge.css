@@ -1,14 +1,57 @@
-/* Import component-specific tokens */
-@import url('./cards-emerge-tokens.css');
-
-/*
- * cards-emerge block — "What EMERGE stands for" acronym list.
- * Mobile-first: base rules target mobile; min-width media queries layer on
- * tablet/desktop styling. Only visible design elements are rendered.
- */
+/* cards-emerge block — "What EMERGE stands for" acronym list. Mobile-first. */
 
 /* ===== Block container ===== */
 .cards-emerge {
+  /* ===== Colors (semantic global tokens) ===== */
+  --cards-emerge-eyebrow-color: var(--color-detail);
+  --cards-emerge-heading-color: var(--color-heading);
+  --cards-emerge-letter-color: var(--color-magenta-visual);
+  --cards-emerge-title-color: var(--color-title);
+  --cards-emerge-subtitle-color: var(--color-detail);
+
+  /* ===== Typography (mobile base) ===== */
+  --cards-emerge-eyebrow-size: var(--detail-size-xs);
+  --cards-emerge-eyebrow-weight: var(--detail-font-weight);
+  --cards-emerge-eyebrow-spacing: 1px;
+  --cards-emerge-heading-size: var(--heading-size-m);
+  --cards-emerge-heading-weight: var(--heading-font-weight);
+  --cards-emerge-heading-line-height: var(--line-height-500);
+  --cards-emerge-letter-size: var(--font-size-1000);
+  --cards-emerge-letter-weight: var(--font-weight-bold);
+  --cards-emerge-letter-line-height: 1;
+  --cards-emerge-title-size: var(--title-size-l);
+  --cards-emerge-title-weight: var(--title-font-weight-strong);
+  --cards-emerge-title-line-height: var(--line-height-300);
+  --cards-emerge-subtitle-size: var(--detail-size-s);
+  --cards-emerge-subtitle-weight: var(--body-font-weight);
+  --cards-emerge-subtitle-line-height: var(--line-height-100);
+
+  /* ===== Typography (desktop overrides, via media query) ===== */
+  --cards-emerge-heading-size-desktop: var(--heading-size-xxl);
+  --cards-emerge-heading-line-height-desktop: var(--line-height-1100);
+  --cards-emerge-letter-size-desktop: var(--font-size-1100);
+  --cards-emerge-title-size-desktop: var(--title-size-l);
+
+  /* ===== Spacing (mobile base) ===== */
+  --cards-emerge-section-padding-block: 32px;
+  --cards-emerge-section-padding-inline: 20px;
+  --cards-emerge-intro-gap: 12px;
+  --cards-emerge-intro-margin-bottom: 32px;
+  --cards-emerge-intro-max-width: 800px;
+  --cards-emerge-list-gap: 20px;
+  --cards-emerge-list-max-width: 420px;
+  --cards-emerge-row-gap: 16px;
+  --cards-emerge-title-subtitle-gap: 4px;
+  --cards-emerge-letter-col-width: 44px;
+  --cards-emerge-body-padding-block: 12px;
+  --cards-emerge-butterfly-width: 172px;
+  --cards-emerge-butterfly-height: 200px;
+  --cards-emerge-butterfly-offset-right: -80px;
+
+  /* ===== Spacing (desktop overrides) ===== */
+  --cards-emerge-list-gap-desktop: 16px;
+  --cards-emerge-letter-col-width-desktop: 56px;
+
   padding: var(--cards-emerge-section-padding-block) var(--cards-emerge-section-padding-inline);
 }
 
@@ -18,7 +61,7 @@
   flex-direction: column;
   gap: var(--cards-emerge-intro-gap);
   max-width: var(--cards-emerge-intro-max-width);
-  margin: 0 auto 40px;
+  margin: 0 auto var(--cards-emerge-intro-margin-bottom);
   text-align: center;
 }
 
@@ -47,7 +90,7 @@
   list-style: none;
   margin: 0 auto;
   padding: 0;
-  max-width: 420px;
+  max-width: var(--cards-emerge-list-max-width);
   display: flex;
   flex-direction: column;
   gap: var(--cards-emerge-list-gap);
@@ -61,15 +104,7 @@
   column-gap: var(--cards-emerge-row-gap);
 }
 
-/* Decorative butterfly graphic (icons/butterfly.png). It's nested inside
-   the second row's <li> (see cards-emerge.js) and absolutely positioned
-   against that row itself (now position:relative, above) so it sits
-   vertically centered beside the second row specifically, not at a guessed
-   offset from the top of the whole list. Only shown from the tablet/desktop
-   breakpoint down below, where the list gains a right-hand gutter (see the
-   media query) so row text isn't laid out fully underneath it; on narrow
-   mobile widths there's no room for the gutter, so the image is hidden
-   there instead of squeezing the text column. */
+/* Butterfly graphic: hidden on mobile, shown from tablet up (see media query) */
 .cards-emerge .cards-emerge-butterfly {
   display: none;
 }
@@ -86,7 +121,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--cards-emerge-title-subtitle-gap);
-  padding: 12px 0;
+  padding: var(--cards-emerge-body-padding-block) 0;
 }
 
 .cards-emerge .cards-emerge-body :is(h1, h2, h3, h4, h5, h6, p:first-child) {
@@ -116,32 +151,20 @@
   }
 
   .cards-emerge .cards-emerge-list {
-    gap: 16px;
-
-    /* Reserve only half the butterfly's width as a guaranteed-clear gutter —
-       the graphic itself is still full width, so it intentionally overlaps
-       the other half onto the row by design (a deliberate bleed, not a
-       clipping accident). */
-
-    /* padding-right: calc(var(--cards-emerge-butterfly-width) / 2); */
+    gap: var(--cards-emerge-list-gap-desktop);
   }
 
   .cards-emerge .cards-emerge-item {
     grid-template-columns: var(--cards-emerge-letter-col-width-desktop) 1fr;
   }
 
-  /* Vertically centered beside the second row (its containing <li> is the
-     position:relative anchor — see the base .cards-emerge-item rule). */
+  /* Vertically centered beside the second row's <li> (position:relative anchor) */
   .cards-emerge .cards-emerge-butterfly {
     display: block;
     position: absolute;
     top: -50%;
-    right: -80px;
+    right: var(--cards-emerge-butterfly-offset-right);
     transform: translateY(-50%);
-
-    /* width: var(--cards-emerge-butterfly-width); */
-
-    /* height: var(--cards-emerge-butterfly-height); */
     object-fit: contain;
     pointer-events: none;
   }
