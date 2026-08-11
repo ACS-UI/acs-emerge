@@ -3,20 +3,20 @@
   --challenge-font: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
 
   /* colors */
-  --challenge-number-color: #dadada;
-  --challenge-label-color: #000;
-  --challenge-text-color: #000;
-  --challenge-rule-color: #e1e1e1;
+  --challenge-number-color: var(--color-gray-300);
+  --challenge-label-color: var(--color-gray-1000);
+  --challenge-text-color: var(--color-gray-1000);
+  --challenge-rule-color: var(--color-gray-200);
 
   /* typography */
   --challenge-number-size: clamp(96px, 12vw, 160px);
-  --challenge-number-weight: 500;
-  --challenge-label-size: 20px;
-  --challenge-label-line: 24px;
-  --challenge-label-weight: 700;
-  --challenge-text-size: 25px;
+  --challenge-number-weight: var(--font-weight-medium);
+  --challenge-label-size: var(--title-size-xl);
+  --challenge-label-line: var(--line-height-400);
+  --challenge-label-weight: var(--font-weight-bold);
+  --challenge-text-size: var(--body-size-xxxl);
   --challenge-text-line: 1.5;
-  --challenge-text-weight: 400;
+  --challenge-text-weight: var(--font-weight-regular);
 
   /* layout */
   --challenge-number-col: 488px;

@@ -1,13 +1,6 @@
 /*
- * client-cards block
- *  - base variant : responsive grid of client cards (logo + title + description
- *    + "Know More" CTA), left-aligned, on white cards.
- *  - carousel variant (`.client-cards.carousel`) : the same cards inside the
- *    shared carousel utility, on a light panel, with a centered intro +
- *    top-right nav + view-all.
- *
- * Shared carousel styles live in styles/carousel.css (loaded by client-cards.js
- * for the carousel variant).
+ * client-cards block: grid of client cards (logo + title + desc + CTA).
+ * carousel variant reuses styles/carousel.css (loaded by client-cards.js).
  */
 
 .client-cards {
@@ -16,6 +9,14 @@
   --client-cards-title-color: var(--color-gray-900);
   --client-cards-desc-color: var(--color-gray-700);
   --client-cards-border: var(--color-gray-200);
+  --client-cards-card-padding: 24px;
+  --client-cards-intro-margin-bottom: 40px;
+  --client-cards-intro-max-width: 40rem;
+  --client-cards-view-all-margin-top: 20px;
+  --client-cards-carousel-intro-max-width: 34rem;
+  --client-cards-carousel-track-padding-block: 24px;
+  --client-cards-carousel-padding-block: 56px;
+  --client-cards-carousel-padding-inline: 48px;
 }
 
 /* card link wrapper: make the whole card clickable without changing styling */
@@ -37,7 +38,7 @@
   gap: 12px;
   height: 100%;
   box-sizing: border-box;
-  padding: 24px;
+  padding: var(--client-cards-card-padding);
   border: 1px solid var(--client-cards-border);
   border-radius: 24px;
   background: var(--color-white);
@@ -86,9 +87,7 @@
   padding-top: 8px;
 }
 
-/* "Know More": outline pill at rest, fills red with white text on hover
-   (eased in/out). Selectors include `a.button` to win over the global
-   button.secondary styling in styles.css. */
+/* outline pill at rest, fills red on hover; `a.button` wins over styles.css */
 .client-cards a.button.client-cards-cta {
   padding: 0.4em 1.2em;
   border-radius: 2.4em;
@@ -114,8 +113,8 @@
 
 /* intro (eyebrow + heading + subheading) above the grid, left-aligned */
 .client-cards .client-cards-intro {
-  margin-bottom: 40px;
-  max-width: 40rem;
+  margin-bottom: var(--client-cards-intro-margin-bottom);
+  max-width: var(--client-cards-intro-max-width);
 }
 
 .client-cards .client-cards-intro h2,
@@ -145,7 +144,7 @@
 }
 
 .client-cards .client-cards-view-all {
-  margin-top: 20px;
+  margin-top: var(--client-cards-view-all-margin-top);
   border: 1px solid var(--color-gray-900);
   border-radius: 2.4em;
   padding: 0.5em 1.4em;
@@ -161,7 +160,7 @@
   gap: var(--client-cards-gap);
 }
 
-@media (width >= 768px) {
+@media (width >= 900px) {
   .client-cards .client-cards-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -175,46 +174,37 @@
 
 /* ===================== carousel variant ===================== */
 
-/* The background panel and text colour now live at the section level
-   (Section Metadata "Style: bg-muted"), so the block is transparent and
-   inherits the section's colour. */
+/* background panel/text colour lives at the section level (Style: bg-muted) */
 
-/* carousel layout vars must sit on the utility's own `.carousel` element,
-   otherwise its base `--carousel-visible: 1` (set directly on it) wins over
-   any value inherited from the block. */
+/* vars must sit on `.carousel` itself — its own base value otherwise wins */
 .client-cards.carousel .carousel {
   --carousel-visible: 1;
   --carousel-gap: var(--client-cards-gap);
   --carousel-nav-bg-hover: rgb(0 0 0 / 8%);
 }
 
-/* Scoped fix (client-cards only, not the shared carousel utility): the
-   viewport's overflow:hidden and the track's overflow-x:auto (which implies
-   overflow-y:auto) clip the card's box-shadow top/bottom. Relax only the
-   vertical axis here — horizontal clipping still needs to stay for the
-   slide-scrolling mechanism. */
+/* relax vertical clipping only, so card box-shadows aren't cut off */
 .client-cards.carousel .carousel-viewport {
   overflow: visible;
 }
 
 .client-cards.carousel .carousel-track {
   overflow: auto visible;
-  padding: 24px 0;
+  padding: var(--client-cards-carousel-track-padding-block) 0;
 }
 
-/* intro (eyebrow + heading); left-aligned by default, centered opt-in at the
-   section level (Section Metadata "Style: center"). */
+/* intro (eyebrow + heading); centered opt-in via Section Metadata "Style: center" */
 .client-cards.carousel .carousel-intro {
-  max-width: 34rem;
+  max-width: var(--client-cards-carousel-intro-max-width);
 }
 
 .client-cards.carousel .carousel-intro h2,
 .client-cards.carousel .carousel-intro h3 {
   margin: 8px 0 0;
   max-height: 488px;
-  font-size: 45px;
-  font-weight: 500;
-  line-height: 52px;
+  font-size: var(--heading-size-xxl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-1100);
 }
 
 /* eyebrow: first short paragraph above the heading */
@@ -227,8 +217,7 @@
   opacity: 0.7;
 }
 
-/* view all button: dark pill at rest; on hover it fills red and reveals a
-   trailing arrow (same behaviour as the profile carousel). */
+/* dark pill at rest, fills red with a trailing arrow on hover */
 .client-cards.carousel .carousel-view-all {
   display: inline-flex;
   align-items: center;
@@ -243,8 +232,7 @@
   transition: background-color 0.2s ease, color 0.2s ease, gap 0.2s ease;
 }
 
-/* trailing arrow (drawn in the current text color): hidden at rest,
-   collapsed to zero width so it takes no space until hover. */
+/* trailing arrow: collapsed to zero width until hover */
 .client-cards.carousel .carousel-view-all::after {
   content: "";
   width: 0;
@@ -272,7 +260,7 @@
   opacity: 1;
 }
 
-@media (width >= 768px) {
+@media (width >= 900px) {
   .client-cards.carousel .carousel {
     --carousel-visible: 2;
   }
@@ -280,7 +268,7 @@
 
 @media (width >= 1024px) {
   .client-cards.carousel {
-    padding: 56px 48px;
+    padding: var(--client-cards-carousel-padding-block) var(--client-cards-carousel-padding-inline);
   }
 
   .client-cards.carousel .carousel {

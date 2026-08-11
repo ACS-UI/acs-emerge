@@ -1,18 +1,7 @@
 /*
- * success block (success stories)
- *  - base variant : responsive grid of story cards (cover image, title,
- *    description, tag pills), left-aligned.
- *  - carousel variant (`.success.carousel`) : cards inside the shared carousel
- *    utility with a centered intro + top-right nav + view-all.
- *  - parallax variant (`.success.parallax`) : a zigzag staircase (JS-
- *    positioned in success.js) where each card starts where the previous
- *    card's text begins, alternating which screen edge it hugs. Each card's
- *    image also pans within its own clipped frame as it scrolls through the
- *    viewport, rather than the whole card moving.
- *
- * Shared carousel styles live in styles/carousel.css (loaded by success.js for
- * the carousel variant). The large background watermark seen in the parallax
- * design is a section-level concern (Section Metadata "Background Text").
+ * success block: grid of story cards. carousel variant reuses
+ * styles/carousel.css. parallax variant is a JS-positioned (success.js)
+ * zigzag staircase where each card's image also pans as it scrolls.
  */
 
 .success {
@@ -22,6 +11,12 @@
   --success-card-max-width: 384px;
   --success-title-color: var(--color-gray-1000);
   --success-desc-color: var(--color-gray-500);
+  --success-intro-margin-bottom: 40px;
+  --success-intro-max-width: 50rem;
+  --success-view-all-margin-top: 16px;
+  --success-carousel-intro-max-width: 34rem;
+  --success-tag-padding: 4px 12px;
+  --success-tags-margin-top: 8px;
 }
 
 /* card link wrapper: make the whole card clickable without changing styling */
@@ -36,9 +31,9 @@
   text-decoration: none;
 }
 
+/* same height:100% override as .success-card — avoids sizing issues when
+   this link is the positioned zigzag item */
 .success.parallax .success-card-link {
-  /* same height:100% override as .success-card below — avoids the same
-     circular sizing issue when this link is the positioned zigzag item. */
   height: auto;
 }
 
@@ -50,17 +45,14 @@
   height: 100%;
 }
 
+/* the zigzag needs each card sized by its own content, not the grid's
+   equal-height rule, so success.js can measure a real height */
 .success.parallax .success-card {
   max-width: var(--success-card-max-width);
-
-  /* override the shared height:100% above — that's for equal-height cards
-     in the grid/carousel's row; the zigzag needs each card sized by its own
-     content so success.js can measure a real height. */
   height: auto;
 }
 
-/* white card-wrap (radius 24 + layered shadow) with an inner image clipped at
-   radius 20, per Figma */
+/* white card-wrap with an inner image clipped to a smaller radius */
 .success .success-card-image {
   position: relative;
   overflow: hidden;
@@ -84,9 +76,7 @@
   object-fit: cover;
 }
 
-/* parallax variant: clipped frame with an oversized (130%), scroll-panned
-   picture. The 15% overhang on each side is the max travel before an edge
-   would show — see the transform math in success.js. */
+/* clipped frame with an oversized, scroll-panned picture (see success.js) */
 .success .success-card-image-inner {
   position: relative;
   width: 100%;
@@ -132,13 +122,13 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 8px 0 0;
+  margin: var(--success-tags-margin-top) 0 0;
   padding: 0;
   list-style: none;
 }
 
 .success .success-card-tag {
-  padding: 4px 12px;
+  padding: var(--success-tag-padding);
   border-radius: 100px;
   background: var(--color-white);
   box-shadow:
@@ -153,8 +143,8 @@
 
 /* ===================== intro (base + parallax) ===================== */
 .success .success-intro {
-  margin-bottom: 40px;
-  max-width: 50rem;
+  margin-bottom: var(--success-intro-margin-bottom);
+  max-width: var(--success-intro-max-width);
 }
 
 /* Heading/XXXXL per Figma — scaled down on mobile, full size on desktop */
@@ -182,13 +172,12 @@
   color: var(--color-gray-600);
 }
 
-/* dark pill at rest; on hover it fills red and reveals a trailing arrow
-   (same treatment as the carousel's view-all button). */
+/* dark pill at rest, fills red with a trailing arrow on hover */
 .success a.button.success-view-all {
   display: inline-flex;
   align-items: center;
   gap: 0;
-  margin-top: 16px;
+  margin-top: var(--success-view-all-margin-top);
   border: 1px solid transparent;
   border-radius: 2.4em;
   padding: 0.6em 1.5em;
@@ -199,8 +188,7 @@
   transition: background-color 0.2s ease, color 0.2s ease, gap 0.2s ease;
 }
 
-/* trailing arrow (drawn in the current text color): hidden at rest,
-   collapsed to zero width so it takes no space until hover. */
+/* trailing arrow: collapsed to zero width until hover */
 .success .success-view-all::after {
   content: "";
   width: 0;
@@ -235,7 +223,7 @@
   gap: var(--success-gap);
 }
 
-@media (width >= 768px) {
+@media (width >= 900px) {
   .success .success-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -261,7 +249,7 @@
 }
 
 .success.carousel .carousel-intro {
-  max-width: 34rem;
+  max-width: var(--success-carousel-intro-max-width);
 }
 
 .success.carousel .carousel-intro h2,
@@ -281,9 +269,8 @@
   color: var(--color-gray-600);
 }
 
-/* view all button: dark pill at rest; on hover it fills red and reveals a
-   trailing arrow (same treatment as the profile/client-cards carousels).
-   Only renders when the author includes a trailing link in the intro. */
+/* dark pill at rest, fills red with a trailing arrow on hover; only renders
+   when the author includes a trailing link in the intro */
 .success.carousel .carousel-view-all {
   display: inline-flex;
   align-items: center;
@@ -298,8 +285,7 @@
   transition: background-color 0.2s ease, color 0.2s ease, gap 0.2s ease;
 }
 
-/* trailing arrow (drawn in the current text color): hidden at rest,
-   collapsed to zero width so it takes no space until hover. */
+/* trailing arrow: collapsed to zero width until hover */
 .success.carousel .carousel-view-all::after {
   content: "";
   width: 0;
@@ -327,7 +313,7 @@
   opacity: 1;
 }
 
-@media (width >= 768px) {
+@media (width >= 900px) {
   .success.carousel .carousel {
     --carousel-visible: 2;
   }
@@ -341,9 +327,8 @@
 
 /* ===================== parallax variant ===================== */
 
-/* below the desktop breakpoint, success.js clears the inline positioning it
-   sets at desktop, and cards fall back to this plain stacked flow in
-   natural authored order. */
+/* below desktop, success.js clears its inline positioning and cards fall
+   back to plain stacked flow */
 .success .success-parallax {
   display: flex;
   flex-direction: column;
@@ -351,21 +336,15 @@
 }
 
 /* zigzag staircase (desktop only): success.js positions each card's
-   top/left/right so it starts exactly where the previous card's text
-   begins, alternating which screen edge it hugs (50px/100px insets, by
-   original authored order — see layoutZigzag in success.js). */
+   top/left/right — see layoutZigzag in success.js */
 @media (width >= 1024px) {
-  /* contained: the insets success.js applies are relative to the block's
-     own (normal, centered-section) edges, not the true screen edge. */
+  /* insets success.js applies are relative to this container, not the screen */
   .success .success-parallax {
     position: relative;
   }
 
-  /* Target only direct children of the wrap (whichever success.js actually
-     appends — a bare .success-card, or a .success-card-link wrapping one).
-     A plain descendant selector would also match a .success-card *nested*
-     inside a .success-card-link, double-applying position:absolute to both
-     the outer link and the inner card. */
+  /* direct children only, so a nested .success-card inside a
+     .success-card-link isn't double-positioned */
   .success .success-parallax > .success-card,
   .success .success-parallax > .success-card-link {
     position: absolute;

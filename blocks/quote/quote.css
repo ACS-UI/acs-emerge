@@ -1,25 +1,23 @@
-/* ==========================================================================
-   quote — aligned to Figma "NotefromManoj" layer spec.
-   The portrait already includes its red frame on a transparent background,
-   so the block renders it as-is (no CSS frame, no cropping).
-   Figma design font is 'Adobe Clean Spectrum VF' (not bundled in this
-   project) — requested first with a project-font fallback.
-   ========================================================================== */
+/*
+ * quote block (Figma "NotefromManoj" spec): pre-framed portrait rendered
+ * as-is (no CSS frame/crop) + quote text in 'Adobe Clean Spectrum VF'
+ * (not bundled) with a project-font fallback.
+ */
 .quote {
   /* fonts */
   --quote-font: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
 
   /* colors — Figma quote text & marks are pure black */
-  --quote-text-color: #000;
-  --quote-mark-color: #000;
+  --quote-text-color: var(--color-gray-1000);
+  --quote-mark-color: var(--color-gray-1000);
 
   /* typography (mobile-first; desktop sizes overridden below) */
   --quote-text-size: 24px;
-  --quote-text-line: 30px;
-  --quote-text-weight: 400;
+  --quote-text-line: var(--line-height-600);
+  --quote-text-weight: var(--font-weight-regular);
   --quote-mark-size: 52px;
   --quote-mark-line: 1.15;
-  --quote-mark-weight: 400;
+  --quote-mark-weight: var(--font-weight-regular);
 
   /* layout */
   --quote-gap: 40px;
@@ -34,9 +32,7 @@
   align-items: center;
 }
 
-/* --------------------------------------------------------------------------
-   Portrait — pre-framed transparent PNG, rendered at natural proportions
-   -------------------------------------------------------------------------- */
+/* portrait: pre-framed transparent PNG, rendered at natural proportions */
 .quote .quote-image {
   line-height: 0;
 }
@@ -48,9 +44,7 @@
   height: auto;
 }
 
-/* --------------------------------------------------------------------------
-   Quote text
-   -------------------------------------------------------------------------- */
+/* ===================== quote text ===================== */
 .quote .quote-body {
   position: relative;
   max-width: var(--quote-content-max);
@@ -96,7 +90,7 @@
 
 /* opening phrase stays bold via authored <strong>; base text is regular */
 .quote .quote-body blockquote strong {
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 .quote .quote-body .quote-attribution {
@@ -105,14 +99,12 @@
   font-weight: 600;
 }
 
-/* ==========================================================================
-   Desktop — portrait left (~592px), quote right (488px), 64px gap
-   ========================================================================== */
+/* desktop: portrait left (~592px), quote right (488px), 64px gap */
 @media (width >= 900px) {
   .quote {
-    --quote-text-size: 36px;
-    --quote-text-line: 42px;
-    --quote-mark-size: 73px;
+    --quote-text-size: var(--font-size-900);
+    --quote-text-line: var(--line-height-900);
+    --quote-mark-size: var(--font-size-1500);
     --quote-gap: 64px;
   }
 

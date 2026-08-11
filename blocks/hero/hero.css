@@ -4,13 +4,17 @@
 }
 
 .hero {
+  --hero-padding-block: 40px;
+  --hero-padding-inline: 24px;
+  --hero-heading-max-width: 1200px;
+
   position: relative;
-  padding: 40px 24px;
+  padding: var(--hero-padding-block) var(--hero-padding-inline);
   min-height: 300px;
 }
 
 .hero h1 {
-  max-width: 1200px;
+  max-width: var(--hero-heading-max-width);
   margin-left: auto;
   margin-right: auto;
   color: var(--background-color);
@@ -32,6 +36,6 @@
 
 @media (width >= 900px) {
   .hero {
-    padding: 40px 32px;
+    --hero-padding-inline: 32px;
   }
 }
