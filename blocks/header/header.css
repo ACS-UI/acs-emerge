@@ -21,8 +21,8 @@ header {
   --nav-link-hover-color: #000;
   --nav-border: 1px solid #e1e1e1;
 
-  /* opaque backdrop for the open mobile menu */
-  --nav-menu-bg: #fff;
+  /* dark panel behind the open mobile menu (matches the theme) */
+  --nav-menu-bg: #1a1a2e;
 }
 
 /* default: light bar in normal flow (header reserves --nav-height from
@@ -35,12 +35,18 @@ header .nav-wrapper {
   border-bottom: var(--nav-border);
 }
 
+/* when the mobile menu is open, the wrapper itself becomes the dark panel
+   (it sits above the transparent nav) and drops its bottom rule */
+header .nav-wrapper:has(nav[aria-expanded='true']) {
+  background-color: var(--nav-menu-bg);
+  border-bottom: 0;
+}
+
 /* hero pages (homepage): transparent overlay over the hero, white text */
 body:has(main > .hero-banner-container:first-child) > header {
   --nav-brand-color: #fff;
   --nav-link-color: #c6c6c6;
   --nav-link-hover-color: #fff;
-  --nav-menu-bg: #1a1a2e;
 
   height: 0;
 }
@@ -72,13 +78,19 @@ header nav[aria-expanded='true'] {
   grid-template:
     'hamburger brand' var(--nav-height)
     'sections sections' 1fr
-    'tools tools' var(--nav-height) / auto 1fr;
+    'tools tools' auto / auto 1fr;
+  gap: 0 16px;
   overflow-y: auto;
   min-height: 100dvh;
 
-  /* opaque backdrop for the open mobile menu so links stay legible even when
-     the closed bar is a transparent overlay */
+  /* opaque dark panel for the open mobile menu (matches the theme) so links
+     stay legible even when the closed bar is a transparent overlay */
   background-color: var(--nav-menu-bg);
+
+  /* open menu always uses light text on the dark panel */
+  --nav-brand-color: #fff;
+  --nav-link-color: #c6c6c6;
+  --nav-link-hover-color: #fff;
 }
 
 @media (width >= 900px) {
@@ -115,23 +127,33 @@ header nav a:hover {
 /* hamburger */
 header nav .nav-hamburger {
   grid-area: hamburger;
-  height: 22px;
   display: flex;
   align-items: center;
   color: var(--nav-brand-color);
 }
 
 header nav .nav-hamburger button {
-  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
   margin: 0;
   border: 0;
-  border-radius: 0;
+  border-radius: 8px;
   padding: 0;
   background-color: transparent;
   color: inherit;
+  cursor: pointer;
   overflow: initial;
   text-overflow: initial;
   white-space: initial;
+}
+
+/* subtle themed focus ring instead of the default yellow/blue box */
+header nav .nav-hamburger button:focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: 2px;
 }
 
 header nav .nav-hamburger-icon,
@@ -243,6 +265,7 @@ header nav[aria-expanded='true'] .nav-sections {
   display: block;
   visibility: visible;
   align-self: start;
+  padding-top: 8px;
 }
 
 header nav .nav-sections ul {
@@ -271,6 +294,18 @@ header nav .nav-sections ul > li > ul {
 
 header nav .nav-sections ul > li > ul > li {
   font-weight: 400;
+}
+
+/* mobile: roomier stacked links with comfortable tap targets */
+header nav[aria-expanded='true'] .nav-sections ul {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 18px;
+}
+
+header nav[aria-expanded='true'] .nav-sections ul > li {
+  padding: 10px 0;
 }
 
 @media (width >= 900px) {
