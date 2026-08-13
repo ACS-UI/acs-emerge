@@ -22,18 +22,18 @@
   --cards-emerge-letter-size: var(--font-size-1000);
   --cards-emerge-letter-weight: var(--font-weight-bold);
   --cards-emerge-letter-line-height: 1;
-  --cards-emerge-title-size: var(--title-size-l);
-  --cards-emerge-title-weight: var(--title-font-weight-strong);
-  --cards-emerge-title-line-height: var(--line-height-300);
-  --cards-emerge-subtitle-size: var(--detail-size-s);
-  --cards-emerge-subtitle-weight: var(--body-font-weight);
-  --cards-emerge-subtitle-line-height: var(--line-height-100);
+  --cards-emerge-title-size: var(--heading-size-l);
+  --cards-emerge-title-weight: var(--font-weight-medium);
+  --cards-emerge-title-line-height: var(--line-height-700);
+  --cards-emerge-subtitle-size: var(--title-size-m);
+  --cards-emerge-subtitle-weight: var(--title-font-weight);
+  --cards-emerge-subtitle-line-height: var(--line-height-200);
 
   /* ===== Typography (desktop overrides, via media query) ===== */
   --cards-emerge-heading-size-desktop: var(--heading-size-xxl);
   --cards-emerge-heading-line-height-desktop: var(--line-height-1100);
   --cards-emerge-letter-size-desktop: var(--font-size-1100);
-  --cards-emerge-title-size-desktop: var(--title-size-l);
+  --cards-emerge-title-size-desktop: var(--heading-size-l);
 
   /* ===== Spacing (mobile base) ===== */
   --cards-emerge-section-padding-block: 0;
