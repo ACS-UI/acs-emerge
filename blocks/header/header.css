@@ -19,7 +19,7 @@ header {
   --nav-menu-bg: #1a1a2e;
 
   /* layout */
-  --nav-gap: 24px;
+  --nav-gap: 7px;
   --nav-gap-desktop: 82px;
   --nav-max-width: 1248px;
   --nav-max-width-desktop: 1264px;
@@ -43,10 +43,13 @@ header .nav-wrapper {
 }
 
 /* when the mobile menu is open, the wrapper itself becomes the dark panel
-   (it sits above the transparent nav) and drops its bottom rule */
-header .nav-wrapper:has(nav[aria-expanded='true']) {
-  background-color: var(--nav-menu-bg);
-  border-bottom: 0;
+   (it sits above the transparent nav) and drops its bottom rule.
+   Mobile only — on desktop aria-expanded="true" is the normal (light) state. */
+@media (width < 900px) {
+  header .nav-wrapper:has(nav[aria-expanded='true']) {
+    background-color: var(--nav-menu-bg);
+    border-bottom: 0;
+  }
 }
 
 /* hero pages (homepage): transparent overlay over the hero, white text */
@@ -86,18 +89,23 @@ header nav[aria-expanded='true'] {
     'hamburger brand' var(--nav-height)
     'sections sections' 1fr
     'tools tools' auto / auto 1fr;
-  gap: 0 16px;
+  gap: 0 var(--nav-gap);
   overflow-y: auto;
   min-height: 100dvh;
 
   /* opaque dark panel for the open mobile menu (matches the theme) so links
      stay legible even when the closed bar is a transparent overlay */
   background-color: var(--nav-menu-bg);
+}
 
-  /* open menu always uses light text on the dark panel */
-  --nav-brand-color: var(--color-white);
-  --nav-link-color: var(--color-gray-400);
-  --nav-link-hover-color: var(--color-white);
+/* open mobile menu always uses light text on the dark panel. Scoped to
+   mobile so it never affects the desktop nav (which is also aria-expanded). */
+@media (width < 900px) {
+  header nav[aria-expanded='true'] {
+    --nav-brand-color: var(--color-white);
+    --nav-link-color: var(--color-gray-400);
+    --nav-link-hover-color: var(--color-white);
+  }
 }
 
 @media (width >= 900px) {
@@ -113,6 +121,7 @@ header nav[aria-expanded='true'] {
   }
 
   header nav[aria-expanded='true'] {
+    gap: 0 var(--nav-gap-desktop);
     min-height: 0;
     overflow: visible;
     background-color: inherit;
@@ -309,16 +318,19 @@ header nav .nav-sections ul > li:last-child {
   margin-bottom: 0;
 }
 
-/* mobile: roomier stacked links with comfortable tap targets */
-header nav[aria-expanded='true'] .nav-sections ul {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  font-size: 18px;
-}
+/* mobile: roomier stacked links with comfortable tap targets.
+   Scoped to mobile so it never affects the desktop nav (also aria-expanded). */
+@media (width < 900px) {
+  header nav[aria-expanded='true'] .nav-sections ul {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 18px;
+  }
 
-header nav[aria-expanded='true'] .nav-sections ul > li {
-  padding: 10px 0;
+  header nav[aria-expanded='true'] .nav-sections ul > li {
+    padding: 10px 0;
+  }
 }
 
 @media (width >= 900px) {
