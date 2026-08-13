@@ -1,12 +1,6 @@
 /*
- * profile block
- *  - base variant : responsive grid of profile cards (image + name + role),
- *    with a bio revealed over the image on hover/focus.
- *  - carousel variant (`.profile.carousel`) : the same cards inside the shared
- *    carousel utility, on a brand gradient, with intro + top-right nav + view-all.
- *
- * Shared carousel styles live in styles/carousel.css (loaded by profile.js
- * for the carousel variant).
+ * profile block: grid of profile cards (image + name + role), bio revealed
+ * on hover/focus. carousel variant reuses styles/carousel.css (via profile.js).
  */
 
 .profile {
@@ -14,6 +8,30 @@
   --profile-gap: 24px;
   --profile-name-color: var(--color-gray-900);
   --profile-role-color: var(--color-gray-600);
+  --profile-overlay-padding-block-start: 40px;
+  --profile-overlay-padding-inline: 24px;
+  --profile-overlay-padding-block-end: 24px;
+  --profile-overlay-gap: 8px;
+  --profile-body-padding: 12px 4px 0;
+  --profile-intro-margin-bottom: 40px;
+  --profile-intro-max-width: 40rem;
+  --profile-view-all-margin-top: 20px;
+  --profile-carousel-intro-max-width: 34rem;
+  --profile-overlap-overlay-padding: 22px;
+  --profile-overlap-overlay-padding-top: 50px;
+  --profile-overlap-overlay-padding-right: 10px;
+  --profile-overlap-overlay-gap: 7px;
+}
+
+/* card link wrapper: make the whole card clickable without changing styling */
+.profile .profile-card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.profile .profile-card-link:hover {
+  text-decoration: none;
 }
 
 /* ===================== cards (shared by both variants) ===================== */
@@ -23,11 +41,12 @@
   outline: none;
 }
 
+/* No fixed aspect-ratio: box takes the image's natural proportions so photos
+   never get cropped, same approach as the carousel variant below. */
 .profile .profile-card-image {
   position: relative;
   overflow: hidden;
   border-radius: var(--profile-card-radius);
-  aspect-ratio: 1 / 1;
   background: var(--color-gray-100);
 }
 
@@ -35,24 +54,20 @@
 .profile .profile-card-image img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
 }
 
-/* hover reveal overlay — a frosted-glass band anchored to the bottom of the
-   card (backdrop blur + translucent tint). A vertical gradient mask feathers
-   the whole band (blur + tint together) from transparent at the top to solid
-   at the bottom, so there is no hard edge — the glass fades into the photo. */
+/* hover reveal overlay: frosted-glass band, feathered from transparent to
+   solid so the glass fades into the photo with no hard edge. */
 .profile .profile-card-overlay {
   position: absolute;
   inset: auto 0 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 40px 24px 24px;
+  gap: var(--profile-overlay-gap);
+  padding: var(--profile-overlay-padding-block-start) var(--profile-overlay-padding-inline) var(--profile-overlay-padding-block-end);
   color: var(--color-white);
-  background: rgb(0 0 0 / 25%);
-  backdrop-filter: blur(14px) saturate(130%);
+  backdrop-filter: blur(14px);
   mask: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, #000 70%);
 
   /* stylelint-disable-next-line property-no-vendor-prefix */
@@ -81,7 +96,7 @@
 
 /* name + role (always visible, below the image) */
 .profile .profile-card-body {
-  padding: 12px 4px 0;
+  padding: var(--profile-body-padding);
 }
 
 .profile .profile-card-name {
@@ -104,8 +119,8 @@
 
 /* intro (eyebrow + heading + subheading) above the grid, left-aligned */
 .profile .profile-intro {
-  margin-bottom: 40px;
-  max-width: 40rem;
+  margin-bottom: var(--profile-intro-margin-bottom);
+  max-width: var(--profile-intro-max-width);
 }
 
 .profile .profile-intro h2,
@@ -135,7 +150,7 @@
 }
 
 .profile .profile-view-all {
-  margin-top: 20px;
+  margin-top: var(--profile-view-all-margin-top);
   border: 1px solid var(--color-gray-900);
   border-radius: 2.4em;
   padding: 0.5em 1.4em;
@@ -151,7 +166,7 @@
   gap: var(--profile-gap);
 }
 
-@media (width >= 768px) {
+@media (width >= 900px) {
   .profile .profile-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -165,35 +180,26 @@
 
 /* ===================== carousel variant ===================== */
 
-/* The gradient panel now lives at the section level (Section Metadata
-   "Style: bg-leadership"), so the block itself is transparent and inherits
-   the white text colour from the section. */
-.profile.carousel {
-  color: var(--color-white);
-}
+/* background panel/text colour lives at the section level (Style: bg-gradient) */
 
-/* carousel layout vars must sit on the utility's own `.carousel` element,
-   otherwise its base `--carousel-visible: 1` (set directly on it) wins over
-   any value inherited from the block. */
+/* vars must sit on `.carousel` itself — its own base value otherwise wins */
 .profile.carousel .carousel {
   --carousel-visible: 1;
   --carousel-gap: var(--profile-gap);
 }
 
-/* intro (eyebrow + heading), centered per Figma in a narrow column so the
-   headline wraps to ~3 lines and the nav can float to the right of it. */
+/* intro (eyebrow + heading); centered opt-in via Section Metadata "Style: center" */
 .profile.carousel .carousel-intro {
-  max-width: 34rem;
-  margin-inline: auto;
-  color: var(--color-white);
+  max-width: var(--profile-carousel-intro-max-width);
 }
 
 .profile.carousel .carousel-intro h2,
 .profile.carousel .carousel-intro h3 {
   margin: 8px 0 0;
-  color: var(--color-white);
-  font-size: var(--heading-size-l);
-  line-height: var(--line-height-700);
+  max-height: 488px;
+  font-size: var(--heading-size-xxl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-1100);
 }
 
 /* eyebrow: first short paragraph above the heading */
@@ -219,18 +225,18 @@
   object-fit: fill;
 }
 
-/* on the gradient, cards' name/role become white */
+/* cards' name/role inherit the section colour (white on gradient panels,
+   dark on a grey panel) */
 .profile.carousel .profile-card-name,
 .profile.carousel .profile-card-role {
-  color: var(--color-white);
+  color: inherit;
 }
 
 .profile.carousel .profile-card-role {
   opacity: 0.85;
 }
 
-/* view all button: dark pill at rest; on hover it fills red and reveals a
-   trailing arrow. */
+/* dark pill at rest, fills red with a trailing arrow on hover */
 .profile.carousel .carousel-view-all {
   display: inline-flex;
   align-items: center;
@@ -245,8 +251,7 @@
   transition: background-color 0.2s ease, color 0.2s ease, gap 0.2s ease;
 }
 
-/* trailing arrow (drawn in the current text color): hidden at rest,
-   collapsed to zero width so it takes no space until hover. */
+/* trailing arrow: collapsed to zero width until hover */
 .profile.carousel .carousel-view-all::after {
   content: "";
   width: 0;
@@ -274,7 +279,7 @@
   opacity: 1;
 }
 
-@media (width >= 768px) {
+@media (width >= 900px) {
   .profile.carousel .carousel {
     --carousel-visible: 2;
   }
@@ -284,4 +289,80 @@
   .profile.carousel .carousel {
     --carousel-visible: 3;
   }
+}
+
+/* ===================== overlap variant ===================== */
+
+/* persistent glass overlay (override the base hover overlay) */
+/* stylelint-disable-next-line no-descending-specificity */
+.profile.overlap .profile-card-overlay {
+  gap: var(--profile-overlap-overlay-gap);
+  padding: var(--profile-overlap-overlay-padding-top) var(--profile-overlap-overlay-padding-right) var(--profile-overlap-overlay-padding) var(--profile-overlap-overlay-padding);
+  text-align: center;
+  opacity: 1;
+
+  /* contain the ::before's negative z-index so it stays behind the text
+     but above the photo, instead of escaping behind the whole card */
+  isolation: isolate;
+  background: none;
+  backdrop-filter: none;
+  mask: none;
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-backdrop-filter: none;
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask: none;
+}
+
+/* glass sits on its own layer behind the text, so only the blur/tint feathers
+   in at the top edge — the text itself stays fully crisp, never masked */
+.profile.overlap .profile-card-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  backdrop-filter: blur(20px) saturate(130%);
+  mask: linear-gradient(to bottom, transparent 0%, #000 10%);
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-backdrop-filter: blur(12px) saturate(130%);
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask: linear-gradient(to bottom, transparent 0%, #000 10%);
+}
+
+/* the bio / quote text */
+.profile.overlap .profile-card-overlay p {
+  font-size: var(--body-size-xxxl);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-600);
+  color: var(--color-white);
+}
+
+/* thin white separator between the quote and the name/designation */
+.profile.overlap .profile-card-divider {
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin: 4px 0;
+  background: rgb(255 255 255 / 10%);
+}
+
+/* name + designation inside the overlay */
+.profile.overlap .profile-card-overlay .profile-card-name {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--title-size-m);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-200);
+  color: var(--color-white);
+}
+
+.profile.overlap .profile-card-overlay .profile-card-role {
+  margin: 0;
+  font-size: var(--body-size-s);
+  line-height: 1.5;
+  color: var(--color-white);
+  opacity: 0.85;
 }

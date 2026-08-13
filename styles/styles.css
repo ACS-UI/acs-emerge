@@ -87,6 +87,48 @@ body.appear {
   display: block;
 }
 
+/*
+ * Page transition (native cross-document View Transitions — no JS). On
+ * same-origin navigation in a supporting browser: the outgoing page recedes
+ * smoothly (shrinks + fades, sinking back and away, on the slower/gentler
+ * side), while the incoming page rises quickly into place (fades in while
+ * sliding up from bottom to top, snappier and shorter). Both start at once,
+ * but the different durations/easings give each its own distinct feel.
+ * Unsupported browsers just navigate normally; no fallback needed.
+ */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: acs-page-recede 0.6s ease-out both;
+}
+
+::view-transition-new(root) {
+  animation: acs-page-rise 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes acs-page-recede {
+  to {
+    transform: scale(0.94);
+    opacity: 0;
+  }
+}
+
+@keyframes acs-page-rise {
+  from {
+    transform: translateY(80px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
 header {
   height: var(--nav-height);
 }
@@ -300,16 +342,21 @@ main img {
 
 /* sections */
 main > .section {
-  margin: 40px 0;
+  margin: 60px 0;
 }
 
 main > .section > div {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: auto;
+  box-sizing: border-box;
   padding: 0 24px;
 }
 
-main > .section:first-of-type {
+/* Only a hero-opening page keeps the first section flush to the top — the
+   nav overlays it transparently by design (see header.css). Every other
+   first section keeps the normal 60px top margin below the (in-flow,
+   space-reserving) header instead of sitting flush against it. */
+main > .hero-banner-container:first-of-type {
   margin-top: 0;
 }
 
@@ -327,14 +374,75 @@ main .section.highlight {
   padding: 40px 0;
 }
 
-div.section[data-background-text] {
+/*
+ * Section background themes (applied via Section Metadata "Style").
+ * Generic, colour-based names so any block can reuse them:
+ *   `bg-gradient-a` — warm brand gradient (red→pink→purple), white text.
+ *   `bg-gradient-b` — cool brand gradient (magenta→purple→blue), white text.
+ *   `bg-muted`      — muted grey (#F3F3F3) panel, static-black text.
+ * Blocks inside (profile/testimonial/client carousels) stay transparent and
+ * inherit the section colour.
+ */
+main .section.bg-gradient-a,
+main .section.bg-gradient-b,
+main .section.bg-muted {
   position: relative;
+  margin: 0;
+  padding: 48px 0;
+  overflow: hidden;
+}
+
+/* gradient panels — white text */
+main .section.bg-gradient-a,
+main .section.bg-gradient-b {
+  color: var(--color-text-static-white);
+}
+
+main .section.bg-gradient-a {
+  background: linear-gradient(95.72deg, #d73220 0%, #d92361 39.94%, #7155fa 121.02%);
+}
+
+main .section.bg-gradient-b {
+  background: linear-gradient(95.85deg, #b539c8 0%, #7155fa 66%, #3b63fb 100%);
+}
+
+/* muted grey panel — static-black text */
+main .section.bg-muted {
+  color: var(--color-text-static-black);
+  background: #f3f3f3;
+}
+
+@media (width >= 1024px) {
+  main .section.bg-gradient-a,
+  main .section.bg-gradient-b,
+  main .section.bg-muted {
+    padding: 64px 0;
+  }
+}
+
+/*
+ * Section background image (applied via Section Metadata "Background
+ * Image"). scripts.js (decorateSectionBackgroundImages) sets the
+ * background-image itself directly — CSS attr() can't feed that property
+ * reliably across browsers — this just handles the sizing/position.
+ */
+main .section[data-background-image] {
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /*
  * Section background watermark text (applied via Section Metadata
- * "Background Text"). Renders a large, faint word behind the section content.
+ * "Background Text"). Renders a large, faint word pinned behind the section
+ * content — it sticks in place for as long as the section is scrolling
+ * through the viewport, then scrolls away once the section has fully passed.
  */
+main .section[data-background-text] {
+  position: relative;
+}
+
 main .section[data-background-text] > div {
   position: relative;
   z-index: 1;
@@ -342,10 +450,12 @@ main .section[data-background-text] > div {
 
 main .section[data-background-text]::before {
   content: attr(data-background-text);
-  position: absolute;
-  inset: 0;
+  position: sticky;
+  top: 0;
   z-index: 0;
   display: flex;
+  height: 100vh;
+  margin-bottom: -100vh;
   align-items: center;
   justify-content: center;
   padding: 0 24px;
@@ -359,6 +469,40 @@ main .section[data-background-text]::before {
   color: rgb(255 255 255 / 16%);
   pointer-events: none;
   user-select: none;
+}
+
+/*
+ * Centered section (opt-in via Section Metadata "Style: center"): center the
+ * section's block itself on the horizontal axis. A block spanning the full
+ * section width is unaffected (nothing to center within), but this matters
+ * for any block that constrains its own width/max-width instead of filling
+ * the section's content column.
+ */
+main .section.center > div > .block {
+  margin-inline: auto;
+}
+
+/*
+ * Centered carousel intro (opt-in via Section Metadata "Style: center").
+ * By default a carousel's intro is left-aligned; adding `center` to the
+ * section centers the intro text and floats the nav to the far right.
+ */
+main .section.center .carousel-top {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+main .section.center .carousel-intro {
+  margin-inline: auto;
+  text-align: center;
+}
+
+main .section.center .carousel-top .carousel-nav {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
 }
 
 /* Grey watermark variant — apply via Section Metadata "Style": bg-text-grey */

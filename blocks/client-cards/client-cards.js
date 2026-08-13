@@ -1,116 +1,151 @@
 import { createOptimizedPicture, loadCSS } from '../../scripts/aem.js';
+import {
+  extractConfig, getIndexLink, fetchIndexRows, excludeListingPages,
+} from '../../scripts/query-index.js';
 
 /**
- * Extracts an optional heading/description "intro" from the first authored row
- * when it has no image (used by the carousel variant for the centered text and
- * an optional "view all" action).
- * @param {Element} block The client-cards block.
- * @returns {{ intro: Element|null, viewAll: {text:string, href:string}|false }}
+ * Wraps a card in a link to its detail page when a destination is available.
+ * @param {HTMLElement} card The card article.
+ * @param {string} href The detail-page URL (falsy = no wrap).
+ * @returns {HTMLElement} The card, or an anchor wrapping it.
  */
-function extractConfig(block) {
-  let intro = null;
-  let viewAll = false;
-
-  const firstRow = block.firstElementChild;
-  if (firstRow && !firstRow.querySelector('picture, img')) {
-    const cells = [...firstRow.children];
-    // A single-cell row of text/headings is treated as the carousel intro.
-    if (cells.length === 1) {
-      intro = document.createElement('div');
-      while (cells[0].firstChild) intro.append(cells[0].firstChild);
-      // A trailing link in the intro becomes the "view all" action.
-      const link = intro.querySelector('a[href]');
-      if (link) {
-        viewAll = { text: link.textContent.trim(), href: link.href };
-        (link.closest('p') || link).remove();
-      }
-      firstRow.remove();
-    }
-  }
-  return { intro, viewAll };
+function linkWrap(card, href) {
+  if (!href) return card;
+  const link = document.createElement('a');
+  link.className = 'client-cards-card-link';
+  link.href = href;
+  link.append(card);
+  return link;
 }
 
 /**
- * Turns one authored row into a client card element.
- *
- * Authored content model (per row / per client):
- *   Cell 1: the client logo image.
- *   Cell 2: a heading (client/engagement title), one or more paragraphs of
- *           description, and optionally a trailing link rendered as the
- *           "Know More" call to action.
- *
- * @param {Element} row The authored row.
+ * Builds the inner card DOM (logo + title + description + optional CTA).
+ * @param {object} parts { img, title, descs[], cta }
  * @returns {HTMLElement} The card article.
  */
-function buildCard(row) {
-  const cells = [...row.children];
+function renderCard({
+  picture, title, descs, cta,
+}) {
   const card = document.createElement('article');
   card.className = 'client-cards-card';
 
-  const imageCell = cells.find((c) => c.querySelector('picture, img'));
-  const bodyCell = cells.find((c) => c !== imageCell && c.textContent.trim());
-
-  // --- logo ---
   const logo = document.createElement('div');
   logo.className = 'client-cards-logo';
-  const img = imageCell?.querySelector('img');
-  if (img) {
-    logo.append(createOptimizedPicture(img.src, img.alt, false, [{ width: '400' }]));
-  }
+  if (picture) logo.append(picture);
   card.append(logo);
 
-  // --- body (title + description + CTA) ---
   const body = document.createElement('div');
   body.className = 'client-cards-body';
-
-  if (bodyCell) {
-    const nodes = [...bodyCell.children];
-    const heading = nodes.find((n) => /^H[1-6]$/.test(n.tagName));
-    if (heading) {
-      heading.classList.add('client-cards-title');
-      body.append(heading);
-    }
-
-    // The trailing link (if any) becomes the "Know More" CTA button.
-    const cta = bodyCell.querySelector('a[href]');
-
-    nodes
-      .filter((n) => n !== heading && !n.contains(cta) && n.textContent.trim())
-      .forEach((p) => {
-        p.classList.add('client-cards-desc');
-        body.append(p);
-      });
-
-    if (cta) {
-      cta.classList.add('button', 'secondary', 'client-cards-cta');
-      const actions = document.createElement('div');
-      actions.className = 'client-cards-actions';
-      actions.append(cta);
-      body.append(actions);
-    }
+  if (title) {
+    const h = document.createElement('h3');
+    h.className = 'client-cards-title';
+    h.textContent = title;
+    body.append(h);
   }
-
+  (descs || []).forEach((text) => {
+    const p = document.createElement('p');
+    p.className = 'client-cards-desc';
+    p.textContent = text;
+    body.append(p);
+  });
+  if (cta) {
+    const actions = document.createElement('div');
+    actions.className = 'client-cards-actions';
+    cta.classList.add('button', 'secondary', 'client-cards-cta');
+    actions.append(cta);
+    body.append(actions);
+  }
   card.append(body);
   return card;
 }
 
 /**
+ * Turns one authored row into a client card, wrapped in its CTA link if the
+ * row authored one.
+ *
+ * Authored content model (per row / per client):
+ *   Cell 1: the client logo image.
+ *   Cell 2: a heading (title), description paragraph(s), and an optional
+ *           trailing link used both as the "Know More" CTA and the card link.
+ *
+ * @param {Element} row The authored row.
+ * @returns {HTMLElement} The card (possibly link-wrapped).
+ */
+function buildCard(row) {
+  const cells = [...row.children];
+  const imageCell = cells.find((c) => c.querySelector('picture, img'));
+  const bodyCell = cells.find((c) => c !== imageCell && c.textContent.trim());
+
+  const img = imageCell?.querySelector('img');
+  const picture = img
+    ? createOptimizedPicture(img.src, img.alt, false, [{ width: '400' }])
+    : null;
+
+  let title;
+  const descs = [];
+  let cta = null;
+  let href = '';
+  if (bodyCell) {
+    const nodes = [...bodyCell.children];
+    const heading = nodes.find((n) => /^H[1-6]$/.test(n.tagName));
+    title = heading ? heading.textContent.trim() : '';
+    cta = bodyCell.querySelector('a[href]');
+    href = cta ? cta.getAttribute('href') : '';
+    nodes
+      .filter((n) => n !== heading && !n.contains(cta) && n.textContent.trim())
+      .forEach((p) => descs.push(p.textContent.trim()));
+  }
+
+  const card = renderCard({
+    picture, title, descs, cta,
+  });
+  return linkWrap(card, href);
+}
+
+/**
+ * Builds a client card from an index row, wrapped in a link to the row path.
+ * @param {object} row Index row (path, title, logo, image, description).
+ * @returns {HTMLElement} The link-wrapped card.
+ */
+function buildCardFromData(row) {
+  const src = row.logo || row.image;
+  const picture = src
+    ? createOptimizedPicture(src, row.title || '', false, [{ width: '400' }])
+    : null;
+  const card = renderCard({
+    picture,
+    title: row.title,
+    descs: row.description ? [row.description] : [],
+    cta: null,
+  });
+  return linkWrap(card, row.path);
+}
+
+/**
  * Decorates the client-cards block.
  *  - base variant: responsive grid of client cards.
- *  - `carousel` variant: cards inside the reusable carousel utility with a
- *    centered intro, top-right nav, and optional "view all".
+ *  - `carousel` variant: cards inside the reusable carousel utility.
+ * Data comes from a query-index sheet when the block is authored as only a
+ * link to one; otherwise from the authored rows. Each card links to its
+ * detail page (index row path, or the authored CTA link).
  * @param {Element} block The client-cards block element.
  */
 export default async function decorate(block) {
   const isCarousel = block.classList.contains('carousel');
-  // Both variants may author an intro (eyebrow + heading + subheading) as the
-  // first text-only row; the carousel centres it, the base grid left-aligns it.
   const { intro, viewAll } = extractConfig(block);
 
-  const rows = [...block.children];
-  const cards = rows
-    .filter((row) => row.querySelector('picture, img') || row.textContent.trim())
-    .map((row) => buildCard(row));
+  const indexUrl = getIndexLink(block);
+  let cards;
+  if (indexUrl) {
+    let dataRows = await fetchIndexRows(indexUrl);
+    dataRows = excludeListingPages(dataRows);
+    cards = dataRows.map((row) => buildCardFromData(row));
+  } else {
+    const rows = [...block.children];
+    cards = rows
+      .filter((row) => row.querySelector('picture, img') || row.textContent.trim())
+      .map((row) => buildCard(row));
+  }
 
   if (isCarousel) {
     await loadCSS(`${window.hlx.codeBasePath}/styles/carousel.css`);
@@ -119,7 +154,7 @@ export default async function decorate(block) {
       heading: intro || undefined,
       viewAll,
       step: 1,
-      align: 'center',
+      align: 'left',
       label: 'New clients',
     });
     block.replaceChildren(carousel);

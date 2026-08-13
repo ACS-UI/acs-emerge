@@ -30,8 +30,13 @@ indices:
   # Leadership profiles: one row per leader page under /leaders/, feeding a
   # future query-index-driven profile block.
   leaders:
+    # `/leaders/**` matches the folder page `/leaders` itself, so require a
+    # child segment to index only the individual leader detail pages.
     include:
-      - '/leaders/**'
+      - '/leaders/*'
+    exclude:
+      # belt-and-braces: keep the /leaders listing page out of the index
+      - '/leaders'
     target: /leaders/query-index.json
     properties:
       title:
@@ -40,8 +45,21 @@ indices:
       role:
         select: head > meta[name="role"]
         value: attribute(el, 'content')
+      # image: the large portrait authored inside the profile-details block
+      # (og:image is auto-derived from the first content image), used when a
+      # block needs the full-size photo.
       image:
         select: head > meta[property="og:image"]
+        value: attribute(el, 'content')
+      # thumbnail: a separate, smaller portrait authored as page metadata,
+      # used for reportee cards where the big image is too large.
+      thumbnail:
+        select: head > meta[name="thumbnail"]
+        value: attribute(el, 'content')
+      # reportees: comma-separated list of leader page paths that report to
+      # this person; lets a block reconstruct the full hierarchy for ordering.
+      reportees:
+        select: head > meta[name="reportees"]
         value: attribute(el, 'content')
       description:
         select: head > meta[name="description"]
@@ -50,8 +68,11 @@ indices:
   # Clients: one row per client page under /clients/, feeding a future
   # query-index-driven client-cards block.
   clients:
+    # require a child segment so the folder page `/clients` is not indexed
     include:
-      - '/clients/**'
+      - '/clients/*'
+    exclude:
+      - '/clients'
     target: /clients/query-index.json
     properties:
       title:
@@ -65,4 +86,29 @@ indices:
         value: attribute(el, 'content')
       description:
         select: head > meta[name="description"]
+        value: attribute(el, 'content')
+
+  # Success stories: one row per case-study page under /success-stories/,
+  # feeding the query-index-driven success block. Cards link to these pages.
+  success:
+    # require a child segment so the folder page `/success-stories` is not indexed
+    include:
+      - '/success-stories/*'
+    exclude:
+      - '/success-stories'
+    target: /success-stories/query-index.json
+    properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, 'content')
+      image:
+        select: head > meta[property="og:image"]
+        value: attribute(el, 'content')
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, 'content')
+      # tags: sourced from the `services` metadata (comma-separated), since
+      # `tags` is a reserved metadata key. Exposed as the `tags` column.
+      tags:
+        select: head > meta[name="services"]
         value: attribute(el, 'content')

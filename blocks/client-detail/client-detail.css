@@ -1,22 +1,21 @@
 .client-detail {
-  /* fonts — Figma design uses Adobe Clean Spectrum VF (not bundled here);
-     requested first with a project-font fallback. */
+  /* Adobe Clean Spectrum VF not bundled here; fall back to project font */
   --cd-font: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
 
   /* colors */
-  --cd-heading-color: #000;
-  --cd-label-color: #505050;
-  --cd-value-color: #000;
-  --cd-rule-color: #e1e1e1;
-  --cd-about-color: #000;
+  --cd-heading-color: var(--color-gray-1000);
+  --cd-label-color: var(--color-gray-700);
+  --cd-value-color: var(--color-gray-1000);
+  --cd-rule-color: var(--color-gray-200);
+  --cd-about-color: var(--color-gray-1000);
 
   /* typography (Title/XL for headings + rows, Body/XXXL for about) */
-  --cd-title-size: 20px;
-  --cd-title-line: 24px;
-  --cd-title-weight: 700;
-  --cd-about-size: 25px;
+  --cd-title-size: var(--title-size-xl);
+  --cd-title-line: var(--line-height-400);
+  --cd-title-weight: var(--font-weight-bold);
+  --cd-about-size: var(--body-size-xxxl);
   --cd-about-line: 1.5;
-  --cd-about-weight: 400;
+  --cd-about-weight: var(--font-weight-regular);
 
   /* layout */
   --cd-section-gap: 40px;
@@ -34,9 +33,7 @@
   font-family: var(--cd-font);
 }
 
-/* --------------------------------------------------------------------------
-   Logo
-   -------------------------------------------------------------------------- */
+/* ===================== Logo ===================== */
 .client-detail .client-detail-logo {
   line-height: 0;
 }
@@ -47,9 +44,7 @@
   max-width: 100%;
 }
 
-/* --------------------------------------------------------------------------
-   Hero image (Figma "banner": 1216x608, radius 24)
-   -------------------------------------------------------------------------- */
+/* Hero image — Figma "banner": 1216x608, radius 24 */
 .client-detail .client-detail-hero {
   line-height: 0;
 }
@@ -60,9 +55,7 @@
   border-radius: var(--cd-hero-radius);
 }
 
-/* --------------------------------------------------------------------------
-   Content — Details + About
-   -------------------------------------------------------------------------- */
+/* ===================== Content — Details + About ===================== */
 .client-detail .client-detail-content {
   display: grid;
   grid-template-columns: 1fr;
@@ -124,9 +117,7 @@
   line-height: var(--cd-about-line);
 }
 
-/* --------------------------------------------------------------------------
-   Desktop — Details (384px) left, About right, 136px gap
-   -------------------------------------------------------------------------- */
+/* Desktop — Details (384px) left, About right, 136px gap */
 @media (width >= 900px) {
   .client-detail .client-detail-content {
     grid-template-columns: var(--cd-details-width) minmax(0, 1fr);
