@@ -189,6 +189,11 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
 /* brand — Figma "Logo": Adobe mark (40x39) + "ACS GDC HUB" wordmark, 8px gap */
 header .nav-brand {
   grid-area: brand;
+  color: var(--nav-brand-color);
+}
+
+/* wordmark text — Figma "Component/XL/Bold": 18px / 22px, 700 */
+header .nav-brand .nav-brand-text {
   font-size: 18px;
   font-weight: 700;
   line-height: 22px;
