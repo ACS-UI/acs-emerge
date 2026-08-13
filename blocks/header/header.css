@@ -85,7 +85,9 @@ header nav[aria-expanded='true'] {
   header nav {
     display: flex;
     justify-content: space-between;
-    gap: 0 32px;
+
+    /* Figma: 82px column gap between the brand and the nav sections */
+    gap: 0 82px;
     max-width: 1264px;
     padding: 0 32px;
   }
