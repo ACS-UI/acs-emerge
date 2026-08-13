@@ -1,26 +1,5 @@
 import { createOptimizedPicture, getMetadata } from '../../scripts/aem.js';
-
-/**
- * Fetches and caches a query-index sheet.
- * @param {string} url The query-index.json URL.
- * @returns {Promise<object[]>} The index rows (empty array on failure).
- */
-const indexCache = new Map();
-async function fetchIndex(url) {
-  if (indexCache.has(url)) return indexCache.get(url);
-  const promise = (async () => {
-    try {
-      const resp = await fetch(url);
-      if (!resp.ok) return [];
-      const json = await resp.json();
-      return json.data || [];
-    } catch (e) {
-      return [];
-    }
-  })();
-  indexCache.set(url, promise);
-  return promise;
-}
+import { fetchIndexRows } from '../../scripts/query-index.js';
 
 /**
  * Builds a single reportee card from an index row.
@@ -69,7 +48,7 @@ async function buildReportees() {
 
   // Index location is configurable via metadata; defaults to the leaders index.
   const indexUrl = getMetadata('reportees-index') || '/leaders/query-index.json';
-  const rows = await fetchIndex(indexUrl);
+  const rows = await fetchIndexRows(indexUrl);
   const byPath = new Map(rows.map((r) => [r.path, r]));
 
   const matched = paths
