@@ -282,7 +282,6 @@ header nav[aria-expanded='true'] .nav-sections {
   display: block;
   visibility: visible;
   align-self: start;
-  padding-top: 8px;
 }
 
 header nav .nav-sections ul {
@@ -321,6 +320,10 @@ header nav .nav-sections ul > li:last-child {
 /* mobile: roomier stacked links with comfortable tap targets.
    Scoped to mobile so it never affects the desktop nav (also aria-expanded). */
 @media (width < 900px) {
+  header nav[aria-expanded='true'] .nav-sections {
+    padding-top: 8px;
+  }
+
   header nav[aria-expanded='true'] .nav-sections ul {
     display: flex;
     flex-direction: column;
