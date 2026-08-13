@@ -18,6 +18,7 @@ header {
   --nav-bg: #fff;
   --nav-brand-color: #000;
   --nav-link-color: #505050;
+  --nav-link-hover-color: #000;
   --nav-border: 1px solid #e1e1e1;
 
   /* opaque backdrop for the open mobile menu */
@@ -38,6 +39,7 @@ header .nav-wrapper {
 body:has(main > .hero-banner-container:first-child) > header {
   --nav-brand-color: #fff;
   --nav-link-color: #c6c6c6;
+  --nav-link-hover-color: #fff;
   --nav-menu-bg: #1a1a2e;
 
   height: 0;
@@ -250,6 +252,15 @@ header nav .nav-sections ul {
 
 header nav .nav-sections ul > li {
   font-weight: 700;
+}
+
+/* nav links: smooth color transition, hover to the variant's hover color */
+header nav .nav-sections a:any-link {
+  transition: color 300ms ease-in-out;
+}
+
+header nav .nav-sections a:hover {
+  color: var(--nav-link-hover-color);
 }
 
 header nav .nav-sections ul > li > ul {
