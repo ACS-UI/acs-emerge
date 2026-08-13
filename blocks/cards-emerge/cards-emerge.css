@@ -2,19 +2,22 @@
 
 /* ===== Block container ===== */
 .cards-emerge {
+  font-family: var(--font-family-sans);
+
   /* ===== Colors (semantic global tokens) ===== */
-  --cards-emerge-eyebrow-color: var(--color-detail);
+  --cards-emerge-eyebrow-color: var(--color-gray-700);
   --cards-emerge-heading-color: var(--color-heading);
   --cards-emerge-letter-color: var(--color-magenta-visual);
   --cards-emerge-title-color: var(--color-title);
   --cards-emerge-subtitle-color: var(--color-detail);
 
   /* ===== Typography (mobile base) ===== */
-  --cards-emerge-eyebrow-size: var(--detail-size-xs);
-  --cards-emerge-eyebrow-weight: var(--detail-font-weight);
-  --cards-emerge-eyebrow-spacing: 1px;
+  --cards-emerge-eyebrow-size: var(--title-size-xl);
+  --cards-emerge-eyebrow-weight: var(--font-weight-bold);
+  --cards-emerge-eyebrow-line-height: var(--line-height-400);
+  --cards-emerge-eyebrow-spacing: 0;
   --cards-emerge-heading-size: var(--heading-size-m);
-  --cards-emerge-heading-weight: var(--heading-font-weight);
+  --cards-emerge-heading-weight: var(--font-weight-medium);
   --cards-emerge-heading-line-height: var(--line-height-500);
   --cards-emerge-letter-size: var(--font-size-1000);
   --cards-emerge-letter-weight: var(--font-weight-bold);
@@ -35,13 +38,13 @@
   /* ===== Spacing (mobile base) ===== */
   --cards-emerge-section-padding-block: 32px;
   --cards-emerge-section-padding-inline: 20px;
-  --cards-emerge-intro-gap: 12px;
-  --cards-emerge-intro-margin-bottom: 32px;
+  --cards-emerge-intro-gap: 8px;
+  --cards-emerge-intro-margin-bottom: 40px;
   --cards-emerge-intro-max-width: 800px;
   --cards-emerge-list-gap: 20px;
   --cards-emerge-list-max-width: 420px;
   --cards-emerge-row-gap: 16px;
-  --cards-emerge-title-subtitle-gap: 4px;
+  --cards-emerge-title-subtitle-gap: 8px;
   --cards-emerge-letter-col-width: 44px;
   --cards-emerge-body-padding-block: 12px;
   --cards-emerge-butterfly-width: 172px;
@@ -50,6 +53,8 @@
 
   /* ===== Spacing (desktop overrides) ===== */
   --cards-emerge-list-gap-desktop: 16px;
+  --cards-emerge-list-max-width-desktop: 592px;
+  --cards-emerge-row-gap-desktop: 32px;
   --cards-emerge-letter-col-width-desktop: 56px;
 
   padding: var(--cards-emerge-section-padding-block) var(--cards-emerge-section-padding-inline);
@@ -70,6 +75,7 @@
   color: var(--cards-emerge-eyebrow-color);
   font-size: var(--cards-emerge-eyebrow-size);
   font-weight: var(--cards-emerge-eyebrow-weight);
+  line-height: var(--cards-emerge-eyebrow-line-height);
   letter-spacing: var(--cards-emerge-eyebrow-spacing);
   text-transform: uppercase;
 }
@@ -151,11 +157,13 @@
   }
 
   .cards-emerge .cards-emerge-list {
+    max-width: var(--cards-emerge-list-max-width-desktop);
     gap: var(--cards-emerge-list-gap-desktop);
   }
 
   .cards-emerge .cards-emerge-item {
     grid-template-columns: var(--cards-emerge-letter-col-width-desktop) 1fr;
+    column-gap: var(--cards-emerge-row-gap-desktop);
   }
 
   /* Vertically centered beside the second row's <li> (position:relative anchor) */
