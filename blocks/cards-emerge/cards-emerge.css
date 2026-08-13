@@ -36,7 +36,7 @@
   --cards-emerge-title-size-desktop: var(--title-size-l);
 
   /* ===== Spacing (mobile base) ===== */
-  --cards-emerge-section-padding-block: 32px;
+  --cards-emerge-section-padding-block: 0;
   --cards-emerge-section-padding-inline: 20px;
   --cards-emerge-intro-gap: 8px;
   --cards-emerge-intro-margin-bottom: 40px;
