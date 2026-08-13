@@ -10,6 +10,7 @@
   --cards-emerge-heading-stroke-width: 1px;
   --cards-emerge-heading-stroke-color: var(--color-text-static-black);
   --cards-emerge-letter-color: var(--color-magenta-visual);
+  --cards-emerge-letter-gradient: linear-gradient(95.85deg, #b539c8 0%, #7155fa 66%, #3b63fb 100%);
   --cards-emerge-title-color: var(--color-title);
   --cards-emerge-subtitle-color: var(--color-detail);
 
@@ -22,7 +23,7 @@
   --cards-emerge-heading-weight: var(--font-weight-medium);
   --cards-emerge-heading-line-height: var(--line-height-500);
   --cards-emerge-letter-size: var(--font-size-1000);
-  --cards-emerge-letter-weight: var(--font-weight-bold);
+  --cards-emerge-letter-weight: var(--font-weight-regular);
   --cards-emerge-letter-line-height: 1;
   --cards-emerge-title-size: var(--heading-size-l);
   --cards-emerge-title-weight: var(--font-weight-medium);
@@ -34,7 +35,8 @@
   /* ===== Typography (desktop overrides, via media query) ===== */
   --cards-emerge-heading-size-desktop: var(--heading-size-xxl);
   --cards-emerge-heading-line-height-desktop: var(--line-height-1100);
-  --cards-emerge-letter-size-desktop: var(--font-size-1100);
+  --cards-emerge-letter-size-desktop: var(--font-size-1500);
+  --cards-emerge-letter-line-height-desktop: var(--line-height-1500);
   --cards-emerge-title-size-desktop: var(--heading-size-l);
 
   /* ===== Spacing (mobile base) ===== */
@@ -57,7 +59,7 @@
   --cards-emerge-list-gap-desktop: 16px;
   --cards-emerge-list-max-width-desktop: 592px;
   --cards-emerge-row-gap-desktop: 32px;
-  --cards-emerge-letter-col-width-desktop: 56px;
+  --cards-emerge-letter-col-width-desktop: 72px;
 
   padding: var(--cards-emerge-section-padding-block) var(--cards-emerge-section-padding-inline);
 }
@@ -87,6 +89,7 @@
 .cards-emerge .cards-emerge-intro h3 {
   margin: 0;
   color: var(--cards-emerge-heading-color);
+  font-family: var(--font-family-sans);
   font-size: var(--cards-emerge-heading-size);
   font-weight: var(--cards-emerge-heading-weight);
   line-height: var(--cards-emerge-heading-line-height);
@@ -126,6 +129,20 @@
   text-align: center;
 }
 
+/* Gradient glyph fill — degrades to the solid magenta color set above on
+   browsers without background-clip:text support */
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .cards-emerge .cards-emerge-letter {
+    background: var(--cards-emerge-letter-gradient);
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
+
 .cards-emerge .cards-emerge-body {
   display: flex;
   flex-direction: column;
@@ -136,6 +153,7 @@
 .cards-emerge .cards-emerge-body :is(h1, h2, h3, h4, h5, h6, p:first-child) {
   margin: 0;
   color: var(--cards-emerge-title-color);
+  font-family: var(--font-family-sans);
   font-size: var(--cards-emerge-title-size);
   font-weight: var(--cards-emerge-title-weight);
   line-height: var(--cards-emerge-title-line-height);
@@ -182,6 +200,7 @@
 
   .cards-emerge .cards-emerge-letter {
     font-size: var(--cards-emerge-letter-size-desktop);
+    line-height: var(--cards-emerge-letter-line-height-desktop);
   }
 
   .cards-emerge .cards-emerge-body :is(h1, h2, h3, h4, h5, h6, p:first-child) {
