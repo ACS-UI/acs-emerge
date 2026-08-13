@@ -1,1 +1,32 @@
 /* add global styles that can be loaded post LCP here */
+
+/* Back button auto-injected on leader and success-story detail pages */
+main .back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+  margin: 16px 0;
+  padding: 8px 16px;
+  font-family: inherit;
+  font-size: var(--body-font-size-s, 16px);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--text-color, #131313);
+  background: transparent;
+  border: 1px solid currentcolor;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+main .back-button:hover,
+main .back-button:focus-visible {
+  color: var(--background-color, #fff);
+  background: var(--text-color, #131313);
+}
+
+@media (width >= 900px) {
+  main .back-button {
+    margin: 24px 0;
+  }
+}

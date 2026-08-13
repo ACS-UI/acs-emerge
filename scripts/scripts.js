@@ -74,6 +74,30 @@ function buildWidgetAutoBlocks(main) {
 }
 
 /**
+ * Prepends a "Back" button on detail pages (leaders and success stories).
+ * The button uses browser history so it returns the user to wherever they
+ * came from. It is skipped on listing/folder pages and hidden when there is
+ * no in-site history to go back to (e.g. a direct landing from search).
+ * @param {Element} main The container element
+ */
+function buildBackButton(main) {
+  // skip detached fragment mains (header/footer/fragments); only the page main
+  if (main !== document.querySelector('main')) return;
+  // only individual detail pages: `/leaders/<slug>` and `/success-stories/<slug>`
+  const isDetailPage = /^\/(leaders|success-stories)\/[^/]+/.test(window.location.pathname);
+  if (!isDetailPage) return;
+  if (window.history.length <= 1) return;
+
+  const back = document.createElement('button');
+  back.type = 'button';
+  back.className = 'back-button';
+  back.setAttribute('aria-label', 'Go back');
+  back.textContent = '‹ Back';
+  back.addEventListener('click', () => window.history.back());
+  main.prepend(back);
+}
+
+/**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
@@ -97,6 +121,7 @@ function buildAutoBlocks(main) {
       });
     }
     buildWidgetAutoBlocks(main);
+    buildBackButton(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
