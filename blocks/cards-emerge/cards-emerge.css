@@ -6,7 +6,9 @@
 
   /* ===== Colors (semantic global tokens) ===== */
   --cards-emerge-eyebrow-color: var(--color-gray-700);
-  --cards-emerge-heading-color: var(--color-heading);
+  --cards-emerge-heading-color: var(--color-text-static-black);
+  --cards-emerge-heading-stroke-width: 1px;
+  --cards-emerge-heading-stroke-color: var(--color-text-static-black);
   --cards-emerge-letter-color: var(--color-magenta-visual);
   --cards-emerge-title-color: var(--color-title);
   --cards-emerge-subtitle-color: var(--color-detail);
@@ -88,6 +90,7 @@
   font-size: var(--cards-emerge-heading-size);
   font-weight: var(--cards-emerge-heading-weight);
   line-height: var(--cards-emerge-heading-line-height);
+  -webkit-text-stroke: var(--cards-emerge-heading-stroke-width) var(--cards-emerge-heading-stroke-color);
 }
 
 /* ===== Acronym list ===== */
