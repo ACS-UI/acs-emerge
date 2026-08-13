@@ -1,34 +1,7 @@
 import { createOptimizedPicture, loadCSS } from '../../scripts/aem.js';
-
-/**
- * If the block is authored as *only* a link to a query-index sheet (no images),
- * returns that URL so the cards can be pulled from the index instead of from
- * authored rows.
- * @param {Element} block The profile block.
- * @returns {string|null} The query-index URL, or null for authored content.
- */
-function getIndexLink(block) {
-  if (block.querySelector('picture, img')) return null;
-  const links = [...block.querySelectorAll('a[href]')];
-  const indexLink = links.find((a) => /query-index\.json(\?|$)/.test(a.getAttribute('href') || a.href));
-  return indexLink ? indexLink.href : null;
-}
-
-/**
- * Fetches a query-index sheet's rows.
- * @param {string} url The query-index.json URL.
- * @returns {Promise<object[]>} Rows (empty array on failure).
- */
-async function fetchIndexRows(url) {
-  try {
-    const resp = await fetch(url);
-    if (!resp.ok) return [];
-    const json = await resp.json();
-    return json.data || [];
-  } catch (e) {
-    return [];
-  }
-}
+import {
+  extractConfig, getIndexLink, fetchIndexRows, excludeListingPages,
+} from '../../scripts/query-index.js';
 
 /**
  * Orders index rows top-down by org hierarchy, breadth-first:
@@ -133,35 +106,6 @@ function buildCardFromData(row, overlap = false) {
 }
 
 /**
- * Extracts an optional heading/description "intro" from the first authored row
- * when it has no image (used by the carousel variant for the top-left text).
- * @param {Element} block The profile block.
- * @returns {{ intro: Element|null, viewAll: {text:string, href:string}|false }}
- */
-function extractConfig(block) {
-  let intro = null;
-  let viewAll = false;
-
-  const firstRow = block.firstElementChild;
-  if (firstRow && !firstRow.querySelector('picture, img')) {
-    const cells = [...firstRow.children];
-    // A single-cell row of text/headings is treated as the carousel intro.
-    if (cells.length === 1) {
-      intro = document.createElement('div');
-      while (cells[0].firstChild) intro.append(cells[0].firstChild);
-      // A trailing link in the intro becomes the "view all" action.
-      const link = intro.querySelector('a[href]');
-      if (link) {
-        viewAll = { text: link.textContent.trim(), href: link.href };
-        (link.closest('p') || link).remove();
-      }
-      firstRow.remove();
-    }
-  }
-  return { intro, viewAll };
-}
-
-/**
  * Turns one authored row into a profile card element.
  *
  * Authored content model (per row / per profile):
@@ -259,11 +203,7 @@ export default async function decorate(block) {
   let cards;
   if (indexUrl) {
     let dataRows = await fetchIndexRows(indexUrl);
-    // Temporary: drop the listing/folder pages (e.g. /leaders, /clients) that
-    // the query-index still returns until the index is rebuilt with the
-    // folder-page exclude live. Belt-and-braces alongside the helix-query fix.
-    const listingPaths = ['/leaders', '/clients', '/success-stories'];
-    dataRows = dataRows.filter((row) => !listingPaths.includes((row.path || '').replace(/\/$/, '')));
+    dataRows = excludeListingPages(dataRows);
     // Exclude the current page's own leader (don't show the card for the
     // detail page you are viewing). Match tolerantly: index paths are
     // site-root (e.g. /leaders/x) while the served path may carry a prefix

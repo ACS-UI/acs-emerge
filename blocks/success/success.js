@@ -1,61 +1,7 @@
 import { createOptimizedPicture, loadCSS } from '../../scripts/aem.js';
-
-/**
- * Extracts an optional heading/description "intro" from the first authored row
- * when it has no image. Shared by all variants (carousel centres it, base &
- * parallax left-align it). A trailing link becomes a "view all" action.
- * @param {Element} block The success block.
- * @returns {{ intro: Element|null, viewAll: {text:string, href:string}|false }}
- */
-function extractConfig(block) {
-  let intro = null;
-  let viewAll = false;
-
-  const firstRow = block.firstElementChild;
-  if (firstRow && !firstRow.querySelector('picture, img')) {
-    const cells = [...firstRow.children];
-    if (cells.length === 1) {
-      intro = document.createElement('div');
-      while (cells[0].firstChild) intro.append(cells[0].firstChild);
-      const link = intro.querySelector('a[href]');
-      if (link) {
-        viewAll = { text: link.textContent.trim(), href: link.href };
-        (link.closest('p') || link).remove();
-      }
-      firstRow.remove();
-    }
-  }
-  return { intro, viewAll };
-}
-
-/**
- * If the block is authored as *only* a link to a query-index sheet (no images),
- * returns that URL so cards are pulled from the index instead of authored rows.
- * @param {Element} block The success block.
- * @returns {string|null} The query-index URL, or null for authored content.
- */
-function getIndexLink(block) {
-  if (block.querySelector('picture, img')) return null;
-  const links = [...block.querySelectorAll('a[href]')];
-  const indexLink = links.find((a) => /query-index\.json(\?|$)/.test(a.getAttribute('href') || a.href));
-  return indexLink ? indexLink.href : null;
-}
-
-/**
- * Fetches a query-index sheet's rows.
- * @param {string} url The query-index.json URL.
- * @returns {Promise<object[]>} Rows (empty array on failure).
- */
-async function fetchIndexRows(url) {
-  try {
-    const resp = await fetch(url);
-    if (!resp.ok) return [];
-    const json = await resp.json();
-    return json.data || [];
-  } catch (e) {
-    return [];
-  }
-}
+import {
+  extractConfig, getIndexLink, fetchIndexRows, excludeListingPages,
+} from '../../scripts/query-index.js';
 
 /**
  * Builds a success-story card from an index row, wrapped in a link to the
@@ -367,10 +313,7 @@ export default async function decorate(block) {
   let cards;
   if (indexUrl) {
     let dataRows = await fetchIndexRows(indexUrl);
-    // Temporary: drop the listing/folder pages the index still returns until
-    // it is rebuilt with the folder-page exclude live.
-    const listingPaths = ['/leaders', '/clients', '/success-stories'];
-    dataRows = dataRows.filter((row) => !listingPaths.includes((row.path || '').replace(/\/$/, '')));
+    dataRows = excludeListingPages(dataRows);
     cards = dataRows.map((row) => buildCardFromData(row, isParallax));
   } else {
     const rows = [...block.children];
