@@ -71,8 +71,8 @@
 
   /* blurred backdrop panel behind the card text (Figma "Rectangle 2") */
   --cw-card-backdrop-bg: rgb(0 0 0 / 10%);
-  --cw-card-backdrop-blur: 10px;
-  --cw-card-backdrop-self-blur: 15px;
+  --cw-card-backdrop-blur: 20px;
+  --cw-card-backdrop-self-blur: 30px;
 }
 
 /* ==========================================================================
