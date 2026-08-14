@@ -252,12 +252,15 @@
   max-width: var(--success-carousel-intro-max-width);
 }
 
+/* Figma Heading/XXL 45/52, Medium */
 .success.carousel .carousel-intro h2,
 .success.carousel .carousel-intro h3 {
   margin: 8px 0 0;
-  font-size: var(--heading-size-l);
-  line-height: var(--line-height-700);
-  color: var(--color-gray-900);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--heading-size-xxl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-1100);
+  color: var(--color-text-static-black);
 }
 
 .success.carousel .carousel-intro p {
