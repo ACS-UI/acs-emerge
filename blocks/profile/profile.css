@@ -12,6 +12,7 @@
   --profile-overlay-padding-inline: 24px;
   --profile-overlay-padding-block-end: 24px;
   --profile-overlay-gap: 8px;
+  --profile-overlay-blur: 28px;
   --profile-body-padding: 12px 4px 0;
   --profile-intro-margin-bottom: 40px;
   --profile-intro-max-width: 40rem;
@@ -67,11 +68,11 @@
   gap: var(--profile-overlay-gap);
   padding: var(--profile-overlay-padding-block-start) var(--profile-overlay-padding-inline) var(--profile-overlay-padding-block-end);
   color: var(--color-white);
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(var(--profile-overlay-blur));
   mask: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, #000 70%);
 
   /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(var(--profile-overlay-blur)) saturate(130%);
 
   /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-mask: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, #000 70%);
