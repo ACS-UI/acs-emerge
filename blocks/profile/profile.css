@@ -235,6 +235,14 @@
   color: inherit;
 }
 
+/* Figma Title/XXXL 25/30, Medium */
+.profile.carousel .profile-card-name {
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--title-size-xxxl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-600);
+}
+
 .profile.carousel .profile-card-role {
   opacity: 0.85;
 }
