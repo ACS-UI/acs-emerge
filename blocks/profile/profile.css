@@ -202,14 +202,15 @@
   line-height: var(--line-height-1100);
 }
 
-/* eyebrow: first short paragraph above the heading */
+/* eyebrow: first short paragraph above the heading — Figma Title/XL 20/24, Bold */
 .profile.carousel .carousel-intro p {
   margin: 0;
-  font-size: var(--detail-size-m);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--title-size-xl);
   font-weight: var(--font-weight-bold);
-  letter-spacing: 0.08em;
+  line-height: var(--line-height-400);
+  letter-spacing: 0;
   text-transform: uppercase;
-  opacity: 0.9;
 }
 
 /* carousel cards show the photo at its natural proportions (no crop/zoom),
