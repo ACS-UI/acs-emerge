@@ -107,6 +107,7 @@
    child of <ul>, hence the wrapper instead of nesting it inside the list). */
 .cards-emerge .cards-emerge-list-wrapper {
   position: relative;
+  isolation: isolate;
   margin: 0 auto;
   max-width: var(--cards-emerge-list-max-width);
 }
