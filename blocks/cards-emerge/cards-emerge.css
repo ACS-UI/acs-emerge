@@ -55,7 +55,8 @@
   --cards-emerge-body-padding-block: 12px;
   --cards-emerge-butterfly-width: 172px;
   --cards-emerge-butterfly-height: 200px;
-  --cards-emerge-butterfly-offset-right: -80px;
+  --cards-emerge-butterfly-offset-top: 47px;
+  --cards-emerge-butterfly-offset-right: -42px;
 
   /* ===== Spacing (desktop overrides) ===== */
   --cards-emerge-list-gap-desktop: 16px;
@@ -99,12 +100,21 @@
 }
 
 /* ===== Acronym list ===== */
-.cards-emerge .cards-emerge-list {
+
+/* The wrapper (not the <ul>) owns the centered column box, so the butterfly
+   — a sibling of the <ul>, not a descendant — can be positioned per Figma
+   relative to the list's own top/right edges (an <img> isn't a valid direct
+   child of <ul>, hence the wrapper instead of nesting it inside the list). */
+.cards-emerge .cards-emerge-list-wrapper {
   position: relative;
-  list-style: none;
   margin: 0 auto;
-  padding: 0;
   max-width: var(--cards-emerge-list-max-width);
+}
+
+.cards-emerge .cards-emerge-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: var(--cards-emerge-list-gap);
@@ -179,8 +189,11 @@
     line-height: var(--cards-emerge-heading-line-height-desktop);
   }
 
-  .cards-emerge .cards-emerge-list {
+  .cards-emerge .cards-emerge-list-wrapper {
     max-width: var(--cards-emerge-list-max-width-desktop);
+  }
+
+  .cards-emerge .cards-emerge-list {
     gap: var(--cards-emerge-list-gap-desktop);
   }
 
@@ -189,15 +202,19 @@
     column-gap: var(--cards-emerge-row-gap-desktop);
   }
 
-  /* Vertically centered beside the second row's <li> (position:relative anchor) */
+  /* Positioned per Figma relative to the list's own top/right edges.
+     z-index: -1 keeps it behind the list text (a normal-flow sibling within
+     the same positioned wrapper) so it can never obscure copy that grows. */
   .cards-emerge .cards-emerge-butterfly {
     display: block;
     position: absolute;
-    top: -50%;
+    top: var(--cards-emerge-butterfly-offset-top);
     right: var(--cards-emerge-butterfly-offset-right);
-    transform: translateY(-50%);
+    width: var(--cards-emerge-butterfly-width);
+    height: var(--cards-emerge-butterfly-height);
     object-fit: contain;
     pointer-events: none;
+    z-index: -1;
   }
 
   .cards-emerge .cards-emerge-letter {
