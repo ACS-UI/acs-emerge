@@ -250,7 +250,11 @@
   line-height: var(--line-height-600);
 }
 
+/* Figma Title/M 16/20, Bold */
 .profile.carousel .profile-card-role {
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--title-size-m);
+  font-weight: var(--font-weight-bold);
   opacity: 0.85;
 }
 
