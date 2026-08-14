@@ -16,7 +16,7 @@
   --profile-intro-margin-bottom: 40px;
   --profile-intro-max-width: 40rem;
   --profile-view-all-margin-top: 20px;
-  --profile-carousel-intro-max-width: 34rem;
+  --profile-carousel-intro-max-width: 30.5rem; /* Figma: carousel-intro frame is 488px wide */
   --profile-overlap-overlay-padding: 22px;
   --profile-overlap-overlay-padding-top: 50px;
   --profile-overlap-overlay-padding-right: 10px;
@@ -193,10 +193,12 @@
   max-width: var(--profile-carousel-intro-max-width);
 }
 
+/* Figma Heading/XXL 45/52, Medium */
 .profile.carousel .carousel-intro h2,
 .profile.carousel .carousel-intro h3 {
   margin: 8px 0 0;
   max-height: 488px;
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--heading-size-xxl);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-1100);
