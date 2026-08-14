@@ -92,7 +92,7 @@ function buildBackButton(main) {
   back.type = 'button';
   back.className = 'back-button';
   back.setAttribute('aria-label', 'Go back');
-  back.textContent = '‹ Back';
+  back.textContent = 'Back';
   back.addEventListener('click', () => window.history.back());
   main.prepend(back);
 }
