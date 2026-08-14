@@ -60,7 +60,11 @@
   --cw-card-text-size: var(--body-size-l);
   --cw-card-text-line: 1.5;
   --cw-card-content-gap: 8px;
-  --cw-card-pad: 30px;
+
+  /* Figma's description text is 284px wide inside a 376px card (minus the
+     4px frame inset each side = 368px), so inline padding is 42px, not 30 */
+  --cw-card-pad-block: 30px;
+  --cw-card-pad-inline: 42px;
 
   /* blurred backdrop panel behind the card text (Figma "Rectangle 2").
      Figma's background-blur is Progressive (0 at the panel's top, ramping
@@ -144,7 +148,7 @@ main .cards-working-container {
   display: flex;
   flex-direction: column;
   gap: var(--cw-card-content-gap);
-  padding: var(--cw-card-pad);
+  padding: var(--cw-card-pad-block) var(--cw-card-pad-inline);
   font-family: var(--cw-font-family);
   color: var(--cw-card-text-color);
 }
