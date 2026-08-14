@@ -56,10 +56,11 @@
   --cards-emerge-butterfly-width: 172px;
   --cards-emerge-butterfly-height: 200px;
 
-  /* Figma measures 47px from the bottom of cards-emerge-intro; the list
-     already starts 40px below that (--cards-emerge-intro-margin-bottom),
-     so the remaining offset into the list itself is 47 - 40 = 7px */
-  --cards-emerge-butterfly-offset-top: 7px;
+  /* Butterfly top sits flush with the bottom of cards-emerge-intro (0px gap
+     from the heading block). Since the list itself starts 40px below that
+     (--cards-emerge-intro-margin-bottom), "flush with intro" is -40px
+     relative to the list's own top edge. */
+  --cards-emerge-butterfly-offset-top: -40px;
   --cards-emerge-butterfly-offset-right: -42px;
 
   /* ===== Spacing (desktop overrides) ===== */
