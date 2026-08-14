@@ -204,6 +204,13 @@
   line-height: var(--line-height-1100);
 }
 
+/* authored content wraps the heading text in <strong>; the browser default
+   (font-weight: bolder) would push it past Medium to Bold, so pin it back */
+.profile.carousel .carousel-intro h2 strong,
+.profile.carousel .carousel-intro h3 strong {
+  font-weight: inherit;
+}
+
 /* eyebrow: first short paragraph above the heading — Figma Title/XL 20/24, Bold */
 .profile.carousel .carousel-intro p {
   margin: 0;
