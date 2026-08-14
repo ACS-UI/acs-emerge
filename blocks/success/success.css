@@ -147,13 +147,15 @@
   max-width: var(--success-intro-max-width);
 }
 
-/* Heading/XXXXL per Figma — scaled down on mobile, full size on desktop */
+/* Heading/XXL 45/52 Medium per Figma — scaled down on mobile, XXXXL on desktop */
 .success .success-intro h2,
 .success .success-intro h3 {
   margin: 8px 0 0;
-  font-size: var(--heading-size-xl);
-  line-height: var(--line-height-900);
-  color: var(--color-gray-1000);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--heading-size-xxl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-1100);
+  color: var(--color-text-static-black);
 }
 
 .success .success-intro p {
