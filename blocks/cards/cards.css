@@ -1,19 +1,24 @@
+.cards {
+  --cards-gap: 24px;
+  --cards-card-body-margin: 16px;
+}
+
 .cards > ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+  gap: var(--cards-gap);
 }
 
 .cards > ul > li {
-  border: 1px solid #dadada;
+  border: 1px solid var(--color-gray-300);
   background-color: var(--background-color);
 }
 
 .cards .cards-card-body {
-  margin: 16px;
+  margin: var(--cards-card-body-margin);
 }
 
 .cards .cards-card-image {

@@ -1,1 +1,52 @@
 /* add global styles that can be loaded post LCP here */
+
+/* Back button auto-injected on leader and success-story detail pages */
+main .back-button {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+
+  /* left edge lines up with the page's 1280px content column instead of a
+     fixed viewport offset (see main > .section > div in styles.css) */
+  margin-top: 16px;
+  margin-inline: max(24px, calc((100% - 1280px) / 2 + 24px));
+  font-family: inherit;
+  font-size: var(--body-font-size-s, 16px);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--text-color, #131313);
+  background: var(--background-color, #fff);
+  border: none;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 8%), 0 1px 3px rgb(0 0 0 / 6%);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+main .back-button::before {
+  content: '';
+  flex: none;
+  width: 20px;
+  height: 20px;
+  background: currentcolor;
+  mask: url('../icons/arrow-left.svg') center / contain no-repeat;
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask: url('../icons/arrow-left.svg') center / contain no-repeat;
+}
+
+main .back-button:hover,
+main .back-button:focus-visible {
+  color: var(--background-color, #fff);
+  background: var(--text-color, #131313);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 16%);
+}
+
+@media (width >= 900px) {
+  main .back-button {
+    margin-top: 24px;
+    margin-inline: max(32px, calc((100% - 1280px) / 2 + 32px));
+  }
+}

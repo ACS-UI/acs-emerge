@@ -1,0 +1,115 @@
+/*
+ * quote block (Figma "NotefromManoj" spec): pre-framed portrait rendered
+ * as-is (no CSS frame/crop) + quote text in 'Adobe Clean Spectrum VF'
+ * (not bundled) with a project-font fallback.
+ */
+.quote {
+  /* fonts */
+  --quote-font: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+
+  /* colors — Figma quote text & marks are pure black */
+  --quote-text-color: var(--color-gray-1000);
+  --quote-mark-color: var(--color-gray-1000);
+
+  /* typography (mobile-first; desktop sizes overridden below) */
+  --quote-text-size: 24px;
+  --quote-text-line: var(--line-height-600);
+  --quote-text-weight: var(--font-weight-regular);
+  --quote-mark-size: 52px;
+  --quote-mark-line: 1.15;
+  --quote-mark-weight: var(--font-weight-regular);
+
+  /* layout */
+  --quote-gap: 40px;
+  --quote-content-max: 488px;
+  --quote-image-col: 49%;
+}
+
+.quote .quote-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--quote-gap);
+  align-items: center;
+}
+
+/* portrait: pre-framed transparent PNG, rendered at natural proportions */
+.quote .quote-image {
+  line-height: 0;
+}
+
+.quote .quote-image picture,
+.quote .quote-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ===================== quote text ===================== */
+.quote .quote-body {
+  position: relative;
+  max-width: var(--quote-content-max);
+  font-family: var(--quote-font);
+  color: var(--quote-text-color);
+}
+
+.quote .quote-body blockquote {
+  position: relative;
+  margin: 0;
+  padding: calc(var(--quote-mark-size) * 0.75) 0;
+  font-size: var(--quote-text-size);
+  font-weight: var(--quote-text-weight);
+  line-height: var(--quote-text-line);
+}
+
+/* decorative opening/closing quotation marks (Figma: 73px, weight 400) */
+.quote .quote-body blockquote::before,
+.quote .quote-body blockquote::after {
+  position: absolute;
+  color: var(--quote-mark-color);
+  font-family: var(--quote-font);
+  font-size: var(--quote-mark-size);
+  font-weight: var(--quote-mark-weight);
+  line-height: var(--quote-mark-line);
+}
+
+.quote .quote-body blockquote::before {
+  content: '\201C';
+  top: 0;
+  left: 0;
+}
+
+.quote .quote-body blockquote::after {
+  content: '\201D';
+  right: 0;
+  bottom: 0;
+}
+
+.quote .quote-body blockquote p {
+  margin: 0;
+}
+
+/* opening phrase stays bold via authored <strong>; base text is regular */
+.quote .quote-body blockquote strong {
+  font-weight: var(--font-weight-bold);
+}
+
+.quote .quote-body .quote-attribution {
+  margin: 16px 0 0;
+  font-size: var(--body-font-size-xs);
+  font-weight: 600;
+}
+
+/* desktop: portrait left (~592px), quote right (488px), 64px gap */
+@media (width >= 900px) {
+  .quote {
+    --quote-text-size: var(--font-size-900);
+    --quote-text-line: var(--line-height-900);
+    --quote-mark-size: var(--font-size-1500);
+    --quote-gap: 64px;
+  }
+
+  .quote .quote-row {
+    grid-template-columns: minmax(0, var(--quote-image-col)) minmax(0, 1fr);
+    align-items: center;
+  }
+}

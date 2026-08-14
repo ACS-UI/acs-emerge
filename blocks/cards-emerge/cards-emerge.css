@@ -1,0 +1,179 @@
+/* cards-emerge block — "What EMERGE stands for" acronym list. Mobile-first. */
+
+/* ===== Block container ===== */
+.cards-emerge {
+  /* ===== Colors (semantic global tokens) ===== */
+  --cards-emerge-eyebrow-color: var(--color-detail);
+  --cards-emerge-heading-color: var(--color-heading);
+  --cards-emerge-letter-color: var(--color-magenta-visual);
+  --cards-emerge-title-color: var(--color-title);
+  --cards-emerge-subtitle-color: var(--color-detail);
+
+  /* ===== Typography (mobile base) ===== */
+  --cards-emerge-eyebrow-size: var(--detail-size-xs);
+  --cards-emerge-eyebrow-weight: var(--detail-font-weight);
+  --cards-emerge-eyebrow-spacing: 1px;
+  --cards-emerge-heading-size: var(--heading-size-m);
+  --cards-emerge-heading-weight: var(--heading-font-weight);
+  --cards-emerge-heading-line-height: var(--line-height-500);
+  --cards-emerge-letter-size: var(--font-size-1000);
+  --cards-emerge-letter-weight: var(--font-weight-bold);
+  --cards-emerge-letter-line-height: 1;
+  --cards-emerge-title-size: var(--title-size-l);
+  --cards-emerge-title-weight: var(--title-font-weight-strong);
+  --cards-emerge-title-line-height: var(--line-height-300);
+  --cards-emerge-subtitle-size: var(--detail-size-s);
+  --cards-emerge-subtitle-weight: var(--body-font-weight);
+  --cards-emerge-subtitle-line-height: var(--line-height-100);
+
+  /* ===== Typography (desktop overrides, via media query) ===== */
+  --cards-emerge-heading-size-desktop: var(--heading-size-xxl);
+  --cards-emerge-heading-line-height-desktop: var(--line-height-1100);
+  --cards-emerge-letter-size-desktop: var(--font-size-1100);
+  --cards-emerge-title-size-desktop: var(--title-size-l);
+
+  /* ===== Spacing (mobile base) ===== */
+  --cards-emerge-section-padding-block: 32px;
+  --cards-emerge-section-padding-inline: 20px;
+  --cards-emerge-intro-gap: 12px;
+  --cards-emerge-intro-margin-bottom: 32px;
+  --cards-emerge-intro-max-width: 800px;
+  --cards-emerge-list-gap: 20px;
+  --cards-emerge-list-max-width: 420px;
+  --cards-emerge-row-gap: 16px;
+  --cards-emerge-title-subtitle-gap: 4px;
+  --cards-emerge-letter-col-width: 44px;
+  --cards-emerge-body-padding-block: 12px;
+  --cards-emerge-butterfly-width: 172px;
+  --cards-emerge-butterfly-height: 200px;
+  --cards-emerge-butterfly-offset-right: -80px;
+
+  /* ===== Spacing (desktop overrides) ===== */
+  --cards-emerge-list-gap-desktop: 16px;
+  --cards-emerge-letter-col-width-desktop: 56px;
+
+  padding: var(--cards-emerge-section-padding-block) var(--cards-emerge-section-padding-inline);
+}
+
+/* ===== Intro (eyebrow + heading), centered ===== */
+.cards-emerge .cards-emerge-intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cards-emerge-intro-gap);
+  max-width: var(--cards-emerge-intro-max-width);
+  margin: 0 auto var(--cards-emerge-intro-margin-bottom);
+  text-align: center;
+}
+
+.cards-emerge .cards-emerge-eyebrow {
+  margin: 0;
+  color: var(--cards-emerge-eyebrow-color);
+  font-size: var(--cards-emerge-eyebrow-size);
+  font-weight: var(--cards-emerge-eyebrow-weight);
+  letter-spacing: var(--cards-emerge-eyebrow-spacing);
+  text-transform: uppercase;
+}
+
+.cards-emerge .cards-emerge-intro h1,
+.cards-emerge .cards-emerge-intro h2,
+.cards-emerge .cards-emerge-intro h3 {
+  margin: 0;
+  color: var(--cards-emerge-heading-color);
+  font-size: var(--cards-emerge-heading-size);
+  font-weight: var(--cards-emerge-heading-weight);
+  line-height: var(--cards-emerge-heading-line-height);
+}
+
+/* ===== Acronym list ===== */
+.cards-emerge .cards-emerge-list {
+  position: relative;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: var(--cards-emerge-list-max-width);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cards-emerge-list-gap);
+}
+
+.cards-emerge .cards-emerge-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--cards-emerge-letter-col-width) 1fr;
+  align-items: center;
+  column-gap: var(--cards-emerge-row-gap);
+}
+
+/* Butterfly graphic: hidden on mobile, shown from tablet up (see media query) */
+.cards-emerge .cards-emerge-butterfly {
+  display: none;
+}
+
+.cards-emerge .cards-emerge-letter {
+  color: var(--cards-emerge-letter-color);
+  font-size: var(--cards-emerge-letter-size);
+  font-weight: var(--cards-emerge-letter-weight);
+  line-height: var(--cards-emerge-letter-line-height);
+  text-align: center;
+}
+
+.cards-emerge .cards-emerge-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cards-emerge-title-subtitle-gap);
+  padding: var(--cards-emerge-body-padding-block) 0;
+}
+
+.cards-emerge .cards-emerge-body :is(h1, h2, h3, h4, h5, h6, p:first-child) {
+  margin: 0;
+  color: var(--cards-emerge-title-color);
+  font-size: var(--cards-emerge-title-size);
+  font-weight: var(--cards-emerge-title-weight);
+  line-height: var(--cards-emerge-title-line-height);
+}
+
+.cards-emerge .cards-emerge-body p {
+  margin: 0;
+  color: var(--cards-emerge-subtitle-color);
+  font-size: var(--cards-emerge-subtitle-size);
+  font-weight: var(--cards-emerge-subtitle-weight);
+  line-height: var(--cards-emerge-subtitle-line-height);
+}
+
+/* ===== Tablet / desktop (min-width) ===== */
+@media (width >= 900px) {
+  .cards-emerge .cards-emerge-intro h1,
+  .cards-emerge .cards-emerge-intro h2,
+  .cards-emerge .cards-emerge-intro h3 {
+    margin-inline: auto;
+    font-size: var(--cards-emerge-heading-size-desktop);
+    line-height: var(--cards-emerge-heading-line-height-desktop);
+  }
+
+  .cards-emerge .cards-emerge-list {
+    gap: var(--cards-emerge-list-gap-desktop);
+  }
+
+  .cards-emerge .cards-emerge-item {
+    grid-template-columns: var(--cards-emerge-letter-col-width-desktop) 1fr;
+  }
+
+  /* Vertically centered beside the second row's <li> (position:relative anchor) */
+  .cards-emerge .cards-emerge-butterfly {
+    display: block;
+    position: absolute;
+    top: -50%;
+    right: var(--cards-emerge-butterfly-offset-right);
+    transform: translateY(-50%);
+    object-fit: contain;
+    pointer-events: none;
+  }
+
+  .cards-emerge .cards-emerge-letter {
+    font-size: var(--cards-emerge-letter-size-desktop);
+  }
+
+  .cards-emerge .cards-emerge-body :is(h1, h2, h3, h4, h5, h6, p:first-child) {
+    font-size: var(--cards-emerge-title-size-desktop);
+  }
+}

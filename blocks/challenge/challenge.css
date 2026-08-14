@@ -1,0 +1,94 @@
+.challenge {
+  /* fonts — Figma design uses Adobe Clean Spectrum VF (not bundled here) */
+  --challenge-font: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+
+  /* colors */
+  --challenge-number-color: var(--color-gray-300);
+  --challenge-label-color: var(--color-gray-1000);
+  --challenge-text-color: var(--color-gray-1000);
+  --challenge-rule-color: var(--color-gray-200);
+
+  /* typography */
+  --challenge-number-size: clamp(96px, 12vw, 160px);
+  --challenge-number-weight: var(--font-weight-medium);
+  --challenge-label-size: var(--title-size-xl);
+  --challenge-label-line: var(--line-height-400);
+  --challenge-label-weight: var(--font-weight-bold);
+  --challenge-text-size: var(--body-size-xxxl);
+  --challenge-text-line: 1.5;
+  --challenge-text-weight: var(--font-weight-regular);
+
+  /* layout */
+  --challenge-number-col: 488px;
+  --challenge-col-gap: 32px;
+  --challenge-content-gap: 16px;
+  --challenge-content-max: 696px;
+  --challenge-row-pad: 60px;
+
+  font-family: var(--challenge-font);
+}
+
+.challenge ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* one row per challenge item, each with a bottom rule */
+.challenge .challenge-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--challenge-col-gap);
+  align-items: center;
+  padding: var(--challenge-row-pad) 0;
+  border-bottom: 1px solid var(--challenge-rule-color);
+}
+
+/* large faint number (Figma "Nos": 160px, weight 500, #DADADA) */
+.challenge .challenge-number {
+  margin: 0;
+  color: var(--challenge-number-color);
+  font-size: var(--challenge-number-size);
+  font-weight: var(--challenge-number-weight);
+  line-height: 1;
+}
+
+/* label + description */
+.challenge .challenge-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--challenge-content-gap);
+  max-width: var(--challenge-content-max);
+  color: var(--challenge-text-color);
+}
+
+/* label — Figma Title/XL: 20px/24px, 700, black */
+.challenge .challenge-body .challenge-label {
+  margin: 0;
+  color: var(--challenge-label-color);
+  font-size: var(--challenge-label-size);
+  font-weight: var(--challenge-label-weight);
+  line-height: var(--challenge-label-line);
+}
+
+/* description — Figma Body/XXXL: 25px, 400, 150% */
+.challenge .challenge-body p:not(.challenge-label) {
+  margin: 0;
+  font-size: var(--challenge-text-size);
+  font-weight: var(--challenge-text-weight);
+  line-height: var(--challenge-text-line);
+}
+
+/* --------------------------------------------------------------------------
+   Desktop — number column beside the text (Figma: row, 32px gap)
+   -------------------------------------------------------------------------- */
+@media (width >= 900px) {
+  .challenge .challenge-item {
+    grid-template-columns: var(--challenge-number-col) minmax(0, 1fr);
+    padding: var(--challenge-row-pad) 0;
+  }
+
+  .challenge .challenge-number {
+    text-align: center;
+  }
+}

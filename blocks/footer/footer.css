@@ -1,20 +1,32 @@
+/* Figma font 'Adobe Clean Spectrum VF' isn't bundled — requested first with a project-font fallback */
 footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+  --footer-bg: #7155fa;
+  --footer-text-color: var(--color-white);
+  --footer-font: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  --footer-font-size: var(--body-size-s);
+  --footer-line-height: 1.5;
+  --footer-pad-y: 16px;
+  --footer-gap: 16px;
+
+  background-color: var(--footer-bg);
+  color: var(--footer-text-color);
+  font-family: var(--footer-font);
+  font-size: var(--footer-font-size);
+  line-height: var(--footer-line-height);
 }
 
 footer .footer > div {
-  margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--footer-gap);
+  max-width: unset;
+  margin: 0;
+  padding: var(--footer-pad-y) 0;
+  text-align: center;
 }
 
 footer .footer p {
   margin: 0;
-}
-
-@media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
-  }
 }

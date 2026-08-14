@@ -1,0 +1,294 @@
+/* ==========================================================================
+   cards-working — block-scoped design tokens (aligned to Figma layer spec)
+   ========================================================================== */
+.cards-working-container,
+.cards-working {
+  /* Figma uses Adobe Clean Spectrum VF, not bundled here — request it first, fall back to project fonts */
+  --cw-font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+
+  /* section */
+  --cw-section-bg: var(--color-gray-75);
+  --cw-section-pad-y: 60px;
+  --cw-section-gap: 40px;
+  --cw-header-gap: 8px;
+  --cw-cards-gap: 24px;
+  --cw-cards-max-width: 1216px;
+
+  /* eyebrow ("WORKING THE EMERGE WAY") */
+  --cw-eyebrow-color: var(--color-gray-700);
+  --cw-eyebrow-size: var(--font-size-400);
+  --cw-eyebrow-line: var(--line-height-400);
+  --cw-eyebrow-weight: var(--font-weight-bold);
+  --cw-eyebrow-spacing: 0.04em;
+
+  /* headline */
+  --cw-heading-font: var(--cw-font-family);
+  --cw-heading-color: var(--color-gray-1000);
+  --cw-heading-size: var(--heading-size-xxl);
+  --cw-heading-line: var(--line-height-1100);
+  --cw-heading-weight: var(--font-weight-medium);
+  --cw-heading-max: 800px;
+  --cw-heading-size-mobile: var(--font-size-800);
+  --cw-heading-line-mobile: 38px;
+
+  /* card shell */
+  --cw-card-width: 376px;
+  --cw-card-height: 549px;
+  --cw-card-ratio: 376 / 549;
+  --cw-card-bg: var(--color-white);
+  --cw-card-radius: 24px;
+  --cw-card-inner-radius: 20px;
+  --cw-card-frame: 4px;
+  --cw-card-tilt: 12deg;
+  --cw-card-overlap: 44px;
+
+  /* a 384x557 card rotated 12deg overhangs its layout box by ~34px top/bottom;
+     reserve that so the visible gap above/below the cards matches the design */
+  --cw-card-rotation-overhang: 34px;
+  --cw-card-shadow:
+    0 0 0 1px rgb(0 0 0 / 4%),
+    0 1px 2px rgb(0 0 0 / 6%),
+    0 4px 6px rgb(0 0 0 / 4%),
+    0 40px 40px -24px rgb(0 0 0 / 6%);
+  --cw-card-overlay: linear-gradient(
+    to top,
+    rgb(0 0 0 / 78%) 0%,
+    rgb(0 0 0 / 55%) 28%,
+    rgb(0 0 0 / 8%) 62%,
+    rgb(0 0 0 / 0%) 100%
+  );
+
+  /* card content */
+  --cw-card-title-color: var(--color-white);
+  --cw-card-title-size: var(--heading-size-l);
+  --cw-card-title-line: var(--line-height-700);
+  --cw-card-title-weight: var(--font-weight-medium);
+  --cw-card-text-color: var(--color-white);
+  --cw-card-text-size: var(--body-size-l);
+  --cw-card-text-line: 1.5;
+  --cw-card-content-gap: 8px;
+  --cw-card-pad: 30px;
+
+  /* blurred backdrop panel behind the card text (Figma "Rectangle 2") */
+  --cw-card-backdrop-bg: rgb(0 0 0 / 10%);
+  --cw-card-backdrop-blur: 10px;
+  --cw-card-backdrop-self-blur: 15px;
+}
+
+/* ==========================================================================
+   Section shell — light-grey background behind header + cards
+   ========================================================================== */
+main .cards-working-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--cw-section-gap);
+  margin: 0;
+  padding: var(--cw-section-pad-y) 0;
+  background: var(--cw-section-bg);
+}
+
+/* the two EDS-generated wrappers span the section width */
+.cards-working-container > .default-content-wrapper,
+.cards-working-container > .cards-working-wrapper {
+  width: 100%;
+  margin: 0;
+}
+
+/* ==========================================================================
+   Cards
+   ========================================================================== */
+.cards-working ul {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--cw-cards-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  justify-items: center;
+}
+
+.cards-working .cards-working-card {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--cw-card-width);
+  aspect-ratio: var(--cw-card-ratio);
+  padding: var(--cw-card-frame);
+  background: var(--cw-card-bg);
+  border-radius: var(--cw-card-radius);
+  box-shadow: var(--cw-card-shadow);
+}
+
+/* image sits inside the white frame, clipped to the inner radius */
+.cards-working .cards-working-card-image {
+  position: absolute;
+  inset: var(--cw-card-frame);
+  overflow: hidden;
+  border-radius: var(--cw-card-inner-radius);
+  line-height: 0;
+}
+
+.cards-working .cards-working-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* dark gradient at the base keeps the overlaid white text legible */
+.cards-working .cards-working-card-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--cw-card-overlay);
+}
+
+.cards-working .cards-working-card-body {
+  position: absolute;
+  inset: auto var(--cw-card-frame) var(--cw-card-frame);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--cw-card-content-gap);
+  padding: var(--cw-card-pad);
+  font-family: var(--cw-font-family);
+  color: var(--cw-card-text-color);
+}
+
+/* blurred translucent panel sitting behind the title + description */
+.cards-working .cards-working-card-body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--cw-card-backdrop-bg);
+  border-radius: 0 0 var(--cw-card-inner-radius) var(--cw-card-inner-radius);
+  filter: blur(var(--cw-card-backdrop-self-blur));
+  backdrop-filter: blur(var(--cw-card-backdrop-blur));
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-backdrop-filter: blur(var(--cw-card-backdrop-blur));
+}
+
+.cards-working .cards-working-card-body h3 {
+  margin: 0;
+  color: var(--cw-card-title-color);
+  font-size: var(--cw-card-title-size);
+  font-weight: var(--cw-card-title-weight);
+  line-height: var(--cw-card-title-line);
+}
+
+.cards-working .cards-working-card-body p {
+  margin: 0;
+  font-size: var(--cw-card-text-size);
+  line-height: var(--cw-card-text-line);
+}
+
+/* ==========================================================================
+   Section default content — eyebrow + headline
+   ========================================================================== */
+.cards-working-container .default-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--cw-header-gap);
+  text-align: center;
+}
+
+.cards-working-container .default-content-wrapper > p:first-child {
+  margin: 0;
+  color: var(--cw-eyebrow-color);
+  font-size: var(--cw-eyebrow-size);
+  font-weight: var(--cw-eyebrow-weight);
+  line-height: var(--cw-eyebrow-line);
+  letter-spacing: var(--cw-eyebrow-spacing);
+  text-transform: uppercase;
+}
+
+.cards-working-container .default-content-wrapper h2 {
+  max-width: var(--cw-heading-max);
+  margin: 0 auto;
+  color: var(--cw-heading-color);
+  font-family: var(--cw-heading-font);
+  font-size: var(--cw-heading-size-mobile);
+  font-weight: var(--cw-heading-weight);
+  line-height: var(--cw-heading-line-mobile);
+}
+
+/* ==========================================================================
+   Desktop — three overlapping cards, outer two tilted ±12°
+   ========================================================================== */
+@media (width >= 1024px) {
+  .cards-working-container .default-content-wrapper h2 {
+    font-size: var(--cw-heading-size);
+    line-height: var(--cw-heading-line);
+  }
+
+  .cards-working ul {
+    grid-template-columns: repeat(3, auto);
+    align-items: start;
+    justify-content: center;
+    gap: 0;
+    max-width: var(--cw-cards-max-width);
+
+    /* top/bottom margin absorbs the rotated cards' overhang so the visible
+       gap to the headline (and section padding below) stays correct */
+    margin: var(--cw-card-rotation-overhang) auto;
+  }
+
+  .cards-working .cards-working-card {
+    width: var(--cw-card-width);
+    height: var(--cw-card-height);
+    aspect-ratio: auto;
+  }
+
+  /* z-index climbs left→center→right (per design); outer cards pivot from the
+     bottom corner nearest center so they fan out from where they meet it */
+  .cards-working .cards-working-card:first-child,
+  .cards-working .cards-working-card:last-child {
+    /* one-time entrance from a lesser tilt, triggered by cards-working.js
+       adding .cards-working-tilted via a single-fire IntersectionObserver */
+    transition: transform 1s ease-out;
+  }
+
+  .cards-working .cards-working-card:first-child {
+    z-index: 1;
+    margin-right: calc(-1 * var(--cw-card-overlap));
+    transform: rotate(calc(-0.4 * var(--cw-card-tilt)));
+    transform-origin: bottom right;
+  }
+
+  .cards-working .cards-working-card:nth-child(2) {
+    z-index: 2;
+  }
+
+  .cards-working .cards-working-card:last-child {
+    z-index: 3;
+    margin-left: calc(-1 * var(--cw-card-overlap));
+    transform: rotate(calc(0.4 * var(--cw-card-tilt)));
+    transform-origin: bottom left;
+  }
+
+  .cards-working.cards-working-tilted .cards-working-card:first-child {
+    transform: rotate(calc(-1 * var(--cw-card-tilt)));
+  }
+
+  .cards-working.cards-working-tilted .cards-working-card:last-child {
+    transform: rotate(var(--cw-card-tilt));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cards-working .cards-working-card:first-child,
+    .cards-working .cards-working-card:last-child {
+      transition: none;
+    }
+
+    .cards-working .cards-working-card:first-child {
+      transform: rotate(calc(-1 * var(--cw-card-tilt)));
+    }
+
+    .cards-working .cards-working-card:last-child {
+      transform: rotate(var(--cw-card-tilt));
+    }
+  }
+}

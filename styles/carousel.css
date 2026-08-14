@@ -1,0 +1,191 @@
+/*
+ * carousel.css — shared styles for the reusable carousel utility
+ * (scripts/carousel.js). Blocks that use the carousel import this file.
+ *
+ * Consumers tune layout with these custom properties (set on `.carousel`
+ * or a parent block):
+ *   --carousel-visible : number of slides visible at once (default 1)
+ *   --carousel-gap     : gap between slides (default 24px)
+ */
+
+.carousel {
+  --carousel-visible: 1;
+  --carousel-gap: 24px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ----- top row: intro (title/desc) on the left, nav on the right ----- */
+.carousel .carousel-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* Centered intro: the intro spans the full width and is centered, while the
+   nav floats to the far right, vertically centered against the heading
+   (the nav positioning lives with the other .carousel-nav rules below). */
+.carousel .carousel-top[data-align="center"] {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel .carousel-intro {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.carousel .carousel-intro[data-align="center"] {
+  text-align: center;
+}
+
+.carousel .carousel-intro[data-align="right"] {
+  text-align: right;
+}
+
+.carousel .carousel-intro :first-child {
+  margin-top: 0;
+}
+
+.carousel .carousel-intro :last-child {
+  margin-bottom: 0;
+}
+
+/* ----- navigation arrows (top right) ----- */
+.carousel .carousel-nav {
+  display: flex;
+  flex: 0 0 auto;
+  gap: var(--carousel-nav-gap, 4px);
+}
+
+.carousel .carousel-nav[hidden] {
+  display: none;
+}
+
+/* bottom navigation: rendered below the track, left-aligned */
+.carousel[data-nav-position="bottom"] > .carousel-nav {
+  justify-content: flex-start;
+}
+
+/* centered-intro layout floats the nav to the far right of the top bar */
+.carousel .carousel-top[data-align="center"] .carousel-nav {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.carousel .carousel-nav-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+
+  /* Plain arrows by default (no ring/fill). Consumers can theme the button
+     chrome via these custom properties without touching this rule. */
+  border: 1px solid var(--carousel-nav-border, transparent);
+  border-radius: 50%;
+  background: var(--carousel-nav-bg, transparent);
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.carousel .carousel-nav-button:focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: 2px;
+}
+
+.carousel .carousel-nav-button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* subtle feedback on hover: a faint translucent halo, not a hard fill */
+.carousel .carousel-nav-button:hover:not(:disabled) {
+  background: var(--carousel-nav-bg-hover, rgb(255 255 255 / 15%));
+}
+
+.carousel .carousel-nav-icon {
+  width: 24px;
+  height: 24px;
+  background: currentcolor;
+  mask: var(--carousel-arrow-mask) center / contain no-repeat;
+  mask-composite: exclude;
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask: var(--carousel-arrow-mask) center / contain no-repeat;
+}
+
+/* Default arrows (used on grey / no-colour sections): solid arrows. */
+.carousel .carousel-nav-prev .carousel-nav-icon {
+  --carousel-arrow-mask: url('../icons/arrow-left-solid.svg');
+}
+
+.carousel .carousel-nav-next .carousel-nav-icon {
+  --carousel-arrow-mask: url('../icons/arrow-right-solid.svg');
+}
+
+/* On coloured (gradient) sections, use the lighter line-style arrows. */
+main .section.bg-gradient-a .carousel .carousel-nav-prev .carousel-nav-icon,
+main .section.bg-gradient-b .carousel .carousel-nav-prev .carousel-nav-icon {
+  --carousel-arrow-mask: url('../icons/arrow-left.svg');
+}
+
+main .section.bg-gradient-a .carousel .carousel-nav-next .carousel-nav-icon,
+main .section.bg-gradient-b .carousel .carousel-nav-next .carousel-nav-icon {
+  --carousel-arrow-mask: url('../icons/arrow-right.svg');
+}
+
+/* ----- viewport + scrolling track ----- */
+.carousel .carousel-viewport {
+  overflow: hidden;
+}
+
+.carousel .carousel-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc(
+    (100% - (var(--carousel-visible) - 1) * var(--carousel-gap)) / var(--carousel-visible)
+  );
+  gap: var(--carousel-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+
+.carousel .carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel .carousel-slide {
+  scroll-snap-align: start;
+  min-width: 0;
+}
+
+.carousel .carousel-slide > * {
+  height: 100%;
+}
+
+/* ----- footer: view all ----- */
+.carousel .carousel-footer {
+  display: flex;
+  justify-content: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel .carousel-track {
+    scroll-behavior: auto;
+  }
+}
