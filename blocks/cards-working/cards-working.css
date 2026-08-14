@@ -198,6 +198,7 @@ main .cards-working-container {
 .cards-working-container .default-content-wrapper > p:first-child {
   margin: 0;
   color: var(--cw-eyebrow-color);
+  font-family: var(--cw-font-family);
   font-size: var(--cw-eyebrow-size);
   font-weight: var(--cw-eyebrow-weight);
   line-height: var(--cw-eyebrow-line);
