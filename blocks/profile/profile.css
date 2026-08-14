@@ -346,13 +346,13 @@
   inset: 0;
   z-index: -1;
   backdrop-filter: blur(20px) saturate(130%);
-  mask: linear-gradient(to bottom, transparent 0%, #000 10%);
+  mask: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, #000 70%);
 
   /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-backdrop-filter: blur(12px) saturate(130%);
 
   /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-mask: linear-gradient(to bottom, transparent 0%, #000 10%);
+  -webkit-mask: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, #000 70%);
 }
 
 /* the bio / quote text */
