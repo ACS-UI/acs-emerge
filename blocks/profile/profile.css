@@ -212,7 +212,7 @@
   font-weight: inherit;
 }
 
-/* eyebrow: first short paragraph above the heading — Figma Title/XL 20/24, Bold */
+/* eyebrow: first short paragraph above the heading — Figma Title/XL 20/24, Bold, gray-700 */
 .profile.carousel .carousel-intro p {
   margin: 0;
   font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
@@ -221,6 +221,7 @@
   line-height: var(--line-height-400);
   letter-spacing: 0;
   text-transform: uppercase;
+  color: var(--color-gray-700);
 }
 
 /* carousel cards show the photo at its natural proportions (no crop/zoom),
