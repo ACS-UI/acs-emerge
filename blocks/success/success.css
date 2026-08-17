@@ -10,7 +10,7 @@
   --success-gap: 32px;
   --success-card-max-width: 384px;
   --success-title-color: var(--color-text-static-black);
-  --success-desc-color: var(--color-gray-500);
+  --success-desc-color: #808080; /* Figma colorTheme/silver-800, not in our gray scale */
   --success-intro-margin-bottom: 40px;
   --success-intro-max-width: 50rem;
   --success-view-all-margin-top: 16px;
@@ -109,10 +109,12 @@
   color: var(--success-title-color);
 }
 
-/* description — Body/M: 16/24, grey */
+/* description — Body/M: 16/150 (=24px), regular, grey */
 .success .success-card-desc {
   margin: 0;
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--body-size-m);
+  font-weight: var(--font-weight-regular);
   line-height: var(--line-height-400);
   color: var(--success-desc-color);
 }
