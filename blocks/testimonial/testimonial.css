@@ -44,6 +44,7 @@
   position: relative;
   margin: 0;
   padding: var(--testimonial-quote-padding-top) 0 0;
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--body-size-s);
   line-height: var(--line-height-400);
   color: var(--testimonial-quote-color);
