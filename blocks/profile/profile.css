@@ -194,7 +194,7 @@
   max-width: var(--profile-carousel-intro-max-width);
 }
 
-/* Figma Heading/XXL 45/52, Medium */
+/* Figma Heading/XXL 45/52, Medium (mobile/tablet frame is 488px wide) */
 .profile.carousel .carousel-intro h2,
 .profile.carousel .carousel-intro h3 {
   margin: 8px 0 0;
@@ -203,6 +203,21 @@
   font-size: var(--heading-size-xxl);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-1100);
+}
+
+/* Figma desktop frame is 800px wide, Heading/XXXXL 73/84, Regular */
+@media (width >= 1024px) {
+  .profile.carousel .carousel-intro {
+    max-width: 50rem;
+  }
+
+  .profile.carousel .carousel-intro h2,
+  .profile.carousel .carousel-intro h3 {
+    max-height: none;
+    font-size: var(--heading-size-xxxxl);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-1500);
+  }
 }
 
 /* authored content wraps the heading text in <strong>; the browser default
