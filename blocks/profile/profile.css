@@ -124,31 +124,9 @@
   max-width: var(--profile-intro-max-width);
 }
 
-.profile .profile-intro h2,
-.profile .profile-intro h3 {
-  margin: 8px 0 0;
-  font-size: var(--heading-size-xl);
-  line-height: var(--line-height-800);
-  color: var(--color-gray-900);
-}
-
-/* subheading / body paragraphs */
-.profile .profile-intro p {
-  margin: 12px 0 0;
-  font-size: var(--body-size-m);
-  line-height: var(--line-height-400);
-  color: var(--color-gray-700);
-}
-
-/* eyebrow: the first paragraph, above the heading */
-.profile .profile-intro p:first-child {
-  margin: 0;
-  font-size: var(--detail-size-m);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-gray-600);
-}
+/* h2/h3, subheading, and eyebrow typography for .profile-intro are defined
+   together with the carousel variant's equivalent rules further down (same
+   Figma spec for both), not here. */
 
 .profile .profile-view-all {
   margin-top: var(--profile-view-all-margin-top);
@@ -194,7 +172,12 @@
   max-width: var(--profile-carousel-intro-max-width);
 }
 
-/* Figma Heading/XXL 45/52, Medium (mobile/tablet frame is 488px wide) */
+/* Figma Heading/XXL 45/52, Medium (mobile/tablet frame is 488px wide).
+   Applies to both variants: the carousel's .carousel-intro and the base
+   grid's .profile-intro use identical typography — see the (still separate)
+   .profile .profile-intro container rule above for its own max-width. */
+.profile .profile-intro h2,
+.profile .profile-intro h3,
 .profile.carousel .carousel-intro h2,
 .profile.carousel .carousel-intro h3 {
   margin: 8px 0 0;
@@ -203,6 +186,7 @@
   font-size: var(--heading-size-xxl);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-1100);
+  color: var(--color-text-static-black);
 }
 
 /* Figma desktop frame is 800px wide, Heading/XXXXL 73/84, Regular */
@@ -211,6 +195,8 @@
     max-width: 50rem;
   }
 
+  .profile .profile-intro h2,
+  .profile .profile-intro h3,
   .profile.carousel .carousel-intro h2,
   .profile.carousel .carousel-intro h3 {
     max-height: none;
@@ -222,12 +208,16 @@
 
 /* authored content wraps the heading text in <strong>; the browser default
    (font-weight: bolder) would push it past Medium to Bold, so pin it back */
+.profile .profile-intro h2 strong,
+.profile .profile-intro h3 strong,
 .profile.carousel .carousel-intro h2 strong,
 .profile.carousel .carousel-intro h3 strong {
   font-weight: inherit;
 }
 
 /* subheading: paragraph after the heading — Figma Body/XXXL 25/150, Regular, black */
+.profile .profile-intro h2 ~ p,
+.profile .profile-intro h3 ~ p,
 .profile.carousel .carousel-intro h2 ~ p,
 .profile.carousel .carousel-intro h3 ~ p {
   margin: 8px 0 0;
@@ -242,6 +232,8 @@
    Scoped to :first-child since the subheading below the heading is also a
    plain <p> with no distinguishing class (see extractConfig in
    scripts/query-index.js — it moves authored nodes as-is). */
+/* stylelint-disable-next-line no-descending-specificity */
+.profile .profile-intro p:first-child,
 .profile.carousel .carousel-intro p:first-child {
   margin: 0;
   font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
