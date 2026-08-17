@@ -193,6 +193,7 @@ main .cards-working-container {
 .cards-working .cards-working-card-body h3 {
   margin: 0;
   color: var(--cw-card-title-color);
+  font-family: var(--cw-font-family);
   font-size: var(--cw-card-title-size);
   font-weight: var(--cw-card-title-weight);
   line-height: var(--cw-card-title-line);
