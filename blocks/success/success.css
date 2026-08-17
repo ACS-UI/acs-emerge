@@ -9,7 +9,7 @@
   --success-inner-radius: 20px;
   --success-gap: 32px;
   --success-card-max-width: 384px;
-  --success-title-color: var(--color-gray-1000);
+  --success-title-color: var(--color-text-static-black);
   --success-desc-color: var(--color-gray-500);
   --success-intro-margin-bottom: 40px;
   --success-intro-max-width: 50rem;
@@ -102,7 +102,7 @@
 /* title — Heading/L: 28/32, medium */
 .success .success-card-title {
   margin: 4px 0 0;
-  font-family: var(--heading-font-family);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--heading-size-l);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-700);
