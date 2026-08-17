@@ -6,8 +6,8 @@
 .profile {
   --profile-card-radius: 12px;
   --profile-gap: 24px;
-  --profile-name-color: var(--color-gray-900);
-  --profile-role-color: var(--color-gray-600);
+  --profile-name-color: var(--color-black);
+  --profile-role-color: #808080; /* Figma colorTheme/silver-800, not in our gray scale */
   --profile-overlay-padding-block-start: 40px;
   --profile-overlay-padding-inline: 24px;
   --profile-overlay-padding-block-end: 24px;
@@ -100,18 +100,22 @@
   padding: var(--profile-body-padding);
 }
 
+/* Figma Title/XXXL 25/30, Medium, black */
 .profile .profile-card-name {
   margin: 0;
-  font-family: var(--heading-font-family);
-  font-size: var(--heading-size-s);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-400);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--title-size-xxxl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-600);
   color: var(--profile-name-color);
 }
 
+/* Figma Title/M 16/20, Bold */
 .profile .profile-card-role {
   margin: 2px 0 0;
-  font-size: var(--detail-size-m);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--title-size-m);
+  font-weight: var(--font-weight-bold);
   line-height: var(--line-height-200);
   color: var(--profile-role-color);
 }
