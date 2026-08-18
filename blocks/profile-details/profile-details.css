@@ -67,11 +67,14 @@
   color: var(--color-black);
 }
 
+/* Figma Body/XXXL 25/150, Regular, black */
 .profile-details .profile-details-text {
   margin: 12px 0 0;
-  font-size: var(--body-size-m);
-  line-height: var(--line-height-400);
-  color: var(--color-gray-700);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--body-size-xxxl);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  color: var(--color-black);
 }
 
 /* ----- reportees (from query-index) ----- */
