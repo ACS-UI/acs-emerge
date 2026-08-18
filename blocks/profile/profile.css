@@ -381,11 +381,12 @@
   -webkit-mask: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, #000 70%);
 }
 
-/* the bio / quote text */
+/* the bio / quote text — Figma Title/XXXL 25/30, Medium, white */
 /* stylelint-disable-next-line no-descending-specificity */
 .profile.overlap .profile-card-overlay p {
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--body-size-xxxl);
-  font-weight: var(--font-weight-regular);
+  font-weight: var(--font-weight-medium);
   line-height: var(--line-height-600);
   color: var(--color-white);
 }
