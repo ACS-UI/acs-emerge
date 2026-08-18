@@ -69,7 +69,7 @@
 
 /* Figma Body/XXXL 25/150, Regular, black */
 .profile-details .profile-details-text {
-  margin: 12px 0 0;
+  margin: 32px 0 0;
   font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--body-size-xxxl);
   font-weight: var(--font-weight-regular);
