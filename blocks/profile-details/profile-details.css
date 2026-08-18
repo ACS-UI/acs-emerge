@@ -12,6 +12,17 @@
   --profile-details-desktop-layout-gap: 56px;
 }
 
+/* page title above the block — a standalone default-content heading, not
+   part of the .profile-details block itself, hence the ID selector */
+#meet-our-leader {
+  margin: 0;
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--heading-size-xxxxl);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-1500);
+  color: var(--color-text-static-black);
+}
+
 /* ----- layout: image (left) + content (right) ----- */
 .profile-details .profile-details-layout {
   display: grid;
