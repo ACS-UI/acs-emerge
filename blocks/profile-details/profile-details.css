@@ -34,14 +34,16 @@
   height: auto;
 }
 
-/* ----- identity + background ----- */
+/* ----- identity + background -----
+   Figma Heading/XXL 45/52 (desktop; mobile scales down via the media query
+   below), Medium, black */
 .profile-details .profile-details-name {
   margin: 0;
-  font-family: var(--heading-font-family);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--heading-size-xl);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-medium);
   line-height: var(--line-height-900);
-  color: var(--color-gray-900);
+  color: var(--color-black);
 }
 
 .profile-details .profile-details-role {
