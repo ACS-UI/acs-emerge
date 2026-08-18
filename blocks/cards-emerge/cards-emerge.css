@@ -10,8 +10,6 @@
   --cards-emerge-heading-stroke-width: 1px;
   --cards-emerge-heading-stroke-color: var(--color-text-static-black);
   --cards-emerge-letter-color: var(--color-magenta-visual);
-
-  /* Same warm red→magenta→purple family as the site's bg-gradient-a sections */
   --cards-emerge-letter-gradient: linear-gradient(95.72deg, #d73220 0%, #d92361 33%, #7155fa 100%);
   --cards-emerge-title-color: var(--color-title);
   --cards-emerge-subtitle-color: var(--color-detail);

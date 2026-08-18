@@ -119,16 +119,10 @@
 
 /* ===================== base variant: grid ===================== */
 
-/* intro (eyebrow + heading + subheading) above the grid, left-aligned.
-   No max-width here — the heading itself carries its own per Figma (see the
-   h2/h3 rule below); the eyebrow/subheading are short enough not to need one. */
+/* intro (eyebrow + heading + subheading) above the grid, left-aligned */
 .profile .profile-intro {
   margin-bottom: var(--profile-intro-margin-bottom);
 }
-
-/* h2/h3, subheading, and eyebrow typography for .profile-intro are defined
-   together with the carousel variant's equivalent rules further down (same
-   Figma spec for both), not here. */
 
 .profile .profile-view-all {
   margin-top: var(--profile-view-all-margin-top);
@@ -174,10 +168,8 @@
   max-width: var(--profile-carousel-intro-max-width);
 }
 
-/* Applies to both variants: the carousel's .carousel-intro and the base
-   grid's .profile-intro use identical typography. The heading carries its
-   own max-width (800px) rather than the container, since the
-   eyebrow/subheading don't need the same constraint. */
+/* Heading carries its own max-width (800px) rather than the container,
+   since the eyebrow/subheading don't need the same constraint. */
 .profile .profile-intro h2,
 .profile .profile-intro h3,
 .profile.carousel .carousel-intro h2,
