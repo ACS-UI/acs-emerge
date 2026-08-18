@@ -99,7 +99,6 @@
   padding: var(--profile-body-padding);
 }
 
-/* Figma Title/XXXL 25/30, Medium, black */
 .profile .profile-card-name {
   margin: 0;
   font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
@@ -109,7 +108,6 @@
   color: var(--profile-name-color);
 }
 
-/* Figma Title/M 16/20, Bold */
 .profile .profile-card-role {
   margin: 2px 0 0;
   font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
@@ -176,10 +174,9 @@
   max-width: var(--profile-carousel-intro-max-width);
 }
 
-/* Figma Heading/XXL 45/52, Medium (mobile/tablet frame is 488px wide).
-   Applies to both variants: the carousel's .carousel-intro and the base
+/* Applies to both variants: the carousel's .carousel-intro and the base
    grid's .profile-intro use identical typography. The heading carries its
-   own max-width (800px per Figma) rather than the container, since the
+   own max-width (800px) rather than the container, since the
    eyebrow/subheading don't need the same constraint. */
 .profile .profile-intro h2,
 .profile .profile-intro h3,
@@ -195,7 +192,6 @@
   color: var(--color-text-static-black);
 }
 
-/* Figma desktop frame is 800px wide, Heading/XXXXL 73/84, Regular */
 @media (width >= 1024px) {
   .profile.carousel .carousel-intro {
     max-width: 50rem;
@@ -221,7 +217,7 @@
   font-weight: inherit;
 }
 
-/* subheading: paragraph after the heading — Figma Body/XXXL 25/150, Regular, black */
+/* subheading: paragraph after the heading */
 .profile .profile-intro h2 ~ p,
 .profile .profile-intro h3 ~ p,
 .profile.carousel .carousel-intro h2 ~ p,
@@ -234,7 +230,7 @@
   color: var(--color-black);
 }
 
-/* eyebrow: first short paragraph above the heading — Figma Title/XL 20/24, Bold, gray-700.
+/* eyebrow: first short paragraph above the heading.
    Scoped to :first-child since the subheading below the heading is also a
    plain <p> with no distinguishing class (see extractConfig in
    scripts/query-index.js — it moves authored nodes as-is). */
@@ -271,7 +267,6 @@
   color: inherit;
 }
 
-/* Figma Title/XXXL 25/30, Medium */
 .profile.carousel .profile-card-name {
   font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--title-size-xxxl);
@@ -279,7 +274,6 @@
   line-height: var(--line-height-600);
 }
 
-/* Figma Title/M 16/20, Bold */
 .profile.carousel .profile-card-role {
   font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--title-size-m);
@@ -383,7 +377,7 @@
   -webkit-mask: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, #000 70%);
 }
 
-/* the bio / quote text — Figma Title/XXXL 25/30, Medium, white */
+/* the bio / quote text */
 /* stylelint-disable-next-line no-descending-specificity */
 .profile.overlap .profile-card-overlay p {
   font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
@@ -402,7 +396,7 @@
   background: rgb(255 255 255 / 10%);
 }
 
-/* name + designation inside the overlay — Figma Title/M 16/20, Bold, white */
+/* name + designation inside the overlay */
 .profile.overlap .profile-card-overlay .profile-card-name {
   margin: 0;
   font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
@@ -412,7 +406,8 @@
   color: var(--color-white);
 }
 
-/* Figma Body/S 14/150, Regular, Palette/transparent-white/900 */
+/* colorTheme/transparent-white/900 in Figma — a raw primitive, not a semantic
+   token, hence --color-transparent-white-900 rather than a --profile-* var */
 .profile.overlap .profile-card-overlay .profile-card-role {
   margin: 0;
   font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);

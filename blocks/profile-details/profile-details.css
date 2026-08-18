@@ -34,9 +34,7 @@
   height: auto;
 }
 
-/* ----- identity + background -----
-   Figma Heading/XXL 45/52 (desktop; mobile scales down via the media query
-   below), Medium, black */
+/* ----- identity + background ----- */
 .profile-details .profile-details-name {
   margin: 0;
   font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
@@ -46,7 +44,6 @@
   color: var(--color-black);
 }
 
-/* Figma Title/XL 20/24, Bold, black */
 .profile-details .profile-details-role {
   margin: 8px 0 0;
   font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
@@ -57,7 +54,6 @@
   color: var(--color-black);
 }
 
-/* Figma Heading (Express)/L 28/32, Medium, black */
 .profile-details .profile-details-section-heading {
   margin: 24px 0 0;
   font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
@@ -67,7 +63,6 @@
   color: var(--color-black);
 }
 
-/* Figma Body/XXXL 25/150, Regular, black */
 .profile-details .profile-details-text {
   margin: 32px 0 0;
   font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
@@ -82,7 +77,6 @@
   margin-top: var(--profile-details-reportees-margin-top);
 }
 
-/* Figma Heading (Express)/L 28/32, Medium, black */
 .profile-details .profile-details-reportees-heading {
   margin: 0 0 16px;
   font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
@@ -149,7 +143,6 @@
   min-width: 0;
 }
 
-/* Figma Title/XL 20/24, Bold, static black */
 .profile-details .profile-details-reportee-name {
   font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--title-size-xl);
@@ -158,7 +151,6 @@
   color: var(--color-text-static-black);
 }
 
-/* Figma Body/M 16/150, Regular, #808080 */
 .profile-details .profile-details-reportee-role {
   font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--body-size-m);

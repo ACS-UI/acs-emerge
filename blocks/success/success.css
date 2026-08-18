@@ -257,7 +257,6 @@
   max-width: var(--success-carousel-intro-max-width);
 }
 
-/* Figma Heading/XXL 45/52, Medium */
 .success.carousel .carousel-intro h2,
 .success.carousel .carousel-intro h3 {
   margin: 8px 0 0;
