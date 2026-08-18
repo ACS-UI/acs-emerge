@@ -158,10 +158,13 @@
   color: var(--color-text-static-black);
 }
 
+/* Figma Body/M 16/150, Regular, #808080 */
 .profile-details .profile-details-reportee-role {
-  font-size: var(--detail-size-s);
-  line-height: var(--line-height-200);
-  color: var(--color-gray-600);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--body-size-m);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  color: #808080;
 }
 
 /* ===================== responsive ===================== */
