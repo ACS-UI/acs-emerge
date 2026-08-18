@@ -57,13 +57,14 @@
   color: var(--color-black);
 }
 
+/* Figma Heading (Express)/L 28/32, Medium, black */
 .profile-details .profile-details-section-heading {
   margin: 24px 0 0;
-  font-family: var(--heading-font-family);
-  font-size: var(--heading-size-m);
-  font-weight: var(--font-weight-bold);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--heading-size-l);
+  font-weight: var(--font-weight-medium);
   line-height: var(--line-height-700);
-  color: var(--color-gray-900);
+  color: var(--color-black);
 }
 
 .profile-details .profile-details-text {
