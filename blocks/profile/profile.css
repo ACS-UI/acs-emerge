@@ -400,20 +400,22 @@
   background: rgb(255 255 255 / 10%);
 }
 
-/* name + designation inside the overlay */
+/* name + designation inside the overlay — Figma Title/M 16/20, Bold, white */
 .profile.overlap .profile-card-overlay .profile-card-name {
   margin: 0;
-  font-family: var(--heading-font-family);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--title-size-m);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-200);
   color: var(--color-white);
 }
 
+/* Figma Body/S 14/150, Regular, Palette/transparent-white/900 */
 .profile.overlap .profile-card-overlay .profile-card-role {
   margin: 0;
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--body-size-s);
+  font-weight: var(--font-weight-regular);
   line-height: 1.5;
-  color: var(--color-white);
-  opacity: 0.85;
+  color: var(--color-transparent-white-900);
 }
