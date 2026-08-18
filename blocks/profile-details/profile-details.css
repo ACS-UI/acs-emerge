@@ -149,12 +149,13 @@
   min-width: 0;
 }
 
+/* Figma Title/XL 20/24, Bold, static black */
 .profile-details .profile-details-reportee-name {
-  font-family: var(--heading-font-family);
-  font-size: var(--body-size-m);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--title-size-xl);
   font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-300);
-  color: var(--color-gray-900);
+  line-height: var(--line-height-400);
+  color: var(--color-text-static-black);
 }
 
 .profile-details .profile-details-reportee-role {
