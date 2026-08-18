@@ -46,13 +46,15 @@
   color: var(--color-black);
 }
 
+/* Figma Title/XL 20/24, Bold, black */
 .profile-details .profile-details-role {
   margin: 8px 0 0;
-  font-size: var(--detail-size-m);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--title-size-xl);
   font-weight: var(--font-weight-bold);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--color-gray-600);
+  line-height: var(--line-height-400);
+  letter-spacing: 0;
+  color: var(--color-black);
 }
 
 .profile-details .profile-details-section-heading {
