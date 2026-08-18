@@ -9,8 +9,8 @@
   --success-inner-radius: 20px;
   --success-gap: 32px;
   --success-card-max-width: 384px;
-  --success-title-color: var(--color-gray-1000);
-  --success-desc-color: var(--color-gray-500);
+  --success-title-color: var(--color-text-static-black);
+  --success-desc-color: #808080; /* Figma colorTheme/silver-800, not in our gray scale */
   --success-intro-margin-bottom: 40px;
   --success-intro-max-width: 50rem;
   --success-view-all-margin-top: 16px;
@@ -102,22 +102,24 @@
 /* title — Heading/L: 28/32, medium */
 .success .success-card-title {
   margin: 4px 0 0;
-  font-family: var(--heading-font-family);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--heading-size-l);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-700);
   color: var(--success-title-color);
 }
 
-/* description — Body/M: 16/24, grey */
+/* description — Body/M: 16/150 (=24px), regular, grey */
 .success .success-card-desc {
   margin: 0;
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--body-size-m);
+  font-weight: var(--font-weight-regular);
   line-height: var(--line-height-400);
   color: var(--success-desc-color);
 }
 
-/* tag pills — white with shadow, Body/S: 14/21, black text */
+/* tag pills — white with shadow, Body/S: 14/150 (=21px), black text */
 .success .success-card-tags {
   display: flex;
   flex-wrap: wrap;
@@ -135,10 +137,11 @@
     0 0 0 1px rgb(0 0 0 / 4%),
     0 1px 2px rgb(0 0 0 / 8%),
     0 4px 6px rgb(0 0 0 / 4%);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--body-size-s);
   font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-100);
-  color: var(--color-gray-1000);
+  line-height: 1.5;
+  color: var(--color-text-static-black);
 }
 
 /* ===================== intro (base + parallax) ===================== */
@@ -147,13 +150,15 @@
   max-width: var(--success-intro-max-width);
 }
 
-/* Heading/XXXXL per Figma — scaled down on mobile, full size on desktop */
+/* Heading/XXL 45/52 Medium per Figma — scaled down on mobile, XXXXL on desktop */
 .success .success-intro h2,
 .success .success-intro h3 {
   margin: 8px 0 0;
-  font-size: var(--heading-size-xl);
-  line-height: var(--line-height-900);
-  color: var(--color-gray-1000);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--heading-size-xxl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-1100);
+  color: var(--color-text-static-black);
 }
 
 .success .success-intro p {
@@ -255,9 +260,11 @@
 .success.carousel .carousel-intro h2,
 .success.carousel .carousel-intro h3 {
   margin: 8px 0 0;
-  font-size: var(--heading-size-l);
-  line-height: var(--line-height-700);
-  color: var(--color-gray-900);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--heading-size-xxl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-1100);
+  color: var(--color-text-static-black);
 }
 
 .success.carousel .carousel-intro p {

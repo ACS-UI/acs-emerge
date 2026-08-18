@@ -50,13 +50,6 @@
     0 1px 2px rgb(0 0 0 / 6%),
     0 4px 6px rgb(0 0 0 / 4%),
     0 40px 40px -24px rgb(0 0 0 / 6%);
-  --cw-card-overlay: linear-gradient(
-    to top,
-    rgb(0 0 0 / 78%) 0%,
-    rgb(0 0 0 / 55%) 28%,
-    rgb(0 0 0 / 8%) 62%,
-    rgb(0 0 0 / 0%) 100%
-  );
 
   /* card content */
   --cw-card-title-color: var(--color-white);
@@ -67,12 +60,25 @@
   --cw-card-text-size: var(--body-size-l);
   --cw-card-text-line: 1.5;
   --cw-card-content-gap: 8px;
-  --cw-card-pad: 30px;
 
-  /* blurred backdrop panel behind the card text (Figma "Rectangle 2") */
+  /* Figma's description text is 284px wide inside a 376px card (minus the
+     4px frame inset each side = 368px), so inline padding is 42px, not 30 */
+  --cw-card-pad-block: 30px;
+  --cw-card-pad-inline: 42px;
+
+  /* blurred backdrop panel behind the card text (Figma "Rectangle 2").
+     Figma's background-blur is Progressive (0 at the panel's top, ramping
+     to 20 at the bottom). CSS backdrop-filter can't vary blur radius within
+     one layer, so this is approximated with 3 stacked layers: a base tint
+     with no backdrop-blur, then two blur-only layers (mid/strong) that each
+     fade in via a mask further down the panel, so the total blur strength
+     ramps up smoothly toward the bottom. */
   --cw-card-backdrop-bg: rgb(0 0 0 / 10%);
-  --cw-card-backdrop-blur: 10px;
-  --cw-card-backdrop-self-blur: 15px;
+  --cw-card-backdrop-self-blur: 30px;
+  --cw-card-backdrop-blur-mid: 10px;
+  --cw-card-backdrop-blur-strong: 20px;
+  --cw-card-backdrop-mid-mask: linear-gradient(to bottom, transparent 20%, #000 70%);
+  --cw-card-backdrop-strong-mask: linear-gradient(to bottom, transparent 50%, #000 100%);
 }
 
 /* ==========================================================================
@@ -135,14 +141,6 @@ main .cards-working-container {
   object-fit: cover;
 }
 
-/* dark gradient at the base keeps the overlaid white text legible */
-.cards-working .cards-working-card-image::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--cw-card-overlay);
-}
-
 .cards-working .cards-working-card-body {
   position: absolute;
   inset: auto var(--cw-card-frame) var(--cw-card-frame);
@@ -150,29 +148,52 @@ main .cards-working-container {
   display: flex;
   flex-direction: column;
   gap: var(--cw-card-content-gap);
-  padding: var(--cw-card-pad);
+  padding: var(--cw-card-pad-block) var(--cw-card-pad-inline);
   font-family: var(--cw-font-family);
   color: var(--cw-card-text-color);
 }
 
-/* blurred translucent panel sitting behind the title + description */
-.cards-working .cards-working-card-body::before {
-  content: '';
+/* blurred translucent panel sitting behind the title + description — three
+   stacked layers (base tint + two progressively-masked blur-only layers,
+   see --cw-card-backdrop-* comment above) */
+.cards-working .cards-working-card-backdrop {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: var(--cw-card-backdrop-bg);
   border-radius: 0 0 var(--cw-card-inner-radius) var(--cw-card-inner-radius);
+}
+
+.cards-working .cards-working-card-backdrop-base {
+  background: var(--cw-card-backdrop-bg);
   filter: blur(var(--cw-card-backdrop-self-blur));
-  backdrop-filter: blur(var(--cw-card-backdrop-blur));
+}
+
+.cards-working .cards-working-card-backdrop-mid {
+  backdrop-filter: blur(var(--cw-card-backdrop-blur-mid));
+  mask-image: var(--cw-card-backdrop-mid-mask);
 
   /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-backdrop-filter: blur(var(--cw-card-backdrop-blur));
+  -webkit-backdrop-filter: blur(var(--cw-card-backdrop-blur-mid));
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask-image: var(--cw-card-backdrop-mid-mask);
+}
+
+.cards-working .cards-working-card-backdrop-strong {
+  backdrop-filter: blur(var(--cw-card-backdrop-blur-strong));
+  mask-image: var(--cw-card-backdrop-strong-mask);
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-backdrop-filter: blur(var(--cw-card-backdrop-blur-strong));
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask-image: var(--cw-card-backdrop-strong-mask);
 }
 
 .cards-working .cards-working-card-body h3 {
   margin: 0;
   color: var(--cw-card-title-color);
+  font-family: var(--cw-font-family);
   font-size: var(--cw-card-title-size);
   font-weight: var(--cw-card-title-weight);
   line-height: var(--cw-card-title-line);
@@ -198,6 +219,7 @@ main .cards-working-container {
 .cards-working-container .default-content-wrapper > p:first-child {
   margin: 0;
   color: var(--cw-eyebrow-color);
+  font-family: var(--cw-font-family);
   font-size: var(--cw-eyebrow-size);
   font-weight: var(--cw-eyebrow-weight);
   line-height: var(--cw-eyebrow-line);

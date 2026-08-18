@@ -15,6 +15,23 @@ export default function decorate(block) {
       if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-working-card-image';
       else div.className = 'cards-working-card-body';
     });
+
+    // Backdrop: base tint + two masked blur-only layers approximating
+    // Figma's progressive (top-to-bottom) background-blur — see
+    // cards-working.css for how each layer's mask staggers the ramp-up.
+    // Order matters here: base first (bottom of the stack), strong last
+    // (top), so later layers correctly paint over earlier ones.
+    const body = li.querySelector('.cards-working-card-body');
+    if (body) {
+      const backdrops = document.createDocumentFragment();
+      ['base', 'mid', 'strong'].forEach((variant) => {
+        const backdrop = document.createElement('div');
+        backdrop.className = `cards-working-card-backdrop cards-working-card-backdrop-${variant}`;
+        backdrops.append(backdrop);
+      });
+      body.prepend(backdrops);
+    }
+
     ul.append(li);
   });
 
