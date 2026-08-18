@@ -239,6 +239,12 @@
   color: var(--color-black);
 }
 
+/* Same reuse-across-contexts issue as the heading/eyebrow above */
+.profile.carousel .carousel-intro h2 ~ p,
+.profile.carousel .carousel-intro h3 ~ p {
+  color: inherit;
+}
+
 /* eyebrow: first short paragraph above the heading.
    Scoped to :first-child since the subheading below the heading is also a
    plain <p> with no distinguishing class (see extractConfig in
@@ -254,6 +260,13 @@
   letter-spacing: 0;
   text-transform: uppercase;
   color: var(--color-gray-700);
+}
+
+/* Same reuse-across-contexts issue as the heading above: inherit the
+   section's own color on the colored-gradient (carousel) instance instead
+   of the plain-background (base grid) instance's gray-700. */
+.profile.carousel .carousel-intro p:first-child {
+  color: inherit;
 }
 
 /* carousel cards show the photo at its natural proportions (no crop/zoom),
