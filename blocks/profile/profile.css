@@ -192,6 +192,15 @@
   color: var(--color-text-static-black);
 }
 
+/* This same block is reused on a plain-background page (base grid variant,
+   static black above) and on a colored gradient section (carousel variant,
+   here) — inherit the section's own text color instead of hardcoding white,
+   same pattern already used for .profile-card-name/-role below. */
+.profile.carousel .carousel-intro h2,
+.profile.carousel .carousel-intro h3 {
+  color: inherit;
+}
+
 @media (width >= 1024px) {
   .profile.carousel .carousel-intro {
     max-width: 50rem;
