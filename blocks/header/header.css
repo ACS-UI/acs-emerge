@@ -1,6 +1,6 @@
 /* Header/nav — 96px tall, Adobe Clean Spectrum VF. Two variants: default
    light bar (most pages) vs. transparent overlay w/ white text on hero
-   pages (homepage) — toggled via :has() below. */
+   pages (homepage) — toggled via :has() below. Mobile-first. */
 header {
   /* Figma header height (was 64px) */
   --nav-height: 96px;
@@ -42,14 +42,11 @@ header .nav-wrapper {
   border-bottom: var(--nav-border);
 }
 
-/* when the mobile menu is open, the wrapper itself becomes the dark panel
-   (it sits above the transparent nav) and drops its bottom rule.
-   Mobile only — on desktop aria-expanded="true" is the normal (light) state. */
-@media (width < 900px) {
-  header .nav-wrapper:has(nav[aria-expanded='true']) {
-    background-color: var(--nav-menu-bg);
-    border-bottom: 0;
-  }
+/* mobile base: when the mobile menu is open, the wrapper itself becomes the
+   dark panel (it sits above the transparent nav) and drops its bottom rule. */
+header .nav-wrapper:has(nav[aria-expanded='true']) {
+  background-color: var(--nav-menu-bg);
+  border-bottom: 0;
 }
 
 /* hero pages (homepage): transparent overlay over the hero, white text */
@@ -96,16 +93,11 @@ header nav[aria-expanded='true'] {
   /* opaque dark panel for the open mobile menu (matches the theme) so links
      stay legible even when the closed bar is a transparent overlay */
   background-color: var(--nav-menu-bg);
-}
 
-/* open mobile menu always uses light text on the dark panel. Scoped to
-   mobile so it never affects the desktop nav (which is also aria-expanded). */
-@media (width < 900px) {
-  header nav[aria-expanded='true'] {
-    --nav-brand-color: var(--color-white);
-    --nav-link-color: var(--color-gray-400);
-    --nav-link-hover-color: var(--color-white);
-  }
+  /* mobile base: open mobile menu always uses light text on the dark panel */
+  --nav-brand-color: var(--color-white);
+  --nav-link-color: var(--color-gray-400);
+  --nav-link-hover-color: var(--color-white);
 }
 
 @media (width >= 900px) {
@@ -120,11 +112,22 @@ header nav[aria-expanded='true'] {
     padding: 0 var(--nav-padding-inline-desktop);
   }
 
+  /* desktop: aria-expanded="true" is the normal (always-on) state, not an
+     open mobile menu — undo the mobile-only overrides above */
+  header .nav-wrapper:has(nav[aria-expanded='true']) {
+    background-color: var(--nav-bg);
+    border-bottom: var(--nav-border);
+  }
+
   header nav[aria-expanded='true'] {
     gap: 0 var(--nav-gap-desktop);
     min-height: 0;
     overflow: visible;
     background-color: inherit;
+
+    --nav-brand-color: unset;
+    --nav-link-color: unset;
+    --nav-link-hover-color: unset;
   }
 }
 
@@ -278,12 +281,6 @@ header nav .nav-sections {
   color: var(--nav-link-color);
 }
 
-header nav[aria-expanded='true'] .nav-sections {
-  display: block;
-  visibility: visible;
-  align-self: start;
-}
-
 header nav .nav-sections ul {
   list-style: none;
   padding-left: 0;
@@ -317,23 +314,26 @@ header nav .nav-sections ul > li:last-child {
   margin-bottom: 0;
 }
 
-/* mobile: roomier stacked links with comfortable tap targets.
-   Scoped to mobile so it never affects the desktop nav (also aria-expanded). */
-@media (width < 900px) {
-  header nav[aria-expanded='true'] .nav-sections {
-    padding-top: 8px;
-  }
+header nav[aria-expanded='true'] .nav-sections {
+  display: block;
+  visibility: visible;
+  align-self: start;
 
-  header nav[aria-expanded='true'] .nav-sections ul {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    font-size: 18px;
-  }
+  /* mobile base: roomier stacked links with comfortable tap targets */
+  padding-top: 8px;
+}
 
-  header nav[aria-expanded='true'] .nav-sections ul > li {
-    padding: 10px 0;
-  }
+/* mobile base: open menu's links stack vertically, larger tap targets */
+header nav[aria-expanded='true'] .nav-sections ul {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 18px;
+}
+
+/* mobile base: roomier tap target per stacked link */
+header nav[aria-expanded='true'] .nav-sections ul > li {
+  padding: 10px 0;
 }
 
 @media (width >= 900px) {
@@ -345,6 +345,9 @@ header nav .nav-sections ul > li:last-child {
 
   header nav[aria-expanded='true'] .nav-sections {
     align-self: unset;
+
+    /* desktop: undo the mobile open-menu spacing above */
+    padding-top: 0;
   }
 
   header nav .nav-sections .nav-drop {
@@ -357,14 +360,19 @@ header nav .nav-sections ul > li:last-child {
     display: none;
   }
 
-  header nav .nav-sections ul {
+  header nav .nav-sections ul,
+  header nav[aria-expanded='true'] .nav-sections ul {
     display: flex;
+    flex-direction: row;
     gap: var(--nav-links-gap);
     margin: 0;
+    font-size: var(--title-size-m);
   }
 
-  header nav .nav-sections ul > li {
+  header nav .nav-sections ul > li,
+  header nav[aria-expanded='true'] .nav-sections ul > li {
     margin-bottom: 0;
+    padding: 0;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li {
