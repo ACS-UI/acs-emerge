@@ -151,6 +151,17 @@ export default async function decorate(block) {
     if (hasStrayContent) {
       siblings.forEach((node) => brandAnchor.append(node));
     }
+
+    // Wrap loose text nodes (the "ACS GDC HUB" wordmark) in a targetable span
+    // so the Figma wordmark type styles can be applied to just the text.
+    [...brandAnchor.childNodes].forEach((node) => {
+      if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
+        const span = document.createElement('span');
+        span.className = 'nav-brand-text';
+        span.textContent = node.textContent.trim();
+        node.replaceWith(span);
+      }
+    });
   }
 
   const navSections = nav.querySelector('.nav-sections');

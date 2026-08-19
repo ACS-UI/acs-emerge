@@ -17,7 +17,7 @@
   --testimonial-attribution-gap: 8px;
   --testimonial-attribution-padding: 40px 24px 24px;
   --testimonial-nav-margin-top: 8px;
-  --testimonial-padding-inline: 116px;
+  --testimonial-padding-inline: 104px;
   --testimonial-media-max-width: 384px;
 
   color: var(--color-white);
@@ -44,6 +44,7 @@
   position: relative;
   margin: 0;
   padding: var(--testimonial-quote-padding-top) 0 0;
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--body-size-s);
   line-height: var(--line-height-400);
   color: var(--testimonial-quote-color);
@@ -163,7 +164,17 @@
 
 /* ===================== responsive ===================== */
 @media (width >= 900px) {
-  /* inset on both sides on desktop per Figma */
+  /* Figma-specified vertical panel padding (60/116, asymmetric — overrides
+     the shared symmetric bg-gradient-a/b section padding used by other
+     blocks). Horizontal inset stays on .testimonial below, added on top of
+     the section wrapper div's own 32px inline padding. */
+  main .section.testimonial-container.bg-gradient-b {
+    padding-top: 60px;
+    padding-bottom: 116px;
+  }
+
+  /* inset on both sides on desktop per Figma (135/136 total, minus the
+     section wrapper div's own 32px inline padding) */
   .testimonial {
     padding-inline: var(--testimonial-padding-inline);
   }

@@ -6,17 +6,17 @@
 .profile {
   --profile-card-radius: 12px;
   --profile-gap: 24px;
-  --profile-name-color: var(--color-gray-900);
-  --profile-role-color: var(--color-gray-600);
+  --profile-name-color: var(--color-black);
+  --profile-role-color: #808080; /* Figma colorTheme/silver-800, not in our gray scale */
   --profile-overlay-padding-block-start: 40px;
   --profile-overlay-padding-inline: 24px;
   --profile-overlay-padding-block-end: 24px;
   --profile-overlay-gap: 8px;
+  --profile-overlay-blur: 28px;
   --profile-body-padding: 12px 4px 0;
   --profile-intro-margin-bottom: 40px;
-  --profile-intro-max-width: 40rem;
   --profile-view-all-margin-top: 20px;
-  --profile-carousel-intro-max-width: 34rem;
+  --profile-carousel-intro-max-width: 30.5rem; /* Figma: carousel-intro frame is 488px wide */
   --profile-overlap-overlay-padding: 22px;
   --profile-overlap-overlay-padding-top: 50px;
   --profile-overlap-overlay-padding-right: 10px;
@@ -67,11 +67,11 @@
   gap: var(--profile-overlay-gap);
   padding: var(--profile-overlay-padding-block-start) var(--profile-overlay-padding-inline) var(--profile-overlay-padding-block-end);
   color: var(--color-white);
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(var(--profile-overlay-blur));
   mask: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, #000 70%);
 
   /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(var(--profile-overlay-blur)) saturate(130%);
 
   /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-mask: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, #000 70%);
@@ -101,16 +101,18 @@
 
 .profile .profile-card-name {
   margin: 0;
-  font-family: var(--heading-font-family);
-  font-size: var(--heading-size-s);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-400);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--title-size-xxxl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-600);
   color: var(--profile-name-color);
 }
 
 .profile .profile-card-role {
   margin: 2px 0 0;
-  font-size: var(--detail-size-m);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--title-size-m);
+  font-weight: var(--font-weight-bold);
   line-height: var(--line-height-200);
   color: var(--profile-role-color);
 }
@@ -120,33 +122,6 @@
 /* intro (eyebrow + heading + subheading) above the grid, left-aligned */
 .profile .profile-intro {
   margin-bottom: var(--profile-intro-margin-bottom);
-  max-width: var(--profile-intro-max-width);
-}
-
-.profile .profile-intro h2,
-.profile .profile-intro h3 {
-  margin: 8px 0 0;
-  font-size: var(--heading-size-xl);
-  line-height: var(--line-height-800);
-  color: var(--color-gray-900);
-}
-
-/* subheading / body paragraphs */
-.profile .profile-intro p {
-  margin: 12px 0 0;
-  font-size: var(--body-size-m);
-  line-height: var(--line-height-400);
-  color: var(--color-gray-700);
-}
-
-/* eyebrow: the first paragraph, above the heading */
-.profile .profile-intro p:first-child {
-  margin: 0;
-  font-size: var(--detail-size-m);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-gray-600);
 }
 
 .profile .profile-view-all {
@@ -193,23 +168,97 @@
   max-width: var(--profile-carousel-intro-max-width);
 }
 
+/* Heading carries its own max-width (800px) rather than the container,
+   since the eyebrow/subheading don't need the same constraint. */
+.profile .profile-intro h2,
+.profile .profile-intro h3,
 .profile.carousel .carousel-intro h2,
 .profile.carousel .carousel-intro h3 {
   margin: 8px 0 0;
+  max-width: 800px;
   max-height: 488px;
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--heading-size-xxl);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-1100);
+  color: var(--color-text-static-black);
 }
 
-/* eyebrow: first short paragraph above the heading */
-.profile.carousel .carousel-intro p {
+/* This same block is reused on a plain-background page (base grid variant,
+   static black above) and on a colored gradient section (carousel variant,
+   here) — inherit the section's own text color instead of hardcoding white,
+   same pattern already used for .profile-card-name/-role below. */
+.profile.carousel .carousel-intro h2,
+.profile.carousel .carousel-intro h3 {
+  color: inherit;
+}
+
+@media (width >= 1024px) {
+  .profile.carousel .carousel-intro {
+    max-width: 50rem;
+  }
+
+  .profile .profile-intro h2,
+  .profile .profile-intro h3,
+  .profile.carousel .carousel-intro h2,
+  .profile.carousel .carousel-intro h3 {
+    max-height: none;
+    font-size: var(--heading-size-xxxxl);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-1500);
+  }
+}
+
+/* authored content wraps the heading text in <strong>; the browser default
+   (font-weight: bolder) would push it past Medium to Bold, so pin it back */
+.profile .profile-intro h2 strong,
+.profile .profile-intro h3 strong,
+.profile.carousel .carousel-intro h2 strong,
+.profile.carousel .carousel-intro h3 strong {
+  font-weight: inherit;
+}
+
+/* subheading: paragraph after the heading */
+.profile .profile-intro h2 ~ p,
+.profile .profile-intro h3 ~ p,
+.profile.carousel .carousel-intro h2 ~ p,
+.profile.carousel .carousel-intro h3 ~ p {
+  margin: 8px 0 0;
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--body-size-xxxl);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  color: var(--color-black);
+}
+
+/* Same reuse-across-contexts issue as the heading/eyebrow above */
+.profile.carousel .carousel-intro h2 ~ p,
+.profile.carousel .carousel-intro h3 ~ p {
+  color: inherit;
+}
+
+/* eyebrow: first short paragraph above the heading.
+   Scoped to :first-child since the subheading below the heading is also a
+   plain <p> with no distinguishing class (see extractConfig in
+   scripts/query-index.js — it moves authored nodes as-is). */
+/* stylelint-disable-next-line no-descending-specificity */
+.profile .profile-intro p:first-child,
+.profile.carousel .carousel-intro p:first-child {
   margin: 0;
-  font-size: var(--detail-size-m);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--title-size-xl);
   font-weight: var(--font-weight-bold);
-  letter-spacing: 0.08em;
+  line-height: var(--line-height-400);
+  letter-spacing: 0;
   text-transform: uppercase;
-  opacity: 0.9;
+  color: var(--color-gray-700);
+}
+
+/* Same reuse-across-contexts issue as the heading above: inherit the
+   section's own color on the colored-gradient (carousel) instance instead
+   of the plain-background (base grid) instance's gray-700. */
+.profile.carousel .carousel-intro p:first-child {
+  color: inherit;
 }
 
 /* carousel cards show the photo at its natural proportions (no crop/zoom),
@@ -232,7 +281,17 @@
   color: inherit;
 }
 
+.profile.carousel .profile-card-name {
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--title-size-xxxl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-600);
+}
+
 .profile.carousel .profile-card-role {
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--title-size-m);
+  font-weight: var(--font-weight-bold);
   opacity: 0.85;
 }
 
@@ -323,19 +382,21 @@
   inset: 0;
   z-index: -1;
   backdrop-filter: blur(20px) saturate(130%);
-  mask: linear-gradient(to bottom, transparent 0%, #000 10%);
+  mask: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, #000 70%);
 
   /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-backdrop-filter: blur(12px) saturate(130%);
 
   /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-mask: linear-gradient(to bottom, transparent 0%, #000 10%);
+  -webkit-mask: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, #000 70%);
 }
 
 /* the bio / quote text */
+/* stylelint-disable-next-line no-descending-specificity */
 .profile.overlap .profile-card-overlay p {
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--body-size-xxxl);
-  font-weight: var(--font-weight-regular);
+  font-weight: var(--font-weight-medium);
   line-height: var(--line-height-600);
   color: var(--color-white);
 }
@@ -352,17 +413,20 @@
 /* name + designation inside the overlay */
 .profile.overlap .profile-card-overlay .profile-card-name {
   margin: 0;
-  font-family: var(--heading-font-family);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--title-size-m);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-200);
   color: var(--color-white);
 }
 
+/* colorTheme/transparent-white/900 in Figma — a raw primitive, not a semantic
+   token, hence --color-transparent-white-900 rather than a --profile-* var */
 .profile.overlap .profile-card-overlay .profile-card-role {
   margin: 0;
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--body-size-s);
+  font-weight: var(--font-weight-regular);
   line-height: 1.5;
-  color: var(--color-white);
-  opacity: 0.85;
+  color: var(--color-transparent-white-900);
 }

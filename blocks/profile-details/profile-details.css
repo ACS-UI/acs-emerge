@@ -12,6 +12,17 @@
   --profile-details-desktop-layout-gap: 56px;
 }
 
+/* page title above the block — a standalone default-content heading, not
+   part of the .profile-details block itself, hence the ID selector */
+#meet-our-leader {
+  margin: 0;
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--heading-size-xxxxl);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-1500);
+  color: var(--color-text-static-black);
+}
+
 /* ----- layout: image (left) + content (right) ----- */
 .profile-details .profile-details-layout {
   display: grid;
@@ -41,36 +52,39 @@
 
 .profile-details .profile-details-name {
   margin: 0;
-  font-family: var(--heading-font-family);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--heading-size-xl);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-medium);
   line-height: var(--line-height-900);
-  color: var(--color-gray-900);
+  color: var(--color-black);
 }
 
 .profile-details .profile-details-role {
   margin: 8px 0 0;
-  font-size: var(--detail-size-m);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--title-size-xl);
   font-weight: var(--font-weight-bold);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--color-gray-600);
+  line-height: var(--line-height-400);
+  letter-spacing: 0;
+  color: var(--color-black);
 }
 
 .profile-details .profile-details-section-heading {
   margin: 24px 0 0;
-  font-family: var(--heading-font-family);
-  font-size: var(--heading-size-m);
-  font-weight: var(--font-weight-bold);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--heading-size-l);
+  font-weight: var(--font-weight-medium);
   line-height: var(--line-height-700);
-  color: var(--color-gray-900);
+  color: var(--color-black);
 }
 
 .profile-details .profile-details-text {
-  margin: 12px 0 0;
-  font-size: var(--body-size-m);
-  line-height: var(--line-height-400);
-  color: var(--color-gray-700);
+  margin: 32px 0 0;
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--body-size-xxxl);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  color: var(--color-black);
 }
 
 /* ----- reportees (from query-index) ----- */
@@ -80,11 +94,11 @@
 
 .profile-details .profile-details-reportees-heading {
   margin: 0 0 16px;
-  font-family: var(--heading-font-family);
-  font-size: var(--heading-size-m);
-  font-weight: var(--font-weight-bold);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--heading-size-l);
+  font-weight: var(--font-weight-medium);
   line-height: var(--line-height-700);
-  color: var(--color-gray-900);
+  color: var(--color-black);
 }
 
 .profile-details .profile-details-reportees-grid {
@@ -145,17 +159,19 @@
 }
 
 .profile-details .profile-details-reportee-name {
-  font-family: var(--heading-font-family);
-  font-size: var(--body-size-m);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--title-size-xl);
   font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-300);
-  color: var(--color-gray-900);
+  line-height: var(--line-height-400);
+  color: var(--color-text-static-black);
 }
 
 .profile-details .profile-details-reportee-role {
-  font-size: var(--detail-size-s);
-  line-height: var(--line-height-200);
-  color: var(--color-gray-600);
+  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  font-size: var(--body-size-m);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  color: #808080;
 }
 
 /* ===================== responsive ===================== */
