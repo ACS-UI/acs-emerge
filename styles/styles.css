@@ -438,9 +438,17 @@ main .section[data-background-image] {
  * "Background Text"). Renders a large, faint word pinned behind the section
  * content — it sticks in place for as long as the section is scrolling
  * through the viewport, then scrolls away once the section has fully passed.
+ *
+ * overflow: hidden clips the watermark to the section's own box. Without it,
+ * a section shorter than the watermark's 100vh height (see ::before below)
+ * lets the sticky element bleed past the section's real bottom edge and
+ * show through the next section — the section's own scroll-through motion
+ * still carries the watermark past the viewport as normal, just clipped at
+ * the section boundary instead of spilling beyond it.
  */
 main .section[data-background-text] {
   position: relative;
+  overflow: hidden;
 }
 
 main .section[data-background-text] > div {

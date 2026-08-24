@@ -23,9 +23,19 @@
   display: block;
 }
 
+/* intro column (see isIntroCol in columns.js): tight eyebrow-to-heading
+   spacing instead of the default UA paragraph/heading margins stacking up
+   into a much larger gap than intended */
+.columns > div > .columns-intro-col p {
+  margin: 0 0 8px;
+}
+
+.columns > div > .columns-intro-col :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+}
+
 @media (width >= 900px) {
   .columns > div {
-    align-items: center;
     flex-direction: unset;
     gap: var(--columns-gap);
   }

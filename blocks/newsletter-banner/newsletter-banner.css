@@ -33,6 +33,23 @@
   color: var(--newsletter-banner-text-color);
 }
 
+/* "NEWS LETTER" label authored as the section's default content, above the
+   banner — not part of the block itself, so it isn't touched by the block's
+   own --newsletter-banner-eyebrow rule below. Otherwise it inherits plain
+   body-paragraph styling (default size/weight/margin), which reads far too
+   large/heavy next to the banner. Small-caps eyebrow treatment matches the
+   convention used elsewhere (e.g. success-intro, cards-working eyebrow).
+   Scoped to :first-child — this section has a second default-content-wrapper
+   *after* the banner (the closing paragraphs), which must stay plain body text. */
+main .newsletter-banner-container > .default-content-wrapper:first-child p {
+  margin: 0 0 16px;
+  color: var(--color-gray-600);
+  font-size: var(--detail-size-m);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 /* full-bleed background image */
 .newsletter-banner .newsletter-banner-media {
   position: absolute;
