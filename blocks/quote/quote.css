@@ -113,3 +113,106 @@
     align-items: center;
   }
 }
+
+/* =====================================================================
+   `card` variant: a single bordered card (quote on top, avatar + name/role
+   attribution row below) instead of the base portrait + quote two-column
+   layout. Additive only — nothing above this point is touched, so the base
+   variant is unaffected. Authored content model is the same two cells
+   (image, text); quote.js moves the image into the attribution row instead
+   of rendering it as a top-level column when this variant is active.
+   ===================================================================== */
+.quote.card {
+  --quote-card-radius: 24px;
+  --quote-card-padding: 32px;
+  --quote-card-border-color: var(--color-red-900);
+  --quote-card-mark-bg: var(--color-red-300);
+  --quote-card-mark-width: 32px;
+  --quote-card-mark-height: 26px;
+  --quote-card-name-color: var(--color-gray-1000);
+  --quote-card-role-color: var(--color-gray-700);
+  --quote-card-avatar-size: 56px;
+}
+
+/* the portrait moves inside the body's attribution row (see quote.js), so
+   the row itself no longer needs the base two-column grid */
+.quote.card .quote-row {
+  display: block;
+}
+
+.quote.card .quote-body {
+  max-width: none;
+  padding: var(--quote-card-padding);
+  border-radius: var(--quote-card-radius);
+  border-left: 4px solid var(--quote-card-border-color);
+  background: var(--color-white);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 6%), 0 4px 6px rgb(0 0 0 / 4%);
+}
+
+.quote.card .quote-body blockquote {
+  padding: 0;
+}
+
+/* the decorative glyph is a masked icon here (pale accent tint), not the
+   base variant's typographic quotation marks — no closing mark either */
+.quote.card .quote-body blockquote::before {
+  position: static;
+  display: block;
+  width: var(--quote-card-mark-width);
+  height: var(--quote-card-mark-height);
+  margin-bottom: 16px;
+  background: var(--quote-card-mark-bg);
+  mask: url('../../icons/quote-open.svg') left top / contain no-repeat;
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask: url('../../icons/quote-open.svg') left top / contain no-repeat;
+}
+
+.quote.card .quote-body blockquote::after {
+  content: none;
+}
+
+/* avatar + name/role, laid out as a row below the quote */
+.quote.card .quote-attribution-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* authored headshot isn't pre-rounded — force it into a circle here */
+.quote.card .quote-avatar {
+  flex: none;
+  width: var(--quote-card-avatar-size);
+  height: var(--quote-card-avatar-size);
+  line-height: 0;
+}
+
+.quote.card .quote-avatar picture,
+.quote.card .quote-avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.quote.card .quote-attribution-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.quote.card .quote-name {
+  margin: 0;
+  font-family: var(--quote-font);
+  font-size: var(--body-font-size-xs);
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--quote-card-name-color);
+}
+
+.quote.card .quote-role {
+  margin: 0;
+  font-family: var(--quote-font);
+  font-size: var(--body-font-size-xs);
+  color: var(--quote-card-role-color);
+}

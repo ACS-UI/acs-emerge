@@ -21,7 +21,6 @@
   --cd-section-gap: 40px;
   --cd-content-gap: 136px;
   --cd-col-gap: 16px;
-  --cd-row-gap: 32px;
   --cd-row-pad: 8px;
   --cd-details-width: 384px;
   --cd-hero-radius: 24px;
@@ -80,12 +79,14 @@
   line-height: var(--cd-title-line);
 }
 
-/* details definition list: one ruled row per pair, label left / value right */
+/* details definition list: one ruled row per pair, label left / value right.
+   No column-gap — the border-bottom is per-cell, so any gap between dt/dd
+   would show up as a break in the underline instead of one continuous line;
+   label/value spacing already comes from dt (1fr) being left-aligned. */
 .client-detail .client-detail-info dl {
   margin: 0;
   display: grid;
   grid-template-columns: 1fr auto;
-  column-gap: var(--cd-row-gap);
 }
 
 .client-detail .client-detail-info dt,
@@ -105,6 +106,36 @@
 
 .client-detail .client-detail-info dd {
   text-align: right;
+  color: var(--cd-value-color);
+}
+
+/* "Tags" group: sub-heading (same treatment as "DETAILS"/"ABOUT") + pills */
+.client-detail .client-detail-tags-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cd-col-gap);
+}
+
+.client-detail .client-detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.client-detail .client-detail-tag {
+  padding: 4px 12px;
+  border-radius: 100px;
+  background: var(--color-white);
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 4%),
+    0 1px 2px rgb(0 0 0 / 8%),
+    0 4px 6px rgb(0 0 0 / 4%);
+  font-size: var(--body-size-s);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
   color: var(--cd-value-color);
 }
 

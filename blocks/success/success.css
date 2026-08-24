@@ -338,6 +338,7 @@
    back to plain stacked flow */
 .success .success-parallax {
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: var(--success-gap);
 }

@@ -1,5 +1,33 @@
 /* add global styles that can be loaded post LCP here */
 
+/* Section content reveal-on-scroll (see observeSectionReveal in
+   scripts/scripts.js). Targets the section's direct content wrappers, not
+   the section element itself, so a section's own box/background (e.g. a
+   coloured bg-gradient panel) is never hidden behind the fade — only the
+   content inside it animates. The `section-fade` class is only added by JS,
+   so if JS fails, content just stays at its default opacity: 1 — nothing is
+   ever hidden by CSS alone. `section-visible` is added the first time the
+   section scrolls into view and never removed (one-time reveal, not
+   re-triggered on scroll-out). */
+main > .section > div.section-fade {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+main > .section > div.section-fade.section-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main > .section > div.section-fade {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* Back button auto-injected on leader and success-story detail pages */
 main .back-button {
   box-sizing: border-box;

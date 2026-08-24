@@ -3,7 +3,8 @@
  *
  * Wraps a set of child elements in a horizontally-scrolling, snap-aligned
  * track with an optional intro (title/description) and top-right previous/next
- * navigation, plus an optional "view all" action below the track.
+ * navigation, plus an optional "view all" action below the track. On mobile,
+ * dot indicators (see styles/carousel.css) replace the prev/next nav.
  *
  * The number of visible items and the gap are controlled entirely from CSS
  * (see styles/carousel.css) via the `--carousel-visible` / `--carousel-gap`
@@ -47,19 +48,52 @@ function slideDelta(track) {
 
 /**
  * Enables/disables nav buttons and hides the whole nav when nothing overflows.
+ * Also updates the mobile dot indicators' active state and visibility.
  * @param {HTMLElement} track The scrolling track element.
  * @param {HTMLButtonElement} prev Previous button.
  * @param {HTMLButtonElement} next Next button.
  * @param {HTMLElement} nav The nav container.
+ * @param {HTMLElement} dots The dot indicators container.
+ * @param {HTMLButtonElement[]} dotButtons One button per slide.
  */
-function updateNav(track, prev, next, nav) {
+function updateNav(track, prev, next, nav, dots, dotButtons) {
   const maxScroll = track.scrollWidth - track.clientWidth;
   const overflows = maxScroll > 1;
   nav.hidden = !overflows;
+  dots.hidden = !overflows;
   const atStart = track.scrollLeft <= 1;
   const atEnd = track.scrollLeft >= maxScroll - 1;
   prev.disabled = atStart;
   next.disabled = atEnd;
+
+  const delta = slideDelta(track);
+  const activeIndex = delta ? Math.round(track.scrollLeft / delta) : 0;
+  dotButtons.forEach((dot, i) => dot.setAttribute('aria-selected', String(i === activeIndex)));
+}
+
+/**
+ * Builds the mobile-only dot indicators, one per slide.
+ * @param {number} count Number of slides.
+ * @returns {{ dots: HTMLElement, dotButtons: HTMLButtonElement[] }}
+ */
+function createDots(count) {
+  const dots = document.createElement('div');
+  dots.className = 'carousel-dots';
+  dots.setAttribute('role', 'tablist');
+  dots.setAttribute('aria-label', 'Slides');
+
+  const dotButtons = Array.from({ length: count }, (_, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'carousel-dot';
+    dot.setAttribute('role', 'tab');
+    dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+    dot.setAttribute('aria-selected', 'false');
+    dots.append(dot);
+    return dot;
+  });
+
+  return { dots, dotButtons };
 }
 
 /**
@@ -151,6 +185,16 @@ export default function createCarousel(children, options = {}) {
   prev.setAttribute('aria-controls', track.id);
   next.setAttribute('aria-controls', track.id);
 
+  // --- mobile-only dot indicators (replace the prev/next nav on mobile) --
+  const { dots, dotButtons } = createDots(items.length);
+  dotButtons.forEach((dot, i) => {
+    dot.setAttribute('aria-controls', track.id);
+    dot.addEventListener('click', () => {
+      track.scrollTo({ left: slideDelta(track) * i, behavior: 'smooth' });
+    });
+  });
+  carousel.append(dots);
+
   // --- bottom navigation (below the track) ------------------------------
   if (navPosition === 'bottom') {
     carousel.append(nav);
@@ -175,7 +219,7 @@ export default function createCarousel(children, options = {}) {
   prev.addEventListener('click', () => scrollByItems(-1));
   next.addEventListener('click', () => scrollByItems(1));
 
-  const refresh = () => updateNav(track, prev, next, nav);
+  const refresh = () => updateNav(track, prev, next, nav, dots, dotButtons);
   track.addEventListener('scroll', refresh, { passive: true });
   if (typeof ResizeObserver !== 'undefined') {
     new ResizeObserver(refresh).observe(track);

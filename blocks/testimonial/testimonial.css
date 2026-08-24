@@ -92,8 +92,11 @@
   font-weight: var(--font-weight-bold);
 }
 
-/* media: white card (Figma radius 24) with layered shadow; inner wrap (radius 20, 4px inset) clips the photo */
+/* media: white card (Figma radius 24) with layered shadow; inner wrap (radius 20, 4px inset) clips the photo.
+   order: -1 puts it on top on mobile/tablet — reset to source order (photo
+   right of the quote) at the desktop breakpoint below. */
 .testimonial .testimonial-media {
+  order: -1;
   position: relative;
   width: 100%;
   padding: 4px;
@@ -189,6 +192,7 @@
   }
 
   .testimonial .testimonial-media {
+    order: 0;
     max-width: var(--testimonial-media-max-width);
     margin-left: auto;
   }

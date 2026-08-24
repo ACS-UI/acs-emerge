@@ -55,9 +55,11 @@
   margin-bottom: 0;
 }
 
-/* ----- navigation arrows (top right) ----- */
+/* ----- navigation arrows (top right) -----
+   Mobile-first: hidden by default, dot indicators take over on mobile;
+   restored at the tablet breakpoint below where dots are hidden instead. */
 .carousel .carousel-nav {
-  display: flex;
+  display: none;
   flex: 0 0 auto;
   gap: var(--carousel-nav-gap, 4px);
 }
@@ -144,6 +146,52 @@ main .section.bg-gradient-b .carousel .carousel-nav-next .carousel-nav-icon {
   --carousel-arrow-mask: url('../icons/arrow-right.svg');
 }
 
+/* ----- mobile dot indicators -----
+   Shown by default (mobile-first); hidden again at the tablet breakpoint
+   where the prev/next nav takes over (see .carousel-nav above). */
+.carousel .carousel-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--carousel-dot-gap, 8px);
+}
+
+.carousel .carousel-dots[hidden] {
+  display: none;
+}
+
+.carousel .carousel-dot {
+  width: var(--carousel-dot-size, 8px);
+  height: var(--carousel-dot-size, 8px);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: currentcolor;
+  opacity: 0.3;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.carousel .carousel-dot:focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: 2px;
+}
+
+.carousel .carousel-dot:hover {
+  opacity: 0.5;
+}
+
+/* On coloured (gradient) sections, dots are explicitly white rather than
+   relying on inherited text color (same convention as the nav arrows above). */
+main .section.bg-gradient-a .carousel .carousel-dot,
+main .section.bg-gradient-b .carousel .carousel-dot {
+  background: var(--color-white);
+}
+
+.carousel .carousel-dot[aria-selected="true"] {
+  opacity: 1;
+}
+
 /* ----- viewport + scrolling track ----- */
 .carousel .carousel-viewport {
   overflow: hidden;
@@ -182,6 +230,17 @@ main .section.bg-gradient-b .carousel .carousel-nav-next .carousel-nav-icon {
 .carousel .carousel-footer {
   display: flex;
   justify-content: center;
+}
+
+/* tablet/desktop: prev/next arrows replace the mobile dot indicators */
+@media (width >= 900px) {
+  .carousel .carousel-nav {
+    display: flex;
+  }
+
+  .carousel .carousel-dots {
+    display: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

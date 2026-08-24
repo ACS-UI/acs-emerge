@@ -240,7 +240,7 @@ main .cards-working-container {
 /* ==========================================================================
    Desktop — three overlapping cards, outer two tilted ±12°
    ========================================================================== */
-@media (width >= 1024px) {
+@media (width >= 1240px) {
   .cards-working-container .default-content-wrapper h2 {
     font-size: var(--cw-heading-size);
     line-height: var(--cw-heading-line);
