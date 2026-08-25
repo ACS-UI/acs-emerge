@@ -94,8 +94,12 @@
 }
 
 .recording .recording-cta.button::after {
-  content: "\2192"; /* → */
+  content: "";
+  display: inline-block;
+  width: 11px;
+  height: 11px;
   margin-left: 8px;
+  background: url('../../icons/arrow-right-white.svg') center / contain no-repeat;
 }
 
 .recording .recording-cta.button:hover {

@@ -1,0 +1,138 @@
+.session-resources-carousel {
+  /* colors */
+  --session-resources-carousel-eyebrow-color: var(--color-gray-700);
+  --session-resources-carousel-heading-color: var(--color-gray-1000);
+  --session-resources-carousel-card-bg: var(--color-white);
+  --session-resources-carousel-title-color: var(--color-gray-1000);
+  --session-resources-carousel-desc-color: var(--color-gray-600);
+
+  /* typography — intro (eyebrow + heading) shared across the event blocks:
+     agenda, event-highlights, session-resources-carousel */
+  --session-resources-carousel-intro-font: 'Loew Riyadh Air', var(--heading-font-family);
+  --session-resources-carousel-eyebrow-size: var(--body-size-xl, 20px);
+  --session-resources-carousel-eyebrow-line: var(--line-height-600, 30px);
+  --session-resources-carousel-heading-size: var(--heading-size-xxl, 45px);
+  --session-resources-carousel-heading-line: var(--line-height-1100, 52px);
+  --session-resources-carousel-title-size: var(--body-size-l, 18px);
+  --session-resources-carousel-desc-size: var(--detail-size-m, 14px);
+
+  /* hover accent — filled red "Open" button; the card itself never changes */
+  --session-resources-carousel-accent: var(--color-red-900);
+  --session-resources-carousel-accent-text: var(--color-white);
+
+  /* layout */
+  --session-resources-carousel-gap: 24px;
+  --session-resources-carousel-card-pad: 24px;
+  --session-resources-carousel-card-radius: 12px;
+}
+
+
+.session-resources-carousel .carousel {
+  --carousel-visible: 1;
+  --carousel-gap: var(--session-resources-carousel-gap);
+}
+
+.session-resources-carousel .session-resources-carousel-intro {
+  margin-bottom: 28px;
+}
+
+.session-resources-carousel .session-resources-carousel-eyebrow {
+  margin: 0 0 8px;
+  color: var(--session-resources-carousel-eyebrow-color);
+  font-family: var(--session-resources-carousel-intro-font);
+  font-size: var(--session-resources-carousel-eyebrow-size);
+  font-weight: var(--font-weight-regular, 400);
+  line-height: var(--session-resources-carousel-eyebrow-line);
+}
+
+.session-resources-carousel .session-resources-carousel-intro :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+  color: var(--session-resources-carousel-heading-color);
+  font-family: var(--session-resources-carousel-intro-font);
+  font-size: var(--session-resources-carousel-heading-size);
+  font-weight: var(--font-weight-regular, 400);
+  line-height: var(--session-resources-carousel-heading-line);
+}
+
+/* card ----------------------------------------------------------------- */
+.session-resources-carousel .session-resources-carousel-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  height: 100%;
+  box-sizing: border-box;
+  padding: var(--session-resources-carousel-card-pad);
+  border-radius: var(--session-resources-carousel-card-radius);
+  background: var(--session-resources-carousel-card-bg);
+  box-shadow: 0 10px 30px rgb(0 0 0 / 6%);
+}
+
+.session-resources-carousel .session-resources-carousel-title {
+  margin: 0;
+  color: var(--session-resources-carousel-title-color);
+  font-size: var(--session-resources-carousel-title-size);
+  font-weight: var(--font-weight-bold, 700);
+  line-height: 1.25;
+}
+
+.session-resources-carousel .session-resources-carousel-desc {
+  margin: 0;
+  color: var(--session-resources-carousel-desc-color);
+  font-size: var(--session-resources-carousel-desc-size);
+  line-height: 1.5;
+}
+
+/* "Open" pill button */
+.session-resources-carousel .session-resources-carousel-open.button {
+  margin-top: 6px;
+  border: 1px solid var(--color-gray-400);
+  border-radius: 2.4em;
+  background: transparent;
+  color: var(--color-gray-1000);
+  font-size: var(--detail-size-m, 14px);
+  font-weight: var(--font-weight-regular, 400);
+  padding: 0.5em 1.1em;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.session-resources-carousel .session-resources-carousel-open.button::after {
+  content: "\2197"; /* ↗ */
+  margin-left: 6px;
+}
+
+/* direct button hover/focus (declared first for specificity ordering) */
+.session-resources-carousel .session-resources-carousel-open.button:hover,
+.session-resources-carousel .session-resources-carousel-open.button:focus-visible {
+  border-color: var(--session-resources-carousel-accent);
+  background: var(--session-resources-carousel-accent);
+  color: var(--session-resources-carousel-accent-text);
+  text-decoration: none;
+}
+
+/*
+ * Hovering/focusing anywhere on the card also fills the "Open" button red —
+ * this is the only visual change on hover; the card itself stays put.
+ */
+.session-resources-carousel .session-resources-carousel-card:hover .session-resources-carousel-open.button,
+.session-resources-carousel .session-resources-carousel-card:focus-within .session-resources-carousel-open.button {
+  border-color: var(--session-resources-carousel-accent);
+  background: var(--session-resources-carousel-accent);
+  color: var(--session-resources-carousel-accent-text);
+  text-decoration: none;
+}
+
+/* --------------------------------------------------------------------------
+   Tablet / desktop
+   -------------------------------------------------------------------------- */
+@media (width >= 768px) {
+  .session-resources-carousel .carousel {
+    --carousel-visible: 2;
+  }
+}
+
+@media (width >= 900px) {
+  .session-resources-carousel .carousel {
+    --carousel-visible: 3;
+  }
+}

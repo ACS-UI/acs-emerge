@@ -20,13 +20,10 @@
   --newsletter-banner-radius: 10px;
   --newsletter-banner-pad-block: 32px;
   --newsletter-banner-pad-inline: 28px;
-  --newsletter-banner-min-height: 240px;
 
   position: relative;
   display: flex;
   align-items: center;
-  min-height: var(--newsletter-banner-min-height);
-  padding: var(--newsletter-banner-pad-block) var(--newsletter-banner-pad-inline);
   border-radius: var(--newsletter-banner-radius);
   background: var(--newsletter-banner-bg);
   overflow: hidden;
@@ -62,14 +59,17 @@ main .newsletter-banner-container > .default-content-wrapper:first-child p {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
 }
 
-/* overlay text sits above the image — full width on mobile */
+/* overlay text sits above the image — full width on mobile. Padding lives
+   here, not on `.newsletter-banner` itself, so it only creates breathing
+   room around the text — the container's own box stays sized to whatever
+   this content actually needs instead of being inflated by its own padding. */
 .newsletter-banner .newsletter-banner-content {
   position: relative;
   z-index: 1;
   max-width: 100%;
+  padding: var(--newsletter-banner-pad-block) var(--newsletter-banner-pad-inline);
 }
 
 .newsletter-banner .newsletter-banner-eyebrow {
@@ -103,17 +103,10 @@ main .newsletter-banner-container > .default-content-wrapper:first-child p {
   .newsletter-banner {
     --newsletter-banner-pad-block: 44px;
     --newsletter-banner-pad-inline: 44px;
-    --newsletter-banner-min-height: 300px;
   }
 
   /* leave room for the imagery on the right at tablet+ */
   .newsletter-banner .newsletter-banner-content {
     max-width: 65%;
-  }
-}
-
-@media (width >= 1024px) {
-  .newsletter-banner {
-    --newsletter-banner-min-height: 340px;
   }
 }

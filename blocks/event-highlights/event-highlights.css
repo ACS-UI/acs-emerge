@@ -1,14 +1,18 @@
 .event-highlights {
   /* colors */
-  --event-highlights-eyebrow-color: var(--color-gray-600);
+  --event-highlights-eyebrow-color: var(--color-gray-700);
   --event-highlights-heading-color: var(--color-gray-1000);
   --event-highlights-value-color: var(--color-gray-1000);
   --event-highlights-label-color: var(--color-gray-600);
   --event-highlights-icon-color: var(--color-gray-1000);
 
-  /* typography */
-  --event-highlights-eyebrow-size: var(--detail-size-m, 14px);
-  --event-highlights-heading-size: var(--heading-size-xl, 36px);
+  /* typography — intro (eyebrow + heading) shared across the event blocks:
+     agenda, event-highlights, session-resources-carousel */
+  --event-highlights-intro-font: 'Loew Riyadh Air', var(--heading-font-family);
+  --event-highlights-eyebrow-size: var(--body-size-xl, 20px);
+  --event-highlights-eyebrow-line: var(--line-height-600, 30px);
+  --event-highlights-heading-size: var(--heading-size-xxl, 45px);
+  --event-highlights-heading-line: var(--line-height-1100, 52px);
   --event-highlights-value-size: clamp(36px, 5vw, 52px);
   --event-highlights-label-size: var(--detail-size-m, 14px);
 
@@ -23,20 +27,21 @@
 }
 
 .event-highlights .event-highlights-eyebrow {
-  margin: 0 0 6px;
+  margin: 0 0 8px;
   color: var(--event-highlights-eyebrow-color);
+  font-family: var(--event-highlights-intro-font);
   font-size: var(--event-highlights-eyebrow-size);
-  font-weight: var(--font-weight-bold, 700);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-weight: var(--font-weight-regular, 400);
+  line-height: var(--event-highlights-eyebrow-line);
 }
 
 .event-highlights .event-highlights-intro :is(h1, h2, h3, h4, h5, h6) {
   margin: 0;
   color: var(--event-highlights-heading-color);
+  font-family: var(--event-highlights-intro-font);
   font-size: var(--event-highlights-heading-size);
   font-weight: var(--font-weight-regular, 400);
-  line-height: 1.1;
+  line-height: var(--event-highlights-heading-line);
 }
 
 /* stats ---------------------------------------------------------------- */

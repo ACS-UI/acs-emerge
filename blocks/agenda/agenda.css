@@ -1,6 +1,6 @@
 .agenda {
   /* colors */
-  --agenda-eyebrow-color: var(--color-gray-600);
+  --agenda-eyebrow-color: var(--color-gray-700);
   --agenda-heading-color: var(--color-gray-1000);
   --agenda-row-bg: var(--color-white);
   --agenda-time-color: var(--color-red-900);
@@ -8,9 +8,13 @@
   --agenda-speaker-color: var(--color-gray-600);
   --agenda-duration-color: var(--color-gray-500);
 
-  /* typography */
-  --agenda-eyebrow-size: var(--detail-size-m, 14px);
-  --agenda-heading-size: var(--heading-size-xl, 36px);
+  /* typography — intro (eyebrow + heading) shared across the event blocks:
+     agenda, event-highlights, session-resources-carousel */
+  --agenda-intro-font: 'Loew Riyadh Air', var(--heading-font-family);
+  --agenda-eyebrow-size: var(--body-size-xl, 20px);
+  --agenda-eyebrow-line: var(--line-height-600, 30px);
+  --agenda-heading-size: var(--heading-size-xxl, 45px);
+  --agenda-heading-line: var(--line-height-1100, 52px);
   --agenda-time-size: var(--detail-size-m, 14px);
   --agenda-title-size: var(--body-size-l, 18px);
   --agenda-speaker-size: var(--detail-size-m, 14px);
@@ -28,20 +32,21 @@
 }
 
 .agenda .agenda-eyebrow {
-  margin: 0 0 6px;
+  margin: 0 0 8px;
   color: var(--agenda-eyebrow-color);
+  font-family: var(--agenda-intro-font);
   font-size: var(--agenda-eyebrow-size);
-  font-weight: var(--font-weight-bold, 700);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-weight: var(--font-weight-regular, 400);
+  line-height: var(--agenda-eyebrow-line);
 }
 
 .agenda .agenda-intro :is(h1, h2, h3, h4, h5, h6) {
   margin: 0;
   color: var(--agenda-heading-color);
+  font-family: var(--agenda-intro-font);
   font-size: var(--agenda-heading-size);
   font-weight: var(--font-weight-regular, 400);
-  line-height: 1.1;
+  line-height: var(--agenda-heading-line);
 }
 
 /* schedule ------------------------------------------------------------- */

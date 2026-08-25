@@ -14,7 +14,7 @@ const VIDEO_TYPES = {
 function buildBackgroundVideo(link, poster) {
   const video = document.createElement('video');
   // Attributes required for silent autoplay across browsers.
-  ['autoplay', 'loop', 'muted', 'playsinline'].forEach((attr) => video.setAttribute(attr, ''));
+  ['autoplay', 'muted', 'playsinline'].forEach((attr) => video.setAttribute(attr, ''));
   video.muted = true; // property form is required for autoplay in Safari/Chrome
   video.setAttribute('aria-hidden', 'true');
   if (poster) video.poster = poster.currentSrc || poster.src;
