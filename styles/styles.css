@@ -87,48 +87,6 @@ body.appear {
   display: block;
 }
 
-/*
- * Page transition (native cross-document View Transitions — no JS). On
- * same-origin navigation in a supporting browser: the outgoing page recedes
- * smoothly (shrinks + fades, sinking back and away, on the slower/gentler
- * side), while the incoming page rises quickly into place (fades in while
- * sliding up from bottom to top, snappier and shorter). Both start at once,
- * but the different durations/easings give each its own distinct feel.
- * Unsupported browsers just navigate normally; no fallback needed.
- */
-@view-transition {
-  navigation: auto;
-}
-
-::view-transition-old(root) {
-  animation: acs-page-recede 0.6s ease-out both;
-}
-
-::view-transition-new(root) {
-  animation: acs-page-rise 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-@keyframes acs-page-recede {
-  to {
-    transform: scale(0.94);
-    opacity: 0;
-  }
-}
-
-@keyframes acs-page-rise {
-  from {
-    transform: translateY(80px);
-    opacity: 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none;
-  }
-}
-
 header {
   height: var(--nav-height);
 }
