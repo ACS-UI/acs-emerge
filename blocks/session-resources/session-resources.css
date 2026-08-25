@@ -1,0 +1,125 @@
+.session-resources {
+  /* colors */
+  --session-resources-eyebrow-color: var(--color-gray-600);
+  --session-resources-heading-color: var(--color-gray-1000);
+  --session-resources-card-bg: var(--color-white);
+  --session-resources-title-color: var(--color-gray-1000);
+  --session-resources-desc-color: var(--color-gray-600);
+
+  /* typography */
+  --session-resources-eyebrow-size: var(--detail-size-m, 14px);
+  --session-resources-heading-size: var(--heading-size-xl, 36px);
+  --session-resources-title-size: var(--body-size-l, 18px);
+  --session-resources-desc-size: var(--detail-size-m, 14px);
+
+  /* layout */
+  --session-resources-gap: 24px;
+  --session-resources-card-pad: 24px;
+  --session-resources-card-radius: 12px;
+  --session-resources-min: 260px;
+
+  /* carousel: one card visible on mobile (see carousel.css) */
+  --carousel-visible: 1;
+  --carousel-gap: var(--session-resources-gap);
+}
+
+/* intro ---------------------------------------------------------------- */
+.session-resources .session-resources-intro {
+  margin-bottom: 28px;
+}
+
+.session-resources .session-resources-intro p:first-child {
+  margin: 0 0 6px;
+  color: var(--session-resources-eyebrow-color);
+  font-size: var(--session-resources-eyebrow-size);
+  font-weight: var(--font-weight-bold, 700);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.session-resources .session-resources-intro :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+  color: var(--session-resources-heading-color);
+  font-size: var(--session-resources-heading-size);
+  font-weight: var(--font-weight-regular, 400);
+  line-height: 1.1;
+}
+
+/* card ----------------------------------------------------------------- */
+.session-resources .session-resources-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  height: 100%;
+  box-sizing: border-box;
+  padding: var(--session-resources-card-pad);
+  border-radius: var(--session-resources-card-radius);
+  background: var(--session-resources-card-bg);
+  box-shadow: 0 10px 30px rgb(0 0 0 / 6%);
+}
+
+.session-resources .session-resources-title {
+  margin: 0;
+  color: var(--session-resources-title-color);
+  font-size: var(--session-resources-title-size);
+  font-weight: var(--font-weight-bold, 700);
+  line-height: 1.25;
+}
+
+.session-resources .session-resources-desc {
+  margin: 0;
+  color: var(--session-resources-desc-color);
+  font-size: var(--session-resources-desc-size);
+  line-height: 1.5;
+}
+
+/* "Open" pill button */
+.session-resources .session-resources-open.button {
+  margin-top: 6px;
+  border: 1px solid var(--color-gray-400);
+  border-radius: 2.4em;
+  background: transparent;
+  color: var(--color-gray-1000);
+  font-size: var(--detail-size-m, 14px);
+  font-weight: var(--font-weight-regular, 400);
+  padding: 0.5em 1.1em;
+}
+
+.session-resources .session-resources-open.button::after {
+  content: "\2197"; /* ↗ */
+  margin-left: 6px;
+}
+
+.session-resources .session-resources-open.button:hover {
+  border-color: var(--color-gray-1000);
+  background: var(--color-gray-1000);
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+/* base grid ------------------------------------------------------------ */
+.session-resources .session-resources-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--session-resources-gap);
+}
+
+/* --------------------------------------------------------------------------
+   Tablet / desktop
+   -------------------------------------------------------------------------- */
+@media (width >= 600px) {
+  .session-resources .session-resources-grid {
+    grid-template-columns: repeat(auto-fit, minmax(var(--session-resources-min), 1fr));
+  }
+
+  .session-resources {
+    --carousel-visible: 2;
+  }
+}
+
+@media (width >= 900px) {
+  .session-resources {
+    --carousel-visible: 3;
+  }
+}

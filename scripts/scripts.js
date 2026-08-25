@@ -74,7 +74,7 @@ function buildWidgetAutoBlocks(main) {
 }
 
 /**
- * Prepends a "Back" button on detail pages (leaders and success stories).
+ * Prepends a "Back" button on detail pages (leaders, success stories, events).
  * The button uses browser history so it returns the user to wherever they
  * came from. It is skipped on listing/folder pages and hidden when there is
  * no in-site history to go back to (e.g. a direct landing from search).
@@ -85,8 +85,9 @@ function buildWidgetAutoBlocks(main) {
 function buildBackButton(main) {
   // skip detached fragment mains (header/footer/fragments); only the page main
   if (main !== document.querySelector('main')) return;
-  // only individual detail pages: `/leaders/<slug>` and `/success-stories/<slug>`
-  const isDetailPage = /^\/(leaders|success-stories)\/[^/]+/.test(window.location.pathname);
+  // only individual detail pages: `/leaders/<slug>`, `/success-stories/<slug>`,
+  // and `/events/<slug>`
+  const isDetailPage = /^\/(leaders|success-stories|events)\/[^/]+/.test(window.location.pathname);
   if (!isDetailPage) return;
   if (window.history.length <= 1) return;
 
