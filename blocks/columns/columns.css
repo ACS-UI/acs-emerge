@@ -44,4 +44,14 @@
     flex: 1;
     order: unset;
   }
+
+  /* intro column (see isIntroCol in columns.js) takes 40% instead of
+     splitting evenly with its sibling, which takes the remaining 60% */
+  .columns > div > .columns-intro-col {
+    flex: 4 1 0%;
+  }
+
+  .columns > div:has(> .columns-intro-col) > div:not(.columns-intro-col) {
+    flex: 6 1 0%;
+  }
 }
