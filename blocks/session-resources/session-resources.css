@@ -12,13 +12,23 @@
   --session-resources-title-size: var(--body-size-l, 18px);
   --session-resources-desc-size: var(--detail-size-m, 14px);
 
+  /* hover accent (see image 3: filled red button, card lifts) */
+  --session-resources-accent: var(--color-red-900);
+  --session-resources-accent-text: var(--color-white);
+
   /* layout */
   --session-resources-gap: 24px;
   --session-resources-card-pad: 24px;
   --session-resources-card-radius: 12px;
   --session-resources-min: 260px;
+}
 
-  /* carousel: one card visible on mobile (see carousel.css) */
+/*
+ * Carousel sizing vars must sit on `.carousel` itself — its own base
+ * `--carousel-visible: 1` (carousel.css) wins over any value set on an
+ * ancestor. One card on mobile; more per breakpoint below.
+ */
+.session-resources.carousel .carousel {
   --carousel-visible: 1;
   --carousel-gap: var(--session-resources-gap);
 }
@@ -57,6 +67,14 @@
   border-radius: var(--session-resources-card-radius);
   background: var(--session-resources-card-bg);
   box-shadow: 0 10px 30px rgb(0 0 0 / 6%);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* hover: card lifts (image 3) */
+.session-resources .session-resources-card:hover,
+.session-resources .session-resources-card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgb(0 0 0 / 12%);
 }
 
 .session-resources .session-resources-title {
@@ -84,6 +102,7 @@
   font-size: var(--detail-size-m, 14px);
   font-weight: var(--font-weight-regular, 400);
   padding: 0.5em 1.1em;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .session-resources .session-resources-open.button::after {
@@ -91,10 +110,24 @@
   margin-left: 6px;
 }
 
-.session-resources .session-resources-open.button:hover {
-  border-color: var(--color-gray-1000);
-  background: var(--color-gray-1000);
-  color: var(--color-white);
+/* direct button hover/focus (declared first for specificity ordering) */
+.session-resources .session-resources-open.button:hover,
+.session-resources .session-resources-open.button:focus-visible {
+  border-color: var(--session-resources-accent);
+  background: var(--session-resources-accent);
+  color: var(--session-resources-accent-text);
+  text-decoration: none;
+}
+
+/*
+ * On card hover/focus the "Open" button also becomes a filled red pill —
+ * see image 3.
+ */
+.session-resources .session-resources-card:hover .session-resources-open.button,
+.session-resources .session-resources-card:focus-within .session-resources-open.button {
+  border-color: var(--session-resources-accent);
+  background: var(--session-resources-accent);
+  color: var(--session-resources-accent-text);
   text-decoration: none;
 }
 
@@ -113,13 +146,13 @@
     grid-template-columns: repeat(auto-fit, minmax(var(--session-resources-min), 1fr));
   }
 
-  .session-resources {
+  .session-resources.carousel .carousel {
     --carousel-visible: 2;
   }
 }
 
 @media (width >= 900px) {
-  .session-resources {
+  .session-resources.carousel .carousel {
     --carousel-visible: 3;
   }
 }
