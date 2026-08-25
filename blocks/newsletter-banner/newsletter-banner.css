@@ -1,0 +1,119 @@
+.newsletter-banner {
+  /* colors */
+  --newsletter-banner-text-color: var(--color-text-static-white);
+  --newsletter-banner-accent-color: #f5e003;
+  --newsletter-banner-eyebrow-color: var(--color-text-static-white);
+
+  /* brand gradient fallback shown behind/around the image */
+  --newsletter-banner-bg: linear-gradient(
+    95.72deg,
+    var(--color-red-900) 0%,
+    var(--color-magenta-900) 40%,
+    #7155fa 121%
+  );
+
+  /* typography */
+  --newsletter-banner-eyebrow-size: var(--body-size-m, 16px);
+  --newsletter-banner-title-size: clamp(36px, 8vw, 64px);
+
+  /* layout */
+  --newsletter-banner-radius: 10px;
+  --newsletter-banner-pad-block: 32px;
+  --newsletter-banner-pad-inline: 28px;
+  --newsletter-banner-min-height: 240px;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: var(--newsletter-banner-min-height);
+  padding: var(--newsletter-banner-pad-block) var(--newsletter-banner-pad-inline);
+  border-radius: var(--newsletter-banner-radius);
+  background: var(--newsletter-banner-bg);
+  overflow: hidden;
+  color: var(--newsletter-banner-text-color);
+}
+
+/* "NEWS LETTER" label authored as the section's default content, above the
+   banner — not part of the block itself, so it isn't touched by the block's
+   own --newsletter-banner-eyebrow rule below. Otherwise it inherits plain
+   body-paragraph styling (default size/weight/margin), which reads far too
+   large/heavy next to the banner. Small-caps eyebrow treatment matches the
+   convention used elsewhere (e.g. success-intro, cards-working eyebrow).
+   Scoped to :first-child — this section has a second default-content-wrapper
+   *after* the banner (the closing paragraphs), which must stay plain body text. */
+main .newsletter-banner-container > .default-content-wrapper:first-child p {
+  margin: 0 0 16px;
+  color: var(--color-gray-600);
+  font-size: var(--detail-size-m);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* full-bleed background image */
+.newsletter-banner .newsletter-banner-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.newsletter-banner .newsletter-banner-media picture,
+.newsletter-banner .newsletter-banner-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* overlay text sits above the image — full width on mobile */
+.newsletter-banner .newsletter-banner-content {
+  position: relative;
+  z-index: 1;
+  max-width: 100%;
+}
+
+.newsletter-banner .newsletter-banner-eyebrow {
+  margin: 0 0 12px;
+  color: var(--newsletter-banner-eyebrow-color);
+  font-size: var(--newsletter-banner-eyebrow-size);
+  font-weight: var(--font-weight-bold, 700);
+}
+
+.newsletter-banner .newsletter-banner-content :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+  color: var(--newsletter-banner-text-color);
+  font-size: var(--newsletter-banner-title-size);
+  font-weight: var(--font-weight-black, 900);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.newsletter-banner .newsletter-banner-content :is(h1, h2, h3, h4, h5, h6) span {
+  display: block;
+}
+
+.newsletter-banner .newsletter-banner-accent {
+  color: var(--newsletter-banner-accent-color);
+}
+
+/* --------------------------------------------------------------------------
+   Tablet / desktop
+   -------------------------------------------------------------------------- */
+@media (width >= 900px) {
+  .newsletter-banner {
+    --newsletter-banner-pad-block: 44px;
+    --newsletter-banner-pad-inline: 44px;
+    --newsletter-banner-min-height: 300px;
+  }
+
+  /* leave room for the imagery on the right at tablet+ */
+  .newsletter-banner .newsletter-banner-content {
+    max-width: 65%;
+  }
+}
+
+@media (width >= 1024px) {
+  .newsletter-banner {
+    --newsletter-banner-min-height: 340px;
+  }
+}

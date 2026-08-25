@@ -1,0 +1,87 @@
+.commitment-cards {
+  /* colors */
+  --commitment-cards-bg: var(--color-white);
+  --commitment-cards-eyebrow-color: var(--color-gray-600);
+  --commitment-cards-heading-color: var(--color-gray-1000);
+  --commitment-cards-body-color: var(--color-gray-800);
+  --commitment-cards-shadow:
+    0 0 0 1px rgb(0 0 0 / 4%),
+    0 1px 2px rgb(0 0 0 / 8%),
+    0 4px 6px rgb(0 0 0 / 4%);
+
+  /* typography */
+  --commitment-cards-eyebrow-size: var(--detail-size-l, 16px);
+  --commitment-cards-heading-size: var(--heading-size-s, 20px);
+  --commitment-cards-body-size: var(--body-size-l, 18px);
+
+  /* layout */
+  --commitment-cards-gap: 24px;
+  --commitment-cards-pad: 24px;
+  --commitment-cards-radius: 12px;
+  --commitment-cards-min: 280px;
+}
+
+/* "We Start Now" + heading, authored as the section's default content before
+   the cards — tight eyebrow-to-heading spacing (default UA paragraph/heading
+   margins would otherwise stack into a much bigger gap than intended). */
+main .commitment-cards-container > .default-content-wrapper p {
+  margin: 0 0 8px;
+}
+
+main .commitment-cards-container > .default-content-wrapper :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0 0 24px;
+}
+
+.commitment-cards ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--commitment-cards-min), 1fr));
+  gap: var(--commitment-cards-gap);
+}
+
+.commitment-cards .commitment-cards-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--commitment-cards-pad);
+  border-radius: var(--commitment-cards-radius);
+  background-color: var(--commitment-cards-bg);
+  box-shadow: var(--commitment-cards-shadow);
+}
+
+.commitment-cards .commitment-cards-eyebrow {
+  margin: 0 0 4px;
+  color: var(--commitment-cards-eyebrow-color);
+  font-size: var(--commitment-cards-eyebrow-size);
+  font-weight: var(--font-weight-regular, 400);
+}
+
+.commitment-cards .commitment-cards-card :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0 0 16px;
+  color: var(--commitment-cards-heading-color);
+  font-size: var(--commitment-cards-heading-size);
+  font-weight: var(--font-weight-bold, 700);
+  line-height: 1.2;
+}
+
+.commitment-cards .commitment-cards-card p:not(.commitment-cards-eyebrow) {
+  margin: 0;
+  color: var(--commitment-cards-body-color);
+  font-size: var(--commitment-cards-body-size);
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   Tablet / desktop — two-up grid, roomier padding
+   -------------------------------------------------------------------------- */
+@media (width >= 900px) {
+  .commitment-cards {
+    --commitment-cards-gap: 28px;
+    --commitment-cards-pad: 28px;
+  }
+
+  .commitment-cards ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

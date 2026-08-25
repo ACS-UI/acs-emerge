@@ -1,0 +1,98 @@
+.pillars {
+  /* colors */
+  --pillars-eyebrow-color: var(--color-gray-600);
+  --pillars-heading-color: var(--color-gray-1000);
+  --pillars-label-color: var(--color-gray-1000);
+  --pillars-text-color: var(--color-gray-800);
+  --pillars-rule-color: var(--color-gray-300);
+
+  /* typography */
+  --pillars-eyebrow-size: var(--body-size-l, 18px);
+  --pillars-heading-size: var(--heading-size-l, 28px);
+  --pillars-label-size: var(--detail-size-l, 16px);
+  --pillars-text-size: var(--body-size-l, 18px);
+
+  /* layout */
+  --pillars-col-gap: 32px;
+  --pillars-row-gap: 28px;
+  --pillars-rule-space: 28px;
+}
+
+/* intro ---------------------------------------------------------------- */
+.pillars .pillars-intro {
+  margin-bottom: var(--pillars-rule-space);
+  padding-bottom: var(--pillars-rule-space);
+  border-bottom: 1px solid var(--pillars-rule-color);
+}
+
+.pillars .pillars-eyebrow {
+  margin: 0 0 6px;
+  color: var(--pillars-eyebrow-color);
+  font-size: var(--pillars-eyebrow-size);
+  font-weight: var(--font-weight-regular, 400);
+}
+
+.pillars .pillars-intro :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+  color: var(--pillars-heading-color);
+  font-size: var(--pillars-heading-size);
+  font-weight: var(--font-weight-extra-bold, 800);
+  line-height: 1.15;
+}
+
+/* pillar columns ------------------------------------------------------- */
+.pillars .pillars-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--pillars-row-gap);
+}
+
+.pillars .pillars-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pillars .pillars-label {
+  margin: 0;
+  color: var(--pillars-label-color);
+  font-size: var(--pillars-label-size);
+  font-weight: var(--font-weight-bold, 700);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.pillars .pillars-item p:not(.pillars-label) {
+  margin: 0;
+  color: var(--pillars-text-color);
+  font-size: var(--pillars-text-size);
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   Tablet / desktop — pillars in a row, vertical dividers between them
+   -------------------------------------------------------------------------- */
+@media (width >= 900px) {
+  .pillars .pillars-list {
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 0;
+  }
+
+  .pillars .pillars-item {
+    padding: 0 var(--pillars-col-gap);
+    border-left: 1px solid var(--pillars-rule-color);
+  }
+
+  .pillars .pillars-item:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .pillars .pillars-item:last-child {
+    padding-right: 0;
+  }
+}
