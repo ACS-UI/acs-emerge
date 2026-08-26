@@ -231,6 +231,11 @@
   font-size: calc(var(--body-size-s, 14px) + 1px);
 }
 
+.event-cards .event-cards-link:hover .event-cards-badge-day,
+.event-cards .event-cards-link:focus-visible .event-cards-badge-day {
+  font-weight: var(--font-weight-regular);
+}
+
 /* ==========================================================================
    Desktop — three across
    ========================================================================== */
