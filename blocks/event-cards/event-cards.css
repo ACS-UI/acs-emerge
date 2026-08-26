@@ -26,11 +26,15 @@
 
 /* intro (eyebrow + headline) on the list page */
 .event-cards .event-cards-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 0;
   margin-bottom: 40px;
 }
 
 .event-cards .event-cards-intro p:first-child {
-  margin: 0 0 8px;
+  margin: 0;
   color: var(--ec-meta-color);
   font-size: var(--font-size-400);
   font-weight: var(--font-weight-bold);
