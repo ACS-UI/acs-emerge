@@ -1,0 +1,186 @@
+.event-cards {
+  /* fonts — Figma uses Adobe Clean Spectrum VF (not bundled); fall back */
+  --ec-font: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+
+  /* colors */
+  --ec-card-bg: var(--color-white);
+  --ec-title-color: var(--color-gray-1000);
+  --ec-meta-color: var(--color-gray-700);
+  --ec-badge-bg: var(--color-white);
+  --ec-badge-color: var(--color-gray-1000);
+  --ec-badge-muted: var(--color-gray-700);
+  --ec-card-shadow:
+    0 0 0 1px rgb(0 0 0 / 4%),
+    0 1px 2px rgb(0 0 0 / 6%),
+    0 12px 24px -12px rgb(0 0 0 / 12%);
+
+  /* layout */
+  --ec-gap: 24px;
+  --ec-card-radius: 16px;
+  --ec-image-radius: 12px;
+  --ec-image-ratio: 3 / 2;
+  --ec-badge-size: 56px;
+
+  font-family: var(--ec-font);
+}
+
+/* intro (eyebrow + headline) on the list page */
+.event-cards .event-cards-intro {
+  margin-bottom: 40px;
+}
+
+.event-cards .event-cards-intro p:first-child {
+  margin: 0 0 8px;
+  color: var(--ec-meta-color);
+  font-size: var(--font-size-400);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.event-cards .event-cards-intro h2 {
+  margin: 0;
+  color: var(--ec-title-color);
+  font-size: var(--heading-size-xxl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-1100);
+}
+
+/* ==========================================================================
+   Grid
+   ========================================================================== */
+.event-cards .event-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--ec-gap);
+}
+
+/* the card link wrapper shouldn't look like a link */
+.event-cards .event-cards-link,
+.event-cards .event-cards-link:any-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   Card
+   ========================================================================== */
+.event-cards .event-cards-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  padding: 12px;
+  background: var(--ec-card-bg);
+  border-radius: var(--ec-card-radius);
+  box-shadow: var(--ec-card-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.event-cards .event-cards-link:hover .event-cards-card,
+.event-cards .event-cards-link:focus-visible .event-cards-card {
+  transform: translateY(-4px);
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 4%),
+    0 18px 32px -12px rgb(0 0 0 / 20%);
+}
+
+/* image with the date badge overlaid top-left */
+.event-cards .event-cards-image {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: var(--ec-image-ratio);
+  border-radius: var(--ec-image-radius);
+  line-height: 0;
+}
+
+.event-cards .event-cards-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* date badge: white rounded square, month / big day / weekday */
+.event-cards .event-cards-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: var(--ec-badge-size);
+  height: var(--ec-badge-size);
+  border-radius: 12px;
+  background: var(--ec-badge-bg);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+  line-height: 1;
+  text-align: center;
+}
+
+.event-cards .event-cards-badge-month {
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.06em;
+  color: var(--ec-badge-muted);
+}
+
+.event-cards .event-cards-badge-day {
+  font-size: 22px;
+  font-weight: var(--font-weight-bold);
+  color: var(--ec-badge-color);
+}
+
+.event-cards .event-cards-badge-weekday {
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  color: var(--ec-badge-muted);
+}
+
+/* body */
+.event-cards .event-cards-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 4px 4px 8px;
+}
+
+.event-cards .event-cards-title {
+  margin: 0;
+  color: var(--ec-title-color);
+  font-family: var(--ec-font);
+  font-size: var(--title-size-l, 18px);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.3;
+}
+
+.event-cards .event-cards-meta {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  color: var(--ec-meta-color);
+  font-size: var(--body-size-s, 14px);
+}
+
+.event-cards .event-cards-meta-sep {
+  color: var(--ec-meta-color);
+}
+
+/* ==========================================================================
+   Desktop — three across
+   ========================================================================== */
+@media (width >= 600px) {
+  .event-cards .event-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  .event-cards .event-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+}
