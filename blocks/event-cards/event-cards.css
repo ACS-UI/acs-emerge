@@ -12,13 +12,13 @@
   --ec-card-shadow:
     0 0 0 1px rgb(0 0 0 / 4%),
     0 1px 2px rgb(0 0 0 / 6%),
-    0 12px 24px -12px rgb(0 0 0 / 12%);
+    0 4px 6px rgb(0 0 0 / 4%),
+    0 20px 20px -24px rgb(0 0 0 / 6%);
 
   /* layout */
   --ec-row-gap: 64px;
   --ec-column-gap: 32px;
-  --ec-card-radius: 16px;
-  --ec-image-radius: 12px;
+  --ec-card-radius: 24px;
   --ec-image-ratio: 3 / 2;
   --ec-badge-size: 56px;
 
@@ -85,9 +85,9 @@
 .event-cards .event-cards-card {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   height: 100%;
-  padding: 12px;
+  padding: 0 0 16px;
   background: var(--ec-card-bg);
   border-radius: var(--ec-card-radius);
   box-shadow: var(--ec-card-shadow);
@@ -102,12 +102,15 @@
     0 18px 32px -12px rgb(0 0 0 / 20%);
 }
 
-/* image with the date badge overlaid top-left */
+/* image with the date badge overlaid top-left. Now that the card has no
+   padding around it (flush top/left/right), the top corners match the
+   card's own radius so the rounding reads as one continuous edge instead
+   of a smaller corner nested inside a bigger one. */
 .event-cards .event-cards-image {
   position: relative;
   overflow: hidden;
   aspect-ratio: var(--ec-image-ratio);
-  border-radius: var(--ec-image-radius);
+  border-radius: var(--ec-card-radius) var(--ec-card-radius) 0 0;
   line-height: 0;
 }
 
