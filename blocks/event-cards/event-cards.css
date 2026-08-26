@@ -15,7 +15,8 @@
     0 12px 24px -12px rgb(0 0 0 / 12%);
 
   /* layout */
-  --ec-gap: 24px;
+  --ec-row-gap: 64px;
+  --ec-column-gap: 32px;
   --ec-card-radius: 16px;
   --ec-image-radius: 12px;
   --ec-image-ratio: 3 / 2;
@@ -26,15 +27,21 @@
 
 /* intro (eyebrow + headline) on the list page */
 .event-cards .event-cards-intro {
+  margin-bottom: 60px;
+}
+
+/* the actual eyebrow+heading wrapper is an unclassed inner <div>
+   (.event-cards-intro > div > p, h2) — the gap has to live here, since
+   .event-cards-intro itself only has this one direct child */
+.event-cards .event-cards-intro > div {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 12px 0;
-  margin-bottom: 60px;
 }
 
 .event-cards .event-cards-intro p:first-child {
   margin: 0;
+  padding: 12px 0;
   color: var(--ec-meta-color);
   font-size: var(--font-size-400);
   font-weight: var(--font-weight-bold);
@@ -59,7 +66,8 @@
 .event-cards .event-cards-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--ec-gap);
+  gap: var(--ec-row-gap) var(--ec-column-gap);
+  padding-top: 32px;
 }
 
 /* the card link wrapper shouldn't look like a link */
