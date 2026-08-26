@@ -1,5 +1,4 @@
 .commitment-cards {
-  /* colors */
   --commitment-cards-bg: var(--color-white);
   --commitment-cards-eyebrow-color: var(--color-gray-600);
   --commitment-cards-heading-color: var(--color-gray-1000);
@@ -9,18 +8,14 @@
     0px 4px 6px 0px #0000000A,
     0px 1px 2px 0px #00000014,
     0px 0px 0px 1px #0000000A;
-;
-
-  /* typography */
   --commitment-cards-eyebrow-size: var(--detail-size-l, 16px);
   --commitment-cards-heading-size: var(--heading-size-s, 20px);
   --commitment-cards-body-size: var(--body-size-l, 18px);
-
-  /* layout */
   --commitment-cards-gap: 24px;
   --commitment-cards-pad: 24px;
   --commitment-cards-radius: 24px;
   --commitment-cards-min: 280px;
+
   font-family: var(--font-family-sans);
 }
 
@@ -29,7 +24,7 @@ main .commitment-cards-container > .default-content-wrapper p {
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
-  color: #000000;
+  color: #000;
 }
 
 main .commitment-cards-container > .default-content-wrapper :is(h1, h2, h3, h4, h5, h6) {
@@ -37,7 +32,7 @@ main .commitment-cards-container > .default-content-wrapper :is(h1, h2, h3, h4, 
   font-weight: 700;
   font-size: 36px;
   line-height: 42px;
-  color: #000000;
+  color: #000;
   margin: 0 0 24px;
 }
 
@@ -82,9 +77,6 @@ main .commitment-cards-container > .default-content-wrapper :is(h1, h2, h3, h4, 
   line-height: 1.5;
 }
 
-/* --------------------------------------------------------------------------
-   Tablet / desktop — two-up grid, roomier padding
-   -------------------------------------------------------------------------- */
 @media (width >= 1024px) {
   .commitment-cards {
     --commitment-cards-pad: 32px 24px;
@@ -98,20 +90,20 @@ main .commitment-cards-container > .default-content-wrapper :is(h1, h2, h3, h4, 
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
-    color: #000000;
+    color: #000;
   }
 
   .commitment-cards .commitment-cards-card :is(h1, h2, h3, h4, h5, h6) {
     font-weight: 700;
     font-size: 28px;
     line-height: 32px;
-    color: #000000;
+    color: #000;
   }
 
   .commitment-cards .commitment-cards-card p:not(.commitment-cards-eyebrow) {
     font-weight: 400;
     font-size: 22px;
     line-height: 150%;
-    color: #000000;
+    color: #000;
   }
 }

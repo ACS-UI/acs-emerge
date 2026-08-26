@@ -1,26 +1,18 @@
 .newsletter-banner {
-  /* colors */
   --newsletter-banner-text-color: var(--color-text-static-white);
   --newsletter-banner-accent-color: #f5e003;
   --newsletter-banner-eyebrow-color: var(--color-text-static-white);
-
-  /* brand gradient fallback shown behind/around the image */
   --newsletter-banner-bg: linear-gradient(
     95.72deg,
     var(--color-red-900) 0%,
     var(--color-magenta-900) 40%,
     #7155fa 121%
   );
-
-  /* typography — mobile smaller than the desktop spec (Title/XL eyebrow,
-     Heading/XXXXL title), overridden at the tablet/desktop breakpoint below */
   --newsletter-banner-font: var(--font-family-loew);
   --newsletter-banner-eyebrow-size: var(--title-size-m, 16px);
   --newsletter-banner-eyebrow-line: 1.2;
   --newsletter-banner-title-size: var(--heading-size-xl, 36px);
   --newsletter-banner-title-line: 1.1;
-
-  /* layout */
   --newsletter-banner-radius: 10px;
   --newsletter-banner-pad-block: 32px;
   --newsletter-banner-pad-inline: 28px;
@@ -67,7 +59,6 @@ main .newsletter-banner-container > .default-content-wrapper:last-child p:last-c
   margin-bottom: 0;
 }
 
-/* full-bleed background image */
 .newsletter-banner .newsletter-banner-media {
   position: absolute;
   inset: 0;
@@ -114,9 +105,6 @@ main .newsletter-banner-container > .default-content-wrapper:last-child p:last-c
   color: var(--newsletter-banner-accent-color);
 }
 
-/* --------------------------------------------------------------------------
-   Tablet / desktop
-   -------------------------------------------------------------------------- */
 @media (width >= 900px) {
   .newsletter-banner {
     --newsletter-banner-pad-block: 40px;
@@ -127,7 +115,6 @@ main .newsletter-banner-container > .default-content-wrapper:last-child p:last-c
     --newsletter-banner-title-line: var(--line-height-1500, 84px);
   }
 
-  /* leave room for the imagery on the right at tablet+ */
   .newsletter-banner .newsletter-banner-content {
     max-width: 65%;
   }

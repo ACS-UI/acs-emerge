@@ -1,28 +1,20 @@
-/*
- * quote block (Figma "NotefromManoj" spec): pre-framed portrait rendered
- * as-is (no CSS frame/crop) + quote text in 'Adobe Clean Spectrum VF'
- * (not bundled) with a project-font fallback.
- */
 .quote {
-  /* fonts */
   --quote-font: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
-
-  /* colors — Figma quote text & marks are pure black */
   --quote-text-color: var(--color-gray-1000);
   --quote-mark-color: var(--color-gray-1000);
-
-  /* typography (mobile-first; desktop sizes overridden below) */
   --quote-text-size: 24px;
   --quote-text-line: var(--line-height-600);
   --quote-text-weight: var(--font-weight-regular);
   --quote-mark-size: 52px;
   --quote-mark-line: 1.15;
   --quote-mark-weight: var(--font-weight-regular);
-
-  /* layout */
   --quote-gap: 40px;
   --quote-content-max: 488px;
   --quote-image-col: 49%;
+}
+
+main > div.section .quote-wrapper {
+  max-width: 1150px;
 }
 
 .quote .quote-row {
@@ -32,7 +24,6 @@
   align-items: center;
 }
 
-/* portrait: pre-framed transparent PNG, rendered at natural proportions */
 .quote .quote-image {
   line-height: 0;
 }
@@ -44,7 +35,6 @@
   height: auto;
 }
 
-/* ===================== quote text ===================== */
 .quote .quote-body {
   position: relative;
   font-family: var(--quote-font);
@@ -60,7 +50,6 @@
   line-height: var(--quote-text-line);
 }
 
-/* decorative opening/closing quotation marks (Figma: 73px, weight 400) */
 .quote .quote-body blockquote::before,
 .quote .quote-body blockquote::after {
   position: absolute;
@@ -72,8 +61,8 @@
 }
 
 .quote .quote-body blockquote::before {
-  content: '\201C';
-  top: 0;
+  content: '';
+  top: 0; 
   left: 0;
 }
 
@@ -85,9 +74,12 @@
 
 .quote .quote-body blockquote p {
   margin: 0;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 150%;
+  color: #131313;
 }
 
-/* opening phrase stays bold via authored <strong>; base text is regular */
 .quote .quote-body blockquote strong {
   font-weight: var(--font-weight-bold);
 }
@@ -98,7 +90,6 @@
   font-weight: 600;
 }
 
-/* desktop: portrait left (~592px), quote right (488px), 64px gap */
 @media (width >= 900px) {
   .quote {
     --quote-text-size: var(--font-size-900);
@@ -113,17 +104,9 @@
   }
 }
 
-/* =====================================================================
-   `card` variant: a single bordered card (quote on top, avatar + name/role
-   attribution row below) instead of the base portrait + quote two-column
-   layout. Additive only — nothing above this point is touched, so the base
-   variant is unaffected. Authored content model is the same two cells
-   (image, text); quote.js moves the image into the attribution row instead
-   of rendering it as a top-level column when this variant is active.
-   ===================================================================== */
 .quote.card {
   --quote-card-radius: 24px;
-  --quote-card-padding: 32px;
+  --quote-card-padding: 48px;
   --quote-card-border-color: var(--color-red-900);
   --quote-card-mark-bg: var(--color-red-300);
   --quote-card-mark-width: 32px;
@@ -131,55 +114,62 @@
   --quote-card-name-color: var(--color-gray-1000);
   --quote-card-role-color: var(--color-gray-700);
   --quote-card-avatar-size: 56px;
+    padding: 40px 0;
 }
 
-/* the portrait moves inside the body's attribution row (see quote.js), so
-   the row itself no longer needs the base two-column grid */
 .quote.card .quote-row {
   display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--quote-card-radius);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.06);
 }
 
 .quote.card .quote-body {
   max-width: none;
   padding: var(--quote-card-padding);
-  border-radius: var(--quote-card-radius);
-  border-left: 4px solid var(--quote-card-border-color);
   background: var(--color-white);
   box-shadow: 0 1px 2px rgb(0 0 0 / 6%), 0 4px 6px rgb(0 0 0 / 4%);
+}
+
+.quote.card .quote-row::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  display: block;
+  width: 6px;
+  height: 100%;
+  background-color: red;
 }
 
 .quote.card .quote-body blockquote {
   padding: 0;
 }
 
-/* the decorative glyph is a masked icon here (pale accent tint), not the
-   base variant's typographic quotation marks — no closing mark either */
 .quote.card .quote-body blockquote::before {
   position: static;
   display: block;
   width: var(--quote-card-mark-width);
   height: var(--quote-card-mark-height);
-  margin-bottom: 16px;
+  margin-bottom: 40px;
   background: var(--quote-card-mark-bg);
-  mask: url('../../icons/quote-open.svg') left top / contain no-repeat;
-
-  /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-mask: url('../../icons/quote-open.svg') left top / contain no-repeat;
+  mask: url('../../icons/red-quote.svg') left top / contain no-repeat;
+  -webkit-mask: url('../../icons/red-quote.svg') left top / contain no-repeat;
 }
 
 .quote.card .quote-body blockquote::after {
   content: none;
 }
 
-/* avatar + name/role, laid out as a row below the quote */
 .quote.card .quote-attribution-row {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 24px;
+  gap: 20px;
+  margin-top: 44px;
 }
 
-/* authored headshot isn't pre-rounded — force it into a circle here */
 .quote.card .quote-avatar {
   flex: none;
   width: var(--quote-card-avatar-size);
@@ -204,14 +194,21 @@
 .quote.card .quote-name {
   margin: 0;
   font-family: var(--quote-font);
-  font-size: var(--body-font-size-xs);
-  font-weight: var(--font-weight-bold, 700);
   color: var(--quote-card-name-color);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 150%;
+  color: #131313;
 }
 
 .quote.card .quote-role {
   margin: 0;
   font-family: var(--quote-font);
-  font-size: var(--body-font-size-xs);
   color: var(--quote-card-role-color);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: #808080;
 }

@@ -1,5 +1,4 @@
 .callout {
-  /* colors */
   --callout-eyebrow-color: var(--color-gray-800);
   --callout-heading-color: var(--color-gray-1000);
   --callout-body-color: var(--color-gray-800);
@@ -7,14 +6,10 @@
   --callout-button-color: var(--color-gray-1000);
   --callout-button-border: var(--color-gray-1000);
   --callout-panel-bg: #f9f8f6;
-
-  /* typography */
   --callout-eyebrow-size: var(--body-size-m, 16px);
   --callout-heading-size: var(--heading-size-l, 28px);
   --callout-body-size: var(--body-size-l, 18px);
   --callout-note-size: var(--detail-size-l, 16px);
-
-  /* layout */
   --callout-max-width: 1000px;
 
   text-align: center;
@@ -47,7 +42,6 @@
   line-height: 1.5;
 }
 
-/* pill-shaped outlined button */
 .callout .button-container,
 .callout p.button-wrapper {
   margin: 28px 0 12px;
@@ -78,9 +72,6 @@
   font-weight: var(--font-weight-bold, 700);
 }
 
-/* --------------------------------------------------------------------------
-   Tablet / desktop
-   -------------------------------------------------------------------------- */
 @media (width >= 900px) {
   .callout {
     --callout-heading-size: var(--heading-size-xl, 36px);
@@ -90,8 +81,6 @@
     margin: 0 0 24px;
   }
 
-  /* pill button sizes to its label (with a comfortable minimum) at tablet+;
-     radius/shadow/font-size below are the Figma spec's Button_SecondaryBlack */
   .callout a.button,
   .callout button.button {
     width: auto;
@@ -103,10 +92,6 @@
     line-height: var(--line-height-200, 20px);
   }
 
-  /* --------------------------------------------------------------------
-     Desktop per Figma spec: the whole block becomes a centered flex column
-     on its own #f9f8f6 panel (same treatment as commitment-cards' intro).
-     -------------------------------------------------------------------- */
   main .section.callout-container {
     display: flex;
     flex-direction: column;
@@ -115,20 +100,10 @@
     padding: 60px;
   }
 
-  /* the block now provides its own 60px inset, so the wrapper's usual
-     inline padding (see main > .section > div in styles.css) would double
-     up on top of it */
   main .section.callout-container > div {
     padding-inline: 0;
   }
 
-  /* "Your Turn" — Pill shape (shadow + full radius, no visible fill given
-     in spec), same treatment as commitment-cards' eyebrow. inline-flex (not
-     flex) so the inherited text-align: center from .callout actually centers
-     this fit-content box — a plain flex box is block-level and text-align
-     has no effect on the box's own position, only flex/grid alignment or
-     margin: auto would (same reason the .button pill centers correctly:
-     it's inline-flex via the global button styles). */
   .callout .callout-eyebrow {
     margin: 0;
     display: inline-flex;
@@ -157,8 +132,6 @@
     margin: 0;
   }
 
-  /* "Form open through July 13" — same Pill treatment as the eyebrow
-     (inline-flex, not flex — see the comment on .callout-eyebrow above) */
   .callout .callout-note {
     margin: 8px 0 0;
     display: inline-flex;

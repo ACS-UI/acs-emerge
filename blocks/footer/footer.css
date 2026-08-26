@@ -1,4 +1,3 @@
-/* Figma font 'Adobe Clean Spectrum VF' isn't bundled — requested first with a project-font fallback */
 footer {
   --footer-bg: #7155fa;
   --footer-text-color: var(--color-white);

@@ -1,13 +1,9 @@
 .event-highlights {
-  /* colors */
   --event-highlights-eyebrow-color: var(--color-gray-700);
   --event-highlights-heading-color: var(--color-gray-1000);
   --event-highlights-value-color: var(--color-gray-1000);
   --event-highlights-label-color: var(--color-gray-600);
   --event-highlights-icon-color: var(--color-gray-1000);
-
-  /* typography — intro (eyebrow + heading) shared across the event blocks:
-     agenda, event-highlights, session-resources-carousel */
   --event-highlights-intro-font: 'Loew Riyadh Air', var(--heading-font-family);
   --event-highlights-eyebrow-size: var(--body-size-xl, 20px);
   --event-highlights-eyebrow-line: var(--line-height-600, 30px);
@@ -15,13 +11,10 @@
   --event-highlights-heading-line: var(--line-height-1100, 52px);
   --event-highlights-value-size: clamp(36px, 5vw, 52px);
   --event-highlights-label-size: var(--detail-size-m, 14px);
-
-  /* layout */
   --event-highlights-row-gap: 40px;
   --event-highlights-icon-size: 48px;
 }
 
-/* intro ---------------------------------------------------------------- */
 .event-highlights .event-highlights-intro {
   margin-bottom: 48px;
 }
@@ -44,7 +37,6 @@
   line-height: var(--event-highlights-heading-line);
 }
 
-/* stats ---------------------------------------------------------------- */
 .event-highlights .event-highlights-list {
   list-style: none;
   margin: 0;
@@ -90,9 +82,6 @@
   font-size: var(--event-highlights-label-size);
 }
 
-/* --------------------------------------------------------------------------
-   Tablet / desktop — all stats on one row
-   -------------------------------------------------------------------------- */
 @media (width >= 900px) {
   .event-highlights .event-highlights-list {
     grid-template-columns: repeat(4, 1fr);

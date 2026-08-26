@@ -1,24 +1,12 @@
-/* Header/nav — 96px tall, Adobe Clean Spectrum VF. Two variants: default
-   light bar (most pages) vs. transparent overlay w/ white text on hero
-   pages (homepage) — toggled via :has() below. Mobile-first. */
 header {
-  /* Figma header height (was 64px) */
   --nav-height: 96px;
-
-  /* Figma design font */
   --nav-font: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
-
-  /* default (light) variant colors */
   --nav-bg: var(--color-white);
   --nav-brand-color: var(--color-black);
   --nav-link-color: var(--color-gray-700);
   --nav-link-hover-color: var(--color-black);
   --nav-border: 1px solid var(--color-gray-200);
-
-  /* dark panel behind the open mobile menu (matches the theme) */
   --nav-menu-bg: #1a1a2e;
-
-  /* layout */
   --nav-gap: 7px;
   --nav-gap-desktop: 82px;
   --nav-max-width: 1248px;
@@ -32,8 +20,6 @@ header {
   --nav-dropdown-link-padding-block: 8px;
 }
 
-/* default: light bar in normal flow (header reserves --nav-height from
-   styles.css), with a bottom rule. */
 header .nav-wrapper {
   position: relative;
   width: 100%;
@@ -42,14 +28,11 @@ header .nav-wrapper {
   border-bottom: var(--nav-border);
 }
 
-/* mobile base: when the mobile menu is open, the wrapper itself becomes the
-   dark panel (it sits above the transparent nav) and drops its bottom rule. */
 header .nav-wrapper:has(nav[aria-expanded='true']) {
   background-color: var(--nav-menu-bg);
   border-bottom: 0;
 }
 
-/* hero pages (homepage): transparent overlay over the hero, white text */
 body:has(main > .hero-banner-container:first-child) > header {
   --nav-brand-color: var(--color-white);
   --nav-link-color: var(--color-gray-400);
@@ -89,12 +72,8 @@ header nav[aria-expanded='true'] {
   gap: 0 var(--nav-gap);
   overflow-y: auto;
   min-height: 100dvh;
-
-  /* opaque dark panel for the open mobile menu (matches the theme) so links
-     stay legible even when the closed bar is a transparent overlay */
   background-color: var(--nav-menu-bg);
 
-  /* mobile base: open mobile menu always uses light text on the dark panel */
   --nav-brand-color: var(--color-white);
   --nav-link-color: var(--color-gray-400);
   --nav-link-hover-color: var(--color-white);
@@ -104,16 +83,11 @@ header nav[aria-expanded='true'] {
   header nav {
     display: flex;
     justify-content: space-between;
-
-    /* Figma: 82px column gap between the brand and the nav sections
-       (via --nav-gap-desktop) */
     gap: 0 var(--nav-gap-desktop);
     max-width: var(--nav-max-width-desktop);
     padding: 0 var(--nav-padding-inline-desktop);
   }
 
-  /* desktop: aria-expanded="true" is the normal (always-on) state, not an
-     open mobile menu — undo the mobile-only overrides above */
   header .nav-wrapper:has(nav[aria-expanded='true']) {
     background-color: var(--nav-bg);
     border-bottom: var(--nav-border);
@@ -139,12 +113,9 @@ header nav p {
 header nav a:any-link,
 header nav a:hover {
   color: currentcolor;
-
-  /* never underline nav links / brand (overrides the global a:hover rule) */
   text-decoration: none;
 }
 
-/* hamburger */
 header nav .nav-hamburger {
   grid-area: hamburger;
   display: flex;
@@ -170,7 +141,6 @@ header nav .nav-hamburger button {
   white-space: initial;
 }
 
-/* subtle themed focus ring instead of the default yellow/blue box */
 header nav .nav-hamburger button:focus-visible {
   outline: 2px solid currentcolor;
   outline-offset: 2px;
@@ -236,13 +206,11 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   }
 }
 
-/* brand — Figma "Logo": Adobe mark (40x39) + "ACS GDC HUB" wordmark, 8px gap */
 header .nav-brand {
   grid-area: brand;
   color: var(--nav-brand-color);
 }
 
-/* wordmark text — Figma "Component/XL/Bold": 18px / 22px, 700 */
 header .nav-brand .nav-brand-text {
   font-size: var(--title-size-l);
   font-weight: var(--font-weight-bold);
@@ -250,7 +218,6 @@ header .nav-brand .nav-brand-text {
   color: var(--nav-brand-color);
 }
 
-/* lay out the authored logo mark + wordmark on one row */
 header .nav-brand p {
   display: flex;
   align-items: center;
@@ -264,7 +231,6 @@ header .nav-brand a:any-link {
   color: var(--nav-brand-color);
 }
 
-/* Adobe logo mark (icon or image) */
 header nav .nav-brand .icon,
 header nav .nav-brand img {
   width: 40px;
@@ -272,7 +238,6 @@ header nav .nav-brand img {
   flex: none;
 }
 
-/* sections — Figma nav links: 16px/20px, 700, #C6C6C6, 16px gap */
 header nav .nav-sections {
   grid-area: sections;
   flex: 1 1 auto;
@@ -293,7 +258,6 @@ header nav .nav-sections ul > li {
   font-weight: var(--font-weight-bold);
 }
 
-/* nav links: smooth color transition, hover to the variant's hover color */
 header nav .nav-sections a:any-link {
   transition: color 300ms ease-in-out;
 }
@@ -318,12 +282,9 @@ header nav[aria-expanded='true'] .nav-sections {
   display: block;
   visibility: visible;
   align-self: start;
-
-  /* mobile base: roomier stacked links with comfortable tap targets */
   padding-top: 8px;
 }
 
-/* mobile base: open menu's links stack vertically, larger tap targets */
 header nav[aria-expanded='true'] .nav-sections ul {
   display: flex;
   flex-direction: column;
@@ -331,7 +292,6 @@ header nav[aria-expanded='true'] .nav-sections ul {
   font-size: 18px;
 }
 
-/* mobile base: roomier tap target per stacked link */
 header nav[aria-expanded='true'] .nav-sections ul > li {
   padding: 10px 0;
 }
@@ -345,8 +305,6 @@ header nav[aria-expanded='true'] .nav-sections ul > li {
 
   header nav[aria-expanded='true'] .nav-sections {
     align-self: unset;
-
-    /* desktop: undo the mobile open-menu spacing above */
     padding-top: 0;
   }
 
@@ -355,7 +313,6 @@ header nav[aria-expanded='true'] .nav-sections ul > li {
     cursor: pointer;
   }
 
-  /* Figma hides the dropdown chevron (chevron-down: display none) */
   header nav .nav-sections .nav-drop::after {
     display: none;
   }
@@ -415,7 +372,6 @@ header nav[aria-expanded='true'] .nav-sections ul > li {
   }
 }
 
-/* tools */
 header nav .nav-tools {
   grid-area: tools;
 }

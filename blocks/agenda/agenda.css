@@ -1,5 +1,4 @@
 .agenda {
-  /* colors */
   --agenda-eyebrow-color: var(--color-gray-700);
   --agenda-heading-color: var(--color-gray-1000);
   --agenda-row-bg: var(--color-white);
@@ -7,9 +6,6 @@
   --agenda-title-color: var(--color-gray-1000);
   --agenda-speaker-color: var(--color-gray-600);
   --agenda-duration-color: var(--color-gray-500);
-
-  /* typography — intro (eyebrow + heading) shared across the event blocks:
-     agenda, event-highlights, session-resources-carousel */
   --agenda-intro-font: 'Loew Riyadh Air', var(--heading-font-family);
   --agenda-eyebrow-size: var(--body-size-xl, 20px);
   --agenda-eyebrow-line: var(--line-height-600, 30px);
@@ -19,14 +15,11 @@
   --agenda-title-size: var(--body-size-l, 18px);
   --agenda-speaker-size: var(--detail-size-m, 14px);
   --agenda-duration-size: var(--detail-size-s, 12px);
-
-  /* layout */
   --agenda-row-gap: 12px;
   --agenda-row-pad: 20px 24px;
   --agenda-row-radius: 10px;
 }
 
-/* intro ---------------------------------------------------------------- */
 .agenda .agenda-intro {
   margin-bottom: 28px;
 }
@@ -49,7 +42,6 @@
   line-height: var(--agenda-heading-line);
 }
 
-/* schedule ------------------------------------------------------------- */
 .agenda .agenda-list {
   list-style: none;
   margin: 0;
@@ -100,9 +92,6 @@
   font-size: var(--agenda-duration-size);
 }
 
-/* --------------------------------------------------------------------------
-   Tablet / desktop — time | body | duration on one row, duration right-aligned
-   -------------------------------------------------------------------------- */
 @media (width >= 900px) {
   .agenda .agenda-item {
     grid-template-columns: 90px 1fr auto;
