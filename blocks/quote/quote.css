@@ -47,7 +47,6 @@
 /* ===================== quote text ===================== */
 .quote .quote-body {
   position: relative;
-  max-width: var(--quote-content-max);
   font-family: var(--quote-font);
   color: var(--quote-text-color);
 }

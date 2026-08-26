@@ -1,5 +1,15 @@
 .columns {
   --columns-gap: 24px;
+  --columns-intro-eyebrow-size: var(--title-size-xl, 20px);
+  --columns-intro-eyebrow-line: var(--line-height-400, 24px);
+  --columns-intro-heading-size: var(--heading-size-xl, 36px);
+  --columns-intro-heading-line: var(--line-height-900, 42px);
+  --columns-body-size: var(--body-size-xxxl, 25px);
+}
+
+
+.columns p {
+  margin: 0;
 }
 
 .columns > div {
@@ -35,6 +45,10 @@
 }
 
 @media (width >= 900px) {
+  .columns {
+    --columns-gap: 120px;
+  }
+
   .columns > div {
     flex-direction: unset;
     gap: var(--columns-gap);
@@ -51,7 +65,24 @@
     flex: 4 1 0%;
   }
 
+  .columns > div > .columns-intro-col p {
+    font-family: var(--body);
+    font-size: var(--columns-intro-eyebrow-size);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--columns-intro-eyebrow-line);
+  }
+
+  .columns > div > .columns-intro-col :is(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-family-sans);
+    font-size: var(--columns-intro-heading-size);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--columns-intro-heading-line);
+  }
+
   .columns > div:has(> .columns-intro-col) > div:not(.columns-intro-col) {
     flex: 6 1 0%;
+    font-size: var(--columns-body-size);
+    font-weight: var(--font-weight-regular);
+    line-height: 1.5;
   }
 }

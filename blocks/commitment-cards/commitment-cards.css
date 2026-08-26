@@ -5,9 +5,11 @@
   --commitment-cards-heading-color: var(--color-gray-1000);
   --commitment-cards-body-color: var(--color-gray-800);
   --commitment-cards-shadow:
-    0 0 0 1px rgb(0 0 0 / 4%),
-    0 1px 2px rgb(0 0 0 / 8%),
-    0 4px 6px rgb(0 0 0 / 4%);
+    0px 20px 20px -24px #00000014,
+    0px 4px 6px 0px #0000000A,
+    0px 1px 2px 0px #00000014,
+    0px 0px 0px 1px #0000000A;
+;
 
   /* typography */
   --commitment-cards-eyebrow-size: var(--detail-size-l, 16px);
@@ -17,18 +19,25 @@
   /* layout */
   --commitment-cards-gap: 24px;
   --commitment-cards-pad: 24px;
-  --commitment-cards-radius: 12px;
+  --commitment-cards-radius: 24px;
   --commitment-cards-min: 280px;
+  font-family: var(--font-family-sans);
 }
 
-/* "We Start Now" + heading, authored as the section's default content before
-   the cards — tight eyebrow-to-heading spacing (default UA paragraph/heading
-   margins would otherwise stack into a much bigger gap than intended). */
 main .commitment-cards-container > .default-content-wrapper p {
-  margin: 0 0 8px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: #000000;
 }
 
 main .commitment-cards-container > .default-content-wrapper :is(h1, h2, h3, h4, h5, h6) {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 42px;
+  color: #000000;
   margin: 0 0 24px;
 }
 
@@ -48,6 +57,7 @@ main .commitment-cards-container > .default-content-wrapper :is(h1, h2, h3, h4, 
   border-radius: var(--commitment-cards-radius);
   background-color: var(--commitment-cards-bg);
   box-shadow: var(--commitment-cards-shadow);
+  
 }
 
 .commitment-cards .commitment-cards-eyebrow {
@@ -58,7 +68,7 @@ main .commitment-cards-container > .default-content-wrapper :is(h1, h2, h3, h4, 
 }
 
 .commitment-cards .commitment-cards-card :is(h1, h2, h3, h4, h5, h6) {
-  margin: 0 0 16px;
+  margin: 0 0 24px;
   color: var(--commitment-cards-heading-color);
   font-size: var(--commitment-cards-heading-size);
   font-weight: var(--font-weight-bold, 700);
@@ -75,13 +85,33 @@ main .commitment-cards-container > .default-content-wrapper :is(h1, h2, h3, h4, 
 /* --------------------------------------------------------------------------
    Tablet / desktop — two-up grid, roomier padding
    -------------------------------------------------------------------------- */
-@media (width >= 900px) {
+@media (width >= 1024px) {
   .commitment-cards {
-    --commitment-cards-gap: 28px;
-    --commitment-cards-pad: 28px;
+    --commitment-cards-pad: 32px 24px;
   }
 
   .commitment-cards ul {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .commitment-cards .commitment-cards-eyebrow {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
+  }
+
+  .commitment-cards .commitment-cards-card :is(h1, h2, h3, h4, h5, h6) {
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 32px;
+    color: #000000;
+  }
+
+  .commitment-cards .commitment-cards-card p:not(.commitment-cards-eyebrow) {
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 150%;
+    color: #000000;
   }
 }

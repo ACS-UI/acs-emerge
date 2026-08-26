@@ -12,9 +12,13 @@
     #7155fa 121%
   );
 
-  /* typography */
-  --newsletter-banner-eyebrow-size: var(--body-size-m, 16px);
-  --newsletter-banner-title-size: clamp(36px, 8vw, 64px);
+  /* typography — mobile smaller than the desktop spec (Title/XL eyebrow,
+     Heading/XXXXL title), overridden at the tablet/desktop breakpoint below */
+  --newsletter-banner-font: var(--font-family-loew);
+  --newsletter-banner-eyebrow-size: var(--title-size-m, 16px);
+  --newsletter-banner-eyebrow-line: 1.2;
+  --newsletter-banner-title-size: var(--heading-size-xl, 36px);
+  --newsletter-banner-title-line: 1.1;
 
   /* layout */
   --newsletter-banner-radius: 10px;
@@ -30,21 +34,37 @@
   color: var(--newsletter-banner-text-color);
 }
 
-/* "NEWS LETTER" label authored as the section's default content, above the
-   banner — not part of the block itself, so it isn't touched by the block's
-   own --newsletter-banner-eyebrow rule below. Otherwise it inherits plain
-   body-paragraph styling (default size/weight/margin), which reads far too
-   large/heavy next to the banner. Small-caps eyebrow treatment matches the
-   convention used elsewhere (e.g. success-intro, cards-working eyebrow).
-   Scoped to :first-child — this section has a second default-content-wrapper
-   *after* the banner (the closing paragraphs), which must stay plain body text. */
 main .newsletter-banner-container > .default-content-wrapper:first-child p {
-  margin: 0 0 16px;
-  color: var(--color-gray-600);
-  font-size: var(--detail-size-m);
+  margin: 0 0 20px;
+  color: var(--color-gray-700);
+  font-family: var(--font-family-loew);
+  font-size: var(--title-size-xl, 20px);
   font-weight: var(--font-weight-bold);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  line-height: var(--line-height-400, 24px);
+}
+
+main .newsletter-banner-container > .default-content-wrapper:last-child {
+  margin-top: 48px;
+}
+
+main .newsletter-banner-container > .default-content-wrapper:last-child p {
+  margin: 0 0 16px;
+  color: var(--color-gray-1000);
+  font-family: var(--font-family-loew);
+  font-size: var(--body-size-l, 18px);
+  font-weight: var(--font-weight-regular, 400);
+  line-height: 1.5;
+}
+
+main .newsletter-banner-container > .default-content-wrapper:last-child p:has(strong) {
+  font-family: var(--font-family-loew);
+  font-size: var(--heading-size-s, 20px);
+  font-weight: var(--font-weight-bold, 700);
+  line-height: var(--line-height-400, 24px);
+}
+
+main .newsletter-banner-container > .default-content-wrapper:last-child p:last-child {
+  margin-bottom: 0;
 }
 
 /* full-bleed background image */
@@ -61,10 +81,6 @@ main .newsletter-banner-container > .default-content-wrapper:first-child p {
   height: 100%;
 }
 
-/* overlay text sits above the image — full width on mobile. Padding lives
-   here, not on `.newsletter-banner` itself, so it only creates breathing
-   room around the text — the container's own box stays sized to whatever
-   this content actually needs instead of being inflated by its own padding. */
 .newsletter-banner .newsletter-banner-content {
   position: relative;
   z-index: 1;
@@ -75,17 +91,19 @@ main .newsletter-banner-container > .default-content-wrapper:first-child p {
 .newsletter-banner .newsletter-banner-eyebrow {
   margin: 0 0 12px;
   color: var(--newsletter-banner-eyebrow-color);
+  font-family: var(--newsletter-banner-font);
   font-size: var(--newsletter-banner-eyebrow-size);
   font-weight: var(--font-weight-bold, 700);
+  line-height: var(--newsletter-banner-eyebrow-line);
 }
 
 .newsletter-banner .newsletter-banner-content :is(h1, h2, h3, h4, h5, h6) {
   margin: 0;
   color: var(--newsletter-banner-text-color);
+  font-family: var(--newsletter-banner-font);
   font-size: var(--newsletter-banner-title-size);
-  font-weight: var(--font-weight-black, 900);
-  line-height: 1.05;
-  letter-spacing: -0.01em;
+  font-weight: var(--font-weight-bold, 700);
+  line-height: var(--newsletter-banner-title-line);
 }
 
 .newsletter-banner .newsletter-banner-content :is(h1, h2, h3, h4, h5, h6) span {
@@ -101,8 +119,12 @@ main .newsletter-banner-container > .default-content-wrapper:first-child p {
    -------------------------------------------------------------------------- */
 @media (width >= 900px) {
   .newsletter-banner {
-    --newsletter-banner-pad-block: 44px;
-    --newsletter-banner-pad-inline: 44px;
+    --newsletter-banner-pad-block: 40px;
+    --newsletter-banner-pad-inline: 32px;
+    --newsletter-banner-eyebrow-size: var(--title-size-xl, 20px);
+    --newsletter-banner-eyebrow-line: var(--line-height-400, 24px);
+    --newsletter-banner-title-size: var(--heading-size-xxxxl, 73px);
+    --newsletter-banner-title-line: var(--line-height-1500, 84px);
   }
 
   /* leave room for the imagery on the right at tablet+ */
