@@ -53,6 +53,7 @@
 .event-cards .event-cards-intro h2 {
   margin: 0;
   max-width: 800px;
+  font-family: var(--ec-font);
   color: var(--color-text-static-black);
   font-size: var(--heading-size-xxxxl);
   font-weight: var(--font-weight-regular);
