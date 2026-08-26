@@ -184,3 +184,27 @@
     gap: 32px;
   }
 }
+
+/* ==========================================================================
+   Carousel variant — feed cards into the shared carousel utility. The vars
+   must sit on `.carousel` itself, since carousel.css's own base
+   (--carousel-visible: 1) otherwise wins by specificity. Without this the
+   carousel shows a single full-width card.
+   ========================================================================== */
+.event-cards.carousel .carousel {
+  --carousel-visible: 1;
+  --carousel-gap: 24px;
+}
+
+@media (width >= 600px) {
+  .event-cards.carousel .carousel {
+    --carousel-visible: 2;
+  }
+}
+
+@media (width >= 900px) {
+  .event-cards.carousel .carousel {
+    --carousel-visible: 3;
+    --carousel-gap: 32px;
+  }
+}
