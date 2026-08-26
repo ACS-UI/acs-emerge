@@ -318,6 +318,13 @@ main > .hero-banner-container:first-of-type {
   margin-top: 0;
 }
 
+/* per Figma, the events listing page needs a larger 210px gap where the
+   events grid is immediately followed by the success-stories carousel,
+   instead of the default 60px collapsed section margin */
+main > .event-cards-container + .success-container {
+  margin-top: 210px;
+}
+
 @media (width >= 900px) {
   main > .section > div {
     padding: 0 32px;
