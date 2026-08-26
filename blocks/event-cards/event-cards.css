@@ -197,7 +197,6 @@
 @media (width >= 900px) {
   .event-cards .event-cards-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
   }
 }
 
