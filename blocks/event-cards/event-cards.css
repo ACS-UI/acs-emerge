@@ -99,10 +99,8 @@
     0 18px 32px -12px rgb(0 0 0 / 20%);
 }
 
-/* image with the date badge overlaid top-left. Now that the card has no
-   padding around it (flush top/left/right), the top corners match the
-   card's own radius so the rounding reads as one continuous edge instead
-   of a smaller corner nested inside a bigger one. */
+/* image with the date badge overlaid top-left; top corners match the
+   card's own radius since the card has no padding around it */
 .event-cards .event-cards-image {
   position: relative;
   overflow: hidden;
@@ -159,12 +157,38 @@
   color: #808080;
 }
 
-/* body */
+/* body — position:relative anchors the hover-only arrow icon (::after) */
 .event-cards .event-cards-body {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 4px;
   margin: 0 16px;
+}
+
+/* hover-only trailing arrow — same mask technique as success.css's
+   view-all arrow; position/reveal approximated, no hover variant was
+   available in Figma to confirm exact values */
+.event-cards .event-cards-body::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 17px;
+  height: 17px;
+  background: var(--color-red-1000);
+  opacity: 0;
+  transform: rotate(-45deg);
+  mask: url('../../icons/arrow-right-solid.svg') center / contain no-repeat;
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask: url('../../icons/arrow-right-solid.svg') center / contain no-repeat;
+  transition: opacity 0.2s ease;
+}
+
+.event-cards .event-cards-link:hover .event-cards-body::after,
+.event-cards .event-cards-link:focus-visible .event-cards-body::after {
+  opacity: 1;
 }
 
 .event-cards .event-cards-title {
@@ -192,6 +216,19 @@
 
 .event-cards .event-cards-meta-sep {
   color: var(--color-black);
+}
+
+/* hover: title turns red + bigger, meta stays black + bigger (sizes
+   approximated — no exact hover-state numbers available) */
+.event-cards .event-cards-link:hover .event-cards-title,
+.event-cards .event-cards-link:focus-visible .event-cards-title {
+  color: var(--color-red-1000);
+  font-size: calc(var(--title-size-xxxl) + 2px);
+}
+
+.event-cards .event-cards-link:hover .event-cards-meta,
+.event-cards .event-cards-link:focus-visible .event-cards-meta {
+  font-size: calc(var(--body-size-s, 14px) + 1px);
 }
 
 /* ==========================================================================
