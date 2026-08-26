@@ -6,8 +6,6 @@
   --ec-card-bg: var(--color-white);
   --ec-meta-color: var(--color-gray-700);
   --ec-badge-bg: var(--color-white);
-  --ec-badge-color: var(--color-gray-1000);
-  --ec-badge-muted: var(--color-gray-700);
   --ec-card-shadow:
     0 0 0 1px rgb(0 0 0 / 4%),
     0 1px 2px rgb(0 0 0 / 6%),
@@ -19,7 +17,6 @@
   --ec-column-gap: 32px;
   --ec-card-radius: 24px;
   --ec-image-ratio: 3 / 2;
-  --ec-badge-size: 56px;
 
   font-family: var(--ec-font);
 }
@@ -123,38 +120,43 @@
 /* date badge: white rounded square, month / big day / weekday */
 .event-cards .event-cards-badge {
   position: absolute;
-  top: 12px;
-  left: 12px;
+  top: 20px;
+  left: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: var(--ec-badge-size);
-  height: var(--ec-badge-size);
-  border-radius: 12px;
+  padding: 8px 26.5px;
+  border: 0.5px solid rgb(11 11 15 / 18%);
+  border-radius: 20px;
   background: var(--ec-badge-bg);
-  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+  box-shadow: 0 6px 20px rgb(13 13 20 / 8%);
   line-height: 1;
   text-align: center;
 }
 
 .event-cards .event-cards-badge-month {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: var(--font-weight-bold);
-  letter-spacing: 0.06em;
-  color: var(--ec-badge-muted);
+  line-height: 16px;
+  letter-spacing: 0;
+  color: var(--color-red-visual);
 }
 
 .event-cards .event-cards-badge-day {
-  font-size: 22px;
+  font-size: 36px;
   font-weight: var(--font-weight-bold);
-  color: var(--ec-badge-color);
+  line-height: 42px;
+  letter-spacing: 0;
+  color: var(--color-black);
 }
 
 .event-cards .event-cards-badge-weekday {
-  font-size: 9px;
-  letter-spacing: 0.06em;
-  color: var(--ec-badge-muted);
+  font-size: 12px;
+  font-weight: var(--font-weight-bold);
+  line-height: 16px;
+  letter-spacing: 0;
+  color: #808080;
 }
 
 /* body */
