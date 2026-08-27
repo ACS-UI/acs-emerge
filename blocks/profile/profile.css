@@ -67,8 +67,7 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  height: var(--profile-overlay-height);
+  min-height: var(--profile-overlay-height);
   gap: var(--profile-overlay-gap);
   padding: var(--profile-overlay-padding-block-start) var(--profile-overlay-padding-inline) var(--profile-overlay-padding-block-end);
   color: var(--color-white);
@@ -361,8 +360,7 @@
 /* persistent glass overlay (override the base hover overlay) */
 /* stylelint-disable-next-line no-descending-specificity */
 .profile.overlap .profile-card-overlay {
-  justify-content: flex-start;
-  height: auto;
+  min-height: 0;
   gap: var(--profile-overlap-overlay-gap);
   padding: var(--profile-overlap-overlay-padding-top) var(--profile-overlap-overlay-padding-right) var(--profile-overlap-overlay-padding) var(--profile-overlap-overlay-padding);
   text-align: center;
