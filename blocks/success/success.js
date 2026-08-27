@@ -1,6 +1,6 @@
 import { createOptimizedPicture, loadCSS } from '../../scripts/aem.js';
 import {
-  extractConfig, getIndexLink, fetchIndexRows, excludeListingPages,
+  extractConfig, getIndexLink, fetchIndexRows, excludeListingPages, displayTitle,
 } from '../../scripts/query-index.js';
 
 /**
@@ -17,10 +17,14 @@ function buildCardFromData(row, parallax = false) {
   const card = document.createElement('article');
   card.className = 'success-card';
 
+  // The index `title` may carry an SEO suffix (e.g. "Casio · Customer success
+  // story · ACS GDC"); cards show just the client name.
+  const cardTitle = displayTitle(row.title);
+
   const media = document.createElement('div');
   media.className = 'success-card-image';
   if (row.image) {
-    const picture = createOptimizedPicture(row.image, row.title || '', false, [{ width: '750' }]);
+    const picture = createOptimizedPicture(row.image, cardTitle, false, [{ width: '750' }]);
     if (parallax) {
       const inner = document.createElement('div');
       inner.className = 'success-card-image-inner';
@@ -34,10 +38,10 @@ function buildCardFromData(row, parallax = false) {
 
   const body = document.createElement('div');
   body.className = 'success-card-body';
-  if (row.title) {
+  if (cardTitle) {
     const h = document.createElement('h3');
     h.className = 'success-card-title';
-    h.textContent = row.title;
+    h.textContent = cardTitle;
     body.append(h);
   }
   if (row.description) {
