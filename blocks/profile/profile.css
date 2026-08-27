@@ -50,6 +50,13 @@
   overflow: hidden;
   border-radius: var(--profile-card-radius);
   background: var(--color-gray-100);
+
+  /* contains the overlay ::before's negative z-index (see
+     .profile-card-overlay below) at the photo's own level, rather than on
+     the overlay itself — backdrop-filter can only see behind as far as the
+     nearest stacking-context ancestor, so isolating any closer than this
+     (e.g. on .profile-card-overlay) would hide the photo from the blur */
+  isolation: isolate;
 }
 
 .profile .profile-card-image picture,
@@ -71,10 +78,6 @@
   gap: var(--profile-overlay-gap);
   padding: var(--profile-overlay-padding-block-start) var(--profile-overlay-padding-inline) var(--profile-overlay-padding-block-end);
   color: var(--color-white);
-
-  /* contain the ::before's negative z-index so it stays behind the text
-     but above the photo, instead of escaping behind the whole card */
-  isolation: isolate;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
