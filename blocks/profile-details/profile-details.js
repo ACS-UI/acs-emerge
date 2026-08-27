@@ -1,5 +1,5 @@
 import { createOptimizedPicture, getMetadata } from '../../scripts/aem.js';
-import { fetchIndexRows } from '../../scripts/query-index.js';
+import { fetchIndexRows, displayTitle } from '../../scripts/query-index.js';
 
 /** Builds a single reportee card (anchor) from a leaders query-index row. */
 function buildReporteeCard(row) {
@@ -19,7 +19,7 @@ function buildReporteeCard(row) {
   body.className = 'profile-details-reportee-body';
   const name = document.createElement('span');
   name.className = 'profile-details-reportee-name';
-  name.textContent = row.title || '';
+  name.textContent = displayTitle(row.title);
   const role = document.createElement('span');
   role.className = 'profile-details-reportee-role';
   role.textContent = row.role || '';

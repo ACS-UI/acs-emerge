@@ -22,6 +22,8 @@
 }
 
 .challenge-container .default-content-wrapper:first-child :is(h1, h2, h3, h4, h5, h6, p) {
+  max-width: 1100px;
+  margin-inline: auto;
   text-align: center;
   font-weight: var(--font-weight-regular);
   font-size: var(--heading-size-xxxl);
