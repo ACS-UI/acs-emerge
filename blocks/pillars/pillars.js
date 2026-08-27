@@ -1,13 +1,5 @@
 /**
- * loads and decorates the pillars block
- *
- * Authored structure:
- *   Row 1 — intro cell: an eyebrow paragraph followed by a heading.
- *   Rows 2..n — one pillar each: a label paragraph (e.g. "ADOPTION")
- *               followed by a description paragraph.
- *
- * Renders the intro above a horizontal rule, then the pillars in a row with
- * vertical dividers between them. Any number of pillars is supported.
+ * Loads and decorates the pillars block: row 1 is the eyebrow + heading intro, rest are pillars.
  * @param {Element} block The block element
  */
 export default function decorate(block) {

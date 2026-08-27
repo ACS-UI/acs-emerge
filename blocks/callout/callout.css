@@ -1,20 +1,16 @@
 .callout {
-  /* colors */
   --callout-eyebrow-color: var(--color-gray-800);
   --callout-heading-color: var(--color-gray-1000);
   --callout-body-color: var(--color-gray-800);
   --callout-note-color: var(--color-gray-800);
   --callout-button-color: var(--color-gray-1000);
   --callout-button-border: var(--color-gray-1000);
-
-  /* typography */
+  --callout-panel-bg: #f9f8f6;
   --callout-eyebrow-size: var(--body-size-m, 16px);
   --callout-heading-size: var(--heading-size-l, 28px);
   --callout-body-size: var(--body-size-l, 18px);
   --callout-note-size: var(--detail-size-l, 16px);
-
-  /* layout */
-  --callout-max-width: 760px;
+  --callout-max-width: 1000px;
 
   text-align: center;
 }
@@ -39,15 +35,13 @@
   line-height: 1.2;
 }
 
-.callout .callout-content p:not(.callout-eyebrow, .callout-note, .button-wrapper) {
+.callout .callout-content p:not(.callout-eyebrow, .callout-note, .button-container, .button-wrapper) {
   margin: 0 auto 28px;
-  max-width: 640px;
   color: var(--callout-body-color);
   font-size: var(--callout-body-size);
   line-height: 1.5;
 }
 
-/* pill-shaped outlined button */
 .callout .button-container,
 .callout p.button-wrapper {
   margin: 28px 0 12px;
@@ -55,8 +49,6 @@
 
 .callout a.button,
 .callout button.button {
-  width: 100%;
-  max-width: 100%;
   padding: 0.85em 1.6em;
   border: 1px solid var(--callout-button-border);
   border-radius: 2.4em;
@@ -80,18 +72,74 @@
   font-weight: var(--font-weight-bold, 700);
 }
 
-/* --------------------------------------------------------------------------
-   Tablet / desktop
-   -------------------------------------------------------------------------- */
-@media (width >= 900px) {
+@media (width >= 768px) {
   .callout {
     --callout-heading-size: var(--heading-size-xl, 36px);
   }
 
-  /* pill button sizes to its label (with a comfortable minimum) at tablet+ */
+  .callout .callout-content :is(h1, h2, h3, h4, h5, h6) {
+    margin: 0 0 24px;
+  }
+
   .callout a.button,
   .callout button.button {
     width: auto;
     min-width: 320px;
+    padding: 8px 24px;
+    border-radius: 55px;
+    filter: drop-shadow(0 4px 8px rgb(0 0 0 / 8%));
+    font-size: var(--title-size-m, 16px);
+    line-height: var(--line-height-200, 20px);
+  }
+
+  main .section.callout-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 60px;
+  }
+
+  main .section.callout-container > div {
+    padding-inline: 0;
+  }
+
+  .callout .callout-eyebrow {
+    margin: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 999px;
+    color: var(--color-gray-1000);
+    font-size: var(--title-size-xl, 20px);
+    font-weight: var(--font-weight-regular, 400);
+    line-height: var(--line-height-400, 24px);
+  }
+
+  .callout .callout-content p:not(.callout-eyebrow, .callout-note, .button-container, .button-wrapper) {
+    margin: 0 0 48px;
+    color: var(--color-gray-1000);
+    font-size: var(--body-size-xl, 20px);
+    font-weight: var(--font-weight-regular, 400);
+    line-height: var(--line-height-600, 30px);
+  }
+
+  .callout .button-container,
+  .callout p.button-wrapper {
+    margin: 0;
+  }
+
+  .callout .callout-note {
+    margin: 8px 0 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 999px;
+    color: var(--color-gray-1000);
+    font-size: var(--title-size-m, 16px);
+    font-weight: var(--font-weight-regular, 400);
+    line-height: var(--line-height-200, 20px);
   }
 }

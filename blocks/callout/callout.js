@@ -1,11 +1,4 @@
-/**
- * loads and decorates the callout block
- *
- * A left-aligned prompt panel. Authored structure: a single cell containing
- * an eyebrow paragraph, a heading, a body paragraph, a button (a link), and
- * a small note paragraph after it.
- * @param {Element} block The block element
- */
+/** Decorates the callout block: a left-aligned panel with eyebrow, heading, body, button, note. */
 export default function decorate(block) {
   const cell = block.querySelector(':scope > div > div') || block.firstElementChild;
   if (!cell) return;
@@ -18,10 +11,7 @@ export default function decorate(block) {
     firstText.classList.add('callout-eyebrow');
   }
 
-  // The CTA is always a button here, regardless of whether the author
-  // wrapped the link in bold/italic (the formatting the core decoration
-  // normally relies on to turn a link into a .button) — a plain link would
-  // otherwise render as default hyperlink text instead of the pill button.
+  // The CTA is always rendered as a button, even for a plain unformatted link.
   let buttonWrapper = cell.querySelector('.button-container, p.button-wrapper');
   if (!buttonWrapper) {
     const link = cell.querySelector('a[href]');

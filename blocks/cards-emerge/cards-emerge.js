@@ -1,12 +1,5 @@
 /**
- * loads and decorates the cards-emerge block
- *
- * Expected authored structure (rows):
- *   Row 1  -> intro: eyebrow (first line) + heading (rest)
- *   Row 2+ -> item: cell 1 = acronym letter, cell 2 = title + description
- *
- * Only the visible design elements are rendered (eyebrow, heading, and the
- * letter/title/description rows). Decorative artwork from the source is omitted.
+ * loads and decorates the cards-emerge block (row 1 = intro, row 2+ = letter/title/desc items)
  * @param {Element} block The block element
  */
 export default function decorate(block) {
@@ -53,10 +46,7 @@ export default function decorate(block) {
     ul.append(li);
   });
 
-  // Decorative butterfly graphic, positioned per Figma relative to the
-  // list's own top/right edges. Wrapped alongside (not inside) the <ul> —
-  // <img> isn't a valid direct child of <ul> — so the wrapper, not an
-  // individual <li>, is what its absolute position resolves against.
+  // Decorative butterfly; wrapped beside the <ul> since <img> can't be a direct child of it.
   const listWrapper = document.createElement('div');
   listWrapper.className = 'cards-emerge-list-wrapper';
 

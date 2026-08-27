@@ -1,15 +1,10 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 
-/**
- * loads and decorates the photo-gallery block
- *
- * Authored structure: each row holds one image. An optional final row with no
- * image is treated as the caption. Images render in a repeating masonry
- * pattern (see CSS): every group of images follows the same layout, so adding
- * more images simply repeats the pattern in the next group below.
- * @param {Element} block The block element
- */
+/** Decorates the photo-gallery block: rows become masonry items; a textless row is the caption. */
 export default function decorate(block) {
+  // `feature` is the variant's old name — alias it so already-authored pages keep working.
+  if (block.classList.contains('feature')) block.classList.add('spotlight');
+
   const caption = document.createElement('figcaption');
   caption.className = 'photo-gallery-caption';
 

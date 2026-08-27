@@ -1,10 +1,4 @@
-/**
- * A column is "intro" shaped when it's just an eyebrow paragraph + heading
- * (no image, nothing else) — e.g. "Why Now" / "Scoped delivery is no longer
- * the ask." — as opposed to a column of regular body copy.
- * @param {Element} col A column cell.
- * @returns {boolean}
- */
+/** A column is "intro" shaped: just an eyebrow paragraph + heading, no image or extra content. */
 function isIntroCol(col) {
   return !col.querySelector('picture')
     && !!col.querySelector('h1, h2, h3, h4, h5, h6')

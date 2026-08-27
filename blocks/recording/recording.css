@@ -1,20 +1,15 @@
 .recording {
-  /* colors */
   --recording-eyebrow-color: var(--color-gray-600);
   --recording-card-bg: var(--color-white);
   --recording-title-color: var(--color-gray-1000);
-  --recording-meta-color: var(--color-gray-500);
+  --recording-meta-color: var(--color-gray-600, #808080);
   --recording-play-bg: var(--color-magenta-900);
   --recording-play-color: var(--color-white);
   --recording-cta-bg: var(--color-gray-1000);
   --recording-cta-color: var(--color-white);
-
-  /* typography */
   --recording-eyebrow-size: var(--detail-size-m, 14px);
   --recording-title-size: var(--heading-size-s, 20px);
   --recording-meta-size: var(--detail-size-m, 14px);
-
-  /* layout */
   --recording-card-pad: 24px;
   --recording-card-radius: 16px;
   --recording-play-size: 56px;
@@ -22,7 +17,7 @@
 }
 
 .recording .recording-eyebrow {
-  margin: 0 0 20px;
+  margin: 0 0 40px;
   color: var(--recording-eyebrow-color);
   font-size: var(--recording-eyebrow-size);
   font-weight: var(--font-weight-bold, 700);
@@ -32,15 +27,15 @@
 
 .recording .recording-card {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 20px;
-  padding: var(--recording-card-pad);
+  padding: 36px 40px;
   border-radius: var(--recording-card-radius);
   background: var(--recording-card-bg);
   box-shadow: var(--recording-card-shadow);
 }
 
-/* play glyph (CSS triangle in a filled circle) */
 .recording .recording-play {
   flex: 0 0 auto;
   display: inline-flex;
@@ -82,9 +77,10 @@
   font-size: var(--recording-meta-size);
 }
 
-/* pill CTA */
 .recording .recording-cta.button {
   flex: 0 0 auto;
+  width: 100%;
+  margin-top: 4px;
   border: 1px solid var(--recording-cta-bg);
   border-radius: 2.4em;
   background: var(--recording-cta-bg);
@@ -94,8 +90,13 @@
 }
 
 .recording .recording-cta.button::after {
-  content: "\2192"; /* → */
-  margin-left: 8px;
+  content: "";
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  margin-left: 11px;
+  margin-top: 2px;
+  background: url('../../icons/arrow-right-white.svg') center / contain no-repeat;
 }
 
 .recording .recording-cta.button:hover {
@@ -105,16 +106,30 @@
   text-decoration: none;
 }
 
-/* --------------------------------------------------------------------------
-   Mobile — stack the card contents
-   -------------------------------------------------------------------------- */
-@media (width < 600px) {
+@media (width >= 768px) {
   .recording .recording-card {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    padding: 36px 40px;
   }
 
   .recording .recording-cta.button {
-    width: 100%;
-    margin-top: 4px;
+    width: auto;
+    margin-top: 0;
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--detail-size-l, 16px);
+    line-height: var(--line-height-400, 24px);
+    padding: 12px 36px;
+  }
+
+  .recording .recording-title {
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--font-size-600, 25px);
+    line-height: var(--line-height-600, 30px);
+  }
+
+  .recording .recording-meta {
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--detail-size-m, 14px);
+    line-height: var(--line-height-200, 20px);
   }
 }

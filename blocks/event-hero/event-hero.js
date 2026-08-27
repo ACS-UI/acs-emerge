@@ -1,22 +1,6 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 
-/**
- * loads and decorates the event-hero block
- *
- * Authored content model (one row per cell of content, single column each):
- *   Row 1: the event title (a heading) and the date (a paragraph).
- *   Row 2: the "About the event" card — a label (e.g. "About the Event") and
- *          one or more body paragraphs.
- *   Row 3: the details card — a definition-style list of label/value pairs
- *          (Timing, Duration, Community, ...). Authored as a table/list where
- *          each line is "Label : Value", or as paragraphs.
- *   Row 4: a call-to-action link (e.g. "Register Now").
- *   Row 5: the event image.
- *
- * Fields may be omitted; the block lays out whatever is present. The left
- * column holds the text/cards, the right column holds the image.
- * @param {Element} block The block element
- */
+/** Decorates the event-hero block: title/date, about card, details, CTA, and image. */
 export default function decorate(block) {
   const rows = [...block.children];
 

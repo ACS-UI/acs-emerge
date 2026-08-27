@@ -1,16 +1,10 @@
-/*
- * success block: grid of story cards. carousel variant reuses
- * styles/carousel.css. parallax variant is a JS-positioned (success.js)
- * zigzag staircase where each card's image also pans as it scrolls.
- */
-
 .success {
   --success-radius: 24px;
   --success-inner-radius: 20px;
   --success-gap: 32px;
   --success-card-max-width: 384px;
   --success-title-color: var(--color-text-static-black);
-  --success-desc-color: #808080; /* Figma colorTheme/silver-800, not in our gray scale */
+  --success-desc-color: var(--color-gray-600, #808080);
   --success-intro-margin-bottom: 40px;
   --success-intro-max-width: 50rem;
   --success-view-all-margin-top: 16px;
@@ -19,7 +13,6 @@
   --success-tags-margin-top: 8px;
 }
 
-/* card link wrapper: make the whole card clickable without changing styling */
 .success .success-card-link {
   display: block;
   height: 100%;
@@ -31,13 +24,10 @@
   text-decoration: none;
 }
 
-/* same height:100% override as .success-card — avoids sizing issues when
-   this link is the positioned zigzag item */
 .success.parallax .success-card-link {
   height: auto;
 }
 
-/* ===================== cards (shared by all variants) ===================== */
 .success .success-card {
   display: flex;
   flex-direction: column;
@@ -45,14 +35,11 @@
   height: 100%;
 }
 
-/* the zigzag needs each card sized by its own content, not the grid's
-   equal-height rule, so success.js can measure a real height */
 .success.parallax .success-card {
   max-width: var(--success-card-max-width);
   height: auto;
 }
 
-/* white card-wrap with an inner image clipped to a smaller radius */
 .success .success-card-image {
   position: relative;
   overflow: hidden;
@@ -76,7 +63,6 @@
   object-fit: cover;
 }
 
-/* clipped frame with an oversized, scroll-panned picture (see success.js) */
 .success .success-card-image-inner {
   position: relative;
   width: 100%;
@@ -99,7 +85,6 @@
   border-radius: 0;
 }
 
-/* title — Heading/L: 28/32, medium */
 .success .success-card-title {
   margin: 4px 0 0;
   font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
@@ -109,7 +94,6 @@
   color: var(--success-title-color);
 }
 
-/* description — Body/M: 16/150 (=24px), regular, grey */
 .success .success-card-desc {
   margin: 0;
   font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
@@ -119,7 +103,6 @@
   color: var(--success-desc-color);
 }
 
-/* tag pills — white with shadow, Body/S: 14/150 (=21px), black text */
 .success .success-card-tags {
   display: flex;
   flex-wrap: wrap;
@@ -144,13 +127,11 @@
   color: var(--color-text-static-black);
 }
 
-/* ===================== intro (base + parallax) ===================== */
 .success .success-intro {
   margin-bottom: var(--success-intro-margin-bottom);
   max-width: var(--success-intro-max-width);
 }
 
-/* Heading/XXL 45/52 Medium per Figma — scaled down on mobile, XXXXL on desktop */
 .success .success-intro h2,
 .success .success-intro h3 {
   margin: 8px 0 0;
@@ -177,7 +158,6 @@
   color: var(--color-gray-600);
 }
 
-/* dark pill at rest, fills red with a trailing arrow on hover */
 .success a.button.success-view-all {
   display: inline-flex;
   align-items: center;
@@ -193,7 +173,6 @@
   transition: background-color 0.2s ease, color 0.2s ease, gap 0.2s ease;
 }
 
-/* trailing arrow: collapsed to zero width until hover */
 .success .success-view-all::after {
   content: "";
   width: 0;
@@ -201,8 +180,6 @@
   background: currentcolor;
   opacity: 0;
   mask: var(--success-arrow-mask) center / contain no-repeat;
-
-  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-mask: var(--success-arrow-mask) center / contain no-repeat;
   transition: width 0.2s ease, opacity 0.2s ease;
 
@@ -221,14 +198,13 @@
   opacity: 1;
 }
 
-/* ===================== base variant: grid ===================== */
 .success .success-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--success-gap);
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .success .success-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -239,7 +215,6 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
-  /* full Heading/XXXXL (73/84) on desktop */
   .success:not(.carousel) .success-intro h2,
   .success:not(.carousel) .success-intro h3 {
     font-size: var(--heading-size-xxxxl);
@@ -247,7 +222,6 @@
   }
 }
 
-/* ===================== carousel variant ===================== */
 .success.carousel .carousel {
   --carousel-visible: 1;
   --carousel-gap: var(--success-gap);
@@ -276,8 +250,6 @@
   color: var(--color-gray-600);
 }
 
-/* dark pill at rest, fills red with a trailing arrow on hover; only renders
-   when the author includes a trailing link in the intro */
 .success.carousel .carousel-view-all {
   display: inline-flex;
   align-items: center;
@@ -292,7 +264,6 @@
   transition: background-color 0.2s ease, color 0.2s ease, gap 0.2s ease;
 }
 
-/* trailing arrow: collapsed to zero width until hover */
 .success.carousel .carousel-view-all::after {
   content: "";
   width: 0;
@@ -300,8 +271,6 @@
   background: currentcolor;
   opacity: 0;
   mask: var(--success-arrow-mask) center / contain no-repeat;
-
-  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-mask: var(--success-arrow-mask) center / contain no-repeat;
   transition: width 0.2s ease, opacity 0.2s ease;
 
@@ -320,7 +289,7 @@
   opacity: 1;
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .success.carousel .carousel {
     --carousel-visible: 2;
   }
@@ -332,10 +301,6 @@
   }
 }
 
-/* ===================== parallax variant ===================== */
-
-/* below desktop, success.js clears its inline positioning and cards fall
-   back to plain stacked flow */
 .success .success-parallax {
   display: flex;
   align-items: center;
@@ -343,16 +308,11 @@
   gap: var(--success-gap);
 }
 
-/* zigzag staircase (desktop only): success.js positions each card's
-   top/left/right — see layoutZigzag in success.js */
 @media (width >= 1024px) {
-  /* insets success.js applies are relative to this container, not the screen */
   .success .success-parallax {
     position: relative;
   }
 
-  /* direct children only, so a nested .success-card inside a
-     .success-card-link isn't double-positioned */
   .success .success-parallax > .success-card,
   .success .success-parallax > .success-card-link {
     position: absolute;
@@ -360,7 +320,6 @@
   }
 }
 
-/* honour reduced motion: no transform drift on the scroll-panned image */
 @media (prefers-reduced-motion: reduce) {
   .success .success-card-image-inner picture {
     transform: none !important;

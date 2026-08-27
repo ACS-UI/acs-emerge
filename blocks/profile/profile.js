@@ -3,16 +3,7 @@ import {
   extractConfig, getIndexLink, fetchIndexRows, excludeListingPages, displayTitle,
 } from '../../scripts/query-index.js';
 
-/**
- * Orders index rows top-down by org hierarchy, breadth-first:
- * top-level leaders (nobody's reportee) first, then all their direct
- * reportees, then the next level, etc. Rows are matched to each other by
- * `path`; a row's `reportees` is a comma-separated list of leader paths.
- * Any rows not reachable from a root (or with no hierarchy data) are appended
- * in their original order so nothing is silently dropped.
- * @param {object[]} rows The index rows.
- * @returns {object[]} Rows in breadth-first hierarchy order.
- */
+/** Orders index rows top-down by org hierarchy, breadth-first from root leaders. */
 function orderByHierarchy(rows) {
   const byPath = new Map(rows.map((r) => [r.path, r]));
   const childPaths = (row) => (row.reportees || '')
@@ -45,13 +36,7 @@ function orderByHierarchy(rows) {
   return ordered;
 }
 
-/**
- * Builds a profile card from an index row, mirroring buildCard's DOM so both
- * authored and index-driven cards style identically. Uses the full-size
- * `image` column (not the small `thumbnail`).
- * @param {object} row An index row (title, role, image, description).
- * @returns {HTMLElement} The card article.
- */
+/** Builds a profile card from an index row, mirroring buildCard's DOM. */
 function buildCardFromData(row, overlap = false) {
   const card = document.createElement('article');
   card.className = 'profile-card';
@@ -107,18 +92,7 @@ function buildCardFromData(row, overlap = false) {
   return card;
 }
 
-/**
- * Turns one authored row into a profile card element.
- *
- * Authored content model (per row / per profile):
- *   Cell 1: the profile image.
- *   Cell 2: name (a heading), role (a paragraph), and optionally one or more
- *           further paragraphs of bio text that are revealed over the image on
- *           hover/focus.
- *
- * @param {Element} row The authored row.
- * @returns {HTMLElement} The card article.
- */
+/** Turns one authored row (image, name, role, bio) into a profile card element. */
 function buildCard(row, overlap = false) {
   const cells = [...row.children];
   const card = document.createElement('article');
@@ -183,13 +157,7 @@ function buildCard(row, overlap = false) {
   return card;
 }
 
-/**
- * Decorates the profile block.
- *  - base variant: responsive grid of profile cards.
- *  - `carousel` variant: cards inside the reusable carousel utility with
- *    top-left intro, top-right nav, and optional "view all".
- * @param {Element} block The profile block element.
- */
+/** Decorates the profile block: responsive grid, or `carousel` variant with intro/nav. */
 export default async function decorate(block) {
   const isCarousel = block.classList.contains('carousel');
   // `overlap` variant: name/role/bio sit in an always-visible glass overlay on

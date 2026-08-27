@@ -1,16 +1,4 @@
-/**
- * loads and decorates the event-highlights block
- *
- * Authored content model:
- *   Row 1 (optional intro): a single text cell with an eyebrow paragraph and a
- *          heading (e.g. "KEY HIGHLIGHTS" / "What made this event special").
- *   Rows 2..n (one per highlight): an icon cell (an image / AEM icon) and a
- *          text cell holding the stat value (e.g. "500+") and a label
- *          (e.g. "Attendees"). The icon cell may be omitted.
- *
- * Renders the intro above a responsive row of icon + big stat + label items.
- * @param {Element} block The block element
- */
+/** Decorates the event-highlights block: intro row + rows of icon + stat value + label items. */
 export default function decorate(block) {
   const rows = [...block.children];
 
@@ -41,9 +29,7 @@ export default function decorate(block) {
     item.className = 'event-highlights-item';
 
     const cells = [...row.children];
-    // Icon cell: a cell with a graphic, or — since the pipeline wraps a loose
-    // icon glyph in its own <p> too — the first cell when there are 2+ cells.
-    // Text cell (value + label) is whatever cell is left.
+    // Icon cell: a cell with a graphic, or the first cell when there are 2+ cells.
     const graphicCell = cells.find((c) => c.querySelector('picture, img, .icon, svg'));
     const iconCell = graphicCell || (cells.length > 1 ? cells[0] : null);
     const textCell = cells.find((c) => c !== iconCell && c.textContent.trim())

@@ -1,12 +1,5 @@
-/*
- * testimonial block: single-item quote+portrait carousel (scripts/carousel.js).
- * Sits on a colored/gradient section background; bg image/watermark text are section-level, not part of this block.
- */
-
 .testimonial {
   --testimonial-quote-color: var(--color-white);
-
-  /* card radius per Figma (24px outer, 20px inner content wrap) */
   --testimonial-radius: 24px;
   --testimonial-inner-radius: 20px;
   --testimonial-gap: 32px;
@@ -23,14 +16,12 @@
   color: var(--color-white);
 }
 
-/* nav arrows inherit white on the colored section */
 .testimonial .carousel {
   color: var(--color-white);
 
   --carousel-nav-bg-hover: rgb(255 255 255 / 15%);
 }
 
-/* ----- one testimonial: quote (left) + media (right) ----- */
 .testimonial .testimonial-item {
   display: grid;
   grid-template-columns: 1fr;
@@ -39,7 +30,6 @@
   align-items: center;
 }
 
-/* ----- quote ----- */
 .testimonial .testimonial-quote {
   position: relative;
   margin: 0;
@@ -50,7 +40,6 @@
   color: var(--testimonial-quote-color);
 }
 
-/* decorative opening quotation mark (glyph icon), top-left */
 .testimonial .testimonial-quote::before {
   content: "";
   display: block;
@@ -59,8 +48,6 @@
   margin-bottom: var(--testimonial-quote-mark-gap);
   background: rgb(255 255 255 / 80%);
   mask: url('../../icons/quote-open.svg') left top / contain no-repeat;
-
-  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-mask: url('../../icons/quote-open.svg') left top / contain no-repeat;
 }
 
@@ -72,7 +59,6 @@
   margin-bottom: 0;
 }
 
-/* closing quotation mark (glyph icon), bottom-right per Figma */
 .testimonial .testimonial-quote::after {
   content: "";
   display: block;
@@ -82,8 +68,6 @@
   margin-left: auto;
   background: rgb(255 255 255 / 80%);
   mask: url('../../icons/quote-close.svg') right bottom / contain no-repeat;
-
-  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-mask: url('../../icons/quote-close.svg') right bottom / contain no-repeat;
 }
 
@@ -92,13 +76,11 @@
   font-weight: var(--font-weight-bold);
 }
 
-/* media: white card (Figma radius 24) with layered shadow; inner wrap (radius 20, 4px inset) clips the photo.
-   order: -1 puts it on top on mobile/tablet — reset to source order (photo
-   right of the quote) at the desktop breakpoint below. */
 .testimonial .testimonial-media {
   order: -1;
   position: relative;
   width: 100%;
+  max-height: 560px;
   padding: 4px;
   border-radius: var(--testimonial-radius);
   background: var(--color-white);
@@ -126,7 +108,6 @@
   object-fit: cover;
 }
 
-/* name + title overlaid at the bottom of the photo */
 .testimonial .testimonial-attribution {
   position: absolute;
   inset: auto 4px 4px;
@@ -141,43 +122,31 @@
   background: linear-gradient(to top, rgb(0 0 0 / 70%) 0%, rgb(0 0 0 / 0%) 100%);
 }
 
-/* Name — Title/XXXL: 25/30, medium */
 .testimonial .testimonial-name {
   margin: 0;
-  font-family: var(--title-font-family);
   font-size: var(--title-size-xxxl);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-600);
 }
 
-/* Role — Title/M: 16/20, bold */
 .testimonial .testimonial-role {
   margin: 0;
-  font-family: var(--title-font-family);
   font-size: var(--title-size-m);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-200);
   opacity: 0.85;
 }
 
-/* ----- spacing between the item and the bottom nav ----- */
 .testimonial .carousel[data-nav-position="bottom"] > .carousel-nav {
   margin-top: var(--testimonial-nav-margin-top);
 }
 
-/* ===================== responsive ===================== */
-@media (width >= 900px) {
-  /* Figma-specified vertical panel padding (60/116, asymmetric — overrides
-     the shared symmetric bg-gradient-a/b section padding used by other
-     blocks). Horizontal inset stays on .testimonial below, added on top of
-     the section wrapper div's own 32px inline padding. */
+@media (width >= 768px) {
   main .section.testimonial-container.bg-gradient-b {
     padding-top: 60px;
     padding-bottom: 116px;
   }
 
-  /* inset on both sides on desktop per Figma (135/136 total, minus the
-     section wrapper div's own 32px inline padding) */
   .testimonial {
     padding-inline: var(--testimonial-padding-inline);
   }

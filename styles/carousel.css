@@ -1,13 +1,3 @@
-/*
- * carousel.css — shared styles for the reusable carousel utility
- * (scripts/carousel.js). Blocks that use the carousel import this file.
- *
- * Consumers tune layout with these custom properties (set on `.carousel`
- * or a parent block):
- *   --carousel-visible : number of slides visible at once (default 1)
- *   --carousel-gap     : gap between slides (default 24px)
- */
-
 .carousel {
   --carousel-visible: 1;
   --carousel-gap: 24px;
@@ -17,7 +7,6 @@
   gap: 24px;
 }
 
-/* ----- top row: intro (title/desc) on the left, nav on the right ----- */
 .carousel .carousel-top {
   display: flex;
   align-items: flex-end;
@@ -25,9 +14,6 @@
   gap: 24px;
 }
 
-/* Centered intro: the intro spans the full width and is centered, while the
-   nav floats to the far right, vertically centered against the heading
-   (the nav positioning lives with the other .carousel-nav rules below). */
 .carousel .carousel-top[data-align="center"] {
   position: relative;
   justify-content: center;
@@ -55,9 +41,6 @@
   margin-bottom: 0;
 }
 
-/* ----- navigation arrows (top right) -----
-   Mobile-first: hidden by default, dot indicators take over on mobile;
-   restored at the tablet breakpoint below where dots are hidden instead. */
 .carousel .carousel-nav {
   display: none;
   flex: 0 0 auto;
@@ -68,12 +51,10 @@
   display: none;
 }
 
-/* bottom navigation: rendered below the track, left-aligned */
 .carousel[data-nav-position="bottom"] > .carousel-nav {
   justify-content: flex-start;
 }
 
-/* centered-intro layout floats the nav to the far right of the top bar */
 .carousel .carousel-top[data-align="center"] .carousel-nav {
   position: absolute;
   top: 50%;
@@ -88,9 +69,6 @@
   width: 40px;
   height: 40px;
   padding: 0;
-
-  /* Plain arrows by default (no ring/fill). Consumers can theme the button
-     chrome via these custom properties without touching this rule. */
   border: 1px solid var(--carousel-nav-border, transparent);
   border-radius: 50%;
   background: var(--carousel-nav-bg, transparent);
@@ -110,7 +88,6 @@
   cursor: default;
 }
 
-/* subtle feedback on hover: a faint translucent halo, not a hard fill */
 .carousel .carousel-nav-button:hover:not(:disabled) {
   background: var(--carousel-nav-bg-hover, rgb(255 255 255 / 15%));
 }
@@ -121,12 +98,9 @@
   background: currentcolor;
   mask: var(--carousel-arrow-mask) center / contain no-repeat;
   mask-composite: exclude;
-
-  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-mask: var(--carousel-arrow-mask) center / contain no-repeat;
 }
 
-/* Default arrows (used on grey / no-colour sections): solid arrows. */
 .carousel .carousel-nav-prev .carousel-nav-icon {
   --carousel-arrow-mask: url('../icons/arrow-left-solid.svg');
 }
@@ -135,7 +109,6 @@
   --carousel-arrow-mask: url('../icons/arrow-right-solid.svg');
 }
 
-/* On coloured (gradient) sections, use the lighter line-style arrows. */
 main .section.bg-gradient-a .carousel .carousel-nav-prev .carousel-nav-icon,
 main .section.bg-gradient-b .carousel .carousel-nav-prev .carousel-nav-icon {
   --carousel-arrow-mask: url('../icons/arrow-left.svg');
@@ -146,9 +119,6 @@ main .section.bg-gradient-b .carousel .carousel-nav-next .carousel-nav-icon {
   --carousel-arrow-mask: url('../icons/arrow-right.svg');
 }
 
-/* ----- mobile dot indicators -----
-   Shown by default (mobile-first); hidden again at the tablet breakpoint
-   where the prev/next nav takes over (see .carousel-nav above). */
 .carousel .carousel-dots {
   display: flex;
   justify-content: center;
@@ -181,8 +151,6 @@ main .section.bg-gradient-b .carousel .carousel-nav-next .carousel-nav-icon {
   opacity: 0.5;
 }
 
-/* On coloured (gradient) sections, dots are explicitly white rather than
-   relying on inherited text color (same convention as the nav arrows above). */
 main .section.bg-gradient-a .carousel .carousel-dot,
 main .section.bg-gradient-b .carousel .carousel-dot {
   background: var(--color-white);
@@ -192,7 +160,6 @@ main .section.bg-gradient-b .carousel .carousel-dot {
   opacity: 1;
 }
 
-/* ----- viewport + scrolling track ----- */
 .carousel .carousel-viewport {
   overflow: hidden;
 }
@@ -226,14 +193,12 @@ main .section.bg-gradient-b .carousel .carousel-dot {
   height: 100%;
 }
 
-/* ----- footer: view all ----- */
 .carousel .carousel-footer {
   display: flex;
   justify-content: center;
 }
 
-/* tablet/desktop: prev/next arrows replace the mobile dot indicators */
-@media (width >= 900px) {
+@media (width >= 768px) {
   .carousel .carousel-nav {
     display: flex;
   }

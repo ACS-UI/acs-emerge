@@ -24,8 +24,7 @@ function widgetUrl(widgetPath, widgetName, extension) {
 }
 
 /**
- * Applies widget metadata, block classes, and section shell classes.
- * Must run before widget HTML/JS load so decorate can read config from the DOM.
+ * Applies widget metadata, block classes, and section shell classes (must run before HTML/JS load).
  * @param {Element} widget The widget block element
  * @param {HTMLAnchorElement} source The authored widget link
  * @param {string} widgetName Widget file name without extension

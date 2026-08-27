@@ -1,49 +1,26 @@
-/*
- * Copyright 2020 Adobe. All rights reserved.
- * This file is licensed to you under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under
- * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
- * OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- */
-
-/* Global design tokens generated from the ACS Figma variable system */
 @import url('./global-tokens.css');
 
 :root {
-  /* colors */
   --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
-
-  /* fonts */
-  --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
-
-  /* body sizes */
-  --body-font-size-m: 22px;
+  --light-color: var(--color-gray-50, #f8f8f8);
+  --dark-color: var(--color-gray-700, #505050);
+  --text-color: var(--color-gray-900, #131313);
+  --link-color: var(--color-link, #3b63fb);
+  --link-hover-color: var(--color-blue-1100, #1d3ecf);
+  --body-font-family: var(--font-family-sans);
+  --heading-font-family: var(--body-font-family);
+  --body-font-size-m: var(--body-size-xxl, 22px);
   --body-font-size-s: 19px;
   --body-font-size-xs: 17px;
-
-  /* heading sizes */
   --heading-font-size-xxl: 55px;
   --heading-font-size-xl: 44px;
   --heading-font-size-l: 34px;
   --heading-font-size-m: 27px;
   --heading-font-size-s: 24px;
-  --heading-font-size-xs: 22px;
-
-  /* nav height */
+  --heading-font-size-xs: var(--heading-size-m, 22px);
   --nav-height: 64px;
 }
 
-/* fallback fonts */
 @font-face {
   font-family: roboto-condensed-fallback;
   size-adjust: 88.82%;
@@ -56,20 +33,17 @@
   src: local('Arial');
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   :root {
-    /* body sizes */
-    --body-font-size-m: 18px;
-    --body-font-size-s: 16px;
-    --body-font-size-xs: 14px;
-
-    /* heading sizes */
-    --heading-font-size-xxl: 45px;
-    --heading-font-size-xl: 36px;
-    --heading-font-size-l: 28px;
-    --heading-font-size-m: 22px;
-    --heading-font-size-s: 20px;
-    --heading-font-size-xs: 18px;
+    --body-font-size-m: var(--body-size-l, 18px);
+    --body-font-size-s: var(--body-size-m, 16px);
+    --body-font-size-xs: var(--body-size-s, 14px);
+    --heading-font-size-xxl: var(--heading-size-xxl, 45px);
+    --heading-font-size-xl: var(--heading-size-xl, 36px);
+    --heading-font-size-l: var(--heading-size-l, 28px);
+    --heading-font-size-m: var(--heading-size-m, 22px);
+    --heading-font-size-s: var(--heading-size-s, 20px);
+    --heading-font-size-xs: var(--heading-size-xs, 18px);
   }
 }
 
@@ -156,7 +130,6 @@ button {
   font: inherit;
 }
 
-/* links */
 a:any-link {
   color: var(--link-color);
   text-decoration: none;
@@ -168,7 +141,6 @@ a:hover {
   text-decoration: underline;
 }
 
-/* buttons */
 p.button-wrapper {
   margin: 12px 0;
 }
@@ -185,7 +157,7 @@ button.button {
   border-radius: 2.4em;
   padding: 0.5em 1.2em;
   font: inherit;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium, 500);
   line-height: 1.25;
   text-decoration: none;
   cursor: pointer;
@@ -254,7 +226,6 @@ button.button.secondary:disabled:focus-visible {
   color: var(--dark-color);
 }
 
-/* high-impact call-to-action */
 a.button.accent,
 button.button.accent {
   border-color: var(--link-color);
@@ -298,7 +269,6 @@ main img {
   width: 100%;
 }
 
-/* sections */
 main > .section {
   margin: 60px 0;
 }
@@ -310,28 +280,16 @@ main > .section > div {
   padding: 0 24px;
 }
 
-/* Only a hero-opening page keeps the first section flush to the top — the
-   nav overlays it transparently by design (see header.css). Every other
-   first section keeps the normal 60px top margin below the (in-flow,
-   space-reserving) header instead of sitting flush against it. */
 main > .hero-banner-container:first-of-type {
   margin-top: 0;
 }
 
-/* per Figma, the events listing page needs a larger 210px gap where the
-   events grid is immediately followed by the success-stories carousel,
-   instead of the default 60px collapsed section margin */
-main > .event-cards-container + .success-container {
-  margin-top: 210px;
-}
-
-@media (width >= 900px) {
+@media (width >= 768px) {
   main > .section > div {
     padding: 0 32px;
   }
 }
 
-/* section metadata */
 main .section.light,
 main .section.highlight {
   background-color: var(--light-color);
@@ -339,15 +297,6 @@ main .section.highlight {
   padding: 40px 0;
 }
 
-/*
- * Section background themes (applied via Section Metadata "Style").
- * Generic, colour-based names so any block can reuse them:
- *   `bg-gradient-a` — warm brand gradient (red→pink→purple), white text.
- *   `bg-gradient-b` — cool brand gradient (magenta→purple→blue), white text.
- *   `bg-muted`      — muted grey (#F3F3F3) panel, static-black text.
- * Blocks inside (profile/testimonial/client carousels) stay transparent and
- * inherit the section colour.
- */
 main .section.bg-gradient-a,
 main .section.bg-gradient-b,
 main .section.bg-muted {
@@ -357,24 +306,22 @@ main .section.bg-muted {
   overflow: hidden;
 }
 
-/* gradient panels — white text */
 main .section.bg-gradient-a,
 main .section.bg-gradient-b {
   color: var(--color-text-static-white);
 }
 
 main .section.bg-gradient-a {
-  background: linear-gradient(95.72deg, #d73220 0%, #d92361 39.94%, #7155fa 121.02%);
+  background: linear-gradient(95.72deg, var(--color-red-900, #d73220) 0%, var(--color-magenta-900, #d92361) 39.94%, #7155fa 121.02%);
 }
 
 main .section.bg-gradient-b {
-  background: linear-gradient(95.85deg, #b539c8 0%, #7155fa 66%, #3b63fb 100%);
+  background: linear-gradient(95.85deg, #b539c8 0%, #7155fa 66%, var(--color-blue-900, #3b63fb) 100%);
 }
 
-/* muted grey panel — static-black text */
 main .section.bg-muted {
   color: var(--color-text-static-black);
-  background: #f3f3f3;
+  background: var(--color-gray-75, #f3f3f3);
 }
 
 @media (width >= 1024px) {
@@ -385,12 +332,6 @@ main .section.bg-muted {
   }
 }
 
-/*
- * Section background image (applied via Section Metadata "Background
- * Image"). scripts.js (decorateSectionBackgroundImages) sets the
- * background-image itself directly — CSS attr() can't feed that property
- * reliably across browsers — this just handles the sizing/position.
- */
 main .section[data-background-image] {
   position: relative;
   background-position: center;
@@ -398,19 +339,6 @@ main .section[data-background-image] {
   background-size: cover;
 }
 
-/*
- * Section background watermark text (applied via Section Metadata
- * "Background Text"). Renders a large, faint word pinned behind the section
- * content — it sticks in place for as long as the section is scrolling
- * through the viewport, then scrolls away once the section has fully passed.
- *
- * overflow: hidden clips the watermark to the section's own box. Without it,
- * a section shorter than the watermark's 100vh height (see ::before below)
- * lets the sticky element bleed past the section's real bottom edge and
- * show through the next section — the section's own scroll-through motion
- * still carries the watermark past the viewport as normal, just clipped at
- * the section boundary instead of spilling beyond it.
- */
 main .section[data-background-text] {
   position: relative;
   overflow: hidden;
@@ -444,22 +372,10 @@ main .section[data-background-text]::before {
   user-select: none;
 }
 
-/*
- * Centered section (opt-in via Section Metadata "Style: center"): center the
- * section's block itself on the horizontal axis. A block spanning the full
- * section width is unaffected (nothing to center within), but this matters
- * for any block that constrains its own width/max-width instead of filling
- * the section's content column.
- */
 main .section.center > div > .block {
   margin-inline: auto;
 }
 
-/*
- * Centered carousel intro (opt-in via Section Metadata "Style: center").
- * By default a carousel's intro is left-aligned; adding `center` to the
- * section centers the intro text and floats the nav to the far right.
- */
 main .section.center .carousel-top {
   position: relative;
   justify-content: center;
@@ -478,7 +394,6 @@ main .section.center .carousel-top .carousel-nav {
   transform: translateY(-50%);
 }
 
-/* Grey watermark variant — apply via Section Metadata "Style": bg-text-grey */
 main .section.bg-text-grey[data-background-text]::before {
   color: rgb(0 0 0 / 8%);
 }

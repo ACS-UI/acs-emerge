@@ -1,8 +1,3 @@
-/*
- * profile-details block: leader detail layout (portrait + name/role/bio) plus
- * a Reportees grid resolved from the leaders query-index. Mobile-first.
- */
-
 .profile-details {
   --profile-details-radius: 16px;
   --profile-details-reportee-radius: 12px;
@@ -12,8 +7,6 @@
   --profile-details-desktop-layout-gap: 56px;
 }
 
-/* page title above the block — a standalone default-content heading, not
-   part of the .profile-details block itself, hence the ID selector */
 #meet-our-leader {
   margin: 0;
   font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
@@ -23,7 +16,6 @@
   color: var(--color-text-static-black);
 }
 
-/* ----- layout: image (left) + content (right) ----- */
 .profile-details .profile-details-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -31,9 +23,9 @@
   align-items: start;
 }
 
-/* ----- portrait: no fixed aspect-ratio, so the photo is never cropped ----- */
 .profile-details .profile-details-image {
   overflow: hidden;
+  max-height: 560px;
   border-radius: var(--profile-details-radius);
   background: var(--color-gray-100);
 }
@@ -45,7 +37,6 @@
   height: auto;
 }
 
-/* ----- identity + background ----- */
 .profile-details .profile-details-content {
   min-width: 0;
 }
@@ -87,7 +78,6 @@
   color: var(--color-black);
 }
 
-/* ----- reportees (from query-index) ----- */
 .profile-details .profile-details-reportees {
   margin-top: var(--profile-details-reportees-margin-top);
 }
@@ -107,7 +97,6 @@
   gap: 16px;
 }
 
-/* one reportee card */
 .profile-details .profile-details-reportee {
   display: flex;
   align-items: center;
@@ -171,11 +160,10 @@
   font-size: var(--body-size-m);
   font-weight: var(--font-weight-regular);
   line-height: 1.5;
-  color: #808080;
+  color: var(--color-gray-600, #808080);
 }
 
-/* ===================== responsive ===================== */
-@media (width >= 900px) {
+@media (width >= 768px) {
   .profile-details .profile-details-reportees-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

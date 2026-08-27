@@ -1,5 +1,4 @@
 .event-hero {
-  /* colors */
   --event-hero-title-color: var(--color-gray-1000);
   --event-hero-date-color: var(--color-gray-1000);
   --event-hero-card-bg: var(--color-white);
@@ -8,14 +7,10 @@
   --event-hero-body-color: var(--color-gray-700);
   --event-hero-detail-label-color: var(--color-gray-700);
   --event-hero-detail-value-color: var(--color-gray-1000);
-
-  /* typography */
   --event-hero-title-size: clamp(40px, 7vw, 64px);
   --event-hero-date-size: var(--body-size-l, 18px);
   --event-hero-label-size: var(--detail-size-m, 14px);
   --event-hero-body-size: var(--body-size-m, 16px);
-
-  /* layout */
   --event-hero-gap: 32px;
   --event-hero-card-pad: 24px;
   --event-hero-card-radius: 12px;
@@ -26,7 +21,6 @@
   gap: var(--event-hero-gap);
 }
 
-/* content column ------------------------------------------------------- */
 .event-hero .event-hero-content {
   display: flex;
   flex-direction: column;
@@ -55,7 +49,6 @@
   font-weight: var(--font-weight-bold, 700);
 }
 
-/* about + details cards ------------------------------------------------ */
 .event-hero .event-hero-about,
 .event-hero .event-hero-details {
   margin: 0;
@@ -78,10 +71,9 @@
   margin: 0;
   color: var(--event-hero-body-color);
   font-size: var(--event-hero-body-size);
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
-/* details: label : value grid */
 .event-hero .event-hero-details {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -89,7 +81,7 @@
   align-items: baseline;
 }
 
-.event-hero .event-hero-details dt {
+.event-hero .event-hero-details :is(dt,dd) {
   margin: 0;
   color: var(--event-hero-detail-label-color);
   font-size: var(--event-hero-body-size);
@@ -101,34 +93,26 @@
   color: var(--event-hero-detail-label-color);
 }
 
-.event-hero .event-hero-details dd {
-  margin: 0;
-  color: var(--event-hero-detail-value-color);
-  font-size: var(--event-hero-body-size);
-  font-weight: var(--font-weight-medium, 500);
-}
-
-/* CTA ------------------------------------------------------------------ */
 .event-hero .event-hero-cta {
   margin-top: 4px;
 }
 
 .event-hero .event-hero-cta .button {
-  border: 1px solid var(--color-gray-1000);
+  border: 1px solid var(--color-gray-1000, #000);
   border-radius: 2.4em;
   background: transparent;
   color: var(--color-gray-1000);
   font-weight: var(--font-weight-regular, 400);
-  padding: 0.7em 1.6em;
+  padding: 8px 24px;
 }
 
 .event-hero .event-hero-cta .button:hover {
-  background: var(--color-gray-1000);
+  border-color: var(--color-red-900);
+  background: var(--color-red-900);
   color: var(--color-white);
   text-decoration: none;
 }
 
-/* media column --------------------------------------------------------- */
 .event-hero .event-hero-media {
   line-height: 0;
 }
@@ -142,10 +126,7 @@
   object-fit: cover;
 }
 
-/* --------------------------------------------------------------------------
-   Tablet / desktop — two columns, image on the right
-   -------------------------------------------------------------------------- */
-@media (width >= 900px) {
+@media (width >= 768px) {
   .event-hero {
     flex-direction: row;
     align-items: stretch;
@@ -153,16 +134,56 @@
   }
 
   .event-hero .event-hero-content {
-    flex: 1 1 48%;
-    max-width: 48%;
+    flex: 1 1 40%;
+    max-width: 40%;
+    gap: 24px;
   }
 
   .event-hero .event-hero-media {
-    flex: 1 1 52%;
+    flex: 1 1 60%;
   }
 
   .event-hero .event-hero-about,
   .event-hero .event-hero-details {
     max-width: 420px;
+  }
+
+  .event-hero .event-hero-head :is(h1, h2, h3, h4, h5, h6) {
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--heading-size-xxxl, 58px);
+    line-height: var(--line-height-1300, 66px);
+  }
+
+  .event-hero .event-hero-date {
+    font-weight: var(--font-weight-bold, 700);
+    font-size: var(--body-size-xl, 20px);
+    line-height: var(--line-height-400, 24px);
+    color: var(--color-gray-900, #131313);
+  }
+
+  .event-hero .event-hero-about-label {
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--detail-size-l, 16px);
+    line-height: var(--line-height-200, 20px);
+    color: var(--color-gray-900, #131313);
+  }
+
+  .event-hero .event-hero-about p:not(.event-hero-about-label) {
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--detail-size-m, 14px);
+    color: var(--color-gray-800, #292929);
+  }
+
+  .event-hero .event-hero-details :is(dt,dd) {
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--detail-size-m, 14px);
+    line-height: 1.5;
+    color: var(--color-gray-800, #292929);
+  }
+
+  .event-hero .event-hero-cta .button {
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--body-size-m, 16px);
+    line-height: 1.5;
   }
 }

@@ -1,13 +1,6 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 
-/**
- * Splits the attribution paragraphs (everything after the blockquote) into
- * name + role. A single paragraph keeps the original one-line treatment
- * (unchanged, base-variant behaviour); two or more paragraphs are treated
- * as name (first) + role (rest), each styled individually — used by the
- * `card` variant's two-line attribution.
- * @param {Element[]} nodes Paragraphs/headings after the blockquote.
- */
+/** Splits attribution paragraphs after the blockquote into name + role. */
 function decorateAttribution(nodes) {
   if (nodes.length === 1) {
     nodes[0].classList.add('quote-attribution');
@@ -18,13 +11,7 @@ function decorateAttribution(nodes) {
   }
 }
 
-/**
- * loads and decorates the quote block
- *  - base variant: portrait (left) + quote (right), two-column.
- *  - `card` variant: a single bordered card — quote on top, a small round
- *    avatar + name/role attribution row below (see quote.css).
- * @param {Element} block The block element
- */
+/** Loads and decorates the quote block: base two-column variant, or `card` variant. */
 export default function decorate(block) {
   const isCard = block.classList.contains('card');
   const row = block.firstElementChild;
@@ -39,11 +26,7 @@ export default function decorate(block) {
   if (!bodyCell) return;
   bodyCell.className = 'quote-body';
 
-  // Ensure the quotation is wrapped in a <blockquote>. Authoring order
-  // differs by variant: the base variant leads with the quote, then the
-  // attribution; the `card` variant leads with name/role, then the quote
-  // last — so the quote paragraph is the first one for the base variant,
-  // the last one for `card`.
+  // Ensure the quotation is wrapped in a <blockquote> (first paragraph for base, last for `card`).
   let blockquote = bodyCell.querySelector('blockquote');
   if (!blockquote) {
     const paragraphs = [...bodyCell.querySelectorAll(':scope > p')];
@@ -60,8 +43,7 @@ export default function decorate(block) {
   decorateAttribution(attributionNodes);
 
   if (isCard) {
-    // Card variant: the portrait becomes a small avatar inside an
-    // attribution row (avatar + name/role), not a separate top-level column.
+    // Card variant: the portrait becomes a small avatar inside the attribution row.
     const attributionRow = document.createElement('div');
     attributionRow.className = 'quote-attribution-row';
 

@@ -80,6 +80,12 @@ function buildWidgetAutoBlocks(main) {
  * no in-site history to go back to (e.g. a direct landing from search).
  * Called only after lazy-styles.css (which styles it) has loaded — see
  * loadLazy — so it never flashes on screen unstyled.
+ *
+ * Prepended inside the first section's own content wrapper (not as a
+ * sibling of the sections) so it's part of that section's box: it inherits
+ * whatever background the first section has (e.g. bg-muted/bg-gradient-a)
+ * instead of sitting in a gap above it, and shares the section's standard
+ * inline padding/max-width instead of needing its own.
  * @param {Element} main The container element
  */
 function buildBackButton(main) {
@@ -97,7 +103,10 @@ function buildBackButton(main) {
   back.setAttribute('aria-label', 'Go back');
   back.textContent = 'Back';
   back.addEventListener('click', () => window.history.back());
-  main.prepend(back);
+
+  const firstSection = main.querySelector(':scope > .section');
+  const target = firstSection?.querySelector(':scope > div') || main;
+  target.prepend(back);
 }
 
 /**

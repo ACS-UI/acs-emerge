@@ -1,23 +1,16 @@
 .client-detail {
-  /* Adobe Clean Spectrum VF not bundled here; fall back to project font */
   --cd-font: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
-
-  /* colors */
   --cd-heading-color: var(--color-gray-1000);
   --cd-label-color: var(--color-gray-700);
   --cd-value-color: var(--color-gray-1000);
   --cd-rule-color: var(--color-gray-200);
   --cd-about-color: var(--color-gray-1000);
-
-  /* typography (Title/XL for headings + rows, Body/XXXL for about) */
   --cd-title-size: var(--title-size-xl);
   --cd-title-line: var(--line-height-400);
   --cd-title-weight: var(--font-weight-bold);
   --cd-about-size: var(--body-size-xxxl);
   --cd-about-line: 1.5;
   --cd-about-weight: var(--font-weight-regular);
-
-  /* layout */
   --cd-section-gap: 40px;
   --cd-content-gap: 136px;
   --cd-col-gap: 16px;
@@ -32,7 +25,6 @@
   font-family: var(--cd-font);
 }
 
-/* ===================== Logo ===================== */
 .client-detail .client-detail-logo {
   line-height: 0;
 }
@@ -43,7 +35,6 @@
   max-width: 100%;
 }
 
-/* Hero image — Figma "banner": 1216x608, radius 24 */
 .client-detail .client-detail-hero {
   line-height: 0;
 }
@@ -54,7 +45,6 @@
   border-radius: var(--cd-hero-radius);
 }
 
-/* ===================== Content — Details + About ===================== */
 .client-detail .client-detail-content {
   display: grid;
   grid-template-columns: 1fr;
@@ -69,7 +59,6 @@
   gap: var(--cd-col-gap);
 }
 
-/* section headings ("DETAILS" / "ABOUT THE CLIENT") — Figma Title/XL, black */
 .client-detail .client-detail-info-heading,
 .client-detail .client-detail-about-heading {
   margin: 0;
@@ -79,10 +68,6 @@
   line-height: var(--cd-title-line);
 }
 
-/* details definition list: one ruled row per pair, label left / value right.
-   No column-gap — the border-bottom is per-cell, so any gap between dt/dd
-   would show up as a break in the underline instead of one continuous line;
-   label/value spacing already comes from dt (1fr) being left-aligned. */
 .client-detail .client-detail-info dl {
   margin: 0;
   display: grid;
@@ -109,7 +94,6 @@
   color: var(--cd-value-color);
 }
 
-/* "Tags" group: sub-heading (same treatment as "DETAILS"/"ABOUT") + pills */
 .client-detail .client-detail-tags-group {
   display: flex;
   flex-direction: column;
@@ -126,20 +110,16 @@
 }
 
 .client-detail .client-detail-tag {
-  padding: 4px 12px;
-  border-radius: 100px;
   background: var(--color-white);
-  box-shadow:
-    0 0 0 1px rgb(0 0 0 / 4%),
-    0 1px 2px rgb(0 0 0 / 8%),
-    0 4px 6px rgb(0 0 0 / 4%);
   font-size: var(--body-size-s);
   font-weight: var(--font-weight-regular);
   line-height: 1.5;
   color: var(--cd-value-color);
+  padding: 4px 12px;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 4%), 0 1px 2px rgb(0 0 0 / 8%), 0 4px 6px rgb(0 0 0 / 4%), 0 4px 10px -16px rgb(0 0 0 / 8%);
+  border-radius: 100px;
 }
 
-/* about text — Figma Body/XXXL */
 .client-detail .client-detail-about p:not(.client-detail-about-heading) {
   margin: 0;
   color: var(--cd-about-color);
@@ -148,8 +128,7 @@
   line-height: var(--cd-about-line);
 }
 
-/* Desktop — Details (384px) left, About right, 136px gap */
-@media (width >= 900px) {
+@media (width >= 768px) {
   .client-detail .client-detail-content {
     grid-template-columns: var(--cd-details-width) minmax(0, 1fr);
   }
