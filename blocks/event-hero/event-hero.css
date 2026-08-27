@@ -1,0 +1,168 @@
+.event-hero {
+  /* colors */
+  --event-hero-title-color: var(--color-gray-1000);
+  --event-hero-date-color: var(--color-gray-1000);
+  --event-hero-card-bg: var(--color-white);
+  --event-hero-card-border: var(--color-gray-200);
+  --event-hero-label-color: var(--color-gray-700);
+  --event-hero-body-color: var(--color-gray-700);
+  --event-hero-detail-label-color: var(--color-gray-700);
+  --event-hero-detail-value-color: var(--color-gray-1000);
+
+  /* typography */
+  --event-hero-title-size: clamp(40px, 7vw, 64px);
+  --event-hero-date-size: var(--body-size-l, 18px);
+  --event-hero-label-size: var(--detail-size-m, 14px);
+  --event-hero-body-size: var(--body-size-m, 16px);
+
+  /* layout */
+  --event-hero-gap: 32px;
+  --event-hero-card-pad: 24px;
+  --event-hero-card-radius: 12px;
+  --event-hero-media-radius: 14px;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--event-hero-gap);
+}
+
+/* content column ------------------------------------------------------- */
+.event-hero .event-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.event-hero .event-hero-head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.event-hero .event-hero-head :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+  color: var(--event-hero-title-color);
+  font-size: var(--event-hero-title-size);
+  font-weight: var(--font-weight-regular, 400);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+
+.event-hero .event-hero-date {
+  margin: 0;
+  color: var(--event-hero-date-color);
+  font-size: var(--event-hero-date-size);
+  font-weight: var(--font-weight-bold, 700);
+}
+
+/* about + details cards ------------------------------------------------ */
+.event-hero .event-hero-about,
+.event-hero .event-hero-details {
+  margin: 0;
+  padding: var(--event-hero-card-pad);
+  border: 1px solid var(--event-hero-card-border);
+  border-radius: var(--event-hero-card-radius);
+  background: var(--event-hero-card-bg);
+}
+
+.event-hero .event-hero-about-label {
+  margin: 0 0 12px;
+  color: var(--event-hero-label-color);
+  font-size: var(--event-hero-label-size);
+  font-weight: var(--font-weight-bold, 700);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.event-hero .event-hero-about p:not(.event-hero-about-label) {
+  margin: 0;
+  color: var(--event-hero-body-color);
+  font-size: var(--event-hero-body-size);
+  line-height: 1.55;
+}
+
+/* details: label : value grid */
+.event-hero .event-hero-details {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px 12px;
+  align-items: baseline;
+}
+
+.event-hero .event-hero-details dt {
+  margin: 0;
+  color: var(--event-hero-detail-label-color);
+  font-size: var(--event-hero-body-size);
+}
+
+.event-hero .event-hero-details dt::after {
+  content: ":";
+  padding-left: 8px;
+  color: var(--event-hero-detail-label-color);
+}
+
+.event-hero .event-hero-details dd {
+  margin: 0;
+  color: var(--event-hero-detail-value-color);
+  font-size: var(--event-hero-body-size);
+  font-weight: var(--font-weight-medium, 500);
+}
+
+/* CTA ------------------------------------------------------------------ */
+.event-hero .event-hero-cta {
+  margin-top: 4px;
+}
+
+.event-hero .event-hero-cta .button {
+  border: 1px solid var(--color-gray-1000);
+  border-radius: 2.4em;
+  background: transparent;
+  color: var(--color-gray-1000);
+  font-weight: var(--font-weight-regular, 400);
+  padding: 0.7em 1.6em;
+}
+
+.event-hero .event-hero-cta .button:hover {
+  background: var(--color-gray-1000);
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+/* media column --------------------------------------------------------- */
+.event-hero .event-hero-media {
+  line-height: 0;
+}
+
+.event-hero .event-hero-media picture,
+.event-hero .event-hero-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--event-hero-media-radius);
+  object-fit: cover;
+}
+
+/* --------------------------------------------------------------------------
+   Tablet / desktop — two columns, image on the right
+   -------------------------------------------------------------------------- */
+@media (width >= 900px) {
+  .event-hero {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 48px;
+  }
+
+  .event-hero .event-hero-content {
+    flex: 1 1 48%;
+    max-width: 48%;
+  }
+
+  .event-hero .event-hero-media {
+    flex: 1 1 52%;
+  }
+
+  .event-hero .event-hero-about,
+  .event-hero .event-hero-details {
+    max-width: 420px;
+  }
+}
