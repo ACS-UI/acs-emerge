@@ -1,6 +1,6 @@
 import { createOptimizedPicture, loadCSS } from '../../scripts/aem.js';
 import {
-  extractConfig, getIndexLink, fetchIndexRows, excludeListingPages,
+  extractConfig, getIndexLink, fetchIndexRows, excludeListingPages, displayTitle,
 } from '../../scripts/query-index.js';
 
 /** Orders index rows top-down by org hierarchy, breadth-first from root leaders. */
@@ -42,10 +42,12 @@ function buildCardFromData(row, overlap = false) {
   card.className = 'profile-card';
   card.tabIndex = 0;
 
+  const cardName = displayTitle(row.title);
+
   const media = document.createElement('div');
   media.className = 'profile-card-image';
   if (row.image) {
-    media.append(createOptimizedPicture(row.image, row.title || '', false, [{ width: '750' }]));
+    media.append(createOptimizedPicture(row.image, cardName, false, [{ width: '750' }]));
   }
   const overlay = document.createElement('div');
   overlay.className = 'profile-card-overlay';
@@ -53,7 +55,7 @@ function buildCardFromData(row, overlap = false) {
 
   const name = document.createElement('h3');
   name.className = 'profile-card-name';
-  name.textContent = row.title || '';
+  name.textContent = cardName;
   const role = document.createElement('p');
   role.className = 'profile-card-role';
   role.textContent = row.role || '';

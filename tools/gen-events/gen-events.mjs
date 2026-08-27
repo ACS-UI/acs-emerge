@@ -19,6 +19,11 @@ mkdirSync(OUT, { recursive: true });
 // picsum image helper — stable per-seed so pages look consistent across loads
 const img = (seed, w, h) => `https://picsum.photos/seed/${seed}/${w}/${h}.jpg`;
 
+/*
+ * All events are the "All Hands Meet" (same title). all-hands-meet is left
+ * untouched; the rest are named ahm-[DD-mon-YYYY] with slightly varied
+ * description, attendees, duration and a distinct date per page.
+ */
 const EVENTS = [
   {
     slug: 'all-hands-meet', name: 'All Hands Meet', date: '2026-08-11', dateLabel: '11th August, Tuesday',
@@ -26,39 +31,39 @@ const EVENTS = [
     about: 'The premier gathering of product visionaries and UI architects. Experience a masterclass in digital craftsmanship, exploring the intersection of precision engineering, luxury aesthetics, and futuristic interaction models in the dark-mode era.',
   },
   {
-    slug: 'design-summit', name: 'Design Systems Summit', date: '2026-09-03', dateLabel: '3rd September, Thursday',
+    slug: 'ahm-03-sep-2026', name: 'All Hands Meet', date: '2026-09-03', dateLabel: '3rd September, Thursday',
     time: '10 AM IST', attendees: '320', duration: '3 hours', speakers: '6', breakouts: '4',
-    about: 'A deep dive into scalable design systems — tokens, theming, and component governance. Practitioners share how they ship consistent experiences across dozens of products at speed.',
+    about: 'Our September all-hands brings the whole team together to review Q3 progress, share customer wins, and align on the priorities shaping the quarter ahead.',
   },
   {
-    slug: 'engineering-connect', name: 'Engineering Connect', date: '2026-09-18', dateLabel: '18th September, Friday',
+    slug: 'ahm-18-sep-2026', name: 'All Hands Meet', date: '2026-09-18', dateLabel: '18th September, Friday',
     time: '2 PM IST', attendees: '640', duration: '2.5 hours', speakers: '10', breakouts: '5',
-    about: 'Our quarterly engineering forum covering platform reliability, developer experience, and the AI-assisted workflows reshaping how we build.',
+    about: 'A packed all-hands focused on delivery excellence — platform reliability, developer experience, and the AI-assisted workflows reshaping how we build together.',
   },
   {
-    slug: 'product-showcase', name: 'Product Showcase', date: '2026-10-07', dateLabel: '7th October, Wednesday',
+    slug: 'ahm-07-oct-2026', name: 'All Hands Meet', date: '2026-10-07', dateLabel: '7th October, Wednesday',
     time: '11 AM IST', attendees: '410', duration: '2 hours', speakers: '7', breakouts: '3',
-    about: 'A live walkthrough of the quarter’s biggest product launches, with demos, roadmaps, and the customer stories behind each release.',
+    about: 'This all-hands walks through the quarter’s biggest launches, with live demos, roadmaps, and the customer stories behind each release.',
   },
   {
-    slug: 'leadership-forum', name: 'Leadership Forum', date: '2026-10-21', dateLabel: '21st October, Wednesday',
+    slug: 'ahm-21-oct-2026', name: 'All Hands Meet', date: '2026-10-21', dateLabel: '21st October, Wednesday',
     time: '9:30 AM IST', attendees: '280', duration: '1.5 hours', speakers: '5', breakouts: '2',
-    about: 'Senior leaders align on strategy, share Q3 wins, and set the vision for the next horizon of growth across the GDC.',
+    about: 'A focused all-hands where leaders align on strategy, share recent wins, and set the vision for the next horizon of growth across the GDC.',
   },
   {
-    slug: 'innovation-day', name: 'Innovation Day', date: '2026-11-05', dateLabel: '5th November, Thursday',
+    slug: 'ahm-05-nov-2026', name: 'All Hands Meet', date: '2026-11-05', dateLabel: '5th November, Thursday',
     time: '10 AM IST', attendees: '750', duration: '4 hours', speakers: '12', breakouts: '6',
-    about: 'A full day of experimentation — lightning talks, hack demos, and cross-team collaborations exploring what’s next in AI, design, and delivery.',
+    about: 'Our largest all-hands of the season — a full agenda of lightning talks, demos, and cross-team collaborations exploring what’s next in AI, design, and delivery.',
   },
   {
-    slug: 'customer-spotlight', name: 'Customer Spotlight', date: '2026-11-19', dateLabel: '19th November, Thursday',
+    slug: 'ahm-19-nov-2026', name: 'All Hands Meet', date: '2026-11-19', dateLabel: '19th November, Thursday',
     time: '3 PM IST', attendees: '360', duration: '2 hours', speakers: '6', breakouts: '3',
-    about: 'Hear directly from the customers we serve — their challenges, the value delivered, and the partnership models driving measurable impact.',
+    about: 'This all-hands puts customers at the centre — the challenges we solved, the value delivered, and the partnership models driving measurable impact.',
   },
   {
-    slug: 'year-end-townhall', name: 'Year-End Town Hall', date: '2026-12-10', dateLabel: '10th December, Thursday',
+    slug: 'ahm-10-dec-2026', name: 'All Hands Meet', date: '2026-12-10', dateLabel: '10th December, Thursday',
     time: '9 AM IST', attendees: '900', duration: '2 hours', speakers: '9', breakouts: '4',
-    about: 'We close the year reflecting on milestones, celebrating the people behind them, and aligning on the ambitions that carry us into the new year.',
+    about: 'Our year-end all-hands reflects on the milestones we hit, celebrates the people behind them, and aligns on the ambitions carrying us into the new year.',
   },
 ];
 
