@@ -14,6 +14,7 @@
   --profile-overlay-gap: 8px;
   --profile-overlay-blur: 20px;
   --profile-overlay-tint: rgb(0 0 0 / 10%);
+  --profile-overlay-height: 150px;
   --profile-body-padding: 12px 4px 0;
   --profile-intro-margin-bottom: 40px;
   --profile-view-all-margin-top: 20px;
@@ -65,6 +66,8 @@
   inset: auto 0 0;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
+  height: var(--profile-overlay-height);
   gap: var(--profile-overlay-gap);
   padding: var(--profile-overlay-padding-block-start) var(--profile-overlay-padding-inline) var(--profile-overlay-padding-block-end);
   color: var(--color-white);
@@ -357,6 +360,8 @@
 /* persistent glass overlay (override the base hover overlay) */
 /* stylelint-disable-next-line no-descending-specificity */
 .profile.overlap .profile-card-overlay {
+  justify-content: flex-start;
+  height: auto;
   gap: var(--profile-overlap-overlay-gap);
   padding: var(--profile-overlap-overlay-padding-top) var(--profile-overlap-overlay-padding-right) var(--profile-overlap-overlay-padding) var(--profile-overlap-overlay-padding);
   text-align: center;
