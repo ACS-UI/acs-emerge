@@ -12,7 +12,8 @@
   --profile-overlay-padding-inline: 24px;
   --profile-overlay-padding-block-end: 24px;
   --profile-overlay-gap: 8px;
-  --profile-overlay-blur: 28px;
+  --profile-overlay-blur: 20px;
+  --profile-overlay-tint: rgb(0 0 0 / 10%);
   --profile-body-padding: 12px 4px 0;
   --profile-intro-margin-bottom: 40px;
   --profile-view-all-margin-top: 20px;
@@ -67,6 +68,7 @@
   gap: var(--profile-overlay-gap);
   padding: var(--profile-overlay-padding-block-start) var(--profile-overlay-padding-inline) var(--profile-overlay-padding-block-end);
   color: var(--color-white);
+  background: var(--profile-overlay-tint);
   backdrop-filter: blur(var(--profile-overlay-blur));
   mask: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, #000 70%);
 
