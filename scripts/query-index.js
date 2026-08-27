@@ -86,3 +86,15 @@ const LISTING_PATHS = ['/leaders', '/clients', '/success-stories'];
 export function excludeListingPages(rows) {
   return rows.filter((row) => !LISTING_PATHS.includes((row.path || '').replace(/\/$/, '')));
 }
+
+/**
+ * Returns the display portion of an index `title`, dropping any
+ * " · <site/section suffix>" a page appends for SEO/browser-tab purposes
+ * (e.g. "Manoj Nagpal · ACS GDC Leadership" → "Manoj Nagpal"). Cards that
+ * show just the entity name should use this instead of the raw title.
+ * @param {string} title The raw index title.
+ * @returns {string} The leading segment before the first "·" separator.
+ */
+export function displayTitle(title) {
+  return (title || '').split('·')[0].trim();
+}
