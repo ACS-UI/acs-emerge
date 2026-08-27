@@ -1,22 +1,3 @@
 {
-  "extends": ["stylelint-config-standard"],
-  "rules": {
-    "property-no-vendor-prefix": [true, {
-      "ignoreProperties": ["-webkit-mask", "-webkit-mask-image", "-webkit-backdrop-filter", "-webkit-background-clip"]
-    }]
-  },
-  "overrides": [
-    {
-      "files": ["blocks/profile/profile.css"],
-      "rules": {
-        "no-descending-specificity": null
-      }
-    },
-    {
-      "files": ["blocks/fragment/fragment.css"],
-      "rules": {
-        "no-empty-source": null
-      }
-    }
-  ]
+  "extends": ["stylelint-config-standard"]
 }

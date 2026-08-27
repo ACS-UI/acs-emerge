@@ -4,7 +4,7 @@
   --success-gap: 32px;
   --success-card-max-width: 384px;
   --success-title-color: var(--color-text-static-black);
-  --success-desc-color: var(--color-gray-600, #808080);
+  --success-desc-color: var(--color-gray-600);
   --success-intro-margin-bottom: 40px;
   --success-intro-max-width: 50rem;
   --success-view-all-margin-top: 16px;
@@ -87,7 +87,7 @@
 
 .success .success-card-title {
   margin: 4px 0 0;
-  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  
   font-size: var(--heading-size-l);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-700);
@@ -96,7 +96,7 @@
 
 .success .success-card-desc {
   margin: 0;
-  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  
   font-size: var(--body-size-m);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-400);
@@ -120,7 +120,7 @@
     0 0 0 1px rgb(0 0 0 / 4%),
     0 1px 2px rgb(0 0 0 / 8%),
     0 4px 6px rgb(0 0 0 / 4%);
-  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  
   font-size: var(--body-size-s);
   font-weight: var(--font-weight-regular);
   line-height: 1.5;
@@ -135,7 +135,7 @@
 .success .success-intro h2,
 .success .success-intro h3 {
   margin: 8px 0 0;
-  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  
   font-size: var(--heading-size-xxl);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-1100);
@@ -180,7 +180,7 @@
   background: currentcolor;
   opacity: 0;
   mask: var(--success-arrow-mask) center / contain no-repeat;
-  -webkit-mask: var(--success-arrow-mask) center / contain no-repeat;
+  mask: var(--success-arrow-mask) center / contain no-repeat;
   transition: width 0.2s ease, opacity 0.2s ease;
 
   --success-arrow-mask: url('../../icons/arrow-right.svg');
@@ -204,7 +204,7 @@
   gap: var(--success-gap);
 }
 
-@media (width >= 768px) {
+@media (width >= 560px) {
   .success .success-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -234,7 +234,7 @@
 .success.carousel .carousel-intro h2,
 .success.carousel .carousel-intro h3 {
   margin: 8px 0 0;
-  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  
   font-size: var(--heading-size-xxl);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-1100);
@@ -271,7 +271,7 @@
   background: currentcolor;
   opacity: 0;
   mask: var(--success-arrow-mask) center / contain no-repeat;
-  -webkit-mask: var(--success-arrow-mask) center / contain no-repeat;
+  mask: var(--success-arrow-mask) center / contain no-repeat;
   transition: width 0.2s ease, opacity 0.2s ease;
 
   --success-arrow-mask: url('../../icons/arrow-right.svg');

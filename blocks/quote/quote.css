@@ -1,5 +1,4 @@
 .quote {
-  --quote-font: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   --quote-text-color: var(--color-gray-1000);
   --quote-mark-color: var(--color-gray-1000);
   --quote-text-size: 24px;
@@ -37,7 +36,7 @@ main > div.section .quote-wrapper {
 
 .quote .quote-body {
   position: relative;
-  font-family: var(--quote-font);
+  
   color: var(--quote-text-color);
 }
 
@@ -54,7 +53,7 @@ main > div.section .quote-wrapper {
 .quote .quote-body blockquote::after {
   position: absolute;
   color: var(--quote-mark-color);
-  font-family: var(--quote-font);
+  
   font-size: var(--quote-mark-size);
   font-weight: var(--quote-mark-weight);
   line-height: var(--quote-mark-line);
@@ -74,10 +73,10 @@ main > div.section .quote-wrapper {
 
 .quote .quote-body blockquote p {
   margin: 0;
-  font-weight: var(--font-weight-regular, 400);
-  font-size: var(--body-size-xxxl, 25px);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--body-size-xxxl);
   line-height: 150%;
-  color: var(--color-gray-900, #131313);
+  color: var(--color-gray-900);
 }
 
 .quote .quote-body blockquote strong {
@@ -111,8 +110,8 @@ main > div.section .quote-wrapper {
   --quote-card-mark-bg: var(--color-red-300);
   --quote-card-mark-width: 32px;
   --quote-card-mark-height: 26px;
-  --quote-card-name-color: var(--color-gray-900, #131313);
-  --quote-card-role-color: var(--color-gray-600, #808080);
+  --quote-card-name-color: var(--color-gray-900);
+  --quote-card-role-color: var(--color-gray-600);
   --quote-card-avatar-size: 56px;
 
   padding: 40px 0;
@@ -157,7 +156,7 @@ main > div.section .quote-wrapper {
   margin-bottom: 40px;
   background: var(--quote-card-mark-bg);
   mask: url('../../icons/red-quote.svg') left top / contain no-repeat;
-  -webkit-mask: url('../../icons/red-quote.svg') left top / contain no-repeat;
+  mask: url('../../icons/red-quote.svg') left top / contain no-repeat;
 }
 
 .quote.card .quote-body blockquote::after {
@@ -194,20 +193,20 @@ main > div.section .quote-wrapper {
 
 .quote.card .quote-name {
   margin: 0;
-  font-family: var(--quote-font);
+  
   color: var(--quote-card-name-color);
   font-style: normal;
-  font-weight: var(--font-weight-regular, 400);
-  font-size: var(--title-size-l, 18px);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--title-size-l);
   line-height: 150%;
 }
 
 .quote.card .quote-role {
   margin: 0;
-  font-family: var(--quote-font);
+  
   color: var(--quote-card-role-color);
   font-style: normal;
-  font-weight: var(--font-weight-regular, 400);
-  font-size: var(--body-size-s, 14px);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--body-size-s);
   line-height: 150%;
 }

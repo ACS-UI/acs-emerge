@@ -9,7 +9,6 @@
 
 #meet-our-leader {
   margin: 0;
-  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--heading-size-xxxxl);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-1500);
@@ -43,7 +42,7 @@
 
 .profile-details .profile-details-name {
   margin: 0;
-  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  
   font-size: var(--heading-size-xl);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-900);
@@ -52,7 +51,7 @@
 
 .profile-details .profile-details-role {
   margin: 8px 0 0;
-  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  
   font-size: var(--title-size-xl);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-400);
@@ -62,7 +61,7 @@
 
 .profile-details .profile-details-section-heading {
   margin: 24px 0 0;
-  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  
   font-size: var(--heading-size-l);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-700);
@@ -71,7 +70,7 @@
 
 .profile-details .profile-details-text {
   margin: 32px 0 0;
-  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  
   font-size: var(--body-size-xxxl);
   font-weight: var(--font-weight-regular);
   line-height: 1.5;
@@ -84,7 +83,7 @@
 
 .profile-details .profile-details-reportees-heading {
   margin: 0 0 16px;
-  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  
   font-size: var(--heading-size-l);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-700);
@@ -148,7 +147,7 @@
 }
 
 .profile-details .profile-details-reportee-name {
-  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  
   font-size: var(--title-size-xl);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-400);
@@ -156,11 +155,11 @@
 }
 
 .profile-details .profile-details-reportee-role {
-  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  
   font-size: var(--body-size-m);
   font-weight: var(--font-weight-regular);
   line-height: 1.5;
-  color: var(--color-gray-600, #808080);
+  color: var(--color-gray-600);
 }
 
 @media (width >= 768px) {

@@ -6,7 +6,7 @@ main > div.section .photo-gallery-wrapper:not(:has(.spotlight)) {
   --photo-gallery-gap: 16px;
   --photo-gallery-radius: 4px;
   --photo-gallery-caption-color: var(--color-gray-800);
-  --photo-gallery-caption-size: var(--body-size-m, 16px);
+  --photo-gallery-caption-size: var(--body-size-m);
 }
 
 .photo-gallery .photo-gallery-figure {
@@ -53,25 +53,25 @@ main .photo-gallery-container > .default-content-wrapper {
 main .photo-gallery-container > .default-content-wrapper p {
   margin: 0 0 8px;
   color: var(--color-gray-700);
-  font-size: var(--body-size-xl, 20px);
-  font-weight: var(--font-weight-regular, 400);
-  line-height: var(--line-height-600, 30px);
+  font-size: var(--body-size-xl);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-600);
 }
 
 main .photo-gallery-container > .default-content-wrapper :is(h1, h2, h3, h4, h5, h6) {
   margin: 0;
   color: var(--color-gray-1000);
-  font-size: var(--heading-size-xxl, 45px);
-  font-weight: var(--font-weight-regular, 400);
-  line-height: var(--line-height-1100, 52px);
+  font-size: var(--heading-size-xxl);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-1100);
 }
 
 @media (width >= 768px) {
   main .photo-gallery-container > .default-content-wrapper p {
-    font-weight: var(--font-weight-regular, 400);
-    font-size: var(--body-size-xl, 20px);
+    font-weight: var(--font-weight-regular);
+    font-size: var(--body-size-xl);
     line-height: 150%;
-    color: var(--color-gray-700, #505050);
+    color: var(--color-gray-700);
   }
 
   .photo-gallery .photo-gallery-grid {
@@ -176,6 +176,7 @@ main .photo-gallery-container > .default-content-wrapper :is(h1, h2, h3, h4, h5,
     grid-auto-rows: 272px;
     grid-auto-flow: row dense;
     gap: 16px;
+    justify-content: left;
   }
 
   .photo-gallery.spotlight .photo-gallery-item:nth-of-type(5n + 1) {

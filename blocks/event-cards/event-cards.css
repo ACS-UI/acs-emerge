@@ -1,5 +1,4 @@
 .event-cards {
-  /* fonts — Figma uses Adobe Clean Spectrum VF (not bundled); fall back */
   --ec-font: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
 
   /* colors */
@@ -55,6 +54,24 @@
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-1500);
   letter-spacing: 0;
+}
+
+.event-cards .event-cards-view-all {
+  margin-top: 20px;
+  border: 1px solid transparent;
+  background: var(--color-gray-900);
+  color: var(--color-white);
+  font-family: var(--ec-font);
+  font-size: var(--detail-size-m);
+  font-weight: var(--font-weight-medium);
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.event-cards .event-cards-view-all:hover {
+  border-color: var(--color-red-1000);
+  background: var(--color-red-1000);
+  color: var(--color-white);
+  text-decoration: none;
 }
 
 /* ==========================================================================
@@ -208,7 +225,7 @@
   align-items: center;
   gap: 6px;
   color: var(--color-black);
-  font-size: var(--body-size-s, 14px);
+  font-size: var(--body-size-s);
   font-weight: var(--font-weight-regular);
   line-height: 1.5;
   letter-spacing: 0;
@@ -228,7 +245,7 @@
 
 .event-cards .event-cards-link:hover .event-cards-meta,
 .event-cards .event-cards-link:focus-visible .event-cards-meta {
-  font-size: calc(var(--body-size-s, 14px) + 1px);
+  font-size: calc(var(--body-size-s) + 1px);
 }
 
 .event-cards .event-cards-link:hover .event-cards-badge-day,
@@ -239,7 +256,7 @@
 /* ==========================================================================
    Desktop — three across
    ========================================================================== */
-@media (width >= 600px) {
+@media (width >= 560px) {
   .event-cards .event-cards-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -262,7 +279,7 @@
   --carousel-gap: 24px;
 }
 
-@media (width >= 600px) {
+@media (width >= 560px) {
   .event-cards.carousel .carousel {
     --carousel-visible: 2;
   }
@@ -273,4 +290,57 @@
     --carousel-visible: 3;
     --carousel-gap: 32px;
   }
+
+  .event-cards.carousel .carousel p:not(.button-container) {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--title-size-xl);
+    line-height: var(--line-height-400);
+  }
+
+  .event-cards.carousel .carousel :is(h1,h2,h3,h4,h5,h6) {
+    font-weight: var(--font-weight-regular);
+    font-size: var(--heading-size-xxl);
+    line-height: var(--line-height-1100);
+  }
+}
+
+/* "View All" pill — dark by default, fills red with a trailing arrow reveal
+   on hover, matching the pattern already used in profile.css/success.css */
+.event-cards.carousel .carousel-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  line-height: 20px;
+  margin-top: 20px;
+  border: 1px solid transparent;
+  border-radius: 2.4em;
+  padding: 0.6em 1.5em;
+  background: var(--color-gray-900);
+  color: var(--color-white);
+  font-family: var(--ec-font);
+  font-size: var(--detail-size-m);
+  font-weight: var(--font-weight-medium);
+  transition: background-color 0.2s ease, color 0.2s ease, gap 0.2s ease;
+}
+
+.event-cards.carousel .carousel-view-all::after {
+  content: "";
+  width: 0;
+  height: 1.1em;
+  background: currentcolor;
+  opacity: 0;
+  mask: url('../../icons/arrow-right-solid.svg') center / contain no-repeat;
+  transition: width 0.2s ease, opacity 0.2s ease;
+}
+
+.event-cards.carousel .carousel-view-all:hover {
+  gap: 0.6em;
+  background: var(--color-red-1000);
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.event-cards.carousel .carousel-view-all:hover::after {
+  width: 1.1em;
+  opacity: 1;
 }

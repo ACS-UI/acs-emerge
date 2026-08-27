@@ -233,8 +233,8 @@ header .nav-brand a:any-link {
 
 header nav .nav-brand .icon,
 header nav .nav-brand img {
-  width: 40px;
-  height: 39px;
+  width: 24px;
+  height: 24px;
   flex: none;
 }
 
@@ -289,7 +289,7 @@ header nav[aria-expanded='true'] .nav-sections ul {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  font-size: var(--title-size-l, 18px);
+  font-size: var(--title-size-l);
 }
 
 header nav[aria-expanded='true'] .nav-sections ul > li {
@@ -301,6 +301,12 @@ header nav[aria-expanded='true'] .nav-sections ul > li {
     display: block;
     visibility: visible;
     white-space: nowrap;
+  }
+
+  header nav .nav-brand .icon,
+  header nav .nav-brand img {
+    width: 40px;
+    height: 40px;
   }
 
   header nav[aria-expanded='true'] .nav-sections {

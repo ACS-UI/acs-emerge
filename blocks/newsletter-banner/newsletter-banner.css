@@ -8,9 +8,9 @@
     var(--color-magenta-900) 40%,
     #7155fa 121%
   );
-  --newsletter-banner-eyebrow-size: var(--title-size-m, 16px);
+  --newsletter-banner-eyebrow-size: var(--title-size-m);
   --newsletter-banner-eyebrow-line: 1.2;
-  --newsletter-banner-title-size: var(--heading-size-xl, 36px);
+  --newsletter-banner-title-size: var(--heading-size-xl);
   --newsletter-banner-title-line: 1.1;
   --newsletter-banner-radius: 10px;
   --newsletter-banner-pad-block: 32px;
@@ -28,9 +28,9 @@
 main .newsletter-banner-container > .default-content-wrapper:first-child p {
   margin: 0 0 20px;
   color: var(--color-gray-700);
-  font-size: var(--title-size-xl, 20px);
-  font-weight: var(--font-weight-bold, 700);
-  line-height: var(--line-height-400, 24px);
+  font-size: var(--title-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-400);
 }
 
 main .newsletter-banner-container > .default-content-wrapper:last-child {
@@ -40,15 +40,15 @@ main .newsletter-banner-container > .default-content-wrapper:last-child {
 main .newsletter-banner-container > .default-content-wrapper:last-child p {
   margin: 0 0 16px;
   color: var(--color-gray-1000);
-  font-size: var(--body-size-l, 18px);
-  font-weight: var(--font-weight-regular, 400);
+  font-size: var(--body-size-l);
+  font-weight: var(--font-weight-regular);
   line-height: 1.5;
 }
 
 main .newsletter-banner-container > .default-content-wrapper:last-child p:has(strong) {
-  font-size: var(--heading-size-s, 20px);
-  font-weight: var(--font-weight-bold, 700);
-  line-height: var(--line-height-400, 24px);
+  font-size: var(--heading-size-s);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-400);
 }
 
 main .newsletter-banner-container > .default-content-wrapper:last-child p:last-child {
@@ -79,7 +79,7 @@ main .newsletter-banner-container > .default-content-wrapper:last-child p:last-c
   margin: 0 0 12px;
   color: var(--newsletter-banner-eyebrow-color);
   font-size: var(--newsletter-banner-eyebrow-size);
-  font-weight: var(--font-weight-bold, 700);
+  font-weight: var(--font-weight-bold);
   line-height: var(--newsletter-banner-eyebrow-line);
 }
 
@@ -87,7 +87,7 @@ main .newsletter-banner-container > .default-content-wrapper:last-child p:last-c
   margin: 0;
   color: var(--newsletter-banner-text-color);
   font-size: var(--newsletter-banner-title-size);
-  font-weight: var(--font-weight-bold, 700);
+  font-weight: var(--font-weight-bold);
   line-height: var(--newsletter-banner-title-line);
 }
 
@@ -103,10 +103,10 @@ main .newsletter-banner-container > .default-content-wrapper:last-child p:last-c
   .newsletter-banner {
     --newsletter-banner-pad-block: 40px;
     --newsletter-banner-pad-inline: 32px;
-    --newsletter-banner-eyebrow-size: var(--title-size-xl, 20px);
-    --newsletter-banner-eyebrow-line: var(--line-height-400, 24px);
-    --newsletter-banner-title-size: var(--heading-size-xxxxl, 73px);
-    --newsletter-banner-title-line: var(--line-height-1500, 84px);
+    --newsletter-banner-eyebrow-size: var(--title-size-xl);
+    --newsletter-banner-eyebrow-line: var(--line-height-400);
+    --newsletter-banner-title-size: var(--heading-size-xxxxl);
+    --newsletter-banner-title-line: var(--line-height-1500);
   }
 
   .newsletter-banner .newsletter-banner-content {

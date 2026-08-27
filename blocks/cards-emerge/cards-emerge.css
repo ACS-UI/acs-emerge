@@ -123,7 +123,7 @@
 @supports (background-clip: text) or (-webkit-background-clip: text) {
   .cards-emerge .cards-emerge-letter {
     background: var(--cards-emerge-letter-gradient);
-    -webkit-background-clip: text;
+    background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;

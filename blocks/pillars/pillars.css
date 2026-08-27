@@ -4,10 +4,10 @@
   --pillars-label-color: var(--color-gray-1000);
   --pillars-text-color: var(--color-gray-800);
   --pillars-rule-color: var(--color-gray-300);
-  --pillars-eyebrow-size: var(--body-size-l, 18px);
-  --pillars-heading-size: var(--heading-size-l, 28px);
-  --pillars-label-size: var(--detail-size-l, 16px);
-  --pillars-text-size: var(--body-size-l, 18px);
+  --pillars-eyebrow-size: var(--body-size-l);
+  --pillars-heading-size: var(--heading-size-l);
+  --pillars-label-size: var(--detail-size-l);
+  --pillars-text-size: var(--body-size-l);
   --pillars-col-gap: 36px 10px 0 0;
   --pillars-row-gap: 28px;
   --pillars-rule-space: 28px;
@@ -22,14 +22,14 @@
   margin: 0 0 6px;
   color: var(--pillars-eyebrow-color);
   font-size: var(--pillars-eyebrow-size);
-  font-weight: var(--font-weight-regular, 400);
+  font-weight: var(--font-weight-regular);
 }
 
 .pillars .pillars-intro :is(h1, h2, h3, h4, h5, h6) {
   margin: 0;
   color: var(--pillars-heading-color);
   font-size: var(--pillars-heading-size);
-  font-weight: var(--font-weight-extra-bold, 800);
+  font-weight: var(--font-weight-extra-bold);
   line-height: 1.15;
 }
 
@@ -53,7 +53,7 @@
   margin: 0;
   color: var(--pillars-label-color);
   font-size: var(--pillars-label-size);
-  font-weight: var(--font-weight-bold, 700);
+  font-weight: var(--font-weight-bold);
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }

@@ -8,9 +8,9 @@
     0px 4px 6px 0px #0000000A,
     0px 1px 2px 0px #00000014,
     0px 0px 0px 1px #0000000A;
-  --commitment-cards-eyebrow-size: var(--detail-size-l, 16px);
-  --commitment-cards-heading-size: var(--heading-size-s, 20px);
-  --commitment-cards-body-size: var(--body-size-l, 18px);
+  --commitment-cards-eyebrow-size: var(--detail-size-l);
+  --commitment-cards-heading-size: var(--heading-size-s);
+  --commitment-cards-body-size: var(--body-size-l);
   --commitment-cards-gap: 24px;
   --commitment-cards-pad: 24px;
   --commitment-cards-radius: 24px;
@@ -19,18 +19,18 @@
 
 main .commitment-cards-container > .default-content-wrapper p {
   font-style: normal;
-  font-weight: var(--font-weight-regular, 400);
-  font-size: var(--body-size-xl, 20px);
-  line-height: var(--line-height-400, 24px);
-  color: var(--color-gray-1000, #000);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--body-size-xl);
+  line-height: var(--line-height-400);
+  color: var(--color-gray-1000);
 }
 
 main .commitment-cards-container > .default-content-wrapper :is(h1, h2, h3, h4, h5, h6) {
   font-style: normal;
-  font-weight: var(--font-weight-bold, 700);
-  font-size: var(--heading-size-xl, 36px);
-  line-height: var(--line-height-900, 42px);
-  color: var(--color-gray-1000, #000);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--heading-size-xl);
+  line-height: var(--line-height-900);
+  color: var(--color-gray-1000);
   margin: 0 0 24px;
 }
 
@@ -56,14 +56,14 @@ main .commitment-cards-container > .default-content-wrapper :is(h1, h2, h3, h4, 
   margin: 0 0 4px;
   color: var(--commitment-cards-eyebrow-color);
   font-size: var(--commitment-cards-eyebrow-size);
-  font-weight: var(--font-weight-regular, 400);
+  font-weight: var(--font-weight-regular);
 }
 
 .commitment-cards .commitment-cards-card :is(h1, h2, h3, h4, h5, h6) {
   margin: 0 0 24px;
   color: var(--commitment-cards-heading-color);
   font-size: var(--commitment-cards-heading-size);
-  font-weight: var(--font-weight-bold, 700);
+  font-weight: var(--font-weight-bold);
   line-height: 1.2;
 }
 
@@ -84,20 +84,20 @@ main .commitment-cards-container > .default-content-wrapper :is(h1, h2, h3, h4, 
   }
 
   .commitment-cards .commitment-cards-eyebrow {
-    font-weight: var(--font-weight-regular, 400);
-    font-size: var(--title-size-l, 18px);
-    line-height: var(--line-height-300, 22px);
+    font-weight: var(--font-weight-regular);
+    font-size: var(--title-size-l);
+    line-height: var(--line-height-300);
   }
 
   .commitment-cards .commitment-cards-card :is(h1, h2, h3, h4, h5, h6) {
-    font-weight: var(--font-weight-bold, 700);
-    font-size: var(--heading-size-l, 28px);
-    line-height: var(--line-height-700, 32px);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--heading-size-l);
+    line-height: var(--line-height-700);
   }
 
   .commitment-cards .commitment-cards-card p:not(.commitment-cards-eyebrow) {
-    font-weight: var(--font-weight-regular, 400);
-    font-size: var(--body-size-xxl, 22px);
+    font-weight: var(--font-weight-regular);
+    font-size: var(--body-size-xxl);
     line-height: 150%;
   }
 }

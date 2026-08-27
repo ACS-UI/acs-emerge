@@ -206,10 +206,8 @@ main .section.bg-gradient-b .carousel .carousel-dot {
   .carousel .carousel-dots {
     display: none;
   }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  .carousel .carousel-track {
-    scroll-behavior: auto;
+  .carousel .carousel-intro :last-child {
+    margin: 0;
   }
 }

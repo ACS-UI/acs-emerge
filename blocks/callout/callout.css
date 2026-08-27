@@ -6,10 +6,10 @@
   --callout-button-color: var(--color-gray-1000);
   --callout-button-border: var(--color-gray-1000);
   --callout-panel-bg: #f9f8f6;
-  --callout-eyebrow-size: var(--body-size-m, 16px);
-  --callout-heading-size: var(--heading-size-l, 28px);
-  --callout-body-size: var(--body-size-l, 18px);
-  --callout-note-size: var(--detail-size-l, 16px);
+  --callout-eyebrow-size: var(--body-size-m);
+  --callout-heading-size: var(--heading-size-l);
+  --callout-body-size: var(--body-size-l);
+  --callout-note-size: var(--detail-size-l);
   --callout-max-width: 1000px;
 
   text-align: center;
@@ -24,14 +24,14 @@
   margin: 0 0 6px;
   color: var(--callout-eyebrow-color);
   font-size: var(--callout-eyebrow-size);
-  font-weight: var(--font-weight-regular, 400);
+  font-weight: var(--font-weight-regular);
 }
 
 .callout .callout-content :is(h1, h2, h3, h4, h5, h6) {
   margin: 0 0 20px;
   color: var(--callout-heading-color);
   font-size: var(--callout-heading-size);
-  font-weight: var(--font-weight-bold, 700);
+  font-weight: var(--font-weight-bold);
   line-height: 1.2;
 }
 
@@ -54,7 +54,7 @@
   border-radius: 2.4em;
   background: transparent;
   color: var(--callout-button-color);
-  font-weight: var(--font-weight-regular, 400);
+  font-weight: var(--font-weight-regular);
 }
 
 .callout a.button:hover,
@@ -69,12 +69,12 @@
   margin: 12px 0 0;
   color: var(--callout-note-color);
   font-size: var(--callout-note-size);
-  font-weight: var(--font-weight-bold, 700);
+  font-weight: var(--font-weight-bold);
 }
 
 @media (width >= 768px) {
   .callout {
-    --callout-heading-size: var(--heading-size-xl, 36px);
+    --callout-heading-size: var(--heading-size-xl);
   }
 
   .callout .callout-content :is(h1, h2, h3, h4, h5, h6) {
@@ -88,8 +88,8 @@
     padding: 8px 24px;
     border-radius: 55px;
     filter: drop-shadow(0 4px 8px rgb(0 0 0 / 8%));
-    font-size: var(--title-size-m, 16px);
-    line-height: var(--line-height-200, 20px);
+    font-size: var(--title-size-m);
+    line-height: var(--line-height-200);
   }
 
   main .section.callout-container {
@@ -112,17 +112,17 @@
     gap: 4px;
     border-radius: 999px;
     color: var(--color-gray-1000);
-    font-size: var(--title-size-xl, 20px);
-    font-weight: var(--font-weight-regular, 400);
-    line-height: var(--line-height-400, 24px);
+    font-size: var(--title-size-xl);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-400);
   }
 
   .callout .callout-content p:not(.callout-eyebrow, .callout-note, .button-container, .button-wrapper) {
     margin: 0 0 48px;
     color: var(--color-gray-1000);
-    font-size: var(--body-size-xl, 20px);
-    font-weight: var(--font-weight-regular, 400);
-    line-height: var(--line-height-600, 30px);
+    font-size: var(--body-size-xl);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-600);
   }
 
   .callout .button-container,
@@ -138,8 +138,8 @@
     gap: 4px;
     border-radius: 999px;
     color: var(--color-gray-1000);
-    font-size: var(--title-size-m, 16px);
-    font-weight: var(--font-weight-regular, 400);
-    line-height: var(--line-height-200, 20px);
+    font-size: var(--title-size-m);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-200);
   }
 }

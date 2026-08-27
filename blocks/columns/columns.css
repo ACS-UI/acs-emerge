@@ -1,10 +1,10 @@
 .columns {
   --columns-gap: 24px;
-  --columns-intro-eyebrow-size: var(--title-size-xl, 20px);
-  --columns-intro-eyebrow-line: var(--line-height-400, 24px);
-  --columns-intro-heading-size: var(--heading-size-xl, 36px);
-  --columns-intro-heading-line: var(--line-height-900, 42px);
-  --columns-body-size: var(--body-size-xxxl, 25px);
+  --columns-intro-eyebrow-size: var(--title-size-xl);
+  --columns-intro-eyebrow-line: var(--line-height-400);
+  --columns-intro-heading-size: var(--heading-size-xl);
+  --columns-intro-heading-line: var(--line-height-900);
+  --columns-body-size: var(--body-size-xxxl);
 }
 
 

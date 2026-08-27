@@ -6,14 +6,14 @@
   --agenda-title-color: var(--color-gray-1000);
   --agenda-speaker-color: var(--color-gray-600);
   --agenda-duration-color: var(--color-gray-500);
-  --agenda-eyebrow-size: var(--body-size-xl, 20px);
-  --agenda-eyebrow-line: var(--line-height-600, 30px);
-  --agenda-heading-size: var(--heading-size-xxl, 45px);
-  --agenda-heading-line: var(--line-height-1100, 52px);
-  --agenda-time-size: var(--detail-size-m, 14px);
-  --agenda-title-size: var(--body-size-l, 18px);
-  --agenda-speaker-size: var(--detail-size-m, 14px);
-  --agenda-duration-size: var(--detail-size-s, 12px);
+  --agenda-eyebrow-size: var(--body-size-xl);
+  --agenda-eyebrow-line: var(--line-height-600);
+  --agenda-heading-size: var(--heading-size-xxl);
+  --agenda-heading-line: var(--line-height-1100);
+  --agenda-time-size: var(--detail-size-m);
+  --agenda-title-size: var(--body-size-l);
+  --agenda-speaker-size: var(--detail-size-m);
+  --agenda-duration-size: var(--detail-size-s);
   --agenda-row-gap: 2px;
   --agenda-row-pad: 20px 24px;
   --agenda-row-radius: 20px;
@@ -27,7 +27,7 @@
   margin: 0 0 8px;
   color: var(--agenda-eyebrow-color);
   font-size: var(--agenda-eyebrow-size);
-  font-weight: var(--font-weight-regular, 400);
+  font-weight: var(--font-weight-regular);
   line-height: var(--agenda-eyebrow-line);
 }
 
@@ -35,7 +35,7 @@
   margin: 0;
   color: var(--agenda-heading-color);
   font-size: var(--agenda-heading-size);
-  font-weight: var(--font-weight-regular, 400);
+  font-weight: var(--font-weight-regular);
   line-height: var(--agenda-heading-line);
 }
 
@@ -62,7 +62,7 @@
 .agenda .agenda-time {
   color: var(--agenda-time-color);
   font-size: var(--agenda-time-size);
-  font-weight: var(--font-weight-bold, 700);
+  font-weight: var(--font-weight-bold);
   white-space: nowrap;
 }
 
@@ -74,7 +74,7 @@
   margin: 0;
   color: var(--agenda-title-color);
   font-size: var(--agenda-title-size);
-  font-weight: var(--font-weight-bold, 700);
+  font-weight: var(--font-weight-bold);
   line-height: 1.3;
 }
 
@@ -102,29 +102,29 @@
     grid-column: auto;
     text-align: right;
     white-space: nowrap;
-    font-weight: var(--font-weight-regular, 400);
+    font-weight: var(--font-weight-regular);
     font-size: var(--agenda-duration-size);
     line-height: 1.5;
     color: #B0B0B0;
   }
 
   .agenda .agenda-title {
-    font-weight: var(--font-weight-bold, 700);
+    font-weight: var(--font-weight-bold);
     font-size: var(--agenda-title-size);
-    line-height: var(--line-height-300, 22px);
+    line-height: var(--line-height-300);
   }
 
   .agenda .agenda-speaker {
-    font-weight: var(--font-weight-regular, 400);
-    font-size: var(--body-size-xl, 20px);
+    font-weight: var(--font-weight-regular);
+    font-size: var(--body-size-xl);
     line-height: 1.5;
-    color: var(--color-gray-700, #505050);
+    color: var(--color-gray-700);
   }
 
   .agenda .agenda-time {
-    font-weight: var(--font-weight-bold, 700);
+    font-weight: var(--font-weight-bold);
     font-size: var(--agenda-time-size);
-    line-height: var(--line-height-100, 18px);
-    color: var(--color-red-800, #F03823);
+    line-height: var(--line-height-100);
+    color: var(--color-red-800);
   }
 }

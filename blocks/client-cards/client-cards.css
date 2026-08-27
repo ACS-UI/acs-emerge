@@ -180,7 +180,6 @@
 .client-cards.carousel .carousel-intro h2,
 .client-cards.carousel .carousel-intro h3 {
   margin: 8px 0 0;
-  max-height: 488px;
   font-size: var(--heading-size-xxl);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-1100);
@@ -216,7 +215,7 @@
   background: currentcolor;
   opacity: 0;
   mask: var(--client-cards-arrow-mask) center / contain no-repeat;
-  -webkit-mask: var(--client-cards-arrow-mask) center / contain no-repeat;
+  mask: var(--client-cards-arrow-mask) center / contain no-repeat;
   transition: width 0.2s ease, opacity 0.2s ease;
 
   --client-cards-arrow-mask: url('../../icons/arrow-right.svg');

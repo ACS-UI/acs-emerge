@@ -129,15 +129,15 @@ main .cards-working-container {
 .cards-working .cards-working-card-backdrop-mid {
   backdrop-filter: blur(var(--cw-card-backdrop-blur-mid));
   mask-image: var(--cw-card-backdrop-mid-mask);
-  -webkit-backdrop-filter: blur(var(--cw-card-backdrop-blur-mid));
-  -webkit-mask-image: var(--cw-card-backdrop-mid-mask);
+  backdrop-filter: blur(var(--cw-card-backdrop-blur-mid));
+  mask-image: var(--cw-card-backdrop-mid-mask);
 }
 
 .cards-working .cards-working-card-backdrop-strong {
   backdrop-filter: blur(var(--cw-card-backdrop-blur-strong));
   mask-image: var(--cw-card-backdrop-strong-mask);
-  -webkit-backdrop-filter: blur(var(--cw-card-backdrop-blur-strong));
-  -webkit-mask-image: var(--cw-card-backdrop-strong-mask);
+  backdrop-filter: blur(var(--cw-card-backdrop-blur-strong));
+  mask-image: var(--cw-card-backdrop-strong-mask);
 }
 
 .cards-working .cards-working-card-body h3 {

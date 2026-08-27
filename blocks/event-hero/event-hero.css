@@ -8,9 +8,9 @@
   --event-hero-detail-label-color: var(--color-gray-700);
   --event-hero-detail-value-color: var(--color-gray-1000);
   --event-hero-title-size: clamp(40px, 7vw, 64px);
-  --event-hero-date-size: var(--body-size-l, 18px);
-  --event-hero-label-size: var(--detail-size-m, 14px);
-  --event-hero-body-size: var(--body-size-m, 16px);
+  --event-hero-date-size: var(--body-size-l);
+  --event-hero-label-size: var(--detail-size-m);
+  --event-hero-body-size: var(--body-size-m);
   --event-hero-gap: 32px;
   --event-hero-card-pad: 24px;
   --event-hero-card-radius: 12px;
@@ -37,7 +37,7 @@
   margin: 0;
   color: var(--event-hero-title-color);
   font-size: var(--event-hero-title-size);
-  font-weight: var(--font-weight-regular, 400);
+  font-weight: var(--font-weight-regular);
   line-height: 1.02;
   letter-spacing: -0.01em;
 }
@@ -46,7 +46,7 @@
   margin: 0;
   color: var(--event-hero-date-color);
   font-size: var(--event-hero-date-size);
-  font-weight: var(--font-weight-bold, 700);
+  font-weight: var(--font-weight-bold);
 }
 
 .event-hero .event-hero-about,
@@ -62,7 +62,7 @@
   margin: 0 0 12px;
   color: var(--event-hero-label-color);
   font-size: var(--event-hero-label-size);
-  font-weight: var(--font-weight-bold, 700);
+  font-weight: var(--font-weight-bold);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -98,11 +98,11 @@
 }
 
 .event-hero .event-hero-cta .button {
-  border: 1px solid var(--color-gray-1000, #000);
+  border: 1px solid var(--color-gray-1000);
   border-radius: 2.4em;
   background: transparent;
   color: var(--color-gray-1000);
-  font-weight: var(--font-weight-regular, 400);
+  font-weight: var(--font-weight-regular);
   padding: 8px 24px;
 }
 
@@ -149,41 +149,41 @@
   }
 
   .event-hero .event-hero-head :is(h1, h2, h3, h4, h5, h6) {
-    font-weight: var(--font-weight-regular, 400);
-    font-size: var(--heading-size-xxxl, 58px);
-    line-height: var(--line-height-1300, 66px);
+    font-weight: var(--font-weight-regular);
+    font-size: var(--heading-size-xxxl);
+    line-height: var(--line-height-1300);
   }
 
   .event-hero .event-hero-date {
-    font-weight: var(--font-weight-bold, 700);
-    font-size: var(--body-size-xl, 20px);
-    line-height: var(--line-height-400, 24px);
-    color: var(--color-gray-900, #131313);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--body-size-xl);
+    line-height: var(--line-height-400);
+    color: var(--color-gray-900);
   }
 
   .event-hero .event-hero-about-label {
-    font-weight: var(--font-weight-regular, 400);
-    font-size: var(--detail-size-l, 16px);
-    line-height: var(--line-height-200, 20px);
-    color: var(--color-gray-900, #131313);
+    font-weight: var(--font-weight-regular);
+    font-size: var(--detail-size-l);
+    line-height: var(--line-height-200);
+    color: var(--color-gray-900);
   }
 
   .event-hero .event-hero-about p:not(.event-hero-about-label) {
-    font-weight: var(--font-weight-regular, 400);
-    font-size: var(--detail-size-m, 14px);
-    color: var(--color-gray-800, #292929);
+    font-weight: var(--font-weight-regular);
+    font-size: var(--detail-size-m);
+    color: var(--color-gray-800);
   }
 
   .event-hero .event-hero-details :is(dt,dd) {
-    font-weight: var(--font-weight-regular, 400);
-    font-size: var(--detail-size-m, 14px);
+    font-weight: var(--font-weight-regular);
+    font-size: var(--detail-size-m);
     line-height: 1.5;
-    color: var(--color-gray-800, #292929);
+    color: var(--color-gray-800);
   }
 
   .event-hero .event-hero-cta .button {
-    font-weight: var(--font-weight-regular, 400);
-    font-size: var(--body-size-m, 16px);
+    font-weight: var(--font-weight-regular);
+    font-size: var(--body-size-m);
     line-height: 1.5;
   }
 }

@@ -22,14 +22,16 @@
  * @typedef {Object} CarouselOptions
  * @property {Node} [heading]  Optional element rendered as the intro (title +
  *   description) at the top-left/centre of the carousel.
- * @property {ViewAllConfig|false} [viewAll=false]  Optional "view all" button
- *   rendered below the track.
+ * @property {ViewAllConfig|false} [viewAll=false]  Optional "view all" button.
  * @property {number} [step=1]  Number of items advanced per navigation click.
  * @property {'left'|'center'|'right'} [align='left']  Text alignment for the
  *   intro (title & description) at the top.
  * @property {string} [label='carousel']  Accessible label for the region.
  * @property {'top'|'bottom'} [navPosition='top']  Where the prev/next nav is
  *   rendered: in the top bar (default) or below the track (bottom-left).
+ * @property {'top'|'bottom'} [viewAllPosition='bottom']  Where the "view all"
+ *   button is rendered: under the top bar (above the track) or in a footer
+ *   below the track (default).
  */
 
 let carouselSeq = 0;
@@ -125,6 +127,7 @@ export default function createCarousel(children, options = {}) {
     align = 'left',
     label = 'carousel',
     navPosition = 'top',
+    viewAllPosition = 'bottom',
   } = options;
 
   carouselSeq += 1;
@@ -145,10 +148,20 @@ export default function createCarousel(children, options = {}) {
   const next = createArrow('next');
   nav.append(prev, next);
 
+  // --- optional "view all" link (built once, placed per viewAllPosition) -
+  let viewAllLink;
+  if (viewAll && viewAll.href) {
+    viewAllLink = document.createElement('a');
+    viewAllLink.className = 'button carousel-view-all';
+    viewAllLink.href = viewAll.href;
+    viewAllLink.textContent = viewAll.text || 'View All';
+  }
+  const viewAllOnTop = viewAllLink && viewAllPosition === 'top';
+
   // --- top: intro (title/desc) + (optionally) navigation ----------------
-  // Skip the top bar entirely when there is nothing to put in it (no heading
-  // and the nav lives at the bottom).
-  if (heading || navPosition === 'top') {
+  // Skip the top bar entirely when there is nothing to put in it (no heading,
+  // no top-positioned "view all", and the nav lives at the bottom).
+  if (heading || navPosition === 'top' || viewAllOnTop) {
     const top = document.createElement('div');
     top.className = 'carousel-top';
     // `align` drives the top-bar layout: a centered intro floats the nav to
@@ -159,6 +172,7 @@ export default function createCarousel(children, options = {}) {
     intro.className = 'carousel-intro';
     intro.dataset.align = align;
     if (heading) intro.append(heading);
+    if (viewAllOnTop) intro.append(viewAllLink);
     top.append(intro);
 
     if (navPosition === 'top') top.append(nav);
@@ -200,15 +214,11 @@ export default function createCarousel(children, options = {}) {
     carousel.append(nav);
   }
 
-  // --- optional "view all" ----------------------------------------------
-  if (viewAll && viewAll.href) {
+  // --- "view all" footer (only when not already placed in the top bar) --
+  if (viewAllLink && !viewAllOnTop) {
     const footer = document.createElement('div');
     footer.className = 'carousel-footer';
-    const link = document.createElement('a');
-    link.className = 'button carousel-view-all';
-    link.href = viewAll.href;
-    link.textContent = viewAll.text || 'View All';
-    footer.append(link);
+    footer.append(viewAllLink);
     carousel.append(footer);
   }
 

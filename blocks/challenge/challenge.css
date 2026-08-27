@@ -23,10 +23,10 @@
 
 .challenge-container .default-content-wrapper:first-child :is(h1, h2, h3, h4, h5, h6, p) {
   text-align: center;
-  font-weight: var(--font-weight-regular, 400);
-  font-size: var(--heading-size-xxxl, 58px);
-  line-height: var(--line-height-1300, 66px);
-  color: var(--color-gray-1000, #000);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--heading-size-xxxl);
+  line-height: var(--line-height-1300);
+  color: var(--color-gray-1000);
 }
 
 .challenge ul {
