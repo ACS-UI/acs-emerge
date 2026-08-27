@@ -1,18 +1,4 @@
-/**
- * loads and decorates the agenda block
- *
- * Authored content model:
- *   Row 1 (optional intro): a single text cell with an eyebrow paragraph and a
- *          heading (e.g. "AGENDA" / "Schedule at a glance").
- *   Rows 2..n (one per agenda item), three cells:
- *          Cell 1: the start time (e.g. "9:00 AM").
- *          Cell 2: the session title (heading or bold text) and the
- *                  speaker/detail (a paragraph).
- *          Cell 3: the session duration (e.g. "15 min").
- *
- * Renders the intro above a list of elevated schedule rows.
- * @param {Element} block The block element
- */
+/** Decorates the agenda block: optional intro row + list of schedule item rows. */
 export default function decorate(block) {
   const rows = [...block.children];
 

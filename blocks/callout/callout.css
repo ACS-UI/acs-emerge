@@ -72,7 +72,7 @@
   font-weight: var(--font-weight-bold, 700);
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .callout {
     --callout-heading-size: var(--heading-size-xl, 36px);
   }

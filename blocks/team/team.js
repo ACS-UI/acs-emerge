@@ -1,15 +1,6 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 
-/**
- * Builds one team-member card from an authored row.
- *
- * Authored content model (per row / per person):
- *   Cell 1: the person's photo.
- *   Cell 2: a single line of text, "Name | Role".
- *
- * @param {Element} row The authored row.
- * @returns {HTMLElement} The card.
- */
+/** Builds one team-member card (photo + "Name | Role" text) from an authored row. */
 function buildCard(row) {
   const cells = [...row.children];
   const imageCell = cells.find((c) => c.querySelector('picture, img'));
@@ -35,10 +26,7 @@ function buildCard(row) {
   return card;
 }
 
-/**
- * Decorates the team block: a responsive grid of member photo + name/role.
- * @param {Element} block The team block element.
- */
+/** Decorates the team block: a responsive grid of member photo + name/role. */
 export default function decorate(block) {
   const cards = [...block.children]
     .filter((row) => row.querySelector('picture, img') || row.textContent.trim())

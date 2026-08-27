@@ -34,7 +34,7 @@
   height: 100%;
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .hero {
     --hero-padding-inline: 32px;
   }

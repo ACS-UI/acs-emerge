@@ -65,7 +65,7 @@
   line-height: 1.5;
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .pillars .pillars-intro {
     --pillars-rule-space: 24px;
   }

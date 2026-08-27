@@ -23,12 +23,11 @@
 
 .challenge-container .default-content-wrapper:first-child :is(h1, h2, h3, h4, h5, h6, p) {
   text-align: center;
-  font-weight: 400;
-  font-size: 58px;
-  line-height: 66px;
-  color: #000000;
+  font-weight: var(--font-weight-regular, 400);
+  font-size: var(--heading-size-xxxl, 58px);
+  line-height: var(--line-height-1300, 66px);
+  color: var(--color-gray-1000, #000);
 }
-
 
 .challenge ul {
   margin: 0;
@@ -76,7 +75,7 @@
   line-height: var(--challenge-text-line);
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .challenge .challenge-item {
     grid-template-columns: var(--challenge-number-col) minmax(0, 1fr);
     padding: var(--challenge-row-pad) 0;

@@ -79,36 +79,33 @@
   font-size: var(--event-highlights-label-size);
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .event-highlights .event-highlights-list {
     grid-template-columns: repeat(4, 1fr);
   }
 
   .event-highlights .event-highlights-eyebrow {
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 150%;
-    color: #505050;
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--event-highlights-eyebrow-size);
+    line-height: 1.5;
   }
 
   .event-highlights .event-highlights-intro :is(h1, h2, h3, h4, h5, h6) {
-    font-weight: 400;
-    font-size: 45px;
-    line-height: 52px;
-    color: #000000;
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--event-highlights-heading-size);
+    line-height: var(--event-highlights-heading-line);
   }
 
   .event-highlights .event-highlights-value {
-    font-weight: 700;
-    font-size: 58px;
-    line-height: 66px;
-    color: #000000;
+    font-weight: var(--font-weight-bold, 700);
+    font-size: var(--font-size-1300, 58px);
+    line-height: var(--line-height-1300, 66px);
   }
 
   .event-highlights .event-highlights-label {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 150%;
-    color: #808080;
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--detail-size-l, 16px);
+    line-height: 1.5;
+    color: var(--color-gray-600, #808080);
   }
 }

@@ -73,13 +73,13 @@
 
 .session-resources-carousel .session-resources-carousel-open.button {
   margin-top: 6px;
-  border: 1px solid #000000;
+  border: 1px solid var(--color-gray-1000, #000);
   border-radius: 2.4em;
   background: transparent;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
-  color: #000000;
+  font-weight: var(--font-weight-regular, 400);
+  font-size: var(--body-size-m, 16px);
+  line-height: var(--line-height-200, 20px);
+  color: var(--color-gray-1000, #000);
   padding: 8px 24px;
   transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
@@ -121,21 +121,21 @@
   .session-resources-carousel .carousel {
     --carousel-visible: 3;
     --session-resources-carousel-card-pad: 20px 24px;
+
     gap: 40px;
   }
 
   .session-resources-carousel .session-resources-carousel-title {
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 24px;
-    color: #000000;
+    font-weight: var(--font-weight-bold, 700);
+    font-size: var(--body-size-xl, 20px);
+    line-height: var(--line-height-400, 24px);
   }
 
   .session-resources-carousel .session-resources-carousel-desc {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 150%;
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--body-size-m, 16px);
+    line-height: 1.5;
     max-width: 320px;
-    color: #808080;
+    color: var(--color-gray-600, #808080);
   }
 }

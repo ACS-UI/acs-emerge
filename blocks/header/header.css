@@ -79,7 +79,7 @@ header nav[aria-expanded='true'] {
   --nav-link-hover-color: var(--color-white);
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   header nav {
     display: flex;
     justify-content: space-between;
@@ -199,7 +199,7 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   transform: rotate(-45deg);
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   header nav .nav-hamburger {
     display: none;
     visibility: hidden;
@@ -289,14 +289,14 @@ header nav[aria-expanded='true'] .nav-sections ul {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  font-size: 18px;
+  font-size: var(--title-size-l, 18px);
 }
 
 header nav[aria-expanded='true'] .nav-sections ul > li {
   padding: 10px 0;
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   header nav .nav-sections {
     display: block;
     visibility: visible;

@@ -146,7 +146,7 @@
   gap: var(--client-cards-gap);
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .client-cards .client-cards-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -234,7 +234,7 @@
   opacity: 1;
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .client-cards.carousel .carousel {
     --carousel-visible: 2;
   }

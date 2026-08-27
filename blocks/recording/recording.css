@@ -2,7 +2,7 @@
   --recording-eyebrow-color: var(--color-gray-600);
   --recording-card-bg: var(--color-white);
   --recording-title-color: var(--color-gray-1000);
-  --recording-meta-color: var(--color-gray-500);
+  --recording-meta-color: var(--color-gray-600, #808080);
   --recording-play-bg: var(--color-magenta-900);
   --recording-play-color: var(--color-white);
   --recording-cta-bg: var(--color-gray-1000);
@@ -106,7 +106,7 @@
   text-decoration: none;
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .recording .recording-card {
     flex-wrap: nowrap;
     padding: 36px 40px;
@@ -115,23 +115,21 @@
   .recording .recording-cta.button {
     width: auto;
     margin-top: 0;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    color: #FFFFFF;
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--detail-size-l, 16px);
+    line-height: var(--line-height-400, 24px);
     padding: 12px 36px;
   }
 
   .recording .recording-title {
-    font-weight: 400;
-    font-size: 25px;
-    line-height: 30px;
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--font-size-600, 25px);
+    line-height: var(--line-height-600, 30px);
   }
 
   .recording .recording-meta {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 20px;
-    color: #808080;
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--detail-size-m, 14px);
+    line-height: var(--line-height-200, 20px);
   }
 }

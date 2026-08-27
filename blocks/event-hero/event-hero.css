@@ -71,7 +71,7 @@
   margin: 0;
   color: var(--event-hero-body-color);
   font-size: var(--event-hero-body-size);
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
 .event-hero .event-hero-details {
@@ -98,7 +98,7 @@
 }
 
 .event-hero .event-hero-cta .button {
-  border: 1px solid #000000;
+  border: 1px solid var(--color-gray-1000, #000);
   border-radius: 2.4em;
   background: transparent;
   color: var(--color-gray-1000);
@@ -126,7 +126,7 @@
   object-fit: cover;
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .event-hero {
     flex-direction: row;
     align-items: stretch;
@@ -149,43 +149,41 @@
   }
 
   .event-hero .event-hero-head :is(h1, h2, h3, h4, h5, h6) {
-    font-weight: 400;
-    font-size: 58px;
-    line-height: 66px;
-    color: #000000;
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--heading-size-xxxl, 58px);
+    line-height: var(--line-height-1300, 66px);
   }
 
   .event-hero .event-hero-date {
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 24px;
-    color: #131313;
+    font-weight: var(--font-weight-bold, 700);
+    font-size: var(--body-size-xl, 20px);
+    line-height: var(--line-height-400, 24px);
+    color: var(--color-gray-900, #131313);
   }
 
   .event-hero .event-hero-about-label {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    color: #131313;
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--detail-size-l, 16px);
+    line-height: var(--line-height-200, 20px);
+    color: var(--color-gray-900, #131313);
   }
 
   .event-hero .event-hero-about p:not(.event-hero-about-label) {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 150%;
-    color: #292929;
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--detail-size-m, 14px);
+    color: var(--color-gray-800, #292929);
   }
 
   .event-hero .event-hero-details :is(dt,dd) {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 150%;
-    color: #292929;
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--detail-size-m, 14px);
+    line-height: 1.5;
+    color: var(--color-gray-800, #292929);
   }
 
   .event-hero .event-hero-cta .button {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 150%;
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--body-size-m, 16px);
+    line-height: 1.5;
   }
 }

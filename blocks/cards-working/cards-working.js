@@ -16,11 +16,7 @@ export default function decorate(block) {
       else div.className = 'cards-working-card-body';
     });
 
-    // Backdrop: base tint + two masked blur-only layers approximating
-    // Figma's progressive (top-to-bottom) background-blur — see
-    // cards-working.css for how each layer's mask staggers the ramp-up.
-    // Order matters here: base first (bottom of the stack), strong last
-    // (top), so later layers correctly paint over earlier ones.
+    // Backdrop: base tint + two masked blur layers approximating Figma's progressive blur.
     const body = li.querySelector('.cards-working-card-body');
     if (body) {
       const backdrops = document.createDocumentFragment();
@@ -41,10 +37,7 @@ export default function decorate(block) {
 
   block.replaceChildren(ul);
 
-  // One-time entrance: adds .cards-working-tilted the first time the block
-  // scrolls into view, triggering the CSS transition from a lesser starting
-  // tilt to the outer cards' final rotation (see cards-working.css). The
-  // observer disconnects immediately after, so this never plays again.
+  // One-time entrance: adds .cards-working-tilted on first scroll into view, then disconnects.
   const observer = new IntersectionObserver((entries) => {
     if (entries.some((entry) => entry.isIntersecting)) {
       block.classList.add('cards-working-tilted');

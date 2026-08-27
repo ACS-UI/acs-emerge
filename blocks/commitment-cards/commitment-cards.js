@@ -1,11 +1,4 @@
-/**
- * loads and decorates the commitment-cards block
- *
- * Text-only cards. Authored structure: one row per card, each with a single
- * cell holding an eyebrow paragraph (e.g. "Commitment 01"), a heading, and a
- * body paragraph. Renders as elevated white cards in a responsive grid.
- * @param {Element} block The block element
- */
+/** Decorates the commitment-cards block: rows become elevated cards with eyebrow, heading, body. */
 export default function decorate(block) {
   const ul = document.createElement('ul');
 

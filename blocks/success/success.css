@@ -4,7 +4,7 @@
   --success-gap: 32px;
   --success-card-max-width: 384px;
   --success-title-color: var(--color-text-static-black);
-  --success-desc-color: #808080;
+  --success-desc-color: var(--color-gray-600, #808080);
   --success-intro-margin-bottom: 40px;
   --success-intro-max-width: 50rem;
   --success-view-all-margin-top: 16px;
@@ -204,7 +204,7 @@
   gap: var(--success-gap);
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .success .success-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -289,7 +289,7 @@
   opacity: 1;
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .success.carousel .carousel {
     --carousel-visible: 2;
   }

@@ -74,10 +74,10 @@ main > div.section .quote-wrapper {
 
 .quote .quote-body blockquote p {
   margin: 0;
-  font-weight: 400;
-  font-size: 25px;
+  font-weight: var(--font-weight-regular, 400);
+  font-size: var(--body-size-xxxl, 25px);
   line-height: 150%;
-  color: #131313;
+  color: var(--color-gray-900, #131313);
 }
 
 .quote .quote-body blockquote strong {
@@ -90,7 +90,7 @@ main > div.section .quote-wrapper {
   font-weight: 600;
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .quote {
     --quote-text-size: var(--font-size-900);
     --quote-text-line: var(--line-height-900);
@@ -111,10 +111,11 @@ main > div.section .quote-wrapper {
   --quote-card-mark-bg: var(--color-red-300);
   --quote-card-mark-width: 32px;
   --quote-card-mark-height: 26px;
-  --quote-card-name-color: var(--color-gray-1000);
-  --quote-card-role-color: var(--color-gray-700);
+  --quote-card-name-color: var(--color-gray-900, #131313);
+  --quote-card-role-color: var(--color-gray-600, #808080);
   --quote-card-avatar-size: 56px;
-    padding: 40px 0;
+
+  padding: 40px 0;
 }
 
 .quote.card .quote-row {
@@ -122,8 +123,8 @@ main > div.section .quote-wrapper {
   position: relative;
   overflow: hidden;
   border-radius: var(--quote-card-radius);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgb(0 0 0 / 8%);
+  box-shadow: 0 4px 24px rgb(0 0 0 / 6%);
 }
 
 .quote.card .quote-body {
@@ -196,10 +197,9 @@ main > div.section .quote-wrapper {
   font-family: var(--quote-font);
   color: var(--quote-card-name-color);
   font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
+  font-weight: var(--font-weight-regular, 400);
+  font-size: var(--title-size-l, 18px);
   line-height: 150%;
-  color: #131313;
 }
 
 .quote.card .quote-role {
@@ -207,8 +207,7 @@ main > div.section .quote-wrapper {
   font-family: var(--quote-font);
   color: var(--quote-card-role-color);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
+  font-weight: var(--font-weight-regular, 400);
+  font-size: var(--body-size-s, 14px);
   line-height: 150%;
-  color: #808080;
 }

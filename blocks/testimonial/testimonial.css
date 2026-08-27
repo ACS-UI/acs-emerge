@@ -141,7 +141,7 @@
   margin-top: var(--testimonial-nav-margin-top);
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   main .section.testimonial-container.bg-gradient-b {
     padding-top: 60px;
     padding-bottom: 116px;

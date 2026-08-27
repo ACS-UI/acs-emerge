@@ -54,7 +54,7 @@ main .back-button:focus-visible {
   box-shadow: 0 4px 12px rgb(0 0 0 / 16%);
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   main .back-button {
     margin-bottom: 40px;
   }

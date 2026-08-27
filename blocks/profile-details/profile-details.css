@@ -160,10 +160,10 @@
   font-size: var(--body-size-m);
   font-weight: var(--font-weight-regular);
   line-height: 1.5;
-  color: #808080;
+  color: var(--color-gray-600, #808080);
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .profile-details .profile-details-reportees-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

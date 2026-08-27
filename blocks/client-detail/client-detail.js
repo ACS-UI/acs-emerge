@@ -1,8 +1,7 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 
 /**
- * Builds the "Tags" group: a sub-heading plus one pill per comma-separated
- * value (e.g. "Adobe EDS, Sitecore Migration, Auto Manufacturing").
+ * Builds the "Tags" group: a sub-heading plus one pill per comma-separated value.
  * @param {string} label The row's label text (used as the sub-heading).
  * @param {Element} value The row's value cell (comma-separated tag text).
  * @returns {HTMLElement} The tags group wrapper.
@@ -30,11 +29,7 @@ function buildTagsGroup(label, value) {
 }
 
 /**
- * Rebuilds the "Details" cell (a flat list of label/value paragraphs such as
- * "Client" / "CASIO" / "Industry" / "Manufacturing") into a definition list.
- * The first paragraph is treated as the section heading. A "Tags" row is
- * special-cased into its own sub-heading + pill list instead of a dt/dd row
- * (see buildTagsGroup).
+ * Rebuilds the "Details" cell (label/value paragraphs) into a dl; a "Tags" row becomes a pill list.
  * @param {Element} cell The details cell
  */
 function decorateDetails(cell) {

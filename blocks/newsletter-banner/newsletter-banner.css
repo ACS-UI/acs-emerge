@@ -29,7 +29,7 @@ main .newsletter-banner-container > .default-content-wrapper:first-child p {
   margin: 0 0 20px;
   color: var(--color-gray-700);
   font-size: var(--title-size-xl, 20px);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-bold, 700);
   line-height: var(--line-height-400, 24px);
 }
 
@@ -99,7 +99,7 @@ main .newsletter-banner-container > .default-content-wrapper:last-child p:last-c
   color: var(--newsletter-banner-accent-color);
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .newsletter-banner {
     --newsletter-banner-pad-block: 40px;
     --newsletter-banner-pad-inline: 32px;

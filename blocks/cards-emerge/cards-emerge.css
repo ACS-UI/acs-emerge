@@ -6,7 +6,7 @@
   --cards-emerge-heading-stroke-width: 1px;
   --cards-emerge-heading-stroke-color: var(--color-text-static-black);
   --cards-emerge-letter-color: var(--color-magenta-visual);
-  --cards-emerge-letter-gradient: linear-gradient(95.72deg, #d73220 0%, #d92361 33%, #7155fa 100%);
+  --cards-emerge-letter-gradient: linear-gradient(95.72deg, var(--color-red-900) 0%, var(--color-magenta-900) 33%, #7155fa 100%);
   --cards-emerge-title-color: var(--color-title);
   --cards-emerge-subtitle-color: var(--color-detail);
   --cards-emerge-eyebrow-size: var(--title-size-xl);
@@ -154,7 +154,7 @@
   line-height: var(--cards-emerge-subtitle-line-height);
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .cards-emerge .cards-emerge-intro h1,
   .cards-emerge .cards-emerge-intro h2,
   .cards-emerge .cards-emerge-intro h3 {

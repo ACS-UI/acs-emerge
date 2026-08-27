@@ -90,7 +90,7 @@
   font-size: var(--agenda-duration-size);
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .agenda .agenda-item {
     grid-template-columns: 90px 1fr auto;
     gap: 32px;
@@ -102,30 +102,29 @@
     grid-column: auto;
     text-align: right;
     white-space: nowrap;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 150%;
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--agenda-duration-size);
+    line-height: 1.5;
     color: #B0B0B0;
   }
 
   .agenda .agenda-title {
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 22px;
-    color: #000000;
+    font-weight: var(--font-weight-bold, 700);
+    font-size: var(--agenda-title-size);
+    line-height: var(--line-height-300, 22px);
   }
 
   .agenda .agenda-speaker {
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 150%;
-    color: #505050;
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--body-size-xl, 20px);
+    line-height: 1.5;
+    color: var(--color-gray-700, #505050);
   }
 
   .agenda .agenda-time {
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 18px;
-    color: #F03823;
+    font-weight: var(--font-weight-bold, 700);
+    font-size: var(--agenda-time-size);
+    line-height: var(--line-height-100, 18px);
+    color: var(--color-red-800, #F03823);
   }
 }

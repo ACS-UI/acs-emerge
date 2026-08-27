@@ -60,14 +60,7 @@ function renderCard({
 }
 
 /**
- * Turns one authored row into a client card, wrapped in its CTA link if the
- * row authored one.
- *
- * Authored content model (per row / per client):
- *   Cell 1: the client logo image.
- *   Cell 2: a heading (title), description paragraph(s), and an optional
- *           trailing link used both as the "Know More" CTA and the card link.
- *
+ * Turns one authored row (logo cell + title/description/CTA cell) into a client card.
  * @param {Element} row The authored row.
  * @returns {HTMLElement} The card (possibly link-wrapped).
  */
@@ -122,12 +115,7 @@ function buildCardFromData(row) {
 }
 
 /**
- * Decorates the client-cards block.
- *  - base variant: responsive grid of client cards.
- *  - `carousel` variant: cards inside the reusable carousel utility.
- * Data comes from a query-index sheet when the block is authored as only a
- * link to one; otherwise from the authored rows. Each card links to its
- * detail page (index row path, or the authored CTA link).
+ * Decorates the client-cards block: a grid, or `carousel` variant, from an index sheet or rows.
  * @param {Element} block The client-cards block element.
  */
 export default async function decorate(block) {

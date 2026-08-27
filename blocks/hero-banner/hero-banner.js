@@ -30,11 +30,7 @@ function buildBackgroundVideo(link, poster) {
 }
 
 /**
- * loads and decorates the hero-banner block
- *
- * This hero is a full-bleed background video only — the source Figma frame
- * contains just the video (any text/CTA layers in the file are hidden and
- * intentionally not rendered).
+ * Loads and decorates the hero-banner block as a full-bleed background video only.
  * @param {Element} block The block element
  */
 export default function decorate(block) {

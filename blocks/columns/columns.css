@@ -41,7 +41,7 @@
   margin: 0;
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .columns {
     --columns-gap: 120px;
   }

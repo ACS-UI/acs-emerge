@@ -198,7 +198,7 @@ main .section.bg-gradient-b .carousel .carousel-dot {
   justify-content: center;
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .carousel .carousel-nav {
     display: flex;
   }

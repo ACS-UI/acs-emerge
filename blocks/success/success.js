@@ -4,11 +4,8 @@ import {
 } from '../../scripts/query-index.js';
 
 /**
- * Builds a success-story card from an index row, wrapped in a link to the
- * story's detail page (the row path).
- *
- * Index columns: path, title, image, description, tags (comma-separated).
- * @param {object} row An index row.
+ * Builds a success-story card from an index row, wrapped in a link to the story's detail page.
+ * @param {object} row An index row (path, title, image, description, tags).
  * @param {boolean} parallax When true, wraps the image in a clipped frame
  *   with an oversized picture so it can pan on scroll (parallax variant).
  * @returns {HTMLElement} The link-wrapped card.
@@ -46,8 +43,7 @@ function buildCardFromData(row, parallax = false) {
     p.textContent = row.description;
     body.append(p);
   }
-  // tags come from the index `tags` column (sourced from the `services`
-  // metadata, since `tags` is a reserved metadata key).
+  // tags come from the index `tags` column (sourced from `services`, since `tags` is reserved).
   const tagValues = (row.tags || row.services || '').split(',').map((t) => t.trim()).filter(Boolean);
   if (tagValues.length) {
     const tags = document.createElement('ul');
@@ -73,14 +69,7 @@ function buildCardFromData(row, parallax = false) {
 }
 
 /**
- * Turns one authored row into a success-story card.
- *
- * Authored content model (per row / per story):
- *   Cell 1: the story image (cover photo).
- *   Cell 2: a heading (client / story title), one or more paragraphs of
- *           description, and an optional trailing list/paragraph of tags
- *           (comma-separated) rendered as pills.
- *
+ * Turns one authored row (image cell, then heading + description + optional tag list) into a card.
  * @param {Element} row The authored row.
  * @param {boolean} parallax When true, wraps the image in a clipped frame
  *   with an oversized picture so it can pan on scroll (parallax variant).
@@ -115,8 +104,7 @@ function buildCard(row, parallax = false) {
   const body = document.createElement('div');
   body.className = 'success-card-body';
 
-  // An authored link (in the body cell) is the card's detail-page target; its
-  // text is not rendered separately — the whole card becomes the link.
+  // An authored link in the body cell is the card's detail-page target; the whole card is the link.
   let href = '';
   if (bodyCell) {
     const nodes = [...bodyCell.children];
@@ -170,14 +158,7 @@ const IMAGE_ASPECT_RATIO = 5 / 4; // height/width — matches success.css .succe
 const IMAGE_TO_BODY_GAP = 16; // matches .success-card's own flex gap
 
 /**
- * Positions cards into a zigzag staircase: each card starts exactly where
- * the previous card's text begins, alternating which screen edge it hugs.
- * The image-height step is computed from the card's measured width and the
- * fixed aspect ratio, rather than measured directly off `.success-card-image`
- * — that element's rendered height depends on a flex/aspect-ratio/absolute-
- * positioning chain that doesn't resolve reliably at measurement time.
- * Cards fall back to plain stacked flow below the desktop breakpoint (see
- * success.css).
+ * Positions cards into a zigzag staircase (step from measured width, not unreliable render height).
  * @param {HTMLElement[]} cards The story cards, in authored order.
  */
 function layoutZigzag(cards) {
@@ -210,10 +191,7 @@ function layoutZigzag(cards) {
       card.style.right = '';
     }
 
-    // Measure the card's actual rendered height (image + gap + body) now
-    // that it's positioned — reliable because .success-card no longer
-    // inherits height:100% from the grid/carousel variants (see success.css),
-    // so this reads its real content height instead of a stale/zero value.
+    // Measure the card's actual rendered height now that it's positioned (no longer height:100%).
     const cardHeight = card.getBoundingClientRect().height;
     maxBottom = Math.max(maxBottom, top + cardHeight);
   });
@@ -223,9 +201,7 @@ function layoutZigzag(cards) {
 }
 
 /**
- * Builds the parallax layout: cards are laid out in a zigzag staircase (see
- * layoutZigzag) and each card's image pans within its clipped frame on
- * scroll.
+ * Builds the parallax layout: cards in a zigzag staircase, each image panning within its frame.
  * @param {HTMLElement[]} cards The story cards.
  * @returns {HTMLElement} The parallax container.
  */
@@ -234,9 +210,7 @@ function buildParallax(cards) {
   wrap.className = 'success-parallax';
   cards.forEach((card) => wrap.append(card));
 
-  // Deferred: `wrap` isn't attached to the document yet at this point (the
-  // caller appends it after buildParallax returns), and getBoundingClientRect
-  // on a detached subtree reads all zeros.
+  // Deferred: `wrap` isn't attached to the document yet, so measuring now would read all zeros.
   requestAnimationFrame(() => layoutZigzag(cards));
   let resizeTicking = false;
   window.addEventListener(
@@ -253,10 +227,7 @@ function buildParallax(cards) {
     { passive: true },
   );
 
-  // Parallax on scroll: each card's image is oversized (130% height) inside
-  // a clipped frame and pans within it by a fraction of the frame's own
-  // scroll progress through the viewport — the image moves, not the card.
-  // Respects reduced motion and only runs while a frame is near the viewport.
+  // Parallax on scroll: oversized images pan within their frame by scroll progress (motion-safe).
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!prefersReduced) {
     const frames = [...wrap.querySelectorAll('.success-card-image-inner')];
@@ -269,14 +240,10 @@ function buildParallax(cards) {
         if (!picture) return;
         const rect = frame.getBoundingClientRect();
         if (rect.bottom < -100 || rect.top > vh + 100) return;
-        // progress: -0.5 (below viewport) .. 0 (centered) .. 0.5 (above).
-        // The 1.6 speed factor reaches max travel sooner in the scroll —
-        // still clamped to the same physical ±15% frame overhang below.
+        // progress: -0.5 (below viewport) .. 0 (centered) .. 0.5 (above), scaled for faster travel.
         const raw = ((vh / 2 - (rect.top + rect.height / 2)) / vh) * 1.6;
         const progress = Math.max(-0.5, Math.min(0.5, raw));
-        // image has 15% overhang on each side, so ±15% of height is the
-        // maximum travel before revealing an edge. Sign is inverted so that
-        // scrolling up reads as the image drifting down within its frame.
+        // clamped to the image's ±15% overhang; sign inverted so scrolling up drifts image down.
         picture.style.transform = `translate3d(0, ${(-progress * rect.height * 0.3).toFixed(1)}px, 0)`;
       });
     };
@@ -295,10 +262,7 @@ function buildParallax(cards) {
 }
 
 /**
- * Decorates the success block.
- *  - base variant: responsive grid of success-story cards.
- *  - `carousel` variant: cards inside the shared carousel utility.
- *  - `parallax` variant: a zigzag staircase of cards that drift on scroll.
+ * Decorates the success block: base grid, `carousel`, or `parallax` (zigzag, drifting) variant.
  * @param {Element} block The success block element.
  */
 export default async function decorate(block) {
@@ -306,9 +270,7 @@ export default async function decorate(block) {
   const isParallax = block.classList.contains('parallax');
   const { intro, viewAll } = extractConfig(block);
 
-  // Data source: pull cards from a query-index sheet when the block is authored
-  // as only a link to one; otherwise build them from the authored rows. Either
-  // way each card links to its detail page.
+  // Data source: query-index sheet if authored as only a link to one, else the authored rows.
   const indexUrl = getIndexLink(block);
   let cards;
   if (indexUrl) {

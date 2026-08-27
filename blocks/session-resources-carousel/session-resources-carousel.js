@@ -1,17 +1,7 @@
 import { loadCSS } from '../../scripts/aem.js';
 import { extractConfig } from '../../scripts/query-index.js';
 
-/**
- * Turns one authored row into a resource card element.
- *
- * Authored content model (per row / per resource):
- *   A single cell holding a title (heading), one or more description
- *   paragraphs, and a link (e.g. "Open") to the resource. The link becomes an
- *   "Open" pill button; it opens in a new tab.
- *
- * @param {Element} row The authored row.
- * @returns {HTMLElement} The card article.
- */
+/** Turns one authored row (title, description paragraphs, link) into a resource card element. */
 function buildCard(row) {
   const cell = row.firstElementChild || row;
   const card = document.createElement('article');
@@ -42,12 +32,7 @@ function buildCard(row) {
   return card;
 }
 
-/**
- * Decorates the session-resources-carousel block: cards inside the reusable
- * carousel utility (mirrors the profile block's carousel variation). There's
- * no non-carousel/base variant — this block is always a carousel.
- * @param {Element} block The session-resources-carousel block element.
- */
+/** Decorates the session-resources-carousel block: cards inside the reusable carousel utility. */
 export default async function decorate(block) {
   // Optional intro (eyebrow + heading) authored as the first text-only row.
   // extractConfig returns a bare wrapper div — class it here (createCarousel

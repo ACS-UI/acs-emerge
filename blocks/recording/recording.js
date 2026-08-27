@@ -1,17 +1,4 @@
-/**
- * loads and decorates the recording block
- *
- * Authored content model (single row, one text cell):
- *   - an optional eyebrow paragraph (e.g. "RECORDING"),
- *   - a title (heading) for the recording,
- *   - a meta paragraph (e.g. "Duration: 1 hr 58 min · Uploaded August 12"),
- *   - a link to the recording. Its text becomes the button label
- *     (e.g. "Watch Recording"); its href is the video URL.
- *
- * The recording opens in a new tab — there is no in-page player. If an
- * eyebrow is present it renders as a section label above the card.
- * @param {Element} block The block element
- */
+/** Loads and decorates the recording block: eyebrow, title, meta, and a link-turned-button. */
 export default function decorate(block) {
   const cell = block.querySelector(':scope > div > div') || block.firstElementChild;
   if (!cell) return;
