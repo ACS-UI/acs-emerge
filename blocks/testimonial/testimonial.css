@@ -80,6 +80,7 @@
   order: -1;
   position: relative;
   width: 100%;
+  max-height: 560px;
   padding: 4px;
   border-radius: var(--testimonial-radius);
   background: var(--color-white);
@@ -123,7 +124,6 @@
 
 .testimonial .testimonial-name {
   margin: 0;
-  font-family: var(--title-font-family);
   font-size: var(--title-size-xxxl);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-600);
@@ -131,7 +131,6 @@
 
 .testimonial .testimonial-role {
   margin: 0;
-  font-family: var(--title-font-family);
   font-size: var(--title-size-m);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-200);

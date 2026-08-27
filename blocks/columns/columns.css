@@ -61,14 +61,12 @@
   }
 
   .columns > div > .columns-intro-col p {
-    font-family: var(--body);
     font-size: var(--columns-intro-eyebrow-size);
     font-weight: var(--font-weight-regular);
     line-height: var(--columns-intro-eyebrow-line);
   }
 
   .columns > div > .columns-intro-col :is(h1, h2, h3, h4, h5, h6) {
-    font-family: var(--font-family-sans);
     font-size: var(--columns-intro-heading-size);
     font-weight: var(--font-weight-bold);
     line-height: var(--columns-intro-heading-line);

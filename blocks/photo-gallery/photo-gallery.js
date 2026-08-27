@@ -10,6 +10,10 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
  * @param {Element} block The block element
  */
 export default function decorate(block) {
+  // `feature` was the variant's old name before it was renamed to
+  // `spotlight` — alias it so already-authored pages keep working.
+  if (block.classList.contains('feature')) block.classList.add('spotlight');
+
   const caption = document.createElement('figcaption');
   caption.className = 'photo-gallery-caption';
 

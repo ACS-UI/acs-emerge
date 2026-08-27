@@ -6,7 +6,6 @@
   --agenda-title-color: var(--color-gray-1000);
   --agenda-speaker-color: var(--color-gray-600);
   --agenda-duration-color: var(--color-gray-500);
-  --agenda-intro-font: 'Loew Riyadh Air', var(--heading-font-family);
   --agenda-eyebrow-size: var(--body-size-xl, 20px);
   --agenda-eyebrow-line: var(--line-height-600, 30px);
   --agenda-heading-size: var(--heading-size-xxl, 45px);
@@ -15,19 +14,18 @@
   --agenda-title-size: var(--body-size-l, 18px);
   --agenda-speaker-size: var(--detail-size-m, 14px);
   --agenda-duration-size: var(--detail-size-s, 12px);
-  --agenda-row-gap: 12px;
+  --agenda-row-gap: 2px;
   --agenda-row-pad: 20px 24px;
-  --agenda-row-radius: 10px;
+  --agenda-row-radius: 20px;
 }
 
 .agenda .agenda-intro {
-  margin-bottom: 28px;
+  margin-bottom: 40px;
 }
 
 .agenda .agenda-eyebrow {
   margin: 0 0 8px;
   color: var(--agenda-eyebrow-color);
-  font-family: var(--agenda-intro-font);
   font-size: var(--agenda-eyebrow-size);
   font-weight: var(--font-weight-regular, 400);
   line-height: var(--agenda-eyebrow-line);
@@ -36,7 +34,6 @@
 .agenda .agenda-intro :is(h1, h2, h3, h4, h5, h6) {
   margin: 0;
   color: var(--agenda-heading-color);
-  font-family: var(--agenda-intro-font);
   font-size: var(--agenda-heading-size);
   font-weight: var(--font-weight-regular, 400);
   line-height: var(--agenda-heading-line);
@@ -47,6 +44,8 @@
   margin: 0;
   padding: 0;
   display: flex;
+  border-radius: var(--agenda-row-radius);
+  overflow: hidden;
   flex-direction: column;
   gap: var(--agenda-row-gap);
 }
@@ -57,7 +56,6 @@
   gap: 4px 20px;
   align-items: start;
   padding: var(--agenda-row-pad);
-  border-radius: var(--agenda-row-radius);
   background: var(--agenda-row-bg);
 }
 
@@ -95,14 +93,39 @@
 @media (width >= 900px) {
   .agenda .agenda-item {
     grid-template-columns: 90px 1fr auto;
-    gap: 24px;
+    gap: 32px;
     align-items: center;
-    padding: 22px 28px;
+    padding: 24px 32px;
   }
 
   .agenda .agenda-duration {
     grid-column: auto;
     text-align: right;
     white-space: nowrap;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 150%;
+    color: #B0B0B0;
+  }
+
+  .agenda .agenda-title {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
+  }
+
+  .agenda .agenda-speaker {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 150%;
+    color: #505050;
+  }
+
+  .agenda .agenda-time {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    color: #F03823;
   }
 }

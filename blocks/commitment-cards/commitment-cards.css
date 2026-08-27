@@ -15,8 +15,6 @@
   --commitment-cards-pad: 24px;
   --commitment-cards-radius: 24px;
   --commitment-cards-min: 280px;
-
-  font-family: var(--font-family-sans);
 }
 
 main .commitment-cards-container > .default-content-wrapper p {

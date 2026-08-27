@@ -17,7 +17,7 @@
 }
 
 .recording .recording-eyebrow {
-  margin: 0 0 20px;
+  margin: 0 0 40px;
   color: var(--recording-eyebrow-color);
   font-size: var(--recording-eyebrow-size);
   font-weight: var(--font-weight-bold, 700);
@@ -27,9 +27,10 @@
 
 .recording .recording-card {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 20px;
-  padding: var(--recording-card-pad);
+  padding: 36px 40px;
   border-radius: var(--recording-card-radius);
   background: var(--recording-card-bg);
   box-shadow: var(--recording-card-shadow);
@@ -78,6 +79,8 @@
 
 .recording .recording-cta.button {
   flex: 0 0 auto;
+  width: 100%;
+  margin-top: 4px;
   border: 1px solid var(--recording-cta-bg);
   border-radius: 2.4em;
   background: var(--recording-cta-bg);
@@ -91,7 +94,8 @@
   display: inline-block;
   width: 11px;
   height: 11px;
-  margin-left: 8px;
+  margin-left: 11px;
+  margin-top: 2px;
   background: url('../../icons/arrow-right-white.svg') center / contain no-repeat;
 }
 
@@ -102,13 +106,32 @@
   text-decoration: none;
 }
 
-@media (width < 600px) {
+@media (width >= 900px) {
   .recording .recording-card {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    padding: 36px 40px;
   }
 
   .recording .recording-cta.button {
-    width: 100%;
-    margin-top: 4px;
+    width: auto;
+    margin-top: 0;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+    padding: 12px 36px;
+  }
+
+  .recording .recording-title {
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 30px;
+  }
+
+  .recording .recording-meta {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #808080;
   }
 }

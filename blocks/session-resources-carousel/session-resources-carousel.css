@@ -4,7 +4,6 @@
   --session-resources-carousel-card-bg: var(--color-white);
   --session-resources-carousel-title-color: var(--color-gray-1000);
   --session-resources-carousel-desc-color: var(--color-gray-600);
-  --session-resources-carousel-intro-font: 'Loew Riyadh Air', var(--heading-font-family);
   --session-resources-carousel-eyebrow-size: var(--body-size-xl, 20px);
   --session-resources-carousel-eyebrow-line: var(--line-height-600, 30px);
   --session-resources-carousel-heading-size: var(--heading-size-xxl, 45px);
@@ -15,7 +14,7 @@
   --session-resources-carousel-accent-text: var(--color-white);
   --session-resources-carousel-gap: 24px;
   --session-resources-carousel-card-pad: 24px;
-  --session-resources-carousel-card-radius: 12px;
+  --session-resources-carousel-card-radius: 24px;
 }
 
 
@@ -31,7 +30,6 @@
 .session-resources-carousel .session-resources-carousel-eyebrow {
   margin: 0 0 8px;
   color: var(--session-resources-carousel-eyebrow-color);
-  font-family: var(--session-resources-carousel-intro-font);
   font-size: var(--session-resources-carousel-eyebrow-size);
   font-weight: var(--font-weight-regular, 400);
   line-height: var(--session-resources-carousel-eyebrow-line);
@@ -40,7 +38,6 @@
 .session-resources-carousel .session-resources-carousel-intro :is(h1, h2, h3, h4, h5, h6) {
   margin: 0;
   color: var(--session-resources-carousel-heading-color);
-  font-family: var(--session-resources-carousel-intro-font);
   font-size: var(--session-resources-carousel-heading-size);
   font-weight: var(--font-weight-regular, 400);
   line-height: var(--session-resources-carousel-heading-line);
@@ -50,7 +47,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
+  gap: 12px;
   height: 100%;
   box-sizing: border-box;
   padding: var(--session-resources-carousel-card-pad);
@@ -68,7 +65,7 @@
 }
 
 .session-resources-carousel .session-resources-carousel-desc {
-  margin: 0;
+  margin: 0 0 16px;
   color: var(--session-resources-carousel-desc-color);
   font-size: var(--session-resources-carousel-desc-size);
   line-height: 1.5;
@@ -76,19 +73,26 @@
 
 .session-resources-carousel .session-resources-carousel-open.button {
   margin-top: 6px;
-  border: 1px solid var(--color-gray-400);
+  border: 1px solid #000000;
   border-radius: 2.4em;
   background: transparent;
-  color: var(--color-gray-1000);
-  font-size: var(--detail-size-m, 14px);
-  font-weight: var(--font-weight-regular, 400);
-  padding: 0.5em 1.1em;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+  padding: 8px 24px;
   transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .session-resources-carousel .session-resources-carousel-open.button::after {
-  content: "\2197";
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
   margin-left: 6px;
+  background: currentcolor;
+  mask: url('../../icons/arrow-up.svg') center / contain no-repeat;
+  -webkit-mask: url('../../icons/arrow-up.svg') center / contain no-repeat;
 }
 
 .session-resources-carousel .session-resources-carousel-open.button:hover,
@@ -113,8 +117,25 @@
   }
 }
 
-@media (width >= 900px) {
+@media (width >= 1024px) {
   .session-resources-carousel .carousel {
     --carousel-visible: 3;
+    --session-resources-carousel-card-pad: 20px 24px;
+    gap: 40px;
+  }
+
+  .session-resources-carousel .session-resources-carousel-title {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+  }
+
+  .session-resources-carousel .session-resources-carousel-desc {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    max-width: 320px;
+    color: #808080;
   }
 }

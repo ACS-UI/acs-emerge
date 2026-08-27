@@ -4,7 +4,6 @@
   --event-highlights-value-color: var(--color-gray-1000);
   --event-highlights-label-color: var(--color-gray-600);
   --event-highlights-icon-color: var(--color-gray-1000);
-  --event-highlights-intro-font: 'Loew Riyadh Air', var(--heading-font-family);
   --event-highlights-eyebrow-size: var(--body-size-xl, 20px);
   --event-highlights-eyebrow-line: var(--line-height-600, 30px);
   --event-highlights-heading-size: var(--heading-size-xxl, 45px);
@@ -12,17 +11,16 @@
   --event-highlights-value-size: clamp(36px, 5vw, 52px);
   --event-highlights-label-size: var(--detail-size-m, 14px);
   --event-highlights-row-gap: 40px;
-  --event-highlights-icon-size: 48px;
+  --event-highlights-icon-size: 60px;
 }
 
 .event-highlights .event-highlights-intro {
-  margin-bottom: 48px;
+  margin-bottom: 40px;
 }
 
 .event-highlights .event-highlights-eyebrow {
   margin: 0 0 8px;
   color: var(--event-highlights-eyebrow-color);
-  font-family: var(--event-highlights-intro-font);
   font-size: var(--event-highlights-eyebrow-size);
   font-weight: var(--font-weight-regular, 400);
   line-height: var(--event-highlights-eyebrow-line);
@@ -31,7 +29,6 @@
 .event-highlights .event-highlights-intro :is(h1, h2, h3, h4, h5, h6) {
   margin: 0;
   color: var(--event-highlights-heading-color);
-  font-family: var(--event-highlights-intro-font);
   font-size: var(--event-highlights-heading-size);
   font-weight: var(--font-weight-regular, 400);
   line-height: var(--event-highlights-heading-line);
@@ -43,14 +40,14 @@
   padding: 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--event-highlights-row-gap) 16px;
+  gap: 24px;
 }
 
 .event-highlights .event-highlights-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   text-align: center;
 }
 
@@ -85,5 +82,33 @@
 @media (width >= 900px) {
   .event-highlights .event-highlights-list {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  .event-highlights .event-highlights-eyebrow {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 150%;
+    color: #505050;
+  }
+
+  .event-highlights .event-highlights-intro :is(h1, h2, h3, h4, h5, h6) {
+    font-weight: 400;
+    font-size: 45px;
+    line-height: 52px;
+    color: #000000;
+  }
+
+  .event-highlights .event-highlights-value {
+    font-weight: 700;
+    font-size: 58px;
+    line-height: 66px;
+    color: #000000;
+  }
+
+  .event-highlights .event-highlights-label {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #808080;
   }
 }

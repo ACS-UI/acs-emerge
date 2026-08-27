@@ -21,7 +21,6 @@ main .team-container > .default-content-wrapper p:first-child {
   margin: 0 0 16px;
   border-radius: 999px;
   color: var(--team-eyebrow-color);
-  font-family: var(--font-family-loew);
   font-size: var(--title-size-xl, 20px);
   font-weight: var(--font-weight-bold, 700);
   line-height: var(--line-height-400, 24px);
@@ -30,7 +29,6 @@ main .team-container > .default-content-wrapper p:first-child {
 main .team-container > .default-content-wrapper :is(h1, h2, h3, h4, h5, h6) {
   margin: 0;
   color: var(--team-heading-color);
-  font-family: var(--font-family-loew);
   font-size: var(--heading-size-xxl, 45px);
   font-weight: var(--font-weight-regular, 400);
   line-height: var(--line-height-1100, 52px);
@@ -71,7 +69,6 @@ main .team-container > .default-content-wrapper :is(h1, h2, h3, h4, h5, h6) {
 .team .team-card-name {
   margin: 0;
   color: var(--team-name-color);
-  font-family: var(--font-family-loew);
   font-size: var(--body-size-l, 18px);
   font-weight: var(--font-weight-regular, 400);
   line-height: 1.5;

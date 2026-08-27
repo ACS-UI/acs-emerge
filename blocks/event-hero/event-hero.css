@@ -81,7 +81,7 @@
   align-items: baseline;
 }
 
-.event-hero .event-hero-details dt {
+.event-hero .event-hero-details :is(dt,dd) {
   margin: 0;
   color: var(--event-hero-detail-label-color);
   font-size: var(--event-hero-body-size);
@@ -93,28 +93,22 @@
   color: var(--event-hero-detail-label-color);
 }
 
-.event-hero .event-hero-details dd {
-  margin: 0;
-  color: var(--event-hero-detail-value-color);
-  font-size: var(--event-hero-body-size);
-  font-weight: var(--font-weight-medium, 500);
-}
-
 .event-hero .event-hero-cta {
   margin-top: 4px;
 }
 
 .event-hero .event-hero-cta .button {
-  border: 1px solid var(--color-gray-1000);
+  border: 1px solid #000000;
   border-radius: 2.4em;
   background: transparent;
   color: var(--color-gray-1000);
   font-weight: var(--font-weight-regular, 400);
-  padding: 0.7em 1.6em;
+  padding: 8px 24px;
 }
 
 .event-hero .event-hero-cta .button:hover {
-  background: var(--color-gray-1000);
+  border-color: var(--color-red-900);
+  background: var(--color-red-900);
   color: var(--color-white);
   text-decoration: none;
 }
@@ -140,16 +134,58 @@
   }
 
   .event-hero .event-hero-content {
-    flex: 1 1 48%;
-    max-width: 48%;
+    flex: 1 1 40%;
+    max-width: 40%;
+    gap: 24px;
   }
 
   .event-hero .event-hero-media {
-    flex: 1 1 52%;
+    flex: 1 1 60%;
   }
 
   .event-hero .event-hero-about,
   .event-hero .event-hero-details {
     max-width: 420px;
+  }
+
+  .event-hero .event-hero-head :is(h1, h2, h3, h4, h5, h6) {
+    font-weight: 400;
+    font-size: 58px;
+    line-height: 66px;
+    color: #000000;
+  }
+
+  .event-hero .event-hero-date {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #131313;
+  }
+
+  .event-hero .event-hero-about-label {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #131313;
+  }
+
+  .event-hero .event-hero-about p:not(.event-hero-about-label) {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    color: #292929;
+  }
+
+  .event-hero .event-hero-details :is(dt,dd) {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    color: #292929;
+  }
+
+  .event-hero .event-hero-cta .button {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
   }
 }

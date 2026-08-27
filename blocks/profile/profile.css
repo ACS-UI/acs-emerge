@@ -37,6 +37,7 @@
 .profile .profile-card-image {
   position: relative;
   overflow: hidden;
+  max-height: 560px;
   border-radius: var(--profile-card-radius);
   background: var(--color-gray-100);
 }

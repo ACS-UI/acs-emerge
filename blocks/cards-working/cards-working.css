@@ -1,6 +1,5 @@
 .cards-working-container,
 .cards-working {
-  --cw-font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   --cw-section-bg: var(--color-gray-75);
   --cw-section-pad-y: 60px;
   --cw-section-gap: 40px;
@@ -12,7 +11,6 @@
   --cw-eyebrow-line: var(--line-height-400);
   --cw-eyebrow-weight: var(--font-weight-bold);
   --cw-eyebrow-spacing: 0.04em;
-  --cw-heading-font: var(--cw-font-family);
   --cw-heading-color: var(--color-gray-1000);
   --cw-heading-size: var(--heading-size-xxl);
   --cw-heading-line: var(--line-height-1100);
@@ -113,7 +111,6 @@ main .cards-working-container {
   flex-direction: column;
   gap: var(--cw-card-content-gap);
   padding: var(--cw-card-pad-block) var(--cw-card-pad-inline);
-  font-family: var(--cw-font-family);
   color: var(--cw-card-text-color);
 }
 
@@ -146,7 +143,6 @@ main .cards-working-container {
 .cards-working .cards-working-card-body h3 {
   margin: 0;
   color: var(--cw-card-title-color);
-  font-family: var(--cw-font-family);
   font-size: var(--cw-card-title-size);
   font-weight: var(--cw-card-title-weight);
   line-height: var(--cw-card-title-line);
@@ -169,7 +165,6 @@ main .cards-working-container {
 .cards-working-container .default-content-wrapper > p:first-child {
   margin: 0;
   color: var(--cw-eyebrow-color);
-  font-family: var(--cw-font-family);
   font-size: var(--cw-eyebrow-size);
   font-weight: var(--cw-eyebrow-weight);
   line-height: var(--cw-eyebrow-line);
@@ -181,7 +176,6 @@ main .cards-working-container {
   max-width: var(--cw-heading-max);
   margin: 0 auto;
   color: var(--cw-heading-color);
-  font-family: var(--cw-heading-font);
   font-size: var(--cw-heading-size-mobile);
   font-weight: var(--cw-heading-weight);
   line-height: var(--cw-heading-line-mobile);

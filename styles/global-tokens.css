@@ -1,8 +1,7 @@
 :root {
-  --font-family-sans: 'Adobe Clean Spectrum VF', var(--body-font-family, roboto, sans-serif);
+  --font-family-sans: 'Adobe Clean Spectrum VF', roboto, sans-serif;
   --font-family-serif: 'Adobe Clean Serif', georgia, 'Times New Roman', serif;
   --font-family-code: 'Source Code Pro', 'SF Mono', monospace;
-  --font-family-loew: 'Loew Riyadh Air', var(--font-family-sans);
   --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;

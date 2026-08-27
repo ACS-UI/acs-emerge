@@ -112,7 +112,6 @@
     gap: 4px;
     border-radius: 999px;
     color: var(--color-gray-1000);
-    font-family: var(--font-family-loew);
     font-size: var(--title-size-xl, 20px);
     font-weight: var(--font-weight-regular, 400);
     line-height: var(--line-height-400, 24px);
@@ -121,7 +120,6 @@
   .callout .callout-content p:not(.callout-eyebrow, .callout-note, .button-container, .button-wrapper) {
     margin: 0 0 48px;
     color: var(--color-gray-1000);
-    font-family: var(--font-family-loew);
     font-size: var(--body-size-xl, 20px);
     font-weight: var(--font-weight-regular, 400);
     line-height: var(--line-height-600, 30px);
@@ -140,7 +138,6 @@
     gap: 4px;
     border-radius: 999px;
     color: var(--color-gray-1000);
-    font-family: var(--font-family-loew);
     font-size: var(--title-size-m, 16px);
     font-weight: var(--font-weight-regular, 400);
     line-height: var(--line-height-200, 20px);

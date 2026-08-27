@@ -115,7 +115,7 @@ function gallerySection(e) {
     picture(img(`${e.slug}-g4`, 800, 800)),
     picture(img(`${e.slug}-g5`, 800, 800)),
   ];
-  const block = `<div class="photo-gallery feature">${imgs.map((i) => row(i)).join('')}</div>`;
+  const block = `<div class="photo-gallery spotlight">${imgs.map((i) => row(i)).join('')}</div>`;
   return `<div>${p('Photo Gallery')}<h2>Moments from the event</h2>${block}</div>`;
 }
 
