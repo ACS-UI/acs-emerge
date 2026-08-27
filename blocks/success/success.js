@@ -17,8 +17,6 @@ function buildCardFromData(row, parallax = false) {
   const card = document.createElement('article');
   card.className = 'success-card';
 
-  // The index `title` may carry an SEO suffix (e.g. "Casio · Customer success
-  // story · ACS GDC"); cards show just the client name.
   const cardTitle = displayTitle(row.title);
 
   const media = document.createElement('div');
