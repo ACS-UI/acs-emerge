@@ -57,8 +57,6 @@ function buildCardFromData(row, overlap = false) {
   card.className = 'profile-card';
   card.tabIndex = 0;
 
-  // The index `title` may carry an SEO suffix (e.g. "Manoj Nagpal · ACS GDC
-  // Leadership"); cards show just the leader name.
   const cardName = displayTitle(row.title);
 
   const media = document.createElement('div');
