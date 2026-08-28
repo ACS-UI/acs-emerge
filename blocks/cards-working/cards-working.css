@@ -20,7 +20,7 @@
   --cw-heading-line-mobile: 38px;
   --cw-card-width: 600px;
   --cw-card-height: 549px;
-  --cw-card-ratio: 3 / 4;
+  --cw-card-ratio: 3 /4;
   --cw-card-bg: var(--color-white);
   --cw-card-radius: 24px;
   --cw-card-inner-radius: 20px;
@@ -130,13 +130,9 @@ main .cards-working-container {
 .cards-working .cards-working-card-backdrop-mid {
   backdrop-filter: blur(var(--cw-card-backdrop-blur-mid));
   mask-image: var(--cw-card-backdrop-mid-mask);
-  backdrop-filter: blur(var(--cw-card-backdrop-blur-mid));
-  mask-image: var(--cw-card-backdrop-mid-mask);
 }
 
 .cards-working .cards-working-card-backdrop-strong {
-  backdrop-filter: blur(var(--cw-card-backdrop-blur-strong));
-  mask-image: var(--cw-card-backdrop-strong-mask);
   backdrop-filter: blur(var(--cw-card-backdrop-blur-strong));
   mask-image: var(--cw-card-backdrop-strong-mask);
 }
@@ -185,6 +181,7 @@ main .cards-working-container {
 @media (width >= 768px) {
   .cards-working ul {
     --cw-card-width: 376px;
+
     flex-flow: row wrap;
     justify-content: center;
   }

@@ -184,7 +184,7 @@ function layoutZigzag(cards) {
     const top = i * step;
     card.style.position = 'absolute';
     card.style.top = `${top}px`;
-    const inset = Math.floor(i / 2) % 2 === 0 ? 50 : 100;
+    const inset = Math.floor(i / 2) % 2 === 0 ? 0 : 50;
     if (i % 2 === 0) {
       card.style.right = `${inset}px`;
       card.style.left = '';

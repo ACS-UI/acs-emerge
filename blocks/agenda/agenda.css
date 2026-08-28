@@ -20,11 +20,11 @@
 }
 
 .agenda .agenda-intro {
-  margin-bottom: 40px;
+  margin-bottom: var(--spacing-500);
 }
 
 .agenda .agenda-eyebrow {
-  margin: 0 0 8px;
+  margin: 0 0 var(--spacing-100);
   color: var(--agenda-eyebrow-color);
   font-size: var(--agenda-eyebrow-size);
   font-weight: var(--font-weight-regular);
@@ -53,7 +53,7 @@
 .agenda .agenda-item {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 4px 20px;
+  gap: var(--spacing-50) var(--spacing-250);
   align-items: start;
   padding: var(--agenda-row-pad);
   background: var(--agenda-row-bg);
@@ -79,7 +79,7 @@
 }
 
 .agenda .agenda-speaker {
-  margin: 2px 0 0;
+  margin: var(--spacing-25) 0 0;
   color: var(--agenda-speaker-color);
   font-size: var(--agenda-speaker-size);
 }
@@ -93,9 +93,9 @@
 @media (width >= 768px) {
   .agenda .agenda-item {
     grid-template-columns: 90px 1fr auto;
-    gap: 32px;
+    gap: var(--spacing-400);
     align-items: center;
-    padding: 24px 32px;
+    padding: var(--spacing-300) var(--spacing-400);
   }
 
   .agenda .agenda-duration {

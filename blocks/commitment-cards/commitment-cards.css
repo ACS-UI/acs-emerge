@@ -31,7 +31,7 @@ main .commitment-cards-container > .default-content-wrapper :is(h1, h2, h3, h4, 
   font-size: var(--heading-size-xl);
   line-height: var(--line-height-900);
   color: var(--color-gray-1000);
-  margin: 0 0 24px;
+  margin: 0 0 var(--spacing-300);
 }
 
 .commitment-cards ul {
@@ -53,14 +53,14 @@ main .commitment-cards-container > .default-content-wrapper :is(h1, h2, h3, h4, 
 }
 
 .commitment-cards .commitment-cards-eyebrow {
-  margin: 0 0 4px;
+  margin: 0 0 var(--spacing-50);
   color: var(--commitment-cards-eyebrow-color);
   font-size: var(--commitment-cards-eyebrow-size);
   font-weight: var(--font-weight-regular);
 }
 
 .commitment-cards .commitment-cards-card :is(h1, h2, h3, h4, h5, h6) {
-  margin: 0 0 24px;
+  margin: 0 0 var(--spacing-300);
   color: var(--commitment-cards-heading-color);
   font-size: var(--commitment-cards-heading-size);
   font-weight: var(--font-weight-bold);

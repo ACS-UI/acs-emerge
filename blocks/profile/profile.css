@@ -1,21 +1,21 @@
 .profile {
   --profile-card-radius: 12px;
-  --profile-gap: 24px;
+  --profile-gap: var(--spacing-300);
   --profile-name-color: var(--color-black);
   --profile-role-color: var(--color-gray-600);
-  --profile-overlay-padding-block-start: 40px;
-  --profile-overlay-padding-inline: 24px;
-  --profile-overlay-padding-block-end: 24px;
-  --profile-overlay-gap: 8px;
+  --profile-overlay-padding-block-start: var(--spacing-500);
+  --profile-overlay-padding-inline: var(--spacing-300);
+  --profile-overlay-padding-block-end: var(--spacing-300);
+  --profile-overlay-gap: var(--spacing-100);
   --profile-overlay-blur: 28px;
-  --profile-body-padding: 12px 4px 0;
-  --profile-intro-margin-bottom: 40px;
-  --profile-view-all-margin-top: 20px;
-  --profile-carousel-intro-max-width: 30.5rem;
-  --profile-overlap-overlay-padding: 22px;
-  --profile-overlap-overlay-padding-top: 50px;
-  --profile-overlap-overlay-padding-right: 10px;
-  --profile-overlap-overlay-gap: 7px;
+  --profile-body-padding: var(--spacing-150) var(--spacing-50) 0;
+  --profile-intro-margin-bottom: var(--spacing-500);
+  --profile-view-all-margin-top: var(--spacing-250);
+  --profile-carousel-intro-max-width: 800px;
+  --profile-overlap-overlay-padding: var(--spacing-275);
+  --profile-overlap-overlay-padding-top: var(--spacing-625);
+  --profile-overlap-overlay-padding-right: var(--spacing-125);
+  --profile-overlap-overlay-gap: var(--spacing-75);
 }
 
 .profile .profile-card-link {
@@ -31,11 +31,8 @@
 .profile .profile-card {
   display: flex;
   flex-direction: column;
+  padding: 0 var(--spacing-625);
   outline: none;
-}
-
-.profile .carousel .carousel-slide {
-  padding: 0 50px;
 }
 
 .profile .profile-card-image {
@@ -102,9 +99,8 @@
 .profile .profile-intro h3,
 .profile.carousel .carousel-intro h2,
 .profile.carousel .carousel-intro h3 {
-  margin: 8px 0 0;
+  margin: var(--spacing-100) 0 0;
   max-width: 800px;
-  
   font-size: var(--heading-size-xxl);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-1100);
@@ -117,7 +113,7 @@
 }
 
 @media (width >= 1024px) {
-  .section.center .profile.carousel .carousel-intro {
+  .bg-gradient-a.section.center .profile.carousel .carousel-intro {
     max-width: 488px;
   }
 
@@ -141,8 +137,7 @@
 
 .profile .profile-intro h2 ~ p,
 .profile .profile-intro h3 ~ p {
-  margin: 8px 0 0;
-  
+  margin: var(--spacing-100) 0 0;
   font-size: var(--body-size-xxxl);
   font-weight: var(--font-weight-regular);
   line-height: 1.5;
@@ -151,7 +146,6 @@
 
 .profile .profile-intro p:first-child {
   margin: 0;
-  
   font-size: var(--title-size-xl);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-400);
@@ -166,8 +160,6 @@
   opacity: 1;
   isolation: isolate;
   background: none;
-  backdrop-filter: none;
-  mask: none;
   gap: var(--profile-overlap-overlay-gap);
   backdrop-filter: blur(16px) saturate(120%);
   mask: none;
@@ -178,8 +170,6 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  backdrop-filter: blur(20px) saturate(130%);
-  mask: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, var(--color-gray-1000) 70%);
   backdrop-filter: blur(12px) saturate(130%);
   mask: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, var(--color-gray-1000) 70%);
 }
@@ -199,15 +189,14 @@
 
 @media (width >= 1024px) {
   .profile.overlap .profile-card-overlay p {
-    -webkit-line-clamp: 5;
-    line-clamp: 5;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
   }
 }
 
 .profile.carousel .carousel-intro h2 ~ p,
 .profile.carousel .carousel-intro h3 ~ p {
-  margin: 8px 0 0;
-  
+  margin: var(--spacing-100) 0 0;
   font-size: var(--body-size-xxxl);
   font-weight: var(--font-weight-regular);
   line-height: 1.5;
@@ -216,7 +205,6 @@
 
 .profile.carousel .carousel-intro p:first-child {
   margin: 0;
-  
   font-size: var(--title-size-xl);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-400);
@@ -237,7 +225,6 @@
 
 .profile .profile-card-name {
   margin: 0;
-  
   font-size: var(--title-size-xxxl);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-600);
@@ -245,7 +232,7 @@
 }
 
 .profile .profile-card-role {
-  margin: 2px 0 0; 
+  margin: var(--spacing-25) 0 0;
   font-size: var(--title-size-m);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-200);
@@ -282,8 +269,8 @@
     --carousel-visible: 2;
   }
 
-  .profile .carousel .carousel-slide {
-    padding: 0px;
+  .profile .profile-card {
+    padding: 0;
   }
 }
 
@@ -293,7 +280,7 @@
   }
 
   .profile.carousel .profile-card-image {
-    max-height: 560px;;
+    max-height: 560px;
     max-width: unset;
     aspect-ratio: auto;
   }
@@ -315,14 +302,12 @@
 }
 
 .profile.carousel .profile-card-name {
-  
   font-size: var(--title-size-xxxl);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-600);
 }
 
 .profile.carousel .profile-card-role {
-  
   font-size: var(--title-size-m);
   font-weight: var(--font-weight-bold);
   opacity: 0.85;
@@ -355,7 +340,6 @@
   background: currentcolor;
   opacity: 0;
   mask: var(--profile-arrow-mask) center / contain no-repeat;
-  mask: var(--profile-arrow-mask) center / contain no-repeat;
   transition: width 0.2s ease, opacity 0.2s ease;
 
   --profile-arrow-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>');
@@ -377,13 +361,12 @@
   display: block;
   width: 100%;
   height: 1px;
-  margin: 4px 0;
+  margin: var(--spacing-50) 0;
   background: rgb(255 255 255 / 10%);
 }
 
 .profile.overlap .profile-card-overlay .profile-card-name {
   margin: 0;
-  
   font-size: var(--title-size-m);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-200);
@@ -392,7 +375,6 @@
 
 .profile.overlap .profile-card-overlay .profile-card-role {
   margin: 0;
-  
   font-size: var(--body-size-s);
   font-weight: var(--font-weight-regular);
   line-height: 1.5;

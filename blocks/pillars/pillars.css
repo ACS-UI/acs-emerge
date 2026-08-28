@@ -19,7 +19,7 @@
 }
 
 .pillars .pillars-eyebrow {
-  margin: 0 0 6px;
+  margin: 0 0 var(--spacing-60);
   color: var(--pillars-eyebrow-color);
   font-size: var(--pillars-eyebrow-size);
   font-weight: var(--font-weight-regular);
@@ -40,13 +40,13 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--pillars-row-gap);
-  margin-top: 24px;
+  margin-top: var(--spacing-300);
 }
 
 .pillars .pillars-item {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--spacing-150);
 }
 
 .pillars .pillars-label {

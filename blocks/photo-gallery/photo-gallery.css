@@ -37,7 +37,7 @@ main > div.section .photo-gallery-wrapper:not(:has(.spotlight)) {
 }
 
 .photo-gallery .photo-gallery-caption {
-  margin-top: 16px;
+  margin-top: var(--spacing-200);
   color: var(--photo-gallery-caption-color);
   font-size: var(--photo-gallery-caption-size);
 }
@@ -47,11 +47,11 @@ main > div.section .photo-gallery-wrapper:not(:has(.spotlight)) {
 }
 
 main .photo-gallery-container > .default-content-wrapper {
-  margin-bottom: 28px;
+  margin-bottom: var(--spacing-350);
 }
 
 main .photo-gallery-container > .default-content-wrapper p {
-  margin: 0 0 8px;
+  margin: 0 0 var(--spacing-100);
   color: var(--color-gray-700);
   font-size: var(--body-size-xl);
   font-weight: var(--font-weight-regular);
@@ -175,7 +175,7 @@ main .photo-gallery-container > .default-content-wrapper :is(h1, h2, h3, h4, h5,
     grid-template-columns: minmax(0, 572px) minmax(0, 278px) minmax(0, 278px);
     grid-auto-rows: 272px;
     grid-auto-flow: row dense;
-    gap: 16px;
+    gap: var(--spacing-200);
     justify-content: left;
   }
 

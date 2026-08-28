@@ -26,7 +26,7 @@
 }
 
 main .newsletter-banner-container > .default-content-wrapper:first-child p {
-  margin: 0 0 20px;
+  margin: 0 0 var(--spacing-250);
   color: var(--color-gray-700);
   font-size: var(--title-size-xl);
   font-weight: var(--font-weight-bold);
@@ -34,11 +34,11 @@ main .newsletter-banner-container > .default-content-wrapper:first-child p {
 }
 
 main .newsletter-banner-container > .default-content-wrapper:last-child {
-  margin-top: 48px;
+  margin-top: var(--spacing-600);
 }
 
 main .newsletter-banner-container > .default-content-wrapper:last-child p {
-  margin: 0 0 16px;
+  margin: 0 0 var(--spacing-200);
   color: var(--color-gray-1000);
   font-size: var(--body-size-l);
   font-weight: var(--font-weight-regular);
@@ -76,7 +76,7 @@ main .newsletter-banner-container > .default-content-wrapper:last-child p:last-c
 }
 
 .newsletter-banner .newsletter-banner-eyebrow {
-  margin: 0 0 12px;
+  margin: 0 0 var(--spacing-150);
   color: var(--newsletter-banner-eyebrow-color);
   font-size: var(--newsletter-banner-eyebrow-size);
   font-weight: var(--font-weight-bold);

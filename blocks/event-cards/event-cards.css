@@ -22,7 +22,7 @@
 
 /* intro (eyebrow + headline) on the list page */
 .event-cards .event-cards-intro {
-  margin-bottom: 60px;
+  margin-bottom: var(--spacing-750);
 }
 
 /* the actual eyebrow+heading wrapper is an unclassed inner <div>
@@ -31,12 +31,12 @@
 .event-cards .event-cards-intro > div {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--spacing-100);
 }
 
 .event-cards .event-cards-intro p:first-child {
   margin: 0;
-  padding: 12px 0;
+  padding: var(--spacing-150) 0;
   color: var(--ec-meta-color);
   font-size: var(--font-size-400);
   font-weight: var(--font-weight-bold);
@@ -57,7 +57,7 @@
 }
 
 .event-cards .event-cards-view-all {
-  margin-top: 20px;
+  margin-top: var(--spacing-250);
   border: 1px solid transparent;
   background: var(--color-gray-900);
   color: var(--color-white);
@@ -81,7 +81,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--ec-row-gap) var(--ec-column-gap);
-  padding-top: 32px;
+  padding-top: var(--spacing-400);
 }
 
 /* the card link wrapper shouldn't look like a link */
@@ -99,9 +99,9 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--spacing-200);
   height: 100%;
-  padding: 0 0 16px;
+  padding: 0 0 var(--spacing-200);
   background: var(--ec-card-bg);
   border-radius: var(--ec-card-radius);
   box-shadow: var(--ec-card-shadow);
@@ -141,7 +141,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 8px 26.5px;
+  padding: var(--spacing-100) 26.5px;
   border: 0.5px solid rgb(11 11 15 / 18%);
   border-radius: 20px;
   background: var(--ec-badge-bg);
@@ -179,8 +179,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin: 0 16px;
+  gap: var(--spacing-50);
+  margin: 0 var(--spacing-200);
 }
 
 /* hover-only trailing arrow — same mask technique as success.css's
@@ -223,7 +223,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 6px;
+  gap: var(--spacing-60);
   color: var(--color-black);
   font-size: var(--body-size-s);
   font-weight: var(--font-weight-regular);
@@ -311,7 +311,7 @@
   align-items: center;
   gap: 0;
   line-height: 20px;
-  margin-top: 20px;
+  margin-top: var(--spacing-250);
   border: 1px solid transparent;
   border-radius: 2.4em;
   padding: 0.6em 1.5em;

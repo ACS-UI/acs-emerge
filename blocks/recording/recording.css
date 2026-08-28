@@ -17,7 +17,7 @@
 }
 
 .recording .recording-eyebrow {
-  margin: 0 0 40px;
+  margin: 0 0 var(--spacing-500);
   color: var(--recording-eyebrow-color);
   font-size: var(--recording-eyebrow-size);
   font-weight: var(--font-weight-bold);
@@ -29,8 +29,8 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 20px;
-  padding: 36px 40px;
+  gap: var(--spacing-250);
+  padding: var(--spacing-450) var(--spacing-500);
   border-radius: var(--recording-card-radius);
   background: var(--recording-card-bg);
   box-shadow: var(--recording-card-shadow);
@@ -52,7 +52,7 @@
   display: block;
   width: 0;
   height: 0;
-  margin-left: 4px;
+  margin-left: var(--spacing-50);
   border-style: solid;
   border-width: 9px 0 9px 15px;
   border-color: transparent transparent transparent var(--recording-play-color);
@@ -72,7 +72,7 @@
 }
 
 .recording .recording-meta {
-  margin: 4px 0 0;
+  margin: var(--spacing-50) 0 0;
   color: var(--recording-meta-color);
   font-size: var(--recording-meta-size);
 }
@@ -80,7 +80,7 @@
 .recording .recording-cta.button {
   flex: 0 0 auto;
   width: 100%;
-  margin-top: 4px;
+  margin-top: var(--spacing-50);
   border: 1px solid var(--recording-cta-bg);
   border-radius: 2.4em;
   background: var(--recording-cta-bg);
@@ -95,7 +95,7 @@
   width: 11px;
   height: 11px;
   margin-left: 11px;
-  margin-top: 2px;
+  margin-top: var(--spacing-25);
   background: url('../../icons/arrow-right-white.svg') center / contain no-repeat;
 }
 
@@ -109,7 +109,7 @@
 @media (width >= 768px) {
   .recording .recording-card {
     flex-wrap: nowrap;
-    padding: 36px 40px;
+    padding: var(--spacing-450) var(--spacing-500);
   }
 
   .recording .recording-cta.button {
@@ -118,7 +118,7 @@
     font-weight: var(--font-weight-regular);
     font-size: var(--detail-size-l);
     line-height: var(--line-height-400);
-    padding: 12px 36px;
+    padding: var(--spacing-150) var(--spacing-450);
   }
 
   .recording .recording-title {

@@ -124,7 +124,6 @@
   .cards-emerge .cards-emerge-letter {
     background: var(--cards-emerge-letter-gradient);
     background-clip: text;
-    background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
   }

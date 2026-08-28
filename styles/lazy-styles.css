@@ -21,9 +21,9 @@ main .back-button {
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 14px 28px;
-  margin-bottom: 24px;
+  gap: var(--spacing-125);
+  padding: 14px var(--spacing-350);
+  margin-bottom: var(--spacing-300);
   font-family: inherit;
   font-size: var(--body-font-size-s, 16px);
   font-weight: 600;
@@ -44,6 +44,7 @@ main .back-button::before {
   height: 20px;
   background: currentcolor;
   mask: url('../icons/arrow-left.svg') center / contain no-repeat;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-mask: url('../icons/arrow-left.svg') center / contain no-repeat;
 }
 
@@ -56,6 +57,6 @@ main .back-button:focus-visible {
 
 @media (width >= 768px) {
   main .back-button {
-    margin-bottom: 40px;
+    margin-bottom: var(--spacing-500);
   }
 }

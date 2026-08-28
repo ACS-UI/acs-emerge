@@ -36,7 +36,6 @@ main > div.section .quote-wrapper {
 
 .quote .quote-body {
   position: relative;
-  
   color: var(--quote-text-color);
 }
 
@@ -53,7 +52,6 @@ main > div.section .quote-wrapper {
 .quote .quote-body blockquote::after {
   position: absolute;
   color: var(--quote-mark-color);
-  
   font-size: var(--quote-mark-size);
   font-weight: var(--quote-mark-weight);
   line-height: var(--quote-mark-line);
@@ -84,7 +82,7 @@ main > div.section .quote-wrapper {
 }
 
 .quote .quote-body .quote-attribution {
-  margin: 16px 0 0;
+  margin: var(--spacing-200) 0 0;
   font-size: var(--body-font-size-xs);
   font-weight: 600;
 }
@@ -114,7 +112,7 @@ main > div.section .quote-wrapper {
   --quote-card-role-color: var(--color-gray-600);
   --quote-card-avatar-size: 56px;
 
-  padding: 40px 0;
+  padding: var(--spacing-500) 0;
 }
 
 .quote.card .quote-row {
@@ -153,9 +151,8 @@ main > div.section .quote-wrapper {
   display: block;
   width: var(--quote-card-mark-width);
   height: var(--quote-card-mark-height);
-  margin-bottom: 40px;
+  margin-bottom: var(--spacing-500);
   background: var(--quote-card-mark-bg);
-  mask: url('../../icons/red-quote.svg') left top / contain no-repeat;
   mask: url('../../icons/red-quote.svg') left top / contain no-repeat;
 }
 
@@ -166,7 +163,7 @@ main > div.section .quote-wrapper {
 .quote.card .quote-attribution-row {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: var(--spacing-250);
   margin-top: 44px;
 }
 
@@ -193,7 +190,6 @@ main > div.section .quote-wrapper {
 
 .quote.card .quote-name {
   margin: 0;
-  
   color: var(--quote-card-name-color);
   font-style: normal;
   font-weight: var(--font-weight-regular);
@@ -203,7 +199,6 @@ main > div.section .quote-wrapper {
 
 .quote.card .quote-role {
   margin: 0;
-  
   color: var(--quote-card-role-color);
   font-style: normal;
   font-weight: var(--font-weight-regular);

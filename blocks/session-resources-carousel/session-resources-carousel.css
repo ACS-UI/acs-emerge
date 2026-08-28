@@ -24,11 +24,11 @@
 }
 
 .session-resources-carousel .session-resources-carousel-intro {
-  margin-bottom: 28px;
+  margin-bottom: var(--spacing-350);
 }
 
 .session-resources-carousel .session-resources-carousel-eyebrow {
-  margin: 0 0 8px;
+  margin: 0 0 var(--spacing-100);
   color: var(--session-resources-carousel-eyebrow-color);
   font-size: var(--session-resources-carousel-eyebrow-size);
   font-weight: var(--font-weight-regular);
@@ -47,7 +47,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
+  gap: var(--spacing-150);
   height: 100%;
   box-sizing: border-box;
   padding: var(--session-resources-carousel-card-pad);
@@ -65,14 +65,14 @@
 }
 
 .session-resources-carousel .session-resources-carousel-desc {
-  margin: 0 0 16px;
+  margin: 0 0 var(--spacing-200);
   color: var(--session-resources-carousel-desc-color);
   font-size: var(--session-resources-carousel-desc-size);
   line-height: 1.5;
 }
 
 .session-resources-carousel .session-resources-carousel-open.button {
-  margin-top: 6px;
+  margin-top: var(--spacing-60);
   border: 1px solid var(--color-gray-1000);
   border-radius: 2.4em;
   background: transparent;
@@ -80,7 +80,7 @@
   font-size: var(--body-size-m);
   line-height: var(--line-height-200);
   color: var(--color-gray-1000);
-  padding: 8px 24px;
+  padding: var(--spacing-100) var(--spacing-300);
   transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
@@ -89,9 +89,8 @@
   display: inline-block;
   width: 7px;
   height: 7px;
-  margin-left: 6px;
+  margin-left: var(--spacing-60);
   background: currentcolor;
-  mask: url('../../icons/arrow-up.svg') center / contain no-repeat;
   mask: url('../../icons/arrow-up.svg') center / contain no-repeat;
 }
 
@@ -122,7 +121,7 @@
     --carousel-visible: 3;
     --session-resources-carousel-card-pad: 20px 24px;
 
-    gap: 40px;
+    gap: var(--spacing-500);
   }
 
   .session-resources-carousel .session-resources-carousel-title {

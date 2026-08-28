@@ -15,11 +15,11 @@
 }
 
 .event-highlights .event-highlights-intro {
-  margin-bottom: 40px;
+  margin-bottom: var(--spacing-500);
 }
 
 .event-highlights .event-highlights-eyebrow {
-  margin: 0 0 8px;
+  margin: 0 0 var(--spacing-100);
   color: var(--event-highlights-eyebrow-color);
   font-size: var(--event-highlights-eyebrow-size);
   font-weight: var(--font-weight-regular);
@@ -40,14 +40,14 @@
   padding: 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: var(--spacing-300);
 }
 
 .event-highlights .event-highlights-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: var(--spacing-100);
   text-align: center;
 }
 

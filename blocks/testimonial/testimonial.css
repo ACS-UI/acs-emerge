@@ -34,7 +34,6 @@
   position: relative;
   margin: 0;
   padding: var(--testimonial-quote-padding-top) 0 0;
-  
   font-size: var(--body-size-s);
   line-height: var(--line-height-400);
   color: var(--testimonial-quote-color);
@@ -47,7 +46,6 @@
   height: 32px;
   margin-bottom: var(--testimonial-quote-mark-gap);
   background: rgb(255 255 255 / 80%);
-  mask: url('../../icons/quote-open.svg') left top / contain no-repeat;
   mask: url('../../icons/quote-open.svg') left top / contain no-repeat;
 }
 
@@ -68,7 +66,6 @@
   margin-left: auto;
   background: rgb(255 255 255 / 80%);
   mask: url('../../icons/quote-close.svg') right bottom / contain no-repeat;
-  mask: url('../../icons/quote-close.svg') right bottom / contain no-repeat;
 }
 
 .testimonial .testimonial-quote strong,
@@ -81,10 +78,10 @@
   position: relative;
   width: 100%;
   box-sizing: border-box;
-  max-width: 600px;
-  max-height: auto;
+  max-width: 560px;
+  max-height: none;
   margin: 0 auto;
-  padding: 4px;
+  padding: var(--spacing-50);
   border-radius: var(--testimonial-radius);
   background: var(--color-white);
   box-shadow:
@@ -158,7 +155,7 @@
 
 @media (width >= 1024px) {
   main .section.testimonial-container.bg-gradient-b {
-    padding-top: 60px;
+    padding-top: var(--spacing-750);
     padding-bottom: 116px;
   }
 

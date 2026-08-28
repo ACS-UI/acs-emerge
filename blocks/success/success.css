@@ -31,7 +31,7 @@
 .success .success-card {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--spacing-200);
   height: 100%;
 }
 
@@ -43,7 +43,7 @@
 .success .success-card-image {
   position: relative;
   overflow: hidden;
-  padding: 4px;
+  padding: var(--spacing-50);
   border-radius: var(--success-radius);
   aspect-ratio: 3 / 4;
   background: var(--color-white);
@@ -86,8 +86,7 @@
 }
 
 .success .success-card-title {
-  margin: 4px 0 0;
-  
+  margin: var(--spacing-50) 0 0;
   font-size: var(--heading-size-l);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-700);
@@ -96,7 +95,6 @@
 
 .success .success-card-desc {
   margin: 0;
-  
   font-size: var(--body-size-m);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-400);
@@ -106,7 +104,7 @@
 .success .success-card-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--spacing-100);
   margin: var(--success-tags-margin-top) 0 0;
   padding: 0;
   list-style: none;
@@ -120,7 +118,6 @@
     0 0 0 1px rgb(0 0 0 / 4%),
     0 1px 2px rgb(0 0 0 / 8%),
     0 4px 6px rgb(0 0 0 / 4%);
-  
   font-size: var(--body-size-s);
   font-weight: var(--font-weight-regular);
   line-height: 1.5;
@@ -134,8 +131,7 @@
 
 .success .success-intro h2,
 .success .success-intro h3 {
-  margin: 8px 0 0;
-  
+  margin: var(--spacing-100) 0 0;
   font-size: var(--heading-size-xxl);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-1100);
@@ -143,7 +139,7 @@
 }
 
 .success .success-intro p {
-  margin: 12px 0 0;
+  margin: var(--spacing-150) 0 0;
   font-size: var(--body-size-m);
   line-height: var(--line-height-400);
   color: var(--color-gray-700);
@@ -179,7 +175,6 @@
   height: 1.1em;
   background: currentcolor;
   opacity: 0;
-  mask: var(--success-arrow-mask) center / contain no-repeat;
   mask: var(--success-arrow-mask) center / contain no-repeat;
   transition: width 0.2s ease, opacity 0.2s ease;
 
@@ -237,8 +232,7 @@
 
 .success.carousel .carousel-intro h2,
 .success.carousel .carousel-intro h3 {
-  margin: 8px 0 0;
-  
+  margin: var(--spacing-100) 0 0;
   font-size: var(--heading-size-xxl);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-1100);
@@ -275,7 +269,6 @@
   height: 1.1em;
   background: currentcolor;
   opacity: 0;
-  mask: var(--success-arrow-mask) center / contain no-repeat;
   mask: var(--success-arrow-mask) center / contain no-repeat;
   transition: width 0.2s ease, opacity 0.2s ease;
 

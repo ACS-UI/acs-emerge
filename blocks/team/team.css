@@ -11,14 +11,14 @@
 }
 
 main .team-container > .default-content-wrapper {
-  margin-bottom: 32px;
+  margin-bottom: var(--spacing-400);
 }
 
 main .team-container > .default-content-wrapper p:first-child {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  margin: 0 0 16px;
+  gap: var(--spacing-50);
+  margin: 0 0 var(--spacing-200);
   border-radius: 999px;
   color: var(--team-eyebrow-color);
   font-size: var(--title-size-xl);

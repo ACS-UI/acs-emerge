@@ -28,7 +28,7 @@
 .client-cards .client-cards-card {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--spacing-150);
   height: 100%;
   box-sizing: border-box;
   padding: var(--client-cards-card-padding);
@@ -59,7 +59,7 @@
 }
 
 .client-cards .client-cards-title {
-  margin: 4px 0 0;
+  margin: var(--spacing-50) 0 0;
   font-family: var(--heading-font-family);
   font-size: var(--heading-size-s);
   font-weight: var(--font-weight-bold);
@@ -76,7 +76,7 @@
 
 .client-cards .client-cards-actions {
   margin-top: auto;
-  padding-top: 8px;
+  padding-top: var(--spacing-100);
 }
 
 .client-cards a.button.client-cards-cta {
@@ -107,14 +107,14 @@
 
 .client-cards .client-cards-intro h2,
 .client-cards .client-cards-intro h3 {
-  margin: 8px 0 0;
+  margin: var(--spacing-100) 0 0;
   font-size: var(--heading-size-xl);
   line-height: var(--line-height-800);
   color: var(--color-gray-900);
 }
 
 .client-cards .client-cards-intro p {
-  margin: 12px 0 0;
+  margin: var(--spacing-150) 0 0;
   font-size: var(--body-size-m);
   line-height: var(--line-height-400);
   color: var(--color-gray-700);
@@ -179,7 +179,7 @@
 
 .client-cards.carousel .carousel-intro h2,
 .client-cards.carousel .carousel-intro h3 {
-  margin: 8px 0 0;
+  margin: var(--spacing-100) 0 0;
   font-size: var(--heading-size-xxl);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-1100);
@@ -214,7 +214,6 @@
   height: 1.1em;
   background: currentcolor;
   opacity: 0;
-  mask: var(--client-cards-arrow-mask) center / contain no-repeat;
   mask: var(--client-cards-arrow-mask) center / contain no-repeat;
   transition: width 0.2s ease, opacity 0.2s ease;
 

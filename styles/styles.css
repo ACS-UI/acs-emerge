@@ -112,7 +112,7 @@ pre {
 }
 
 pre {
-  padding: 16px;
+  padding: var(--spacing-200);
   border-radius: 8px;
   background-color: var(--light-color);
   overflow-x: auto;
@@ -120,7 +120,7 @@ pre {
 }
 
 main > div {
-  margin: 40px 16px;
+  margin: var(--spacing-500) var(--spacing-200);
 }
 
 input,
@@ -142,7 +142,7 @@ a:hover {
 }
 
 p.button-wrapper {
-  margin: 12px 0;
+  margin: var(--spacing-150) 0;
 }
 
 a.button:any-link,
@@ -270,14 +270,14 @@ main img {
 }
 
 main > .section {
-  margin: 60px 0;
+  margin: var(--spacing-750) 0;
 }
 
 main > .section > div {
   max-width: 1280px;
   margin: auto;
   box-sizing: border-box;
-  padding: 0 24px;
+  padding: 0 var(--spacing-300);
 }
 
 main > .hero-banner-container:first-of-type {
@@ -286,7 +286,7 @@ main > .hero-banner-container:first-of-type {
 
 @media (width >= 768px) {
   main > .section > div {
-    padding: 0 32px;
+    padding: 0 var(--spacing-400);
   }
 }
 
@@ -294,7 +294,7 @@ main .section.light,
 main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
-  padding: 40px 0;
+  padding: var(--spacing-500) 0;
 }
 
 main .section.bg-gradient-a,
@@ -302,7 +302,7 @@ main .section.bg-gradient-b,
 main .section.bg-muted {
   position: relative;
   margin: 0;
-  padding: 48px 0;
+  padding: var(--spacing-600) 0;
   overflow: hidden;
 }
 
@@ -359,7 +359,7 @@ main .section[data-background-text]::before {
   margin-bottom: -100vh;
   align-items: center;
   justify-content: center;
-  padding: 0 24px;
+  padding: 0 var(--spacing-300);
   font-family: var(--heading-font-family);
   font-weight: var(--font-weight-black);
   font-size: clamp(6rem, 22vw, 20rem);

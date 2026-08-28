@@ -24,13 +24,13 @@
 .event-hero .event-hero-content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--spacing-250);
 }
 
 .event-hero .event-hero-head {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--spacing-100);
 }
 
 .event-hero .event-hero-head :is(h1, h2, h3, h4, h5, h6) {
@@ -59,7 +59,7 @@
 }
 
 .event-hero .event-hero-about-label {
-  margin: 0 0 12px;
+  margin: 0 0 var(--spacing-150);
   color: var(--event-hero-label-color);
   font-size: var(--event-hero-label-size);
   font-weight: var(--font-weight-bold);
@@ -77,7 +77,7 @@
 .event-hero .event-hero-details {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 10px 12px;
+  gap: var(--spacing-125) var(--spacing-150);
   align-items: baseline;
 }
 
@@ -89,12 +89,12 @@
 
 .event-hero .event-hero-details dt::after {
   content: ":";
-  padding-left: 8px;
+  padding-left: var(--spacing-100);
   color: var(--event-hero-detail-label-color);
 }
 
 .event-hero .event-hero-cta {
-  margin-top: 4px;
+  margin-top: var(--spacing-50);
 }
 
 .event-hero .event-hero-cta .button {
@@ -103,7 +103,7 @@
   background: transparent;
   color: var(--color-gray-1000);
   font-weight: var(--font-weight-regular);
-  padding: 8px 24px;
+  padding: var(--spacing-100) var(--spacing-300);
 }
 
 .event-hero .event-hero-cta .button:hover {
@@ -130,13 +130,13 @@
   .event-hero {
     flex-direction: row;
     align-items: stretch;
-    gap: 48px;
+    gap: var(--spacing-600);
   }
 
   .event-hero .event-hero-content {
     flex: 1 1 40%;
     max-width: 40%;
-    gap: 24px;
+    gap: var(--spacing-300);
   }
 
   .event-hero .event-hero-media {

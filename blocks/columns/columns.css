@@ -34,7 +34,7 @@
 }
 
 .columns > div > .columns-intro-col p {
-  margin: 0 0 8px;
+  margin: 0 0 var(--spacing-100);
 }
 
 .columns > div > .columns-intro-col :is(h1, h2, h3, h4, h5, h6) {

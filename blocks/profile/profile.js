@@ -168,7 +168,7 @@ export default async function decorate(block) {
   const { intro, viewAll: authoredViewAll } = extractConfig(block);
   // overlap carousel always has a "View All" action; page metadata keys
   // (view-all-text / view-all-href) take precedence, falling back to defaults.
-  const viewAll = (isOverlap && !authoredViewAll)
+  const viewAll = (isCarousel && isOverlap && !authoredViewAll)
     ? {
       text: getMetadata('view-all-text') || 'View All',
       href: getMetadata('view-all-href') || '/recognitions',

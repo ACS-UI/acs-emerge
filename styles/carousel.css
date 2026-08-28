@@ -4,14 +4,14 @@
 
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: var(--spacing-300);
 }
 
 .carousel .carousel-top {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 24px;
+  gap: var(--spacing-300);
 }
 
 .carousel .carousel-top[data-align="center"] {
@@ -44,7 +44,7 @@
 .carousel .carousel-nav {
   display: none;
   flex: 0 0 auto;
-  gap: var(--carousel-nav-gap, 4px);
+  gap: var(--carousel-nav-gap, var(--spacing-50));
 }
 
 .carousel .carousel-nav[hidden] {
@@ -98,6 +98,7 @@
   background: currentcolor;
   mask: var(--carousel-arrow-mask) center / contain no-repeat;
   mask-composite: exclude;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-mask: var(--carousel-arrow-mask) center / contain no-repeat;
 }
 
@@ -123,7 +124,7 @@ main .section.bg-gradient-b .carousel .carousel-nav-next .carousel-nav-icon {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: var(--carousel-dot-gap, 8px);
+  gap: var(--carousel-dot-gap, var(--spacing-100));
 }
 
 .carousel .carousel-dots[hidden] {
