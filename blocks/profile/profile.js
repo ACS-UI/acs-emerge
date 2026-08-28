@@ -1,4 +1,4 @@
-import { createOptimizedPicture, loadCSS } from '../../scripts/aem.js';
+import { createOptimizedPicture, loadCSS, getMetadata } from '../../scripts/aem.js';
 import {
   extractConfig, getIndexLink, fetchIndexRows, excludeListingPages, displayTitle,
 } from '../../scripts/query-index.js';
@@ -165,7 +165,15 @@ export default async function decorate(block) {
   const isOverlap = block.classList.contains('overlap');
   // Both variants may author an intro (eyebrow + heading + subheading) as the
   // first text-only row; the carousel centres it, the base grid left-aligns it.
-  const { intro, viewAll } = extractConfig(block);
+  const { intro, viewAll: authoredViewAll } = extractConfig(block);
+  // overlap carousel always has a "View All" action; page metadata keys
+  // (view-all-text / view-all-href) take precedence, falling back to defaults.
+  const viewAll = (isOverlap && !authoredViewAll)
+    ? {
+      text: getMetadata('view-all-text') || 'View All',
+      href: getMetadata('view-all-href') || '/recognitions',
+    }
+    : authoredViewAll;
 
   // Data source: pull cards from a query-index sheet when the block is authored
   // as only a link to one; otherwise build them from the authored rows.
@@ -186,6 +194,8 @@ export default async function decorate(block) {
     });
     // Order top-down by org hierarchy (breadth-first).
     dataRows = orderByHierarchy(dataRows);
+    // overlap carousel shows only the top 4 leaders by default.
+    if (isOverlap) dataRows = dataRows.slice(0, 4);
     cards = dataRows.map((row) => buildCardFromData(row, isOverlap));
   } else {
     const rows = [...block.children];
@@ -197,9 +207,16 @@ export default async function decorate(block) {
   if (isCarousel) {
     await loadCSS(`${window.hlx.codeBasePath}/styles/carousel.css`);
     const { default: createCarousel } = await import('../../scripts/carousel.js');
+    // "View All" moves into the top bar, except in tinted sections (gradient/muted
+    // backgrounds), where it stays in the footer below the track.
+    const section = block.closest('.section');
+    const isTintedSection = section?.classList.contains('bg-gradient-a')
+      || section?.classList.contains('bg-gradient-b')
+      || section?.classList.contains('bg-muted');
     const carousel = createCarousel(cards, {
       heading: intro || undefined,
       viewAll,
+      viewAllPosition: isTintedSection ? 'bottom' : 'top',
       step: 1,
       align: 'left',
       label: 'Leadership profiles',

@@ -23,7 +23,7 @@ main > div.section .photo-gallery-wrapper:not(:has(.spotlight)) {
 .photo-gallery .photo-gallery-item {
   grid-column: span 1;
   grid-row: span 1;
-  max-height: 160px;
+  max-height: 220px;
   overflow: hidden;
   border-radius: var(--photo-gallery-radius);
 }

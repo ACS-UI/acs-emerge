@@ -292,6 +292,7 @@ export default async function decorate(block) {
     const carousel = createCarousel(cards, {
       heading: intro || undefined,
       viewAll,
+      viewAllPosition: 'top',
       step: 1,
       align: 'left',
       label: 'Success stories',

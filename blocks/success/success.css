@@ -2,7 +2,7 @@
   --success-radius: 24px;
   --success-inner-radius: 20px;
   --success-gap: 32px;
-  --success-card-max-width: 384px;
+  --success-card-max-width: 600px;
   --success-title-color: var(--color-text-static-black);
   --success-desc-color: var(--color-gray-600);
   --success-intro-margin-bottom: 40px;
@@ -45,7 +45,7 @@
   overflow: hidden;
   padding: 4px;
   border-radius: var(--success-radius);
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 3 / 4;
   background: var(--color-white);
   box-shadow:
     0 0 0 1px rgb(0 0 0 / 4%),
@@ -204,7 +204,11 @@
   gap: var(--success-gap);
 }
 
-@media (width >= 560px) {
+@media (width >= 768px) {
+  .success {
+    --success-card-max-width: 400px;
+  }
+
   .success .success-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -254,6 +258,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0;
+  margin-top: var(--success-view-all-margin-top);
   border: 1px solid transparent;
   border-radius: 2.4em;
   padding: 0.6em 1.5em;
@@ -302,14 +307,21 @@
 }
 
 .success .success-parallax {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
   gap: var(--success-gap);
+}
+
+@media (width >= 768px) {
+  .success .success-parallax {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (width >= 1024px) {
   .success .success-parallax {
+    display: block;
     position: relative;
   }
 

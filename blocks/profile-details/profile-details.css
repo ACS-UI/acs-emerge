@@ -24,7 +24,7 @@
 
 .profile-details .profile-details-image {
   overflow: hidden;
-  max-height: 560px;
+  max-height: 560px;;
   border-radius: var(--profile-details-radius);
   background: var(--color-gray-100);
 }

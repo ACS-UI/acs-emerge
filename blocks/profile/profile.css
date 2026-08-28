@@ -34,10 +34,14 @@
   outline: none;
 }
 
+.profile .carousel .carousel-slide {
+  padding: 0 50px;
+}
+
 .profile .profile-card-image {
   position: relative;
   overflow: hidden;
-  max-width: 560px;
+  max-width: 600px;
   height: auto;
   aspect-ratio: 3/4;
   border-radius: var(--profile-card-radius);
@@ -113,7 +117,7 @@
 }
 
 @media (width >= 1024px) {
-  .profile.carousel .carousel-intro {
+  .section.center .profile.carousel .carousel-intro {
     max-width: 488px;
   }
 
@@ -181,11 +185,23 @@
 }
 
 .profile.overlap .profile-card-overlay p {
-  
+  display: -webkit-box;
+  overflow: hidden;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-clamp: 3;
   font-size: var(--body-size-xxxl);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-600);
   color: var(--color-white);
+}
+
+@media (width >= 1024px) {
+  .profile.overlap .profile-card-overlay p {
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
+  }
 }
 
 .profile.carousel .carousel-intro h2 ~ p,
@@ -257,13 +273,17 @@
   gap: var(--profile-gap);
 }
 
-@media (width >= 560px) {
+@media (width >= 768px) {
   .profile .profile-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
   .profile.carousel .carousel {
     --carousel-visible: 2;
+  }
+
+  .profile .carousel .carousel-slide {
+    padding: 0px;
   }
 }
 
@@ -273,7 +293,7 @@
   }
 
   .profile.carousel .profile-card-image {
-    max-height: 560px;
+    max-height: 560px;;
     max-width: unset;
     aspect-ratio: auto;
   }
@@ -320,6 +340,12 @@
   font-size: var(--detail-size-m);
   font-weight: var(--font-weight-medium);
   transition: background-color 0.2s ease, color 0.2s ease, gap 0.2s ease;
+}
+
+/* top-bar placement: .carousel-intro isn't a flex container, so the button
+   needs its own top margin to separate from the heading above it. */
+.profile.carousel .carousel-intro > .carousel-view-all {
+  margin-top: var(--profile-view-all-margin-top);
 }
 
 .profile.carousel .carousel-view-all::after {

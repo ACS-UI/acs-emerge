@@ -253,10 +253,22 @@
   font-weight: var(--font-weight-regular);
 }
 
+.event-cards.carousel .carousel p:not(.button-container) {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--title-size-xl);
+  line-height: var(--line-height-400);
+}
+
+.event-cards.carousel .carousel :is(h1,h2,h3,h4,h5,h6) {
+  font-weight: var(--font-weight-regular);
+  font-size: var(--heading-size-xxl);
+  line-height: var(--line-height-1100);
+}
+
 /* ==========================================================================
    Desktop — three across
    ========================================================================== */
-@media (width >= 560px) {
+@media (width >= 768px) {
   .event-cards .event-cards-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -279,7 +291,7 @@
   --carousel-gap: 24px;
 }
 
-@media (width >= 560px) {
+@media (width >= 768px) {
   .event-cards.carousel .carousel {
     --carousel-visible: 2;
   }
@@ -289,18 +301,6 @@
   .event-cards.carousel .carousel {
     --carousel-visible: 3;
     --carousel-gap: 32px;
-  }
-
-  .event-cards.carousel .carousel p:not(.button-container) {
-    font-weight: var(--font-weight-bold);
-    font-size: var(--title-size-xl);
-    line-height: var(--line-height-400);
-  }
-
-  .event-cards.carousel .carousel :is(h1,h2,h3,h4,h5,h6) {
-    font-weight: var(--font-weight-regular);
-    font-size: var(--heading-size-xxl);
-    line-height: var(--line-height-1100);
   }
 }
 

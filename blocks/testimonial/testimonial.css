@@ -80,7 +80,8 @@
   order: -1;
   position: relative;
   width: 100%;
-  max-width: 560px;
+  box-sizing: border-box;
+  max-width: 600px;
   max-height: auto;
   margin: 0 auto;
   padding: 4px;
