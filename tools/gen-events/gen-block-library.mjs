@@ -236,19 +236,33 @@ for (const name of blockNames) {
   defaultGrid = setRootClass(defaultGrid, name);
 
   // ---- assemble sections: default + one per variant ----
-  const sections = [];
+  // Each variant follows the DA library convention:
+  //   <h3>Variant name</h3>
+  //   library-container-start
+  //     <the block>
+  //     library-metadata (name / description)
+  //   library-container-end
+  // The heading lists the variant as a named sub-item in the DA Blocks panel;
+  // the container markers group the block + its metadata as one insertable unit.
   const displayName = titleCase(name);
-  const desc = `${displayName} block.`;
-  sections.push(`<div>\n${pretty(defaultGrid)}\n${libMeta(displayName, desc)}\n</div>`);
+  const buildVariant = (heading, grid, metaName, metaDesc) => [
+    `<h3>${heading}</h3>`,
+    '<div class="library-container-start"></div>',
+    pretty(grid),
+    libMeta(metaName, metaDesc),
+    '<div class="library-container-end"></div>',
+  ].join('\n');
 
+  const sections = [];
+  sections.push(buildVariant(displayName, defaultGrid, displayName, `${displayName} block.`));
   for (const v of VARIANTS[name] || []) {
     const variantGrid = setRootClass(defaultGrid, `${name} ${v}`);
-    sections.push(
-      `<div>\n${pretty(variantGrid)}\n${libMeta(`${displayName} (${titleCase(v)})`, `${titleCase(v)} variant of ${displayName}.`)}\n</div>`,
-    );
+    const vName = `${displayName} (${titleCase(v)})`;
+    sections.push(buildVariant(vName, variantGrid, vName, `${titleCase(v)} variant of ${displayName}.`));
   }
 
-  writeFileSync(join(libDir, `${name}.html`), `${sections.join('\n')}\n`);
+  // one <div> section wrapping the whole file's variants
+  writeFileSync(join(libDir, `${name}.html`), `<div>\n${sections.join('\n')}\n</div>\n`);
   generated.push({ name: displayName, slug: name, variants: (VARIANTS[name] || []).length });
   // eslint-disable-next-line no-console
   console.log(`Generated library/blocks/${name}.html (${1 + (VARIANTS[name] || []).length} variants)`);
