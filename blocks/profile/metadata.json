@@ -1,0 +1,29 @@
+{
+  "variantName": "profile",
+  "baseBlock": "profile",
+  "version": "1.0.0",
+  "created": "2026-08-28T11:28:03.828Z",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "purpose": "profile",
+    "imagePattern": "withimg"
+  },
+  "contentPattern": {
+    "structure": "repeating-items",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "usage": {
+    "pagesUsing": [
+      "index",
+      "leaders/keerthi-kumar",
+      "leaders/manoj-nagpal",
+      "leaders/santosh-naik",
+      "leaders/sunil-prasad",
+      "leadership",
+      "recognitions"
+    ],
+    "reuseCount": 7,
+    "lastUsed": "2026-08-28T11:28:03.828Z"
+  }
+}

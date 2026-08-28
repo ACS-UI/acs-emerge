@@ -1,0 +1,25 @@
+{
+  "variantName": "challenge",
+  "baseBlock": "challenge",
+  "version": "1.0.0",
+  "created": "2026-08-28T11:28:03.828Z",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "purpose": "challenge",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "repeating-items",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "usage": {
+    "pagesUsing": [
+      "clients/altria",
+      "clients/casio",
+      "clients/microsoft"
+    ],
+    "reuseCount": 3,
+    "lastUsed": "2026-08-28T11:28:03.828Z"
+  }
+}

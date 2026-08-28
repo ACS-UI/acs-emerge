@@ -1,0 +1,21 @@
+{
+  "variantName": "session-resources-carousel",
+  "baseBlock": "session-resources-carousel",
+  "version": "1.0.0",
+  "created": "2026-08-28T11:28:03.828Z",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "purpose": "session resources carousel",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "repeating-items",
+    "buttonCount": 1,
+    "imageCount": 0
+  },
+  "usage": {
+    "pagesUsing": [],
+    "reuseCount": 0,
+    "lastUsed": "2026-08-28T11:28:03.828Z"
+  }
+}

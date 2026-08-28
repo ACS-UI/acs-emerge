@@ -1,0 +1,24 @@
+{
+  "variantName": "agenda",
+  "baseBlock": "agenda",
+  "version": "1.0.0",
+  "created": "2026-08-28T11:28:03.828Z",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "purpose": "agenda",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "repeating-items",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "usage": {
+    "pagesUsing": [
+      "events/all-hands-meet",
+      "events/product-showcase"
+    ],
+    "reuseCount": 2,
+    "lastUsed": "2026-08-28T11:28:03.828Z"
+  }
+}

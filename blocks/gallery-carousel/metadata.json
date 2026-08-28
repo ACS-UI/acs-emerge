@@ -1,0 +1,26 @@
+{
+  "variantName": "gallery-carousel",
+  "baseBlock": "gallery-carousel",
+  "version": "1.0.0",
+  "created": "2026-08-28T11:28:03.828Z",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "purpose": "gallery carousel",
+    "imagePattern": "withimg"
+  },
+  "contentPattern": {
+    "structure": "repeating-items",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "usage": {
+    "pagesUsing": [
+      "success-stories/casio",
+      "success-stories/corteva",
+      "success-stories/japan-tobaco",
+      "success-stories/maruti"
+    ],
+    "reuseCount": 4,
+    "lastUsed": "2026-08-28T11:28:03.828Z"
+  }
+}

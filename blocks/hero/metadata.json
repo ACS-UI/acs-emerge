@@ -1,0 +1,21 @@
+{
+  "variantName": "hero",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-08-28T11:28:03.828Z",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "purpose": "hero",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "single-item",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "usage": {
+    "pagesUsing": [],
+    "reuseCount": 0,
+    "lastUsed": "2026-08-28T11:28:03.828Z"
+  }
+}

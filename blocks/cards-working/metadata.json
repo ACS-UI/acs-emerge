@@ -1,0 +1,23 @@
+{
+  "variantName": "cards-working",
+  "baseBlock": "cards-working",
+  "version": "1.0.0",
+  "created": "2026-08-28T11:28:03.828Z",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "purpose": "cards working",
+    "imagePattern": "withimg"
+  },
+  "contentPattern": {
+    "structure": "repeating-items",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "usage": {
+    "pagesUsing": [
+      "index"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-28T11:28:03.828Z"
+  }
+}
