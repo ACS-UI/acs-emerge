@@ -1,13 +1,8 @@
 .gallery-carousel {
-  /* colors */
   --gc-arrow-color: var(--color-black);
-
-  /* slide (Figma Rectangle 26/27: 1008x567, radius 24, drop-shadow) */
   --gc-slide-ratio: 1008 / 567;
   --gc-radius: 24px;
-  --gc-shadow: 0 12px 50px rgb(0 0 0 / 15%);
-
-  /* layout — 32px gap between slides; next slide peeks on the right */
+  --gc-shadow: 0 12px 50px var(--color-transparent-black-300);
   --gc-gap: 32px;
   --gc-slide-width: 100%;
   --gc-arrow-size: 40px;
@@ -15,7 +10,6 @@
   --gc-arrows-margin-bottom: 24px;
 }
 
-/* scrollable, snapping track */
 .gallery-carousel .gallery-carousel-track {
   display: flex;
   gap: var(--gc-gap);
@@ -46,13 +40,10 @@
   display: block;
   width: 100%;
   height: 100%;
-
-  /* fixed-ratio slide, cropped from the top like the Figma screenshots */
   object-fit: cover;
   object-position: top;
 }
 
-/* Arrows: right-aligned pair above the track (Figma "arrows": 40x40, 24 gap) */
 .gallery-carousel .gallery-carousel-arrows {
   display: flex;
   justify-content: flex-end;
@@ -73,7 +64,6 @@
   cursor: pointer;
 }
 
-/* chevron glyph (Figma Vector) */
 .gallery-carousel .gallery-carousel-arrow::before {
   content: '';
   display: inline-block;
@@ -91,8 +81,7 @@
   transform: translateX(-2px) rotate(45deg);
 }
 
-/* Desktop: slide ~79% wide (1008/1280) so the next slide peeks, as designed */
-@media (width >= 900px) {
+@media (width >= 768px) {
   .gallery-carousel {
     --gc-slide-width: 78.75%;
   }

@@ -1,8 +1,3 @@
-/*
- * client-cards block: grid of client cards (logo + title + desc + CTA).
- * carousel variant reuses styles/carousel.css (loaded by client-cards.js).
- */
-
 .client-cards {
   --client-cards-radius: 12px;
   --client-cards-gap: 24px;
@@ -19,7 +14,6 @@
   --client-cards-carousel-padding-inline: 48px;
 }
 
-/* card link wrapper: make the whole card clickable without changing styling */
 .client-cards .client-cards-card-link {
   display: block;
   height: 100%;
@@ -31,11 +25,10 @@
   text-decoration: none;
 }
 
-/* ===================== cards (shared by both variants) ===================== */
 .client-cards .client-cards-card {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--spacing-150);
   height: 100%;
   box-sizing: border-box;
   padding: var(--client-cards-card-padding);
@@ -66,7 +59,7 @@
 }
 
 .client-cards .client-cards-title {
-  margin: 4px 0 0;
+  margin: var(--spacing-50) 0 0;
   font-family: var(--heading-font-family);
   font-size: var(--heading-size-s);
   font-weight: var(--font-weight-bold);
@@ -81,13 +74,11 @@
   color: var(--client-cards-desc-color);
 }
 
-/* CTA button sits at the bottom of the card */
 .client-cards .client-cards-actions {
   margin-top: auto;
-  padding-top: 8px;
+  padding-top: var(--spacing-100);
 }
 
-/* outline pill at rest, fills red on hover; `a.button` wins over styles.css */
 .client-cards a.button.client-cards-cta {
   padding: 0.4em 1.2em;
   border-radius: 2.4em;
@@ -109,9 +100,6 @@
   text-decoration: none;
 }
 
-/* ===================== base variant: grid ===================== */
-
-/* intro (eyebrow + heading + subheading) above the grid, left-aligned */
 .client-cards .client-cards-intro {
   margin-bottom: var(--client-cards-intro-margin-bottom);
   max-width: var(--client-cards-intro-max-width);
@@ -119,21 +107,19 @@
 
 .client-cards .client-cards-intro h2,
 .client-cards .client-cards-intro h3 {
-  margin: 8px 0 0;
+  margin: var(--spacing-100) 0 0;
   font-size: var(--heading-size-xl);
   line-height: var(--line-height-800);
   color: var(--color-gray-900);
 }
 
-/* subheading / body paragraphs */
 .client-cards .client-cards-intro p {
-  margin: 12px 0 0;
+  margin: var(--spacing-150) 0 0;
   font-size: var(--body-size-m);
   line-height: var(--line-height-400);
   color: var(--color-gray-700);
 }
 
-/* eyebrow: the first paragraph, above the heading */
 .client-cards .client-cards-intro p:first-child {
   margin: 0;
   font-size: var(--detail-size-m);
@@ -160,7 +146,7 @@
   gap: var(--client-cards-gap);
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .client-cards .client-cards-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -172,18 +158,12 @@
   }
 }
 
-/* ===================== carousel variant ===================== */
-
-/* background panel/text colour lives at the section level (Style: bg-muted) */
-
-/* vars must sit on `.carousel` itself — its own base value otherwise wins */
 .client-cards.carousel .carousel {
   --carousel-visible: 1;
   --carousel-gap: var(--client-cards-gap);
   --carousel-nav-bg-hover: rgb(0 0 0 / 8%);
 }
 
-/* relax vertical clipping only, so card box-shadows aren't cut off */
 .client-cards.carousel .carousel-viewport {
   overflow: visible;
 }
@@ -193,21 +173,18 @@
   padding: var(--client-cards-carousel-track-padding-block) 0;
 }
 
-/* intro (eyebrow + heading); centered opt-in via Section Metadata "Style: center" */
 .client-cards.carousel .carousel-intro {
   max-width: var(--client-cards-carousel-intro-max-width);
 }
 
 .client-cards.carousel .carousel-intro h2,
 .client-cards.carousel .carousel-intro h3 {
-  margin: 8px 0 0;
-  max-height: 488px;
+  margin: var(--spacing-100) 0 0;
   font-size: var(--heading-size-xxl);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-1100);
 }
 
-/* eyebrow: first short paragraph above the heading */
 .client-cards.carousel .carousel-intro p {
   margin: 0;
   font-size: var(--detail-size-m);
@@ -217,7 +194,6 @@
   opacity: 0.7;
 }
 
-/* dark pill at rest, fills red with a trailing arrow on hover */
 .client-cards.carousel .carousel-view-all {
   display: inline-flex;
   align-items: center;
@@ -232,7 +208,6 @@
   transition: background-color 0.2s ease, color 0.2s ease, gap 0.2s ease;
 }
 
-/* trailing arrow: collapsed to zero width until hover */
 .client-cards.carousel .carousel-view-all::after {
   content: "";
   width: 0;
@@ -240,9 +215,6 @@
   background: currentcolor;
   opacity: 0;
   mask: var(--client-cards-arrow-mask) center / contain no-repeat;
-
-  /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-mask: var(--client-cards-arrow-mask) center / contain no-repeat;
   transition: width 0.2s ease, opacity 0.2s ease;
 
   --client-cards-arrow-mask: url('../../icons/arrow-right.svg');
@@ -260,7 +232,7 @@
   opacity: 1;
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .client-cards.carousel .carousel {
     --carousel-visible: 2;
   }

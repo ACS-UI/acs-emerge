@@ -1,9 +1,35 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 
 /**
- * Rebuilds the "Details" cell (a flat list of label/value paragraphs such as
- * "Client" / "CASIO" / "Industry" / "Manufacturing") into a definition list.
- * The first paragraph is treated as the section heading.
+ * Builds the "Tags" group: a sub-heading plus one pill per comma-separated value.
+ * @param {string} label The row's label text (used as the sub-heading).
+ * @param {Element} value The row's value cell (comma-separated tag text).
+ * @returns {HTMLElement} The tags group wrapper.
+ */
+function buildTagsGroup(label, value) {
+  const group = document.createElement('div');
+  group.className = 'client-detail-tags-group';
+
+  const heading = document.createElement('p');
+  heading.className = 'client-detail-info-heading client-detail-tags-heading';
+  heading.textContent = label;
+  group.append(heading);
+
+  const tags = document.createElement('ul');
+  tags.className = 'client-detail-tags';
+  value.textContent.split(',').map((t) => t.trim()).filter(Boolean).forEach((text) => {
+    const tag = document.createElement('li');
+    tag.className = 'client-detail-tag';
+    tag.textContent = text;
+    tags.append(tag);
+  });
+  group.append(tags);
+
+  return group;
+}
+
+/**
+ * Rebuilds the "Details" cell (label/value paragraphs) into a dl; a "Tags" row becomes a pill list.
  * @param {Element} cell The details cell
  */
 function decorateDetails(cell) {
@@ -16,21 +42,28 @@ function decorateDetails(cell) {
   heading.classList.add('client-detail-info-heading');
 
   const dl = document.createElement('dl');
+  const groups = [];
   for (let i = 0; i < rest.length; i += 2) {
     const label = rest[i];
     const value = rest[i + 1];
     if (!label) break;
-    const dt = document.createElement('dt');
-    dt.innerHTML = label.innerHTML;
-    dl.append(dt);
-    if (value) {
-      const dd = document.createElement('dd');
-      dd.innerHTML = value.innerHTML;
-      dl.append(dd);
+    const labelText = label.textContent.trim();
+    if (labelText.toLowerCase() === 'tags' && value) {
+      groups.push(buildTagsGroup(labelText, value));
+    } else {
+      const dt = document.createElement('dt');
+      dt.innerHTML = label.innerHTML;
+      dl.append(dt);
+      if (value) {
+        const dd = document.createElement('dd');
+        dd.innerHTML = value.innerHTML;
+        dl.append(dd);
+      }
     }
   }
   rest.forEach((p) => p.remove());
   heading.after(dl);
+  groups.forEach((group) => cell.append(group));
 }
 
 /**

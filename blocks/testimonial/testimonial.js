@@ -1,18 +1,6 @@
 import { createOptimizedPicture, loadCSS } from '../../scripts/aem.js';
 
-/**
- * Turns one authored row into a testimonial slide.
- *
- * Authored content model (per row / per testimonial):
- *   Cell 1: the quote — one or more paragraphs of testimonial text (bold runs
- *           are authored inline and preserved).
- *   Cell 2: the portrait image.
- *   Cell 3: the attribution — a name (heading or first line) and a title/role
- *           (following paragraph), shown over the photo.
- *
- * @param {Element} row The authored row.
- * @returns {HTMLElement} The testimonial figure.
- */
+/** Turns one authored row (quote, portrait, attribution) into a testimonial slide. */
 function buildSlide(row) {
   const cells = [...row.children];
   const figure = document.createElement('figure');
@@ -63,11 +51,7 @@ function buildSlide(row) {
   return figure;
 }
 
-/**
- * Decorates the testimonial block: a single-item carousel of quotes with a
- * portrait, using the shared carousel utility with bottom-left navigation.
- * @param {Element} block The testimonial block element.
- */
+/** Decorates the testimonial block: a single-item carousel of quotes with a portrait. */
 export default async function decorate(block) {
   const rows = [...block.children];
   const slides = rows

@@ -1,0 +1,88 @@
+.team {
+  --team-eyebrow-color: var(--color-gray-700);
+  --team-heading-color: var(--color-gray-1000);
+  --team-name-color: var(--color-gray-900);
+  --team-card-radius: 24px;
+  --team-card-gap: 10px;
+  --team-grid-row-gap: 32px;
+  --team-grid-column-gap: 40px;
+  --team-grid-padding-block: 120px;
+  --team-card-columns: 2;
+}
+
+main .team-container > .default-content-wrapper {
+  margin-bottom: var(--spacing-400);
+}
+
+main .team-container > .default-content-wrapper p:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-50);
+  margin: 0 0 var(--spacing-200);
+  border-radius: 999px;
+  color: var(--team-eyebrow-color);
+  font-size: var(--title-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-400);
+}
+
+main .team-container > .default-content-wrapper :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+  color: var(--team-heading-color);
+  font-size: var(--heading-size-xxl);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-1100);
+}
+
+.team .team-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--team-grid-row-gap) var(--team-grid-column-gap);
+}
+
+.team .team-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 1 calc((100% - (var(--team-card-columns) - 1) * var(--team-grid-column-gap)) / var(--team-card-columns));
+  gap: var(--team-card-gap);
+  text-align: center;
+}
+
+.team .team-card-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: var(--team-card-radius);
+  background: var(--color-gray-100);
+}
+
+.team .team-card-image picture,
+.team .team-card-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team .team-card-name {
+  margin: 0;
+  color: var(--team-name-color);
+  font-size: var(--body-size-l);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+}
+
+@media (width >= 768px) {
+  .team {
+    --team-card-columns: 3;
+  }
+}
+
+@media (width >= 1024px) {
+  .team {
+    --team-card-columns: 4;
+    --team-grid-column-gap: 120px;
+  }
+}

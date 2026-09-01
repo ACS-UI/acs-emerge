@@ -1,17 +1,29 @@
-/* add global styles that can be loaded post LCP here */
+main > .section > div.section-fade {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
 
-/* Back button auto-injected on leader and success-story detail pages */
+main > .section > div.section-fade.section-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main > .section > div.section-fade {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 main .back-button {
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 14px 28px;
-
-  /* left edge lines up with the page's 1280px content column instead of a
-     fixed viewport offset (see main > .section > div in styles.css) */
-  margin-top: 16px;
-  margin-inline: max(24px, calc((100% - 1280px) / 2 + 24px));
+  gap: var(--spacing-125);
+  padding: 14px var(--spacing-350);
+  margin-bottom: var(--spacing-300);
   font-family: inherit;
   font-size: var(--body-font-size-s, 16px);
   font-weight: 600;
@@ -32,7 +44,6 @@ main .back-button::before {
   height: 20px;
   background: currentcolor;
   mask: url('../icons/arrow-left.svg') center / contain no-repeat;
-
   /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-mask: url('../icons/arrow-left.svg') center / contain no-repeat;
 }
@@ -44,9 +55,8 @@ main .back-button:focus-visible {
   box-shadow: 0 4px 12px rgb(0 0 0 / 16%);
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   main .back-button {
-    margin-top: 24px;
-    margin-inline: max(32px, calc((100% - 1280px) / 2 + 32px));
+    margin-bottom: var(--spacing-500);
   }
 }

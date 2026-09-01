@@ -1,20 +1,14 @@
-/* cards-emerge block — "What EMERGE stands for" acronym list. Mobile-first. */
-
-/* ===== Block container ===== */
 .cards-emerge {
   font-family: var(--font-family-sans);
 
-  /* ===== Colors (semantic global tokens) ===== */
   --cards-emerge-eyebrow-color: var(--color-gray-700);
   --cards-emerge-heading-color: var(--color-text-static-black);
   --cards-emerge-heading-stroke-width: 1px;
   --cards-emerge-heading-stroke-color: var(--color-text-static-black);
   --cards-emerge-letter-color: var(--color-magenta-visual);
-  --cards-emerge-letter-gradient: linear-gradient(95.72deg, #d73220 0%, #d92361 33%, #7155fa 100%);
+  --cards-emerge-letter-gradient: linear-gradient(95.72deg, var(--color-red-900) 0%, var(--color-magenta-900) 33%, #7155fa 100%);
   --cards-emerge-title-color: var(--color-title);
   --cards-emerge-subtitle-color: var(--color-detail);
-
-  /* ===== Typography (mobile base) ===== */
   --cards-emerge-eyebrow-size: var(--title-size-xl);
   --cards-emerge-eyebrow-weight: var(--font-weight-bold);
   --cards-emerge-eyebrow-line-height: var(--line-height-400);
@@ -31,15 +25,11 @@
   --cards-emerge-subtitle-size: var(--title-size-m);
   --cards-emerge-subtitle-weight: var(--title-font-weight);
   --cards-emerge-subtitle-line-height: var(--line-height-200);
-
-  /* ===== Typography (desktop overrides, via media query) ===== */
   --cards-emerge-heading-size-desktop: var(--heading-size-xxl);
   --cards-emerge-heading-line-height-desktop: var(--line-height-1100);
   --cards-emerge-letter-size-desktop: var(--font-size-1500);
   --cards-emerge-letter-line-height-desktop: var(--line-height-1500);
   --cards-emerge-title-size-desktop: var(--heading-size-l);
-
-  /* ===== Spacing (mobile base) ===== */
   --cards-emerge-section-padding-block: 0;
   --cards-emerge-section-padding-inline: 20px;
   --cards-emerge-intro-gap: 8px;
@@ -53,15 +43,8 @@
   --cards-emerge-body-padding-block: 12px;
   --cards-emerge-butterfly-width: 172px;
   --cards-emerge-butterfly-height: 200px;
-
-  /* Butterfly top sits flush with the bottom of cards-emerge-intro (0px gap
-     from the heading block). Since the list itself starts 40px below that
-     (--cards-emerge-intro-margin-bottom), "flush with intro" is -40px
-     relative to the list's own top edge. */
   --cards-emerge-butterfly-offset-top: -40px;
   --cards-emerge-butterfly-offset-right: -42px;
-
-  /* ===== Spacing (desktop overrides) ===== */
   --cards-emerge-list-gap-desktop: 16px;
   --cards-emerge-list-max-width-desktop: 592px;
   --cards-emerge-row-gap-desktop: 32px;
@@ -70,7 +53,6 @@
   padding: var(--cards-emerge-section-padding-block) var(--cards-emerge-section-padding-inline);
 }
 
-/* ===== Intro (eyebrow + heading), centered ===== */
 .cards-emerge .cards-emerge-intro {
   display: flex;
   flex-direction: column;
@@ -102,12 +84,6 @@
   -webkit-text-stroke: var(--cards-emerge-heading-stroke-width) var(--cards-emerge-heading-stroke-color);
 }
 
-/* ===== Acronym list ===== */
-
-/* The wrapper (not the <ul>) owns the centered column box, so the butterfly
-   — a sibling of the <ul>, not a descendant — can be positioned per Figma
-   relative to the list's own top/right edges (an <img> isn't a valid direct
-   child of <ul>, hence the wrapper instead of nesting it inside the list). */
 .cards-emerge .cards-emerge-list-wrapper {
   position: relative;
   isolation: isolate;
@@ -132,7 +108,6 @@
   column-gap: var(--cards-emerge-row-gap);
 }
 
-/* Butterfly graphic: hidden on mobile, shown from tablet up (see media query) */
 .cards-emerge .cards-emerge-butterfly {
   display: none;
 }
@@ -145,15 +120,10 @@
   text-align: center;
 }
 
-/* Gradient glyph fill — degrades to the solid magenta color set above on
-   browsers without background-clip:text support */
 @supports (background-clip: text) or (-webkit-background-clip: text) {
   .cards-emerge .cards-emerge-letter {
     background: var(--cards-emerge-letter-gradient);
-    /* stylelint-disable-next-line property-no-vendor-prefix */
-    -webkit-background-clip: text;
     background-clip: text;
-    /* stylelint-disable-next-line property-no-vendor-prefix */
     -webkit-text-fill-color: transparent;
     color: transparent;
   }
@@ -183,8 +153,7 @@
   line-height: var(--cards-emerge-subtitle-line-height);
 }
 
-/* ===== Tablet / desktop (min-width) ===== */
-@media (width >= 900px) {
+@media (width >= 768px) {
   .cards-emerge .cards-emerge-intro h1,
   .cards-emerge .cards-emerge-intro h2,
   .cards-emerge .cards-emerge-intro h3 {
@@ -206,9 +175,6 @@
     column-gap: var(--cards-emerge-row-gap-desktop);
   }
 
-  /* Positioned per Figma relative to the list's own top/right edges.
-     z-index: -1 keeps it behind the list text (a normal-flow sibling within
-     the same positioned wrapper) so it can never obscure copy that grows. */
   .cards-emerge .cards-emerge-butterfly {
     display: block;
     position: absolute;

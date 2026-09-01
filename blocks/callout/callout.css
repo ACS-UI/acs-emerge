@@ -1,0 +1,145 @@
+.callout {
+  --callout-eyebrow-color: var(--color-gray-800);
+  --callout-heading-color: var(--color-gray-1000);
+  --callout-body-color: var(--color-gray-800);
+  --callout-note-color: var(--color-gray-800);
+  --callout-button-color: var(--color-gray-1000);
+  --callout-button-border: var(--color-gray-1000);
+  --callout-panel-bg: #f9f8f6;
+  --callout-eyebrow-size: var(--body-size-m);
+  --callout-heading-size: var(--heading-size-l);
+  --callout-body-size: var(--body-size-l);
+  --callout-note-size: var(--detail-size-l);
+  --callout-max-width: 1000px;
+
+  text-align: center;
+}
+
+.callout .callout-content {
+  max-width: var(--callout-max-width);
+  margin: 0 auto;
+}
+
+.callout .callout-eyebrow {
+  margin: 0 0 var(--spacing-60);
+  color: var(--callout-eyebrow-color);
+  font-size: var(--callout-eyebrow-size);
+  font-weight: var(--font-weight-regular);
+}
+
+.callout .callout-content :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0 0 var(--spacing-250);
+  color: var(--callout-heading-color);
+  font-size: var(--callout-heading-size);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+}
+
+.callout .callout-content p:not(.callout-eyebrow, .callout-note, .button-container, .button-wrapper) {
+  margin: 0 auto var(--spacing-350);
+  color: var(--callout-body-color);
+  font-size: var(--callout-body-size);
+  line-height: 1.5;
+}
+
+.callout .button-container,
+.callout p.button-wrapper {
+  margin: var(--spacing-350) 0 var(--spacing-150);
+}
+
+.callout a.button,
+.callout button.button {
+  padding: 0.85em 1.6em;
+  border: 1px solid var(--callout-button-border);
+  border-radius: 2.4em;
+  background: transparent;
+  color: var(--callout-button-color);
+  font-weight: var(--font-weight-regular);
+}
+
+.callout a.button:hover,
+.callout button.button:hover {
+  background: var(--callout-button-color);
+  border-color: var(--callout-button-color);
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.callout .callout-note {
+  margin: var(--spacing-150) 0 0;
+  color: var(--callout-note-color);
+  font-size: var(--callout-note-size);
+  font-weight: var(--font-weight-bold);
+}
+
+@media (width >= 768px) {
+  .callout {
+    --callout-heading-size: var(--heading-size-xl);
+  }
+
+  .callout .callout-content :is(h1, h2, h3, h4, h5, h6) {
+    margin: 0 0 var(--spacing-300);
+  }
+
+  .callout a.button,
+  .callout button.button {
+    width: auto;
+    min-width: 320px;
+    padding: var(--spacing-100) var(--spacing-300);
+    border-radius: 55px;
+    filter: drop-shadow(0 4px 8px rgb(0 0 0 / 8%));
+    font-size: var(--title-size-m);
+    line-height: var(--line-height-200);
+  }
+
+  main .section.callout-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-300);
+    padding: var(--spacing-750);
+  }
+
+  main .section.callout-container > div {
+    padding-inline: 0;
+  }
+
+  .callout .callout-eyebrow {
+    margin: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-50);
+    border-radius: 999px;
+    color: var(--color-gray-1000);
+    font-size: var(--title-size-xl);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-400);
+  }
+
+  .callout .callout-content p:not(.callout-eyebrow, .callout-note, .button-container, .button-wrapper) {
+    margin: 0 0 var(--spacing-600);
+    color: var(--color-gray-1000);
+    font-size: var(--body-size-xl);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-600);
+  }
+
+  .callout .button-container,
+  .callout p.button-wrapper {
+    margin: 0;
+  }
+
+  .callout .callout-note {
+    margin: var(--spacing-100) 0 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-50);
+    border-radius: 999px;
+    color: var(--color-gray-1000);
+    font-size: var(--title-size-m);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-200);
+  }
+}

@@ -1,0 +1,103 @@
+.commitment-cards {
+  --commitment-cards-bg: var(--color-white);
+  --commitment-cards-eyebrow-color: var(--color-gray-1000);
+  --commitment-cards-heading-color: var(--color-gray-1000);
+  --commitment-cards-body-color: var(--color-gray-1000);
+  --commitment-cards-shadow:
+    0px 20px 20px -24px #00000014,
+    0px 4px 6px 0px #0000000A,
+    0px 1px 2px 0px #00000014,
+    0px 0px 0px 1px #0000000A;
+  --commitment-cards-eyebrow-size: var(--detail-size-l);
+  --commitment-cards-heading-size: var(--heading-size-s);
+  --commitment-cards-body-size: var(--body-size-l);
+  --commitment-cards-gap: 24px;
+  --commitment-cards-pad: 24px;
+  --commitment-cards-radius: 24px;
+  --commitment-cards-min: 280px;
+}
+
+main .commitment-cards-container > .default-content-wrapper p {
+  font-style: normal;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--body-size-xl);
+  line-height: var(--line-height-400);
+  color: var(--color-gray-1000);
+}
+
+main .commitment-cards-container > .default-content-wrapper :is(h1, h2, h3, h4, h5, h6) {
+  font-style: normal;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--heading-size-xl);
+  line-height: var(--line-height-900);
+  color: var(--color-gray-1000);
+  margin: 0 0 var(--spacing-300);
+}
+
+.commitment-cards ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--commitment-cards-min), 1fr));
+  gap: var(--commitment-cards-gap);
+}
+
+.commitment-cards .commitment-cards-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--commitment-cards-pad);
+  border-radius: var(--commitment-cards-radius);
+  background-color: var(--commitment-cards-bg);
+  box-shadow: var(--commitment-cards-shadow);
+}
+
+.commitment-cards .commitment-cards-eyebrow {
+  margin: 0 0 var(--spacing-50);
+  color: var(--commitment-cards-eyebrow-color);
+  font-size: var(--commitment-cards-eyebrow-size);
+  font-weight: var(--font-weight-regular);
+}
+
+.commitment-cards .commitment-cards-card :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0 0 var(--spacing-300);
+  color: var(--commitment-cards-heading-color);
+  font-size: var(--commitment-cards-heading-size);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+}
+
+.commitment-cards .commitment-cards-card p:not(.commitment-cards-eyebrow) {
+  margin: 0;
+  color: var(--commitment-cards-body-color);
+  font-size: var(--commitment-cards-body-size);
+  line-height: 1.5;
+}
+
+@media (width >= 1024px) {
+  .commitment-cards {
+    --commitment-cards-pad: 32px 24px;
+  }
+
+  .commitment-cards ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .commitment-cards .commitment-cards-eyebrow {
+    font-weight: var(--font-weight-regular);
+    font-size: var(--title-size-l);
+    line-height: var(--line-height-300);
+  }
+
+  .commitment-cards .commitment-cards-card :is(h1, h2, h3, h4, h5, h6) {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--heading-size-l);
+    line-height: var(--line-height-700);
+  }
+
+  .commitment-cards .commitment-cards-card p:not(.commitment-cards-eyebrow) {
+    font-weight: var(--font-weight-regular);
+    font-size: var(--body-size-xxl);
+    line-height: 150%;
+  }
+}

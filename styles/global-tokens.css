@@ -1,40 +1,14 @@
-/*
- * global-tokens.css — global design tokens generated from the ACS Figma variable system.
- *
- * Sources (W3C Design Tokens JSON exported from Figma):
- *   - Typography  ← "Modeless" collection (Adobe Spectrum platform scale)
- *   - Color       ← "Light" / "Dark" / "Wireframe" colorTheme modes
- *
- * Curated + semantic scope: neutrals (gray) + brand-relevant scales
- * (blue, green, red, orange, magenta, pink) + all semantic tokens.
- * Spectrum component-internal tokens (swatch, tree-view, coach-mark, etc.)
- * and the unused rainbow scales are intentionally omitted.
- *
- * Themes: Light is the default (:root). Wireframe applies under
- * [data-theme="wireframe"].
- */
-
-/* =========================================================================
-   TYPOGRAPHY (mode-independent — Modeless / platform scale)
-   ========================================================================= */
 :root {
-  /* ----- Font families ----- */
-  --font-family-sans: 'Adobe Clean Spectrum VF', var(--body-font-family, roboto, sans-serif);
+  --font-family-sans: 'Adobe Clean Spectrum VF', roboto, sans-serif;
   --font-family-serif: 'Adobe Clean Serif', georgia, 'Times New Roman', serif;
   --font-family-code: 'Source Code Pro', 'SF Mono', monospace;
-
-  /* ----- Font weights (Spectrum name → numeric) ----- */
   --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-bold: 700;
   --font-weight-extra-bold: 800;
   --font-weight-black: 900;
-
-  /* ----- Letter spacing ----- */
   --letter-spacing-default: 0;
-
-  /* ----- Font size ramp (platformScale/font-size-*) ----- */
   --font-size-25: 10px;
   --font-size-50: 11px;
   --font-size-75: 12px;
@@ -53,8 +27,6 @@
   --font-size-1300: 58px;
   --font-size-1400: 65px;
   --font-size-1500: 73px;
-
-  /* ----- Line-height ramp (paired to matching font-size) ----- */
   --line-height-25: 12px;
   --line-height-50: 14px;
   --line-height-75: 16px;
@@ -73,8 +45,25 @@
   --line-height-1300: 66px;
   --line-height-1400: 74px;
   --line-height-1500: 84px;
-
-  /* ----- Heading hierarchy (sans-serif, extra-bold; heavy = black) ----- */
+  --spacing-25: 2px;
+  --spacing-50: 4px;
+  --spacing-60: 6px;
+  --spacing-75: 7px;
+  --spacing-100: 8px;
+  --spacing-125: 10px;
+  --spacing-150: 12px;
+  --spacing-200: 16px;
+  --spacing-250: 20px;
+  --spacing-275: 22px;
+  --spacing-300: 24px;
+  --spacing-350: 28px;
+  --spacing-400: 32px;
+  --spacing-450: 36px;
+  --spacing-500: 40px;
+  --spacing-600: 48px;
+  --spacing-625: 50px;
+  --spacing-700: 56px;
+  --spacing-750: 60px;
   --heading-font-family: var(--font-family-sans);
   --heading-font-weight: var(--font-weight-extra-bold);
   --heading-font-weight-heavy: var(--font-weight-black);
@@ -86,8 +75,6 @@
   --heading-size-xxl: 45px;
   --heading-size-xxxl: 58px;
   --heading-size-xxxxl: 73px;
-
-  /* ----- Title hierarchy (sans-serif, bold; strong = extra-bold) ----- */
   --title-font-family: var(--font-family-sans);
   --title-font-weight: var(--font-weight-bold);
   --title-font-weight-strong: var(--font-weight-extra-bold);
@@ -98,8 +85,6 @@
   --title-size-xl: 20px;
   --title-size-xxl: 22px;
   --title-size-xxxl: 25px;
-
-  /* ----- Body hierarchy (sans-serif, regular; strong = bold) ----- */
   --body-font-family-sans: var(--font-family-sans);
   --body-font-family-serif: var(--font-family-serif);
   --body-font-weight: var(--font-weight-regular);
@@ -112,8 +97,6 @@
   --body-size-xl: 20px;
   --body-size-xxl: 22px;
   --body-size-xxxl: 25px;
-
-  /* ----- Detail hierarchy (sans-serif, medium; strong = bold) ----- */
   --detail-font-family: var(--font-family-sans);
   --detail-font-weight: var(--font-weight-medium);
   --detail-font-weight-strong: var(--font-weight-bold);
@@ -122,8 +105,6 @@
   --detail-size-m: 14px;
   --detail-size-l: 16px;
   --detail-size-xl: 18px;
-
-  /* ----- Code hierarchy (mono, regular; strong = bold) ----- */
   --code-font-family: var(--font-family-code);
   --code-font-weight: var(--font-weight-regular);
   --code-font-weight-strong: var(--font-weight-bold);
@@ -132,14 +113,8 @@
   --code-size-m: 16px;
   --code-size-l: 18px;
   --code-size-xl: 20px;
-
-  /* =======================================================================
-     COLOR — mode-independent primitives (identical across all three modes)
-     ======================================================================= */
   --color-black: #000;
   --color-white: #fff;
-
-  /* Transparent blacks / whites (alpha ramps) */
   --color-transparent-black-100: rgb(0 0 0 / 9%);
   --color-transparent-black-300: rgb(0 0 0 / 15%);
   --color-transparent-black-400: rgb(0 0 0 / 22%);
@@ -151,20 +126,10 @@
   --color-transparent-white-400: rgb(255 255 255 / 21%);
   --color-transparent-white-600: rgb(255 255 255 / 51%);
   --color-transparent-white-900: rgb(255 255 255 / 94%);
-
-  /* Static brand blues (do not change across themes) */
   --color-static-blue-900: #3b63fb;
   --color-static-blue-1000: #274dea;
-
-  /* Semantic links (map to static blues) */
   --color-link: var(--color-static-blue-900);
   --color-link-hover: var(--color-static-blue-1000);
-
-  /* =======================================================================
-     COLOR — LIGHT theme (default)
-     ======================================================================= */
-
-  /* ----- Neutral (gray) primitives ----- */
   --color-gray-25: #fff;
   --color-gray-50: #f8f8f8;
   --color-gray-75: #f3f3f3;
@@ -178,8 +143,6 @@
   --color-gray-800: #292929;
   --color-gray-900: #131313;
   --color-gray-1000: #000;
-
-  /* ----- Blue (accent / informative) primitives ----- */
   --color-blue-100: #f5f9ff;
   --color-blue-200: #e5f0fe;
   --color-blue-300: #cbe2fe;
@@ -196,8 +159,6 @@
   --color-blue-1400: #0c1f69;
   --color-blue-1500: #0e1843;
   --color-blue-1600: #070b1e;
-
-  /* ----- Brand / status scales (curated steps) ----- */
   --color-green-200: #d7f7e1;
   --color-green-300: #adeec5;
   --color-green-700: #0ba45d;
@@ -228,8 +189,6 @@
   --color-pink-800: #e434a3;
   --color-pink-900: #ce2a92;
   --color-pink-1000: #b01f7b;
-
-  /* ----- Semantic: content / text ----- */
   --color-heading: var(--color-gray-900);
   --color-title: var(--color-gray-900);
   --color-body: var(--color-gray-800);
@@ -243,8 +202,6 @@
   --color-disabled-content: var(--color-gray-400);
   --color-text-static-black: var(--color-black);
   --color-text-static-white: var(--color-white);
-
-  /* ----- Semantic: backgrounds ----- */
   --color-background-base: var(--color-gray-25);
   --color-background-layer-1: var(--color-gray-50);
   --color-background-layer-2: var(--color-gray-25);
@@ -265,8 +222,6 @@
   --color-negative-background: var(--color-red-900);
   --color-negative-subtle-background: var(--color-red-200);
   --color-disabled-background: var(--color-gray-100);
-
-  /* ----- Semantic: visual (accent swatches / status dots) ----- */
   --color-accent-visual: var(--color-blue-800);
   --color-informative-visual: var(--color-blue-800);
   --color-neutral-visual: var(--color-gray-500);
@@ -279,18 +234,11 @@
   --color-orange-visual: var(--color-orange-700);
   --color-magenta-visual: var(--color-magenta-800);
   --color-pink-visual: var(--color-pink-800);
-
-  /* ----- Semantic: border / focus ----- */
   --color-focus-indicator: var(--color-blue-800);
   --color-negative-border: var(--color-red-900);
   --color-disabled-border: var(--color-gray-300);
 }
 
-
-/* =========================================================================
-   COLOR — WIREFRAME theme (blue-tinted greys; brand scales collapse to
-   a single neutral ramp, so status/accent all read as muted blue-grey)
-   ========================================================================= */
 [data-theme="wireframe"] {
   --color-gray-25: #fefeff;
   --color-gray-50: #f6f8fd;
@@ -305,8 +253,6 @@
   --color-gray-800: #192e5d;
   --color-gray-900: #0a1327;
   --color-gray-1000: #000;
-
-  /* Wireframe collapses every brand ramp to one shared neutral scale. */
   --color-blue-100: #f6f8fc;
   --color-blue-200: #ebeff8;
   --color-blue-300: #d8e0f2;
@@ -353,8 +299,6 @@
   --color-pink-800: #5d7fc9;
   --color-pink-900: #4a6fc3;
   --color-pink-1000: #3d5ea5;
-
-  /* Semantic remaps matching the Wireframe mode's primitive picks */
   --color-background-layer-2: var(--color-gray-25);
   --color-background-elevated: var(--color-gray-25);
   --color-background-pasteboard: var(--color-gray-100);

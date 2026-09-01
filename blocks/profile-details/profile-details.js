@@ -1,11 +1,7 @@
 import { createOptimizedPicture, getMetadata } from '../../scripts/aem.js';
-import { fetchIndexRows } from '../../scripts/query-index.js';
+import { fetchIndexRows, displayTitle } from '../../scripts/query-index.js';
 
-/**
- * Builds a single reportee card from an index row.
- * @param {object} row A leaders query-index row (path, title, role, thumbnail).
- * @returns {HTMLElement} The reportee card (anchor).
- */
+/** Builds a single reportee card (anchor) from a leaders query-index row. */
 function buildReporteeCard(row) {
   const card = document.createElement('a');
   card.className = 'profile-details-reportee';
@@ -23,7 +19,7 @@ function buildReporteeCard(row) {
   body.className = 'profile-details-reportee-body';
   const name = document.createElement('span');
   name.className = 'profile-details-reportee-name';
-  name.textContent = row.title || '';
+  name.textContent = displayTitle(row.title);
   const role = document.createElement('span');
   role.className = 'profile-details-reportee-role';
   role.textContent = row.role || '';
@@ -33,12 +29,7 @@ function buildReporteeCard(row) {
   return card;
 }
 
-/**
- * Resolves the reportees for this page: reads the comma-separated `reportees`
- * page metadata (a list of leader page paths), looks each up in the leaders
- * query-index, and renders a card per match (preserving authored order).
- * @returns {Promise<HTMLElement|null>} The reportees section, or null if none.
- */
+/** Resolves reportees from `reportees` page metadata against the leaders query-index. */
 async function buildReportees() {
   const raw = getMetadata('reportees');
   if (!raw) return null;
@@ -71,19 +62,7 @@ async function buildReportees() {
   return section;
 }
 
-/**
- * Decorates the profile-details block.
- *
- * Authored content model:
- *   Row 1: cell 1 = portrait image; cell 2 = name (heading) + role (paragraph).
- *   Row 2+: the "Background" heading and bio paragraphs (authored freely).
- *
- * The Reportees section is NOT authored here — it is resolved from this page's
- * `reportees` metadata (leader page paths) against the leaders query-index,
- * pulling each reportee's name (title), role, and thumbnail photo.
- *
- * @param {Element} block The profile-details block element.
- */
+/** Decorates the profile-details block: portrait + name/role, bio rows, and reportees. */
 export default async function decorate(block) {
   const rows = [...block.children];
 

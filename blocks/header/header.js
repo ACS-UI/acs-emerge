@@ -2,7 +2,7 @@ import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 // media query match that indicates mobile/tablet width
-const isDesktop = window.matchMedia('(min-width: 900px)');
+const isDesktop = window.matchMedia('(min-width: 1024px)');
 
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
@@ -53,11 +53,7 @@ function focusNavSection() {
   document.activeElement.addEventListener('keydown', openOnKeydown);
 }
 
-/**
- * Toggles all nav sections
- * @param {Element} sections The container element
- * @param {Boolean} expanded Whether the element should be expanded or collapsed
- */
+/** Toggles all nav sections open/closed. */
 function toggleAllNavSections(sections, expanded = false) {
   if (!sections) return;
   sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((section) => {
@@ -65,12 +61,7 @@ function toggleAllNavSections(sections, expanded = false) {
   });
 }
 
-/**
- * Toggles the entire nav
- * @param {Element} nav The container element
- * @param {Element} navSections The nav sections within the container element
- * @param {*} forceExpanded Optional param to force nav expand behavior when not null
- */
+/** Toggles the entire nav open/closed. */
 function toggleMenu(nav, navSections, forceExpanded = null) {
   const expanded = forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
   const button = nav.querySelector('.nav-hamburger button');
@@ -108,10 +99,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   }
 }
 
-/**
- * loads and decorates the header, mainly the nav
- * @param {Element} block The header block element
- */
+/** Loads and decorates the header, mainly the nav. */
 export default async function decorate(block) {
   // load nav as fragment
   const navMeta = getMetadata('nav');
@@ -137,10 +125,7 @@ export default async function decorate(block) {
     brandLink.closest('.button-container').className = '';
   }
 
-  // When the brand is authored as a logo image followed by wordmark text, the
-  // pipeline leaves the text as a sibling of the (image-only) link. Fold the
-  // whole brand paragraph's contents into the single link so the logo + text
-  // are one clickable home link.
+  // Fold logo + wordmark into the single brand link so it's one clickable target.
   const brandAnchor = navBrand.querySelector('a[href]');
   if (brandAnchor) {
     const brandParagraph = brandAnchor.closest('p') || navBrand;
@@ -152,8 +137,7 @@ export default async function decorate(block) {
       siblings.forEach((node) => brandAnchor.append(node));
     }
 
-    // Wrap loose text nodes (the "ACS GDC HUB" wordmark) in a targetable span
-    // so the Figma wordmark type styles can be applied to just the text.
+    // Wrap the loose wordmark text node in a span so it can be styled independently.
     [...brandAnchor.childNodes].forEach((node) => {
       if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
         const span = document.createElement('span');

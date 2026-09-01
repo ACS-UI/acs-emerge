@@ -1,8 +1,5 @@
 /**
- * loads and decorates the challenge block
- *
- * Authored structure: one row per item; the first cell holds the item number
- * (e.g. "01") and the second cell holds a label followed by a description.
+ * Loads and decorates the challenge block (one row per item: number cell, label + description).
  * @param {Element} block The block element
  */
 export default function decorate(block) {

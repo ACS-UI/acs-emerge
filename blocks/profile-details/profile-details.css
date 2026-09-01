@@ -1,29 +1,20 @@
-/*
- * profile-details block: leader detail layout (portrait + name/role/bio) plus
- * a Reportees grid resolved from the leaders query-index. Mobile-first.
- */
-
 .profile-details {
   --profile-details-radius: 16px;
   --profile-details-reportee-radius: 12px;
-  --profile-details-layout-gap: 32px;
-  --profile-details-reportees-margin-top: 32px;
-  --profile-details-reportee-padding: 12px;
-  --profile-details-desktop-layout-gap: 56px;
+  --profile-details-layout-gap: var(--spacing-400);
+  --profile-details-reportees-margin-top: var(--spacing-400);
+  --profile-details-reportee-padding: var(--spacing-150);
+  --profile-details-desktop-layout-gap: var(--spacing-700);
 }
 
-/* page title above the block — a standalone default-content heading, not
-   part of the .profile-details block itself, hence the ID selector */
 #meet-our-leader {
   margin: 0;
-  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--heading-size-xxxxl);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-1500);
   color: var(--color-text-static-black);
 }
 
-/* ----- layout: image (left) + content (right) ----- */
 .profile-details .profile-details-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -31,9 +22,10 @@
   align-items: start;
 }
 
-/* ----- portrait: no fixed aspect-ratio, so the photo is never cropped ----- */
 .profile-details .profile-details-image {
   overflow: hidden;
+  max-height: 600px;
+  aspect-ratio: 3 / 4;
   border-radius: var(--profile-details-radius);
   background: var(--color-gray-100);
 }
@@ -45,14 +37,12 @@
   height: auto;
 }
 
-/* ----- identity + background ----- */
 .profile-details .profile-details-content {
   min-width: 0;
 }
 
 .profile-details .profile-details-name {
   margin: 0;
-  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--heading-size-xl);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-900);
@@ -60,8 +50,7 @@
 }
 
 .profile-details .profile-details-role {
-  margin: 8px 0 0;
-  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  margin: var(--spacing-100) 0 0;
   font-size: var(--title-size-xl);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-400);
@@ -70,8 +59,7 @@
 }
 
 .profile-details .profile-details-section-heading {
-  margin: 24px 0 0;
-  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  margin: var(--spacing-300) 0 0;
   font-size: var(--heading-size-l);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-700);
@@ -79,22 +67,19 @@
 }
 
 .profile-details .profile-details-text {
-  margin: 32px 0 0;
-  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  margin: var(--spacing-400) 0 0;
   font-size: var(--body-size-xxxl);
   font-weight: var(--font-weight-regular);
   line-height: 1.5;
   color: var(--color-black);
 }
 
-/* ----- reportees (from query-index) ----- */
 .profile-details .profile-details-reportees {
   margin-top: var(--profile-details-reportees-margin-top);
 }
 
 .profile-details .profile-details-reportees-heading {
-  margin: 0 0 16px;
-  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+  margin: 0 0 var(--spacing-200);
   font-size: var(--heading-size-l);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-700);
@@ -104,14 +89,13 @@
 .profile-details .profile-details-reportees-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 16px;
+  gap: var(--spacing-200);
 }
 
-/* one reportee card */
 .profile-details .profile-details-reportee {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--spacing-150);
   padding: var(--profile-details-reportee-padding);
   border: 1px solid var(--color-gray-200);
   border-radius: var(--profile-details-reportee-radius);
@@ -154,12 +138,11 @@
 .profile-details .profile-details-reportee-body {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--spacing-25);
   min-width: 0;
 }
 
 .profile-details .profile-details-reportee-name {
-  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--title-size-xl);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-400);
@@ -167,15 +150,13 @@
 }
 
 .profile-details .profile-details-reportee-role {
-  font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
   font-size: var(--body-size-m);
   font-weight: var(--font-weight-regular);
   line-height: 1.5;
-  color: #808080;
+  color: var(--color-gray-600);
 }
 
-/* ===================== responsive ===================== */
-@media (width >= 900px) {
+@media (width >= 768px) {
   .profile-details .profile-details-reportees-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

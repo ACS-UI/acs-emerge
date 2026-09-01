@@ -74,17 +74,26 @@ function buildWidgetAutoBlocks(main) {
 }
 
 /**
- * Prepends a "Back" button on detail pages (leaders and success stories).
+ * Prepends a "Back" button on detail pages (leaders, success stories, events).
  * The button uses browser history so it returns the user to wherever they
  * came from. It is skipped on listing/folder pages and hidden when there is
  * no in-site history to go back to (e.g. a direct landing from search).
+ * Called only after lazy-styles.css (which styles it) has loaded — see
+ * loadLazy — so it never flashes on screen unstyled.
+ *
+ * Prepended inside the first section's own content wrapper (not as a
+ * sibling of the sections) so it's part of that section's box: it inherits
+ * whatever background the first section has (e.g. bg-muted/bg-gradient-a)
+ * instead of sitting in a gap above it, and shares the section's standard
+ * inline padding/max-width instead of needing its own.
  * @param {Element} main The container element
  */
 function buildBackButton(main) {
   // skip detached fragment mains (header/footer/fragments); only the page main
   if (main !== document.querySelector('main')) return;
-  // only individual detail pages: `/leaders/<slug>` and `/success-stories/<slug>`
-  const isDetailPage = /^\/(leaders|success-stories)\/[^/]+/.test(window.location.pathname);
+  // only individual detail pages: `/leaders/<slug>`, `/success-stories/<slug>`,
+  // and `/events/<slug>`
+  const isDetailPage = /^\/(leaders|success-stories|events)\/[^/]+/.test(window.location.pathname);
   if (!isDetailPage) return;
   if (window.history.length <= 1) return;
 
@@ -94,7 +103,10 @@ function buildBackButton(main) {
   back.setAttribute('aria-label', 'Go back');
   back.textContent = 'Back';
   back.addEventListener('click', () => window.history.back());
-  main.prepend(back);
+
+  const firstSection = main.querySelector(':scope > .section');
+  const target = firstSection?.querySelector(':scope > div') || main;
+  target.prepend(back);
 }
 
 /**
@@ -121,7 +133,6 @@ function buildAutoBlocks(main) {
       });
     }
     buildWidgetAutoBlocks(main);
-    buildBackButton(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
@@ -183,6 +194,35 @@ function decorateSectionBackgroundImages(main) {
 }
 
 /**
+ * Fades each section's content in the first time the section scrolls into
+ * view (see `.section-fade`/`.section-visible` in lazy-styles.css). The
+ * section element itself (its box/background) is never touched — only its
+ * direct content wrappers (the divs added by decorateSections) animate — so
+ * e.g. a coloured section background is never hidden behind the fade. The
+ * first section is already on screen at load, so it's skipped to avoid
+ * delaying LCP/adding layout shift; every section after that reveals once,
+ * the first time it intersects, and is never re-hidden on scroll-out.
+ * @param {Element} main The container element
+ */
+function observeSectionReveal(main) {
+  const sections = [...main.querySelectorAll(':scope > .section')].slice(1);
+  if (!sections.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      [...entry.target.children].forEach((content) => content.classList.add('section-visible'));
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.15 });
+
+  sections.forEach((section) => {
+    [...section.children].forEach((content) => content.classList.add('section-fade'));
+    observer.observe(section);
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -230,6 +270,7 @@ async function loadLazy(doc) {
 
   const main = doc.querySelector('main');
   await loadSections(main);
+  observeSectionReveal(main);
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
@@ -237,7 +278,10 @@ async function loadLazy(doc) {
 
   loadFooter(doc.querySelector('body > footer'));
 
-  loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
+  // Inserted only once its styling has loaded, so it can't flash on screen
+  // unstyled (see buildBackButton).
+  await loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
+  buildBackButton(main);
   loadFonts();
 }
 

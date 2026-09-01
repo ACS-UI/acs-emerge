@@ -86,3 +86,7 @@ const LISTING_PATHS = ['/leaders', '/clients', '/success-stories'];
 export function excludeListingPages(rows) {
   return rows.filter((row) => !LISTING_PATHS.includes((row.path || '').replace(/\/$/, '')));
 }
+
+export function displayTitle(title) {
+  return (title || '').split('·')[0].trim();
+}

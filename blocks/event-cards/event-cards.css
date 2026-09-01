@@ -1,0 +1,347 @@
+.event-cards {
+  --ec-font: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
+
+  /* colors */
+  --ec-card-bg: var(--color-white);
+  --ec-meta-color: var(--color-gray-700);
+  --ec-badge-bg: var(--color-white);
+  --ec-badge-weekday-color: #808080; /* Figma colorTheme/silver-800, not in our gray scale */
+  --ec-card-shadow:
+    0 0 0 1px rgb(0 0 0 / 4%),
+    0 1px 2px rgb(0 0 0 / 6%),
+    0 4px 6px rgb(0 0 0 / 4%),
+    0 20px 20px -24px rgb(0 0 0 / 6%);
+
+  /* layout */
+  --ec-row-gap: 64px;
+  --ec-column-gap: 32px;
+  --ec-card-radius: 24px;
+  --ec-image-ratio: 3 / 2;
+
+  font-family: var(--ec-font);
+}
+
+/* intro (eyebrow + headline) on the list page */
+.event-cards .event-cards-intro {
+  margin-bottom: var(--spacing-750);
+}
+
+/* the actual eyebrow+heading wrapper is an unclassed inner <div>
+   (.event-cards-intro > div > p, h2) — the gap has to live here, since
+   .event-cards-intro itself only has this one direct child */
+.event-cards .event-cards-intro > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-100);
+}
+
+.event-cards .event-cards-intro p:first-child {
+  margin: 0;
+  padding: var(--spacing-150) 0;
+  color: var(--ec-meta-color);
+  font-size: var(--font-size-400);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-400);
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.event-cards .event-cards-intro h2 {
+  margin: 0;
+  max-width: 800px;
+  font-family: var(--ec-font);
+  color: var(--color-text-static-black);
+  font-size: var(--heading-size-xxxxl);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-1500);
+  letter-spacing: 0;
+}
+
+.event-cards .event-cards-view-all {
+  margin-top: var(--spacing-250);
+  border: 1px solid transparent;
+  background: var(--color-gray-900);
+  color: var(--color-white);
+  font-family: var(--ec-font);
+  font-size: var(--detail-size-m);
+  font-weight: var(--font-weight-medium);
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.event-cards .event-cards-view-all:hover {
+  border-color: var(--color-red-1000);
+  background: var(--color-red-1000);
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   Grid
+   ========================================================================== */
+.event-cards .event-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--ec-row-gap) var(--ec-column-gap);
+  padding-top: var(--spacing-400);
+}
+
+/* the card link wrapper shouldn't look like a link */
+.event-cards .event-cards-link,
+.event-cards .event-cards-link:any-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   Card
+   ========================================================================== */
+.event-cards .event-cards-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-200);
+  height: 100%;
+  padding: 0 0 var(--spacing-200);
+  background: var(--ec-card-bg);
+  border-radius: var(--ec-card-radius);
+  box-shadow: var(--ec-card-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.event-cards .event-cards-link:hover .event-cards-card,
+.event-cards .event-cards-link:focus-visible .event-cards-card {
+  transform: translateY(-4px);
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 4%),
+    0 18px 32px -12px rgb(0 0 0 / 20%);
+}
+
+/* image with the date badge overlaid top-left; top corners match the
+   card's own radius since the card has no padding around it */
+.event-cards .event-cards-image {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: var(--ec-image-ratio);
+  border-radius: var(--ec-card-radius) var(--ec-card-radius) 0 0;
+  line-height: 0;
+}
+
+.event-cards .event-cards-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* date badge: white rounded square, month / big day / weekday */
+.event-cards .event-cards-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-100) 26.5px;
+  border: 0.5px solid rgb(11 11 15 / 18%);
+  border-radius: 20px;
+  background: var(--ec-badge-bg);
+  box-shadow: 0 6px 20px rgb(13 13 20 / 8%);
+  line-height: 1;
+  text-align: center;
+}
+
+.event-cards .event-cards-badge-month {
+  font-size: 12px;
+  font-weight: var(--font-weight-bold);
+  line-height: 16px;
+  letter-spacing: 0;
+  color: var(--color-red-visual);
+}
+
+.event-cards .event-cards-badge-day {
+  font-size: 36px;
+  font-weight: var(--font-weight-bold);
+  line-height: 42px;
+  letter-spacing: 0;
+  color: var(--color-black);
+}
+
+.event-cards .event-cards-badge-weekday {
+  font-size: 12px;
+  font-weight: var(--font-weight-bold);
+  line-height: 16px;
+  letter-spacing: 0;
+  color: var(--ec-badge-weekday-color);
+}
+
+/* body — position:relative anchors the hover-only arrow icon (::after) */
+.event-cards .event-cards-body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-50);
+  margin: 0 var(--spacing-200);
+}
+
+/* hover-only trailing arrow — same mask technique as success.css's
+   view-all arrow; position/reveal approximated, no hover variant was
+   available in Figma to confirm exact values */
+.event-cards .event-cards-body::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 17px;
+  height: 17px;
+  background: var(--color-red-1000);
+  opacity: 0;
+  transform: rotate(-45deg);
+  mask: url('../../icons/arrow-right-solid.svg') center / contain no-repeat;
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask: url('../../icons/arrow-right-solid.svg') center / contain no-repeat;
+  transition: opacity 0.2s ease;
+}
+
+.event-cards .event-cards-link:hover .event-cards-body::after,
+.event-cards .event-cards-link:focus-visible .event-cards-body::after {
+  opacity: 1;
+}
+
+.event-cards .event-cards-title {
+  margin: 0;
+  color: var(--color-gray-800);
+  font-family: var(--ec-font);
+  font-size: var(--title-size-xxxl);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-600);
+  letter-spacing: 0;
+}
+
+.event-cards .event-cards-meta {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-60);
+  color: var(--color-black);
+  font-size: var(--body-size-s);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+.event-cards .event-cards-meta-sep {
+  color: var(--color-black);
+}
+
+/* hover: title turns red + bigger, meta stays black + bigger (sizes
+   approximated — no exact hover-state numbers available) */
+.event-cards .event-cards-link:hover .event-cards-title,
+.event-cards .event-cards-link:focus-visible .event-cards-title {
+  color: var(--color-red-1000);
+  font-size: calc(var(--title-size-xxxl) + 2px);
+}
+
+.event-cards .event-cards-link:hover .event-cards-meta,
+.event-cards .event-cards-link:focus-visible .event-cards-meta {
+  font-size: calc(var(--body-size-s) + 1px);
+}
+
+.event-cards .event-cards-link:hover .event-cards-badge-day,
+.event-cards .event-cards-link:focus-visible .event-cards-badge-day {
+  font-weight: var(--font-weight-regular);
+}
+
+.event-cards.carousel .carousel p:not(.button-container) {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--title-size-xl);
+  line-height: var(--line-height-400);
+}
+
+.event-cards.carousel .carousel :is(h1,h2,h3,h4,h5,h6) {
+  font-weight: var(--font-weight-regular);
+  font-size: var(--heading-size-xxl);
+  line-height: var(--line-height-1100);
+}
+
+/* ==========================================================================
+   Desktop — three across
+   ========================================================================== */
+@media (width >= 768px) {
+  .event-cards .event-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  .event-cards .event-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ==========================================================================
+   Carousel variant — feed cards into the shared carousel utility. The vars
+   must sit on `.carousel` itself, since carousel.css's own base
+   (--carousel-visible: 1) otherwise wins by specificity. Without this the
+   carousel shows a single full-width card.
+   ========================================================================== */
+.event-cards.carousel .carousel {
+  --carousel-visible: 1;
+  --carousel-gap: 24px;
+}
+
+@media (width >= 768px) {
+  .event-cards.carousel .carousel {
+    --carousel-visible: 2;
+  }
+}
+
+@media (width >= 900px) {
+  .event-cards.carousel .carousel {
+    --carousel-visible: 3;
+    --carousel-gap: 32px;
+  }
+}
+
+/* "View All" pill — dark by default, fills red with a trailing arrow reveal
+   on hover, matching the pattern already used in profile.css/success.css */
+.event-cards.carousel .carousel-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  line-height: 20px;
+  margin-top: var(--spacing-250);
+  border: 1px solid transparent;
+  border-radius: 2.4em;
+  padding: 0.6em 1.5em;
+  background: var(--color-gray-900);
+  color: var(--color-white);
+  font-family: var(--ec-font);
+  font-size: var(--detail-size-m);
+  font-weight: var(--font-weight-medium);
+  transition: background-color 0.2s ease, color 0.2s ease, gap 0.2s ease;
+}
+
+.event-cards.carousel .carousel-view-all::after {
+  content: "";
+  width: 0;
+  height: 1.1em;
+  background: currentcolor;
+  opacity: 0;
+  mask: url('../../icons/arrow-right-solid.svg') center / contain no-repeat;
+  transition: width 0.2s ease, opacity 0.2s ease;
+}
+
+.event-cards.carousel .carousel-view-all:hover {
+  gap: 0.6em;
+  background: var(--color-red-1000);
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.event-cards.carousel .carousel-view-all:hover::after {
+  width: 1.1em;
+  opacity: 1;
+}

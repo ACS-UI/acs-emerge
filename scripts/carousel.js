@@ -3,7 +3,8 @@
  *
  * Wraps a set of child elements in a horizontally-scrolling, snap-aligned
  * track with an optional intro (title/description) and top-right previous/next
- * navigation, plus an optional "view all" action below the track.
+ * navigation, plus an optional "view all" action below the track. On mobile,
+ * dot indicators (see styles/carousel.css) replace the prev/next nav.
  *
  * The number of visible items and the gap are controlled entirely from CSS
  * (see styles/carousel.css) via the `--carousel-visible` / `--carousel-gap`
@@ -21,14 +22,16 @@
  * @typedef {Object} CarouselOptions
  * @property {Node} [heading]  Optional element rendered as the intro (title +
  *   description) at the top-left/centre of the carousel.
- * @property {ViewAllConfig|false} [viewAll=false]  Optional "view all" button
- *   rendered below the track.
+ * @property {ViewAllConfig|false} [viewAll=false]  Optional "view all" button.
  * @property {number} [step=1]  Number of items advanced per navigation click.
  * @property {'left'|'center'|'right'} [align='left']  Text alignment for the
  *   intro (title & description) at the top.
  * @property {string} [label='carousel']  Accessible label for the region.
  * @property {'top'|'bottom'} [navPosition='top']  Where the prev/next nav is
  *   rendered: in the top bar (default) or below the track (bottom-left).
+ * @property {'top'|'bottom'} [viewAllPosition='bottom']  Where the "view all"
+ *   button is rendered: under the top bar (above the track) or in a footer
+ *   below the track (default).
  */
 
 let carouselSeq = 0;
@@ -47,19 +50,52 @@ function slideDelta(track) {
 
 /**
  * Enables/disables nav buttons and hides the whole nav when nothing overflows.
+ * Also updates the mobile dot indicators' active state and visibility.
  * @param {HTMLElement} track The scrolling track element.
  * @param {HTMLButtonElement} prev Previous button.
  * @param {HTMLButtonElement} next Next button.
  * @param {HTMLElement} nav The nav container.
+ * @param {HTMLElement} dots The dot indicators container.
+ * @param {HTMLButtonElement[]} dotButtons One button per slide.
  */
-function updateNav(track, prev, next, nav) {
+function updateNav(track, prev, next, nav, dots, dotButtons) {
   const maxScroll = track.scrollWidth - track.clientWidth;
   const overflows = maxScroll > 1;
   nav.hidden = !overflows;
+  dots.hidden = !overflows;
   const atStart = track.scrollLeft <= 1;
   const atEnd = track.scrollLeft >= maxScroll - 1;
   prev.disabled = atStart;
   next.disabled = atEnd;
+
+  const delta = slideDelta(track);
+  const activeIndex = delta ? Math.round(track.scrollLeft / delta) : 0;
+  dotButtons.forEach((dot, i) => dot.setAttribute('aria-selected', String(i === activeIndex)));
+}
+
+/**
+ * Builds the mobile-only dot indicators, one per slide.
+ * @param {number} count Number of slides.
+ * @returns {{ dots: HTMLElement, dotButtons: HTMLButtonElement[] }}
+ */
+function createDots(count) {
+  const dots = document.createElement('div');
+  dots.className = 'carousel-dots';
+  dots.setAttribute('role', 'tablist');
+  dots.setAttribute('aria-label', 'Slides');
+
+  const dotButtons = Array.from({ length: count }, (_, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'carousel-dot';
+    dot.setAttribute('role', 'tab');
+    dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+    dot.setAttribute('aria-selected', 'false');
+    dots.append(dot);
+    return dot;
+  });
+
+  return { dots, dotButtons };
 }
 
 /**
@@ -91,6 +127,7 @@ export default function createCarousel(children, options = {}) {
     align = 'left',
     label = 'carousel',
     navPosition = 'top',
+    viewAllPosition = 'bottom',
   } = options;
 
   carouselSeq += 1;
@@ -111,10 +148,20 @@ export default function createCarousel(children, options = {}) {
   const next = createArrow('next');
   nav.append(prev, next);
 
+  // --- optional "view all" link (built once, placed per viewAllPosition) -
+  let viewAllLink;
+  if (viewAll && viewAll.href) {
+    viewAllLink = document.createElement('a');
+    viewAllLink.className = 'button carousel-view-all';
+    viewAllLink.href = viewAll.href;
+    viewAllLink.textContent = viewAll.text || 'View All';
+  }
+  const viewAllOnTop = viewAllLink && viewAllPosition === 'top';
+
   // --- top: intro (title/desc) + (optionally) navigation ----------------
-  // Skip the top bar entirely when there is nothing to put in it (no heading
-  // and the nav lives at the bottom).
-  if (heading || navPosition === 'top') {
+  // Skip the top bar entirely when there is nothing to put in it (no heading,
+  // no top-positioned "view all", and the nav lives at the bottom).
+  if (heading || navPosition === 'top' || viewAllOnTop) {
     const top = document.createElement('div');
     top.className = 'carousel-top';
     // `align` drives the top-bar layout: a centered intro floats the nav to
@@ -125,6 +172,7 @@ export default function createCarousel(children, options = {}) {
     intro.className = 'carousel-intro';
     intro.dataset.align = align;
     if (heading) intro.append(heading);
+    if (viewAllOnTop) intro.append(viewAllLink);
     top.append(intro);
 
     if (navPosition === 'top') top.append(nav);
@@ -151,20 +199,26 @@ export default function createCarousel(children, options = {}) {
   prev.setAttribute('aria-controls', track.id);
   next.setAttribute('aria-controls', track.id);
 
+  // --- mobile-only dot indicators (replace the prev/next nav on mobile) --
+  const { dots, dotButtons } = createDots(items.length);
+  dotButtons.forEach((dot, i) => {
+    dot.setAttribute('aria-controls', track.id);
+    dot.addEventListener('click', () => {
+      track.scrollTo({ left: slideDelta(track) * i, behavior: 'smooth' });
+    });
+  });
+  carousel.append(dots);
+
   // --- bottom navigation (below the track) ------------------------------
   if (navPosition === 'bottom') {
     carousel.append(nav);
   }
 
-  // --- optional "view all" ----------------------------------------------
-  if (viewAll && viewAll.href) {
+  // --- "view all" footer (only when not already placed in the top bar) --
+  if (viewAllLink && !viewAllOnTop) {
     const footer = document.createElement('div');
     footer.className = 'carousel-footer';
-    const link = document.createElement('a');
-    link.className = 'button carousel-view-all';
-    link.href = viewAll.href;
-    link.textContent = viewAll.text || 'View All';
-    footer.append(link);
+    footer.append(viewAllLink);
     carousel.append(footer);
   }
 
@@ -175,7 +229,7 @@ export default function createCarousel(children, options = {}) {
   prev.addEventListener('click', () => scrollByItems(-1));
   next.addEventListener('click', () => scrollByItems(1));
 
-  const refresh = () => updateNav(track, prev, next, nav);
+  const refresh = () => updateNav(track, prev, next, nav, dots, dotButtons);
   track.addEventListener('scroll', refresh, { passive: true });
   if (typeof ResizeObserver !== 'undefined') {
     new ResizeObserver(refresh).observe(track);

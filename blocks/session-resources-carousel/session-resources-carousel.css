@@ -1,0 +1,140 @@
+.session-resources-carousel {
+  --session-resources-carousel-eyebrow-color: var(--color-gray-700);
+  --session-resources-carousel-heading-color: var(--color-gray-1000);
+  --session-resources-carousel-card-bg: var(--color-white);
+  --session-resources-carousel-title-color: var(--color-gray-1000);
+  --session-resources-carousel-desc-color: var(--color-gray-600);
+  --session-resources-carousel-eyebrow-size: var(--body-size-xl);
+  --session-resources-carousel-eyebrow-line: var(--line-height-600);
+  --session-resources-carousel-heading-size: var(--heading-size-xxl);
+  --session-resources-carousel-heading-line: var(--line-height-1100);
+  --session-resources-carousel-title-size: var(--body-size-l);
+  --session-resources-carousel-desc-size: var(--detail-size-m);
+  --session-resources-carousel-accent: var(--color-red-900);
+  --session-resources-carousel-accent-text: var(--color-white);
+  --session-resources-carousel-gap: 24px;
+  --session-resources-carousel-card-pad: 24px;
+  --session-resources-carousel-card-radius: 24px;
+}
+
+
+.session-resources-carousel .carousel {
+  --carousel-visible: 1;
+  --carousel-gap: var(--session-resources-carousel-gap);
+}
+
+.session-resources-carousel .session-resources-carousel-intro {
+  margin-bottom: var(--spacing-350);
+}
+
+.session-resources-carousel .session-resources-carousel-eyebrow {
+  margin: 0 0 var(--spacing-100);
+  color: var(--session-resources-carousel-eyebrow-color);
+  font-size: var(--session-resources-carousel-eyebrow-size);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--session-resources-carousel-eyebrow-line);
+}
+
+.session-resources-carousel .session-resources-carousel-intro :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+  color: var(--session-resources-carousel-heading-color);
+  font-size: var(--session-resources-carousel-heading-size);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--session-resources-carousel-heading-line);
+}
+
+.session-resources-carousel .session-resources-carousel-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-150);
+  height: 100%;
+  box-sizing: border-box;
+  padding: var(--session-resources-carousel-card-pad);
+  border-radius: var(--session-resources-carousel-card-radius);
+  background: var(--session-resources-carousel-card-bg);
+  box-shadow: 0 10px 30px rgb(0 0 0 / 6%);
+}
+
+.session-resources-carousel .session-resources-carousel-title {
+  margin: 0;
+  color: var(--session-resources-carousel-title-color);
+  font-size: var(--session-resources-carousel-title-size);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.25;
+}
+
+.session-resources-carousel .session-resources-carousel-desc {
+  margin: 0 0 var(--spacing-200);
+  color: var(--session-resources-carousel-desc-color);
+  font-size: var(--session-resources-carousel-desc-size);
+  line-height: 1.5;
+}
+
+.session-resources-carousel .session-resources-carousel-open.button {
+  margin-top: var(--spacing-60);
+  border: 1px solid var(--color-gray-1000);
+  border-radius: 2.4em;
+  background: transparent;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--body-size-m);
+  line-height: var(--line-height-200);
+  color: var(--color-gray-1000);
+  padding: var(--spacing-100) var(--spacing-300);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.session-resources-carousel .session-resources-carousel-open.button::after {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-left: var(--spacing-60);
+  background: currentcolor;
+  mask: url('../../icons/arrow-up.svg') center / contain no-repeat;
+}
+
+.session-resources-carousel .session-resources-carousel-open.button:hover,
+.session-resources-carousel .session-resources-carousel-open.button:focus-visible {
+  border-color: var(--session-resources-carousel-accent);
+  background: var(--session-resources-carousel-accent);
+  color: var(--session-resources-carousel-accent-text);
+  text-decoration: none;
+}
+
+.session-resources-carousel .session-resources-carousel-card:hover .session-resources-carousel-open.button,
+.session-resources-carousel .session-resources-carousel-card:focus-within .session-resources-carousel-open.button {
+  border-color: var(--session-resources-carousel-accent);
+  background: var(--session-resources-carousel-accent);
+  color: var(--session-resources-carousel-accent-text);
+  text-decoration: none;
+}
+
+@media (width >= 768px) {
+  .session-resources-carousel .carousel {
+    --carousel-visible: 2;
+  }
+}
+
+@media (width >= 1024px) {
+  .session-resources-carousel .carousel {
+    --carousel-visible: 3;
+    --session-resources-carousel-card-pad: 20px 24px;
+
+    gap: var(--spacing-500);
+  }
+
+  .session-resources-carousel .session-resources-carousel-title {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--body-size-xl);
+    line-height: var(--line-height-400);
+  }
+
+  .session-resources-carousel .session-resources-carousel-desc {
+    font-weight: var(--font-weight-regular);
+    font-size: var(--body-size-m);
+    line-height: 1.5;
+    max-width: 320px;
+    color: var(--color-gray-600);
+  }
+}

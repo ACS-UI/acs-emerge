@@ -1,0 +1,128 @@
+.pillars {
+  --pillars-eyebrow-color: var(--color-gray-600);
+  --pillars-heading-color: var(--color-gray-1000);
+  --pillars-label-color: var(--color-gray-1000);
+  --pillars-text-color: var(--color-gray-800);
+  --pillars-rule-color: var(--color-gray-300);
+  --pillars-eyebrow-size: var(--body-size-l);
+  --pillars-heading-size: var(--heading-size-l);
+  --pillars-label-size: var(--detail-size-l);
+  --pillars-text-size: var(--body-size-l);
+  --pillars-col-gap: 36px 10px 0 0;
+  --pillars-row-gap: 28px;
+  --pillars-rule-space: 28px;
+}
+
+.pillars .pillars-intro {
+  padding-bottom: var(--pillars-rule-space);
+  border-bottom: 1px solid var(--pillars-rule-color);
+}
+
+.pillars .pillars-eyebrow {
+  margin: 0 0 var(--spacing-60);
+  color: var(--pillars-eyebrow-color);
+  font-size: var(--pillars-eyebrow-size);
+  font-weight: var(--font-weight-regular);
+}
+
+.pillars .pillars-intro :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+  color: var(--pillars-heading-color);
+  font-size: var(--pillars-heading-size);
+  font-weight: var(--font-weight-extra-bold);
+  line-height: 1.15;
+}
+
+.pillars .pillars-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--pillars-row-gap);
+  margin-top: var(--spacing-300);
+}
+
+.pillars .pillars-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-150);
+}
+
+.pillars .pillars-label {
+  margin: 0;
+  color: var(--pillars-label-color);
+  font-size: var(--pillars-label-size);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.pillars .pillars-item p:not(.pillars-label) {
+  margin: 0;
+  color: var(--pillars-text-color);
+  font-size: var(--pillars-text-size);
+  line-height: 1.5;
+}
+
+@media (width >= 768px) {
+  .pillars .pillars-intro {
+    --pillars-rule-space: 24px;
+  }
+
+  
+  .pillars .pillars-label {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000;
+  }
+
+  .pillars .pillars-item p:not(.pillars-label) {
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 150%;
+    color: #000;
+  }
+
+  .pillars .pillars-list {
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 0;
+    margin: 0;
+  }
+
+  .pillars .pillars-item {
+    padding: var(--pillars-col-gap);
+    border-left: 1px solid var(--pillars-rule-color);
+  }
+
+  .pillars .pillars-item:not(:first-child) {
+    padding-left: var(--pillars-rule-space);
+  }
+
+  .pillars .pillars-item:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .pillars .pillars-item:last-child {
+    padding-right: 0;
+  }
+
+  .pillars .pillars-eyebrow {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000;
+
+  }
+
+
+  .pillars .pillars-intro :is(h1, h2, h3, h4, h5, h6) {
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 42px;
+    color: #000;
+  }
+}

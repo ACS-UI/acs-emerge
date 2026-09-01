@@ -1,28 +1,16 @@
-/* ==========================================================================
-   cards-working — block-scoped design tokens (aligned to Figma layer spec)
-   ========================================================================== */
 .cards-working-container,
 .cards-working {
-  /* Figma uses Adobe Clean Spectrum VF, not bundled here — request it first, fall back to project fonts */
-  --cw-font-family: 'Adobe Clean Spectrum VF', 'Adobe Clean', adobe-clean, var(--body-font-family);
-
-  /* section */
   --cw-section-bg: var(--color-gray-75);
   --cw-section-pad-y: 60px;
   --cw-section-gap: 40px;
   --cw-header-gap: 8px;
   --cw-cards-gap: 24px;
   --cw-cards-max-width: 1216px;
-
-  /* eyebrow ("WORKING THE EMERGE WAY") */
   --cw-eyebrow-color: var(--color-gray-700);
   --cw-eyebrow-size: var(--font-size-400);
   --cw-eyebrow-line: var(--line-height-400);
   --cw-eyebrow-weight: var(--font-weight-bold);
   --cw-eyebrow-spacing: 0.04em;
-
-  /* headline */
-  --cw-heading-font: var(--cw-font-family);
   --cw-heading-color: var(--color-gray-1000);
   --cw-heading-size: var(--heading-size-xxl);
   --cw-heading-line: var(--line-height-1100);
@@ -30,28 +18,21 @@
   --cw-heading-max: 800px;
   --cw-heading-size-mobile: var(--font-size-800);
   --cw-heading-line-mobile: 38px;
-
-  /* card shell */
-  --cw-card-width: 376px;
+  --cw-card-width: 600px;
   --cw-card-height: 549px;
-  --cw-card-ratio: 376 / 549;
+  --cw-card-ratio: 3 /4;
   --cw-card-bg: var(--color-white);
   --cw-card-radius: 24px;
   --cw-card-inner-radius: 20px;
   --cw-card-frame: 4px;
   --cw-card-tilt: 12deg;
   --cw-card-overlap: 44px;
-
-  /* a 384x557 card rotated 12deg overhangs its layout box by ~34px top/bottom;
-     reserve that so the visible gap above/below the cards matches the design */
   --cw-card-rotation-overhang: 34px;
   --cw-card-shadow:
     0 0 0 1px rgb(0 0 0 / 4%),
     0 1px 2px rgb(0 0 0 / 6%),
     0 4px 6px rgb(0 0 0 / 4%),
     0 40px 40px -24px rgb(0 0 0 / 6%);
-
-  /* card content */
   --cw-card-title-color: var(--color-white);
   --cw-card-title-size: var(--heading-size-l);
   --cw-card-title-line: var(--line-height-700);
@@ -60,30 +41,16 @@
   --cw-card-text-size: var(--body-size-l);
   --cw-card-text-line: 1.5;
   --cw-card-content-gap: 8px;
-
-  /* Figma's description text is 284px wide inside a 376px card (minus the
-     4px frame inset each side = 368px), so inline padding is 42px, not 30 */
   --cw-card-pad-block: 30px;
   --cw-card-pad-inline: 42px;
-
-  /* blurred backdrop panel behind the card text (Figma "Rectangle 2").
-     Figma's background-blur is Progressive (0 at the panel's top, ramping
-     to 20 at the bottom). CSS backdrop-filter can't vary blur radius within
-     one layer, so this is approximated with 3 stacked layers: a base tint
-     with no backdrop-blur, then two blur-only layers (mid/strong) that each
-     fade in via a mask further down the panel, so the total blur strength
-     ramps up smoothly toward the bottom. */
   --cw-card-backdrop-bg: rgb(0 0 0 / 10%);
   --cw-card-backdrop-self-blur: 30px;
   --cw-card-backdrop-blur-mid: 10px;
   --cw-card-backdrop-blur-strong: 20px;
-  --cw-card-backdrop-mid-mask: linear-gradient(to bottom, transparent 20%, #000 70%);
-  --cw-card-backdrop-strong-mask: linear-gradient(to bottom, transparent 50%, #000 100%);
+  --cw-card-backdrop-mid-mask: linear-gradient(to bottom, transparent 20%, var(--color-gray-1000) 70%);
+  --cw-card-backdrop-strong-mask: linear-gradient(to bottom, transparent 50%, var(--color-gray-1000) 100%);
 }
 
-/* ==========================================================================
-   Section shell — light-grey background behind header + cards
-   ========================================================================== */
 main .cards-working-container {
   display: flex;
   flex-direction: column;
@@ -94,24 +61,21 @@ main .cards-working-container {
   background: var(--cw-section-bg);
 }
 
-/* the two EDS-generated wrappers span the section width */
 .cards-working-container > .default-content-wrapper,
 .cards-working-container > .cards-working-wrapper {
   width: 100%;
   margin: 0;
 }
 
-/* ==========================================================================
-   Cards
-   ========================================================================== */
 .cards-working ul {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: var(--cw-cards-gap);
-  margin: 0;
+  max-width: var(--cw-cards-max-width);
+  margin: 0 auto;
   padding: 0;
   list-style: none;
-  justify-items: center;
 }
 
 .cards-working .cards-working-card {
@@ -126,7 +90,6 @@ main .cards-working-container {
   box-shadow: var(--cw-card-shadow);
 }
 
-/* image sits inside the white frame, clipped to the inner radius */
 .cards-working .cards-working-card-image {
   position: absolute;
   inset: var(--cw-card-frame);
@@ -149,13 +112,9 @@ main .cards-working-container {
   flex-direction: column;
   gap: var(--cw-card-content-gap);
   padding: var(--cw-card-pad-block) var(--cw-card-pad-inline);
-  font-family: var(--cw-font-family);
   color: var(--cw-card-text-color);
 }
 
-/* blurred translucent panel sitting behind the title + description — three
-   stacked layers (base tint + two progressively-masked blur-only layers,
-   see --cw-card-backdrop-* comment above) */
 .cards-working .cards-working-card-backdrop {
   position: absolute;
   inset: 0;
@@ -171,29 +130,16 @@ main .cards-working-container {
 .cards-working .cards-working-card-backdrop-mid {
   backdrop-filter: blur(var(--cw-card-backdrop-blur-mid));
   mask-image: var(--cw-card-backdrop-mid-mask);
-
-  /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-backdrop-filter: blur(var(--cw-card-backdrop-blur-mid));
-
-  /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-mask-image: var(--cw-card-backdrop-mid-mask);
 }
 
 .cards-working .cards-working-card-backdrop-strong {
   backdrop-filter: blur(var(--cw-card-backdrop-blur-strong));
   mask-image: var(--cw-card-backdrop-strong-mask);
-
-  /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-backdrop-filter: blur(var(--cw-card-backdrop-blur-strong));
-
-  /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-mask-image: var(--cw-card-backdrop-strong-mask);
 }
 
 .cards-working .cards-working-card-body h3 {
   margin: 0;
   color: var(--cw-card-title-color);
-  font-family: var(--cw-font-family);
   font-size: var(--cw-card-title-size);
   font-weight: var(--cw-card-title-weight);
   line-height: var(--cw-card-title-line);
@@ -205,9 +151,6 @@ main .cards-working-container {
   line-height: var(--cw-card-text-line);
 }
 
-/* ==========================================================================
-   Section default content — eyebrow + headline
-   ========================================================================== */
 .cards-working-container .default-content-wrapper {
   display: flex;
   flex-direction: column;
@@ -219,7 +162,6 @@ main .cards-working-container {
 .cards-working-container .default-content-wrapper > p:first-child {
   margin: 0;
   color: var(--cw-eyebrow-color);
-  font-family: var(--cw-font-family);
   font-size: var(--cw-eyebrow-size);
   font-weight: var(--cw-eyebrow-weight);
   line-height: var(--cw-eyebrow-line);
@@ -231,30 +173,37 @@ main .cards-working-container {
   max-width: var(--cw-heading-max);
   margin: 0 auto;
   color: var(--cw-heading-color);
-  font-family: var(--cw-heading-font);
   font-size: var(--cw-heading-size-mobile);
   font-weight: var(--cw-heading-weight);
   line-height: var(--cw-heading-line-mobile);
 }
 
-/* ==========================================================================
-   Desktop — three overlapping cards, outer two tilted ±12°
-   ========================================================================== */
-@media (width >= 1024px) {
+@media (width >= 768px) {
+  .cards-working ul {
+    --cw-card-width: 376px;
+
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+
+  .cards-working .cards-working-card {
+    flex: 0 1 calc(50% - var(--cw-cards-gap) / 2);
+  }
+}
+
+@media (width >= 1260px) {
   .cards-working-container .default-content-wrapper h2 {
     font-size: var(--cw-heading-size);
     line-height: var(--cw-heading-line);
   }
 
   .cards-working ul {
+    display: grid;
     grid-template-columns: repeat(3, auto);
     align-items: start;
     justify-content: center;
     gap: 0;
     max-width: var(--cw-cards-max-width);
-
-    /* top/bottom margin absorbs the rotated cards' overhang so the visible
-       gap to the headline (and section padding below) stays correct */
     margin: var(--cw-card-rotation-overhang) auto;
   }
 
@@ -264,12 +213,8 @@ main .cards-working-container {
     aspect-ratio: auto;
   }
 
-  /* z-index climbs left→center→right (per design); outer cards pivot from the
-     bottom corner nearest center so they fan out from where they meet it */
   .cards-working .cards-working-card:first-child,
   .cards-working .cards-working-card:last-child {
-    /* one-time entrance from a lesser tilt, triggered by cards-working.js
-       adding .cards-working-tilted via a single-fire IntersectionObserver */
     transition: transform 1s ease-out;
   }
 
