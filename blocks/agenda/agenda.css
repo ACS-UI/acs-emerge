@@ -6,6 +6,7 @@
   --agenda-title-color: var(--color-gray-1000);
   --agenda-speaker-color: var(--color-gray-600);
   --agenda-duration-color: var(--color-gray-500);
+  --agenda-duration-color-desktop: #B0B0B0; /* Figma value, not in our gray scale */
   --agenda-eyebrow-size: var(--body-size-xl);
   --agenda-eyebrow-line: var(--line-height-600);
   --agenda-heading-size: var(--heading-size-xxl);
@@ -105,7 +106,7 @@
     font-weight: var(--font-weight-regular);
     font-size: var(--agenda-duration-size);
     line-height: 1.5;
-    color: #B0B0B0;
+    color: var(--agenda-duration-color-desktop);
   }
 
   .agenda .agenda-title {

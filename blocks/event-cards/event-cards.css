@@ -5,6 +5,7 @@
   --ec-card-bg: var(--color-white);
   --ec-meta-color: var(--color-gray-700);
   --ec-badge-bg: var(--color-white);
+  --ec-badge-weekday-color: #808080; /* Figma colorTheme/silver-800, not in our gray scale */
   --ec-card-shadow:
     0 0 0 1px rgb(0 0 0 / 4%),
     0 1px 2px rgb(0 0 0 / 6%),
@@ -171,7 +172,7 @@
   font-weight: var(--font-weight-bold);
   line-height: 16px;
   letter-spacing: 0;
-  color: #808080;
+  color: var(--ec-badge-weekday-color);
 }
 
 /* body — position:relative anchors the hover-only arrow icon (::after) */

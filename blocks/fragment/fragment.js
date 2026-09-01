@@ -43,7 +43,7 @@ export async function loadFragment(path, variation) {
 
 export default async function decorate(block) {
   const link = block.querySelector('a');
-  const href = link ? link.getAttribute('href') : block.textContent.trim();
+  const href = (link ? link.getAttribute('href') : block.textContent.trim()) || '';
   const [path, query] = href.split('?');
   // `?variation=x` on the fragment link becomes a class on the first block.
   const variation = query && new URLSearchParams(query).get('variation');
