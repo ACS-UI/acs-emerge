@@ -104,7 +104,6 @@
   position: relative;
   display: grid;
   grid-template-columns: var(--cards-emerge-letter-col-width) 1fr;
-  align-items: center;
   column-gap: var(--cards-emerge-row-gap);
 }
 
@@ -134,6 +133,7 @@
   flex-direction: column;
   gap: var(--cards-emerge-title-subtitle-gap);
   padding: var(--cards-emerge-body-padding-block) 0;
+  max-width: 366px;
 }
 
 .cards-emerge .cards-emerge-body :is(h1, h2, h3, h4, h5, h6, p:first-child) {
