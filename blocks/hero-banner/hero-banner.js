@@ -13,11 +13,15 @@ const VIDEO_TYPES = {
  */
 function buildBackgroundVideo(link, poster) {
   const video = document.createElement('video');
-  // Attributes required for silent autoplay across browsers.
-  ['autoplay', 'muted', 'playsinline', 'loop'].forEach((attr) => video.setAttribute(attr, ''));
+  // Attributes required for silent autoplay across browsers. No `loop`:
+  ['autoplay', 'muted', 'playsinline'].forEach((attr) => video.setAttribute(attr, ''));
   video.muted = true; // property form is required for autoplay in Safari/Chrome
   video.setAttribute('aria-hidden', 'true');
   if (poster) video.poster = poster.currentSrc || poster.src;
+const STOP_AT_SECONDS = 6;
+  video.addEventListener('timeupdate', () => {
+    if (video.currentTime >= STOP_AT_SECONDS) video.pause();
+  });
 
   const href = link.getAttribute('href');
   const ext = href.split('.').pop().split(/[?#]/)[0].toLowerCase();

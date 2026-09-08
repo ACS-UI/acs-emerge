@@ -180,6 +180,18 @@
     column-gap: var(--cards-emerge-row-gap-desktop);
   }
 
+  .cards-emerge .cards-emerge-letter {
+    padding-top: var(--cards-emerge-letter-offset-top-desktop);
+    font-size: var(--cards-emerge-letter-size-desktop);
+    line-height: var(--cards-emerge-letter-line-height-desktop);
+  }
+
+  .cards-emerge .cards-emerge-body :is(h1, h2, h3, h4, h5, h6, p:first-child) {
+    font-size: var(--cards-emerge-title-size-desktop);
+  }
+}
+
+@media (width >= 1024px) {
   .cards-emerge .cards-emerge-butterfly {
     display: block;
     position: absolute;
@@ -190,15 +202,5 @@
     object-fit: contain;
     pointer-events: none;
     z-index: -1;
-  }
-
-  .cards-emerge .cards-emerge-letter {
-    padding-top: var(--cards-emerge-letter-offset-top-desktop);
-    font-size: var(--cards-emerge-letter-size-desktop);
-    line-height: var(--cards-emerge-letter-line-height-desktop);
-  }
-
-  .cards-emerge .cards-emerge-body :is(h1, h2, h3, h4, h5, h6, p:first-child) {
-    font-size: var(--cards-emerge-title-size-desktop);
   }
 }

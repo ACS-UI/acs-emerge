@@ -261,18 +261,20 @@ main > .profile-container:not(.bg-gradient-a) {
   color: inherit;
 }
 
+/* Mobile-first default (<768px): matches Figma (14px / 18px line-height). */
 .profile.carousel .carousel-intro p:first-child {
   margin: 0;
   font-size: var(--title-size-s);
   font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-400);
+  line-height: var(--line-height-100);
   letter-spacing: 0;
   text-transform: uppercase;
-  color: var(--color-gray-700);
+  color: var(--color-white);
 }
 
 @media (width >= 768px) {
   .profile.carousel .carousel-intro p:first-child {
+    line-height: var(--line-height-400);
     color: inherit;
   }
 }
