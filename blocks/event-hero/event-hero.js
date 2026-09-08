@@ -20,6 +20,7 @@ export default function decorate(block) {
 
   const content = document.createElement('div');
   content.className = 'event-hero-content';
+  let mediaInserted = false;
 
   rows.forEach((row) => {
     if (row === mediaRow) return;
@@ -33,7 +34,8 @@ export default function decorate(block) {
       const head = document.createElement('div');
       head.className = 'event-hero-head';
       while (cell.firstElementChild) head.append(cell.firstElementChild);
-      content.append(head);
+      content.append(head, media);
+      mediaInserted = true;
     } else if (heading) {
       // title + date live together in one cell
       const head = document.createElement('div');
@@ -41,7 +43,8 @@ export default function decorate(block) {
       while (cell.firstElementChild) head.append(cell.firstElementChild);
       const date = head.querySelector('p');
       if (date) date.classList.add('event-hero-date');
-      content.append(head);
+      content.append(head, media);
+      mediaInserted = true;
     } else if (link && cell.children.length <= 1) {
       // CTA row
       const cta = document.createElement('div');
@@ -77,5 +80,7 @@ export default function decorate(block) {
     }
   });
 
-  block.replaceChildren(content, media);
+  if (!mediaInserted) content.prepend(media);
+
+  block.replaceChildren(content);
 }
