@@ -8,11 +8,11 @@
   --cd-title-size: var(--title-size-xl);
   --cd-title-line: var(--line-height-400);
   --cd-title-weight: var(--font-weight-bold);
-  --cd-about-size: var(--body-size-xxxl);
+  --cd-about-size: var(--body-size-l);
   --cd-about-line: 1.5;
   --cd-about-weight: var(--font-weight-regular);
   --cd-section-gap: 40px;
-  --cd-content-gap: 136px;
+  --cd-content-gap: var(--spacing-400);
   --cd-col-gap: 16px;
   --cd-row-pad: 8px;
   --cd-details-width: 384px;
@@ -131,5 +131,48 @@
 @media (width >= 768px) {
   .client-detail .client-detail-content {
     grid-template-columns: var(--cd-details-width) minmax(0, 1fr);
+  }
+
+  .client-detail {
+    --cd-about-size: var(--body-size-xxxl);
+    --cd-content-gap: 136px;
+  }
+}
+
+/* "Business Challenge" intro section on client-detail pages (e.g.
+   /success-stories/casio): plain default content, not part of the
+   client-detail block itself, so scoped via the heading's own ID (like
+   #meet-our-leader in profile-details.css) rather than a block class.
+   Styled to match .client-detail-about-heading / .client-detail-about p. */
+p:has(+ #migrate-the-remaining-maruti-suzuki-digital-properties-from-sitecore-to-adobe-eds-before-the-sitecore-license-expiry-ensuring-business-continuity-and-a-unified-digital-platform) {
+  font-size: var(--title-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-400);
+  text-transform: uppercase;
+  color: var(--color-gray-1000);
+}
+
+/* Mobile-first default (<768px); the section's own top margin is reduced
+   the same way as .client-detail-content's gap above. */
+main > .section:has(#migrate-the-remaining-maruti-suzuki-digital-properties-from-sitecore-to-adobe-eds-before-the-sitecore-license-expiry-ensuring-business-continuity-and-a-unified-digital-platform) {
+  margin-top: var(--spacing-400);
+}
+
+@media (width >= 768px) {
+  main > .section:has(#migrate-the-remaining-maruti-suzuki-digital-properties-from-sitecore-to-adobe-eds-before-the-sitecore-license-expiry-ensuring-business-continuity-and-a-unified-digital-platform) {
+    margin-top: var(--spacing-750);
+  }
+}
+
+#migrate-the-remaining-maruti-suzuki-digital-properties-from-sitecore-to-adobe-eds-before-the-sitecore-license-expiry-ensuring-business-continuity-and-a-unified-digital-platform {
+  font-size: var(--body-size-l);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  color: var(--color-gray-1000);
+}
+
+@media (width >= 768px) {
+  #migrate-the-remaining-maruti-suzuki-digital-properties-from-sitecore-to-adobe-eds-before-the-sitecore-license-expiry-ensuring-business-continuity-and-a-unified-digital-platform {
+    font-size: var(--body-size-xxxl);
   }
 }
