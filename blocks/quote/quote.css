@@ -31,6 +31,16 @@ main > .quote-container {
   line-height: 0;
 }
 
+/* Below 768px, the "Reflections Manoj" background-text watermark
+   (main .section[data-background-text]::before in styles.css) inherits a
+   left/right padding meant for general section content; strip it here so
+   the watermark spans full width, matching Figma. */
+@media (width < 768px) {
+  main .quote-container[data-background-text]::before {
+    padding-inline: 0;
+  }
+}
+
 .quote .quote-image picture,
 .quote .quote-image img {
   display: block;
@@ -66,15 +76,15 @@ main > .quote-container {
 .quote .quote-body blockquote p::before {
   content: '\201C';
   color: var(--quote-mark-color);
-  font-size: var(--quote-mark-size);
+  font-size: 1.8em;
   font-weight: var(--quote-mark-weight);
   line-height: 0;
 }
 
 .quote .quote-body blockquote p {
   margin: 0;
-  padding-left: calc(var(--quote-mark-size) * 0.65);
-  text-indent: calc(var(--quote-mark-size) * -0.65);
+  padding-left: 0.52em;
+  text-indent: -0.52em;
   font-weight: var(--font-weight-regular);
   font-size: var(--quote-text-size);
   line-height: 150%;
