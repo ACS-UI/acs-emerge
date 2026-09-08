@@ -41,6 +41,7 @@
   max-width: 600px;
   height: auto;
   aspect-ratio: 3/4;
+  border: 1px solid rgb(255 255 255 / 80%);
   border-radius: var(--profile-card-radius);
   background: var(--color-gray-100);
 }
@@ -64,6 +65,10 @@
   isolation: isolate;
   background: none;
   backdrop-filter: blur(16px) saturate(120%);
+
+  /* Mobile only: fades this base blur layer in too, so it doesn't create its
+     own hard edge alongside the graduated ::before blur layer below. */
+  mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, var(--color-gray-1000) 70%);
   opacity: 1;
   transition: opacity 0.3s ease;
 }
@@ -137,6 +142,10 @@
     font-weight: var(--font-weight-medium);
     line-height: var(--line-height-500);
   }
+
+  .profile .profile-intro p:first-child {
+    font-size: var(--title-size-xl);
+  }
 }
 
 @media (width >= 1024px) {
@@ -173,7 +182,7 @@
 
 .profile .profile-intro p:first-child {
   margin: 0;
-  font-size: var(--title-size-xl);
+  font-size: var(--title-size-s);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-400);
   letter-spacing: 0;
@@ -189,7 +198,10 @@
   background: none;
   gap: var(--profile-overlap-overlay-gap);
   backdrop-filter: blur(16px) saturate(120%);
-  mask: none;
+
+  /* Fades this base blur layer in too, matching the ::before layer below, so
+     it doesn't create its own hard edge against the sharp image above it. */
+  mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, var(--color-gray-1000) 70%);
 }
 
 .profile.overlap .profile-card-overlay::before {
@@ -201,23 +213,25 @@
   mask: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, var(--color-gray-1000) 70%);
 }
 
+/* Mobile-first default (<1024px): no line-clamp, so the full quote always
+   shows in full instead of being truncated regardless of available space. */
 .profile.overlap .profile-card-overlay p {
-  display: -webkit-box;
-  overflow: hidden;
-  /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  line-clamp: 3;
-  font-size: var(--body-size-xxxl);
+  font-size: var(--body-size-m);
   font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-600);
+  line-height: var(--line-height-300);
   color: var(--color-white);
 }
 
 @media (width >= 1024px) {
   .profile.overlap .profile-card-overlay p {
+    display: -webkit-box;
+    overflow: hidden;
+    /* stylelint-disable-next-line property-no-vendor-prefix */
     -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
     line-clamp: 4;
+    font-size: var(--body-size-xxxl);
+    line-height: var(--line-height-600);
   }
 }
 
@@ -240,9 +254,46 @@
   color: inherit;
 }
 
+/* Mobile-first override for the "Recognitions" (overlap carousel) intro
+   (<768px), scoped to .overlap specifically so the plain leadership
+   carousel's intro (.profile.carousel without .overlap) is unaffected. */
+.profile.overlap.carousel .carousel-intro p:first-child {
+  color: var(--color-gray-700);
+}
+
+.profile.overlap.carousel .carousel-intro h2,
+.profile.overlap.carousel .carousel-intro h3 {
+  font-size: var(--heading-size-m);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-500);
+}
+
+@media (width >= 768px) {
+  .profile.overlap.carousel .carousel-intro p:first-child {
+    color: inherit;
+  }
+
+  .profile.overlap.carousel .carousel-intro h2,
+  .profile.overlap.carousel .carousel-intro h3 {
+    font-size: var(--heading-size-xxl);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-1100);
+  }
+}
+
+@media (width >= 1024px) {
+  .profile.overlap.carousel .carousel-intro h2,
+  .profile.overlap.carousel .carousel-intro h3 {
+    font-size: var(--font-size-1100);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-1100);
+  }
+}
+
 @media (width >= 768px) {
   .profile .profile-card-overlay {
     opacity: 0;
+    mask-image: none;
   }
 
   .profile .profile-card:hover .profile-card-overlay,
@@ -265,11 +316,12 @@
   color: var(--profile-name-color);
 }
 
+/* Mobile-first default (<768px): smaller than .profile-card-name (13.5px). */
 .profile .profile-card-role {
   margin: var(--spacing-25) 0 0;
-  font-size: var(--title-size-m);
+  font-size: 11px;
   font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-200);
+  line-height: 14px;
   color: var(--profile-role-color);
 }
 
@@ -308,6 +360,11 @@
     font-weight: var(--font-weight-medium);
     line-height: var(--line-height-600);
   }
+
+  .profile .profile-card-role {
+    font-size: var(--title-size-m);
+    line-height: var(--line-height-200);
+  }
 }
 
 @media (width >= 1024px) {
@@ -320,10 +377,6 @@
     max-width: unset;
     aspect-ratio: auto;
   }
-}
-
-.profile.carousel .profile-card-image {
-  border: 1px solid rgb(255 255 255 / 35%);
 }
 
 .profile.carousel .profile-card-image picture,
@@ -339,14 +392,25 @@
 
 .profile.carousel .profile-card-name {
   font-size: var(--title-size-l);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-bold);
   line-height: var(--line-height-600);
 }
 
 .profile.carousel .profile-card-role {
-  font-size: var(--title-size-s);
-  font-weight: var(--font-weight-bold);
+  font-size: var(--title-size-xs);
+  font-weight: var(--font-weight-regular);
   opacity: 0.85;
+}
+
+@media (width >= 768px) {
+  .profile.carousel .profile-card-name {
+    font-weight: var(--font-weight-medium);
+  }
+
+  .profile.carousel .profile-card-role {
+    font-size: var(--title-size-xl);
+    font-weight: var(--font-weight-bold);
+  }
 }
 
 .profile.carousel .carousel-view-all {
@@ -364,8 +428,6 @@
   transition: background-color 0.2s ease, color 0.2s ease, gap 0.2s ease;
 }
 
-/* top-bar placement: .carousel-intro isn't a flex container, so the button
-   needs its own top margin to separate from the heading above it. */
 .profile.carousel .carousel-intro > .carousel-view-all {
   margin-top: var(--profile-view-all-margin-top);
 }
@@ -413,9 +475,9 @@
 .profile.overlap .profile-card-overlay .profile-card-role {
   margin: 0;
   font-size: var(--body-size-s);
-  font-weight: var(--font-weight-regular);
+  font-weight: var(--font-weight-bold);
   line-height: 1.5;
-  color: var(--color-transparent-white-900);
+  color: var(--color-white);
 }
 
 @media (width >= 1024px) {
@@ -425,7 +487,7 @@
 }
 
 @media (width < 768px) {
-  .profile.carousel .carousel-footer .carousel-view-all {
+  .profile.carousel .carousel-view-all {
     width: 100%;
   }
 }
