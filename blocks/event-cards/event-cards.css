@@ -13,7 +13,7 @@
     0 20px 20px -24px rgb(0 0 0 / 6%);
 
   /* layout */
-  --ec-row-gap: 64px;
+  --ec-row-gap: var(--spacing-400);
   --ec-column-gap: 32px;
   --ec-card-radius: 24px;
   --ec-image-ratio: 3 / 2;
@@ -21,9 +21,19 @@
   font-family: var(--ec-font);
 }
 
-/* intro (eyebrow + headline) on the list page */
+main > .event-cards-container {
+  margin-top: var(--spacing-400);
+}
+
+@media (width >= 768px) {
+  main > .event-cards-container {
+    margin-top: var(--spacing-750);
+  }
+}
+
+/* intro (eyebrow + headline) on the list page; mobile-first default (<768px). */
 .event-cards .event-cards-intro {
-  margin-bottom: var(--spacing-750);
+  margin-bottom: var(--spacing-100);
 }
 
 /* the actual eyebrow+heading wrapper is an unclassed inner <div>
@@ -51,9 +61,9 @@
   max-width: 800px;
   font-family: var(--ec-font);
   color: var(--color-text-static-black);
-  font-size: var(--heading-size-xxxxl);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-1500);
+  font-size: var(--heading-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-900);
   letter-spacing: 0;
 }
 
@@ -214,7 +224,7 @@
   color: var(--color-gray-800);
   font-family: var(--ec-font);
   font-size: var(--title-size-xxxl);
-  font-weight: var(--font-weight-regular);
+  font-weight: var(--font-weight-bold);
   line-height: var(--line-height-600);
   letter-spacing: 0;
 }
@@ -272,6 +282,24 @@
 @media (width >= 768px) {
   .event-cards .event-cards-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .event-cards {
+    --ec-row-gap: 64px;
+  }
+
+  .event-cards .event-cards-intro {
+    margin-bottom: var(--spacing-750);
+  }
+
+  .event-cards .event-cards-intro h2 {
+    font-size: var(--heading-size-xxxxl);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-1500);
+  }
+
+  .event-cards .event-cards-title {
+    font-weight: var(--font-weight-regular);
   }
 }
 
