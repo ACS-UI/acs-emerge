@@ -17,14 +17,14 @@
   --cards-emerge-heading-size: var(--heading-size-m);
   --cards-emerge-heading-weight: var(--font-weight-medium);
   --cards-emerge-heading-line-height: var(--line-height-500);
-  --cards-emerge-letter-size: var(--font-size-1000);
+  --cards-emerge-letter-size: var(--font-size-1200);
   --cards-emerge-letter-weight: var(--font-weight-regular);
   --cards-emerge-letter-line-height: 1;
   --cards-emerge-title-size: var(--heading-size-l);
   --cards-emerge-title-weight: var(--font-weight-medium);
   --cards-emerge-title-line-height: var(--line-height-700);
   --cards-emerge-eyebrow-heading-line-height: var(--line-height-100);
-  --cards-emerge-subtitle-size: var(--title-size-m);
+  --cards-emerge-subtitle-size: var(--title-size-s);
   --cards-emerge-subtitle-weight: var(--title-font-weight);
   --cards-emerge-subtitle-line-height: var(--line-height-200);
   --cards-emerge-heading-size-desktop: var(--heading-size-xxl);
@@ -51,6 +51,7 @@
   --cards-emerge-list-max-width-desktop: 592px;
   --cards-emerge-row-gap-desktop: 32px;
   --cards-emerge-letter-col-width-desktop: 72px;
+  --cards-emerge-letter-offset-top: 8px;
 
   padding: var(--cards-emerge-section-padding-block) var(--cards-emerge-section-padding-inline);
 }
@@ -115,6 +116,7 @@
 }
 
 .cards-emerge .cards-emerge-letter {
+  padding-top: var(--cards-emerge-letter-offset-top);
   color: var(--cards-emerge-letter-color);
   font-size: var(--cards-emerge-letter-size);
   font-weight: var(--cards-emerge-letter-weight);
@@ -191,6 +193,7 @@
   }
 
   .cards-emerge .cards-emerge-letter {
+    padding-top: var(--cards-emerge-letter-offset-top-desktop);
     font-size: var(--cards-emerge-letter-size-desktop);
     line-height: var(--cards-emerge-letter-line-height-desktop);
   }
