@@ -129,9 +129,9 @@
 .profile.carousel .carousel-intro h3 {
   margin: var(--spacing-100) 0 0;
   max-width: 800px;
-  font-size: var(--heading-size-xxl);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-1100);
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-800);
   color: inherit;
 }
 
@@ -145,6 +145,13 @@
 
   .profile .profile-intro p:first-child {
     font-size: var(--title-size-xl);
+  }
+
+  .profile.carousel .carousel-intro h2,
+  .profile.carousel .carousel-intro h3 {
+    font-size: var(--heading-size-m);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-500);
   }
 }
 
@@ -251,7 +258,13 @@
   line-height: var(--line-height-400);
   letter-spacing: 0;
   text-transform: uppercase;
-  color: inherit;
+  color: var(--color-gray-700);
+}
+
+@media (width >= 768px) {
+  .profile.carousel .carousel-intro p:first-child {
+    color: inherit;
+  }
 }
 
 /* Mobile-first override for the "Recognitions" (overlap carousel) intro
@@ -293,7 +306,6 @@
 @media (width >= 768px) {
   .profile .profile-card-overlay {
     opacity: 0;
-    mask-image: none;
   }
 
   .profile .profile-card:hover .profile-card-overlay,
