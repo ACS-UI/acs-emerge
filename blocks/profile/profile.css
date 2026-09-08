@@ -31,7 +31,7 @@
 .profile .profile-card {
   display: flex;
   flex-direction: column;
-  padding: 0 var(--spacing-625);
+  padding: 0;
   outline: none;
 }
 
@@ -52,6 +52,7 @@
   height: auto;
 }
 
+/* Mobile-first default (<768px): always visible, since hover isn't possible on touch. */
 .profile .profile-card-overlay {
   position: absolute;
   inset: auto 0 0;
@@ -63,7 +64,7 @@
   isolation: isolate;
   background: none;
   backdrop-filter: blur(16px) saturate(120%);
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.3s ease;
 }
 
@@ -108,8 +109,17 @@
   max-width: var(--profile-carousel-intro-max-width);
 }
 
+/* Mobile-first default for the grid variant's heading (<768px). */
 .profile .profile-intro h2,
-.profile .profile-intro h3,
+.profile .profile-intro h3 {
+  margin: var(--spacing-100) 0 0;
+  max-width: 800px;
+  font-size: var(--font-size-900);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-900);
+  color: var(--color-text-static-black);
+}
+
 .profile.carousel .carousel-intro h2,
 .profile.carousel .carousel-intro h3 {
   margin: var(--spacing-100) 0 0;
@@ -117,12 +127,16 @@
   font-size: var(--heading-size-xxl);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-1100);
-  color: var(--color-text-static-black);
+  color: inherit;
 }
 
-.profile.carousel .carousel-intro h2,
-.profile.carousel .carousel-intro h3 {
-  color: inherit;
+@media (width >= 768px) {
+  .profile .profile-intro h2,
+  .profile .profile-intro h3 {
+    font-size: var(--heading-size-m);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-500);
+  }
 }
 
 @media (width >= 1024px) {
@@ -226,21 +240,28 @@
   color: inherit;
 }
 
-.profile .profile-card:hover .profile-card-overlay,
-.profile .profile-card:focus-within .profile-card-overlay,
-.profile .profile-card:focus .profile-card-overlay {
-  opacity: 1;
+@media (width >= 768px) {
+  .profile .profile-card-overlay {
+    opacity: 0;
+  }
+
+  .profile .profile-card:hover .profile-card-overlay,
+  .profile .profile-card:focus-within .profile-card-overlay,
+  .profile .profile-card:focus .profile-card-overlay {
+    opacity: 1;
+  }
 }
 
 .profile .profile-card-body {
   padding: var(--profile-body-padding);
 }
 
+/* Mobile-first default (<768px). */
 .profile .profile-card-name {
   margin: 0;
-  font-size: var(--title-size-xxxl);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-600);
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 16.5px;
   color: var(--profile-name-color);
 }
 
@@ -282,8 +303,10 @@
     --carousel-visible: 2;
   }
 
-  .profile .profile-card {
-    padding: 0;
+  .profile .profile-card-name {
+    font-size: var(--title-size-xxxl);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-600);
   }
 }
 
@@ -297,10 +320,6 @@
     max-width: unset;
     aspect-ratio: auto;
   }
-}
-
-.profile.carousel .profile-card {
-  padding: 0;
 }
 
 .profile.carousel .profile-card-image {
@@ -402,14 +421,6 @@
 @media (width >= 1024px) {
   .profile.carousel .carousel {
     --carousel-visible: 3;
-  }
-}
-
-@media (width < 1024px) {
-  .profile.carousel .carousel-intro h2,
-  .profile.carousel .carousel-intro h3 {
-    font-size: var(--heading-size-m);
-    line-height: var(--line-height-500);
   }
 }
 
