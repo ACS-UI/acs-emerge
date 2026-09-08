@@ -10,17 +10,18 @@
     0px 0px 0px 1px #0000000A;
   --commitment-cards-eyebrow-size: var(--detail-size-l);
   --commitment-cards-heading-size: var(--heading-size-s);
-  --commitment-cards-body-size: var(--body-size-l);
+  --commitment-cards-body-size: var(--body-size-s);
   --commitment-cards-gap: 24px;
   --commitment-cards-pad: 24px;
   --commitment-cards-radius: 24px;
   --commitment-cards-min: 280px;
 }
 
+/* Mobile-first default (<1024px, matching this file's own breakpoint). */
 main .commitment-cards-container > .default-content-wrapper p {
   font-style: normal;
   font-weight: var(--font-weight-regular);
-  font-size: var(--body-size-xl);
+  font-size: var(--body-size-s);
   line-height: var(--line-height-400);
   color: var(--color-gray-1000);
 }
@@ -77,6 +78,10 @@ main .commitment-cards-container > .default-content-wrapper :is(h1, h2, h3, h4, 
 @media (width >= 1024px) {
   .commitment-cards {
     --commitment-cards-pad: 32px 24px;
+  }
+
+  main .commitment-cards-container > .default-content-wrapper p {
+    font-size: var(--body-size-xl);
   }
 
   .commitment-cards ul {

@@ -6,10 +6,10 @@
   --callout-button-color: var(--color-gray-1000);
   --callout-button-border: var(--color-gray-1000);
   --callout-panel-bg: #f9f8f6;
-  --callout-eyebrow-size: var(--body-size-m);
-  --callout-heading-size: var(--heading-size-l);
-  --callout-body-size: var(--body-size-l);
-  --callout-note-size: var(--detail-size-l);
+  --callout-eyebrow-size: var(--body-size-s);
+  --callout-heading-size: var(--heading-size-m);
+  --callout-body-size: var(--body-size-m);
+  --callout-note-size: var(--detail-size-m);
   --callout-max-width: 1000px;
 
   text-align: center;
@@ -55,6 +55,8 @@
   background: transparent;
   color: var(--callout-button-color);
   font-weight: var(--font-weight-regular);
+  font-size: var(--detail-size-m);
+  white-space: normal;
 }
 
 .callout a.button:hover,
