@@ -91,6 +91,19 @@
   --carousel-gap: var(--profile-gap);
 }
 
+/* Below 768px: same peek-style scroll-snap look as cards-working (a small
+   fixed peek of the next card instead of a full-width slide), with the dot
+   indicators dropped since the peek itself signals there's more to scroll. */
+@media (width < 768px) {
+  .profile.carousel .carousel-track {
+    grid-auto-columns: calc(100% - 40px);
+  }
+
+  .profile.carousel .carousel-dots {
+    display: none;
+  }
+}
+
 .profile.carousel .carousel-intro {
   max-width: var(--profile-carousel-intro-max-width);
 }
@@ -205,7 +218,7 @@
 
 .profile.carousel .carousel-intro p:first-child {
   margin: 0;
-  font-size: var(--title-size-xl);
+  font-size: var(--title-size-s);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-400);
   letter-spacing: 0;
@@ -286,6 +299,10 @@
   }
 }
 
+.profile.carousel .profile-card {
+  padding: 0;
+}
+
 .profile.carousel .profile-card-image {
   border: 1px solid rgb(255 255 255 / 35%);
 }
@@ -302,13 +319,13 @@
 }
 
 .profile.carousel .profile-card-name {
-  font-size: var(--title-size-xxxl);
+  font-size: var(--title-size-l);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-600);
 }
 
 .profile.carousel .profile-card-role {
-  font-size: var(--title-size-m);
+  font-size: var(--title-size-s);
   font-weight: var(--font-weight-bold);
   opacity: 0.85;
 }
@@ -316,10 +333,11 @@
 .profile.carousel .carousel-view-all {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0;
   border: 1px solid transparent;
   border-radius: 2.4em;
-  padding: 0.6em 1.5em;
+  padding: 0.6em 2.2em;
   background: var(--color-gray-900);
   color: var(--color-white);
   font-size: var(--detail-size-m);
@@ -384,5 +402,29 @@
 @media (width >= 1024px) {
   .profile.carousel .carousel {
     --carousel-visible: 3;
+  }
+}
+
+@media (width < 1024px) {
+  .profile.carousel .carousel-intro h2,
+  .profile.carousel .carousel-intro h3 {
+    font-size: var(--heading-size-m);
+    line-height: var(--line-height-500);
+  }
+}
+
+@media (width < 768px) {
+  .profile.carousel .carousel-footer .carousel-view-all {
+    width: 100%;
+  }
+}
+
+main .profile-container.bg-gradient-a {
+  padding-bottom: var(--spacing-400);
+}
+
+@media (width >= 768px) {
+  main .profile-container.bg-gradient-a {
+    padding-bottom: var(--spacing-600);
   }
 }
