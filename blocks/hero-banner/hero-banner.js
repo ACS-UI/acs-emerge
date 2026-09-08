@@ -7,21 +7,26 @@ const VIDEO_TYPES = {
 
 /**
  * Builds a full-bleed, autoplaying background video from a link to a video file.
+ * No `loop`, so it plays once and stops on its own final frame (the `ended`
+ * handler is just a hook — e.g. to swap in a fallback image later — since
+ * a plain video with no `loop` already freezes there natively). This is
+ * intentionally NOT tied to a hardcoded duration: whoever supplies the
+ * video is responsible for it ending on a good frame, so a future
+ * replacement (different length/speed/edit) keeps working without any
+ * code change here.
  * @param {HTMLAnchorElement} link Anchor pointing at the video file
  * @param {HTMLImageElement} [poster] Optional poster image shown before/while loading
  * @returns {HTMLVideoElement}
  */
 function buildBackgroundVideo(link, poster) {
   const video = document.createElement('video');
-  // Attributes required for silent autoplay across browsers. No `loop`:
+  // Attributes required for silent autoplay across browsers. No `loop`.
   ['autoplay', 'muted', 'playsinline'].forEach((attr) => video.setAttribute(attr, ''));
   video.muted = true; // property form is required for autoplay in Safari/Chrome
   video.setAttribute('aria-hidden', 'true');
   if (poster) video.poster = poster.currentSrc || poster.src;
-const STOP_AT_SECONDS = 6;
-  video.addEventListener('timeupdate', () => {
-    if (video.currentTime >= STOP_AT_SECONDS) video.pause();
-  });
+
+  video.addEventListener('ended', () => video.classList.add('is-ended'));
 
   const href = link.getAttribute('href');
   const ext = href.split('.').pop().split(/[?#]/)[0].toLowerCase();
