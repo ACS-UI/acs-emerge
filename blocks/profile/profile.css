@@ -18,6 +18,16 @@
   --profile-overlap-overlay-gap: var(--spacing-75);
 }
 
+main > .profile-container:not(.bg-gradient-a) {
+  margin-top: var(--spacing-400);
+}
+
+@media (width >= 768px) {
+  main > .profile-container:not(.bg-gradient-a) {
+    margin-top: var(--spacing-750);
+  }
+}
+
 .profile .profile-card-link {
   display: block;
   color: inherit;
