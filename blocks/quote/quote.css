@@ -4,8 +4,6 @@
   --quote-text-size: var(--body-size-xl);
   --quote-text-line: var(--line-height-600);
   --quote-text-weight: var(--font-weight-regular);
-  --quote-mark-size: 52px;
-  --quote-mark-line: 1.15;
   --quote-mark-weight: var(--font-weight-regular);
   --quote-gap: 44px;
   --quote-content-max: 488px;
@@ -65,9 +63,9 @@ main > .quote-container {
 .quote .quote-body blockquote::after {
   position: absolute;
   color: var(--quote-mark-color);
-  font-size: var(--quote-mark-size);
+  font-size: 1.8em;
   font-weight: var(--quote-mark-weight);
-  line-height: var(--quote-mark-line);
+  line-height: 0;
   content: '\201D';
   right: 0;
   bottom: 0;
@@ -105,7 +103,6 @@ main > .quote-container {
   .quote {
     --quote-text-size: var(--font-size-900);
     --quote-text-line: var(--line-height-900);
-    --quote-mark-size: var(--font-size-1500);
     --quote-gap: 64px;
   }
 

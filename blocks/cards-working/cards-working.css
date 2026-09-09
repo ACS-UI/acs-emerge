@@ -90,10 +90,6 @@ main .cards-working-container {
   box-shadow: var(--cw-card-shadow);
 }
 
-/* Below 768px: same horizontal scroll-snap technique as styles/carousel.css
-   (.carousel-track / .carousel-slide), reused here instead of the shared
-   carousel.js component so the >=1260px tilted-overlap layout (which relies
-   on :first-child/:last-child on this same ul/li structure) stays untouched. */
 @media (width < 768px) {
   .cards-working {
     --cw-card-pad-inline: 24px;

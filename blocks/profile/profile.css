@@ -63,7 +63,6 @@ main > .profile-container:not(.bg-gradient-a) {
   height: auto;
 }
 
-/* Mobile-first default (<768px): always visible, since hover isn't possible on touch. */
 .profile .profile-card-overlay {
   position: absolute;
   inset: auto 0 0;
@@ -74,23 +73,26 @@ main > .profile-container:not(.bg-gradient-a) {
   color: var(--color-white);
   isolation: isolate;
   background: none;
-  backdrop-filter: blur(16px) saturate(120%);
-
-  /* Mobile only: fades this base blur layer in too, so it doesn't create its
-     own hard edge alongside the graduated ::before blur layer below. */
-  mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, var(--color-gray-1000) 70%);
   opacity: 1;
   transition: opacity 0.3s ease;
 }
 
-.profile .profile-card-overlay::before {
+.profile .profile-card-overlay::before,
+.profile .profile-card-overlay::after {
   content: '';
   position: absolute;
   inset: 0;
   z-index: -1;
   border-radius: inherit;
+}
+.profile .profile-card-overlay::before {
   backdrop-filter: blur(var(--profile-overlay-blur)) saturate(130%);
   mask: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, var(--color-gray-1000) 70%);
+}
+
+profile .profile-card-overlay::after {
+  backdrop-filter: blur(16px) saturate(120%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, var(--color-gray-1000) 70%);
 }
 
 .profile .profile-card-overlay :first-child { margin-top: 0; }
@@ -107,12 +109,13 @@ main > .profile-container:not(.bg-gradient-a) {
   --carousel-gap: var(--profile-gap);
 }
 
-/* Below 768px: same peek-style scroll-snap look as cards-working (a small
-   fixed peek of the next card instead of a full-width slide), with the dot
-   indicators dropped since the peek itself signals there's more to scroll. */
 @media (width < 768px) {
   .profile.carousel .carousel-track {
     grid-auto-columns: calc(100% - 40px);
+  }
+
+ .profile.overlap.carousel .carousel-track {
+    grid-auto-columns: calc(100% - 32px);
   }
 
   .profile.carousel .carousel-dots {
@@ -124,7 +127,6 @@ main > .profile-container:not(.bg-gradient-a) {
   max-width: var(--profile-carousel-intro-max-width);
 }
 
-/* Mobile-first default for the grid variant's heading (<768px). */
 .profile .profile-intro h2,
 .profile .profile-intro h3 {
   margin: var(--spacing-100) 0 0;
@@ -214,24 +216,25 @@ main > .profile-container:not(.bg-gradient-a) {
   isolation: isolate;
   background: none;
   gap: var(--profile-overlap-overlay-gap);
-  backdrop-filter: blur(16px) saturate(120%);
-
-  /* Fades this base blur layer in too, matching the ::before layer below, so
-     it doesn't create its own hard edge against the sharp image above it. */
-  mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, var(--color-gray-1000) 70%);
 }
 
-.profile.overlap .profile-card-overlay::before {
+.profile.overlap .profile-card-overlay::before,
+.profile.overlap .profile-card-overlay::after {
   content: '';
   position: absolute;
   inset: 0;
   z-index: -1;
-  backdrop-filter: blur(12px) saturate(130%);
+}
+
+.profile.overlap .profile-card-overlay::before {
+  backdrop-filter: blur(8px) saturate(130%);
   mask: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, var(--color-gray-1000) 70%);
 }
 
-/* Mobile-first default (<1024px): no line-clamp, so the full quote always
-   shows in full instead of being truncated regardless of available space. */
+.profile.overlap .profile-card-overlay::after {
+  backdrop-filter: blur(10px) saturate(120%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, var(--color-gray-1000) 70%);
+}
 .profile.overlap .profile-card-overlay p {
   font-size: var(--body-size-m);
   font-weight: var(--font-weight-medium);
@@ -243,7 +246,6 @@ main > .profile-container:not(.bg-gradient-a) {
   .profile.overlap .profile-card-overlay p {
     display: -webkit-box;
     overflow: hidden;
-    /* stylelint-disable-next-line property-no-vendor-prefix */
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     line-clamp: 4;
@@ -261,7 +263,6 @@ main > .profile-container:not(.bg-gradient-a) {
   color: inherit;
 }
 
-/* Mobile-first default (<768px): matches Figma (14px / 18px line-height). */
 .profile.carousel .carousel-intro p:first-child {
   margin: 0;
   font-size: var(--title-size-s);
@@ -279,9 +280,6 @@ main > .profile-container:not(.bg-gradient-a) {
   }
 }
 
-/* Mobile-first override for the "Recognitions" (overlap carousel) intro
-   (<768px), scoped to .overlap specifically so the plain leadership
-   carousel's intro (.profile.carousel without .overlap) is unaffected. */
 .profile.overlap.carousel .carousel-intro p:first-child {
   color: var(--color-gray-700);
 }
@@ -331,7 +329,6 @@ main > .profile-container:not(.bg-gradient-a) {
   padding: var(--profile-body-padding);
 }
 
-/* Mobile-first default (<768px). */
 .profile .profile-card-name {
   margin: 0;
   font-size: 13.5px;
@@ -339,8 +336,6 @@ main > .profile-container:not(.bg-gradient-a) {
   line-height: 16.5px;
   color: var(--profile-name-color);
 }
-
-/* Mobile-first default (<768px): smaller than .profile-card-name (13.5px). */
 .profile .profile-card-role {
   margin: var(--spacing-25) 0 0;
   font-size: 11px;

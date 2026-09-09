@@ -28,6 +28,12 @@
   gap: var(--testimonial-gap);
   margin: 0;
   align-items: flex-start;
+
+  /* Each slide is stretched to match the tallest one in the carousel row
+     (see .carousel-slide > * in styles/carousel.css); without this, shorter
+     quotes could start at a different vertical point instead of packing to
+     the top like the tallest slide does. */
+  align-content: start;
 }
 
 .testimonial .testimonial-quote {
@@ -107,6 +113,12 @@
   height: 100%;
 }
 
+/* This element holds the real, visible text (name/role) — it must never
+   carry its own mask/opacity fade, or the text fades along with it. All
+   blur/darken decoration lives on the ::before/::after pseudo-elements
+   below instead: purely decorative, positioned behind (z-index: -1), with
+   no text content of their own, so they can fade independently of the
+   text sitting on top of them. */
 .testimonial .testimonial-attribution {
   position: absolute;
   inset: auto 4px 4px;
@@ -121,23 +133,41 @@
   border-radius: 0 0 var(--testimonial-inner-radius) var(--testimonial-inner-radius);
   isolation: isolate;
   background: none;
-  backdrop-filter: blur(16px) saturate(120%);
 }
 
-.testimonial .testimonial-attribution::before {
+.testimonial .testimonial-attribution::before,
+.testimonial .testimonial-attribution::after {
   content: '';
   position: absolute;
   inset: 0;
   z-index: -1;
   border-radius: inherit;
+}
+
+/* Stronger, gradient-masked blur (unchanged from before). */
+.testimonial .testimonial-attribution::before {
   backdrop-filter: blur(12px) saturate(130%);
   mask: linear-gradient(to top, var(--color-gray-1000) 0%, rgb(0 0 0 / 60%) 35%, transparent 70%);
+}
+
+/* Base flat blur — was previously on the parent itself (see comment above). */
+.testimonial .testimonial-attribution::after {
+  backdrop-filter: blur(16px) saturate(120%);
+}
+
+/* Mobile only (<1024px): fades this base blur layer in too, matching the
+   ::before layer above, so it doesn't create its own hard edge against the
+   sharp portrait above it. Desktop is untouched pending explicit approval. */
+@media (width < 1024px) {
+  .testimonial .testimonial-attribution::after {
+    mask-image: linear-gradient(to top, var(--color-gray-1000) 0%, rgb(0 0 0 / 60%) 35%, transparent 70%);
+  }
 }
 
 .testimonial .testimonial-name {
   margin: 0;
   font-size: var(--title-size-xxxl);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-bold);
   line-height: var(--line-height-600);
 }
 

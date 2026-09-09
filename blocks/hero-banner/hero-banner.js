@@ -5,19 +5,7 @@ const VIDEO_TYPES = {
   ogv: 'video/ogg',
 };
 
-/**
- * Builds a full-bleed, autoplaying background video from a link to a video file.
- * No `loop`, so it plays once and stops on its own final frame (the `ended`
- * handler is just a hook — e.g. to swap in a fallback image later — since
- * a plain video with no `loop` already freezes there natively). This is
- * intentionally NOT tied to a hardcoded duration: whoever supplies the
- * video is responsible for it ending on a good frame, so a future
- * replacement (different length/speed/edit) keeps working without any
- * code change here.
- * @param {HTMLAnchorElement} link Anchor pointing at the video file
- * @param {HTMLImageElement} [poster] Optional poster image shown before/while loading
- * @returns {HTMLVideoElement}
- */
+
 function buildBackgroundVideo(link, poster) {
   const video = document.createElement('video');
   // Attributes required for silent autoplay across browsers. No `loop`.
@@ -38,10 +26,7 @@ function buildBackgroundVideo(link, poster) {
   return video;
 }
 
-/**
- * Loads and decorates the hero-banner block as a full-bleed background video only.
- * @param {Element} block The block element
- */
+
 export default function decorate(block) {
   const videoLink = block.querySelector(
     'a[href$=".mp4"], a[href$=".webm"], a[href$=".mov"], a[href$=".ogv"]',

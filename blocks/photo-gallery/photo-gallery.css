@@ -40,6 +40,7 @@ main > div.section .photo-gallery-wrapper:not(:has(.spotlight)) {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 .photo-gallery .photo-gallery-caption {
