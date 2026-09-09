@@ -29,10 +29,6 @@ main > .quote-container {
   line-height: 0;
 }
 
-/* Below 768px, the "Reflections Manoj" background-text watermark
-   (main .section[data-background-text]::before in styles.css) inherits a
-   left/right padding meant for general section content; strip it here so
-   the watermark spans full width, matching Figma. */
 @media (width < 768px) {
   main .quote-container[data-background-text]::before {
     padding-inline: 0;
