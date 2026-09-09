@@ -9,9 +9,9 @@
 
 #meet-our-leader {
   margin: 0;
-  font-size: var(--heading-size-xxxxl);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-1500);
+  font-size: var(--heading-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-700);
   color: var(--color-text-static-black);
 }
 
@@ -43,9 +43,9 @@
 
 .profile-details .profile-details-name {
   margin: 0;
-  font-size: var(--heading-size-xl);
+  font-size: var(--heading-size-l);
   font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-900);
+  line-height: var(--line-height-700);
   color: var(--color-black);
 }
 
@@ -59,16 +59,16 @@
 }
 
 .profile-details .profile-details-section-heading {
-  margin: var(--spacing-300) 0 0;
+  margin: var(--spacing-500) 0 0;
   font-size: var(--heading-size-l);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-bold);
   line-height: var(--line-height-700);
   color: var(--color-black);
 }
 
 .profile-details .profile-details-text {
   margin: var(--spacing-400) 0 0;
-  font-size: var(--body-size-xxxl);
+  font-size: var(--body-size-l);
   font-weight: var(--font-weight-regular);
   line-height: 1.5;
   color: var(--color-black);
@@ -81,7 +81,7 @@
 .profile-details .profile-details-reportees-heading {
   margin: 0 0 var(--spacing-200);
   font-size: var(--heading-size-l);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-bold);
   line-height: var(--line-height-700);
   color: var(--color-black);
 }
@@ -171,5 +171,24 @@
   .profile-details .profile-details-name {
     font-size: var(--heading-size-xxl);
     line-height: var(--line-height-1100);
+  }
+
+  #meet-our-leader {
+    font-size: var(--heading-size-xxxxl);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-1500);
+  }
+
+  .profile-details .profile-details-section-heading {
+    margin-top: var(--spacing-300);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .profile-details .profile-details-text {
+    font-size: var(--body-size-xxxl);
+  }
+
+  .profile-details .profile-details-reportees-heading {
+    font-weight: var(--font-weight-medium);
   }
 }
