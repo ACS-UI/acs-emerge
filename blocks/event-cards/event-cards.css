@@ -168,6 +168,7 @@ main > .event-cards-container {
   letter-spacing: 0;
   color: var(--ec-badge-weekday-color);
 }
+
 .event-cards .event-cards-body {
   position: relative;
   display: flex;
@@ -187,7 +188,6 @@ main > .event-cards-container {
   opacity: 0;
   transform: rotate(-45deg);
   mask: url('../../icons/arrow-right-solid.svg') center / contain no-repeat;
- -webkit-mask: url('../../icons/arrow-right-solid.svg') center / contain no-repeat;
   transition: opacity 0.2s ease;
 }
 
