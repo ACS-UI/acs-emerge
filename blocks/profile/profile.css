@@ -88,11 +88,13 @@ main > .profile-container:not(.bg-gradient-a) {
 .profile .profile-card-overlay::before {
   backdrop-filter: blur(var(--profile-overlay-blur)) saturate(130%);
   mask: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, var(--color-gray-1000) 70%);
+  will-change: backdrop-filter, opacity;
 }
 
 profile .profile-card-overlay::after {
   backdrop-filter: blur(16px) saturate(120%);
   mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, var(--color-gray-1000) 70%);
+  will-change: backdrop-filter, opacity;
 }
 
 .profile .profile-card-overlay :first-child { margin-top: 0; }
@@ -313,7 +315,7 @@ profile .profile-card-overlay::after {
   }
 }
 
-@media (width >= 768px) {
+@media (width >= 1024px) {
   .profile .profile-card-overlay {
     opacity: 0;
   }
