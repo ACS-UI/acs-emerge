@@ -169,6 +169,7 @@ main > .success-container {
   align-items: center;
   justify-content: center;
   gap: 0;
+  width: 100%;
   margin-top: var(--success-view-all-margin-top);
   border: 1px solid transparent;
   border-radius: 2.4em;
@@ -178,12 +179,6 @@ main > .success-container {
   font-size: var(--detail-size-m);
   font-weight: var(--font-weight-medium);
   transition: background-color 0.2s ease, color 0.2s ease, gap 0.2s ease;
-}
-
-@media (width < 768px) {
-  .success a.button.success-view-all {
-    width: 100%;
-  }
 }
 
 .success .success-view-all::after {
@@ -220,6 +215,10 @@ main > .success-container {
   .success {
     --success-card-max-width: 400px;
     --success-tags-margin-top: 8px;
+  }
+
+  .success a.button.success-view-all {
+    width: auto;
   }
 
   .success .success-grid {
@@ -264,7 +263,6 @@ main > .success-container {
   max-width: var(--success-carousel-intro-max-width);
 }
 
-/* Mobile-first default (<768px). */
 .success.carousel .carousel-intro h2,
 .success.carousel .carousel-intro h3 {
   margin: var(--spacing-100) 0 0;
@@ -288,6 +286,7 @@ main > .success-container {
   align-items: center;
   justify-content: center;
   gap: 0;
+  width: 100%;
   margin-top: var(--success-view-all-margin-top);
   border: 1px solid transparent;
   border-radius: 2.4em;
@@ -297,12 +296,6 @@ main > .success-container {
   font-size: var(--detail-size-m);
   font-weight: var(--font-weight-medium);
   transition: background-color 0.2s ease, color 0.2s ease, gap 0.2s ease;
-}
-
-@media (width < 768px) {
-  .success.carousel .carousel-view-all {
-    width: 100%;
-  }
 }
 
 .success.carousel .carousel-view-all::after {
@@ -332,6 +325,10 @@ main > .success-container {
 @media (width >= 768px) {
   .success.carousel .carousel {
     --carousel-visible: 2;
+  }
+
+  .success.carousel .carousel-view-all {
+    display: none;
   }
 
   .success.carousel .carousel-intro h2,

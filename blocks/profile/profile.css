@@ -112,18 +112,16 @@ main > .profile-container:not(.bg-gradient-a) {
   --carousel-gap: var(--profile-gap);
 }
 
-@media (width < 768px) {
-  .profile.carousel .carousel-track {
-    grid-auto-columns: calc(100% - 40px);
-  }
+.profile.carousel .carousel-track {
+  grid-auto-columns: calc(100% - 40px);
+}
 
- .profile.overlap.carousel .carousel-track {
-    grid-auto-columns: calc(100% - 32px);
-  }
+.profile.overlap.carousel .carousel-track {
+  grid-auto-columns: calc(100% - 32px);
+}
 
-  .profile.carousel .carousel-dots {
-    display: none;
-  }
+.profile.carousel .carousel-dots {
+  display: none;
 }
 
 .profile.carousel .carousel-intro {
@@ -379,6 +377,11 @@ main > .profile-container:not(.bg-gradient-a) {
     --carousel-visible: 2;
   }
 
+  .profile.carousel .carousel-track,
+  .profile.overlap.carousel .carousel-track {
+    grid-auto-columns: calc((100% - (var(--carousel-visible) - 1) * var(--carousel-gap)) / var(--carousel-visible));
+  }
+
   .profile .profile-card-name {
     font-size: var(--title-size-xxxl);
     font-weight: var(--font-weight-medium);
@@ -442,6 +445,7 @@ main > .profile-container:not(.bg-gradient-a) {
   align-items: center;
   justify-content: center;
   gap: 0;
+  width: 100%;
   border: 1px solid transparent;
   border-radius: 2.4em;
   padding: 0.6em 2.2em;
@@ -480,6 +484,16 @@ main > .profile-container:not(.bg-gradient-a) {
   opacity: 1;
 }
 
+@media (width >= 768px) {
+  .profile.carousel .carousel-view-all {
+    width: auto;
+  }
+
+ .profile.carousel .carousel-intro > .carousel-view-all {
+    display: none;
+  }
+}
+
 .profile.overlap .profile-card-divider {
   display: block;
   width: 100%;
@@ -507,12 +521,6 @@ main > .profile-container:not(.bg-gradient-a) {
 @media (width >= 1024px) {
   .profile.carousel .carousel {
     --carousel-visible: 3;
-  }
-}
-
-@media (width < 768px) {
-  .profile.carousel .carousel-view-all {
-    width: 100%;
   }
 }
 

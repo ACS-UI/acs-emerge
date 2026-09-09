@@ -140,12 +140,7 @@
 
 .testimonial .testimonial-attribution::after {
   backdrop-filter: blur(16px) saturate(120%);
-}
-
-@media (width < 1024px) {
-  .testimonial .testimonial-attribution::after {
-    mask-image: linear-gradient(to top, var(--color-gray-1000) 0%, rgb(0 0 0 / 60%) 35%, transparent 70%);
-  }
+  mask-image: linear-gradient(to top, var(--color-gray-1000) 0%, rgb(0 0 0 / 60%) 35%, transparent 70%);
 }
 
 .testimonial .testimonial-name {
@@ -168,6 +163,10 @@
 }
 
 @media (width >= 1024px) {
+  .testimonial .testimonial-attribution::after {
+    mask-image: none;
+  }
+
   main .section.testimonial-container.bg-gradient-b {
     padding-top: var(--spacing-750);
     padding-bottom: 116px;
