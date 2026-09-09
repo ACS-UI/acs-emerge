@@ -13,9 +13,7 @@ function buildBackgroundVideo(link, poster) {
   video.muted = true; // property form is required for autoplay in Safari/Chrome
   video.setAttribute('aria-hidden', 'true');
   if (poster) video.poster = poster.currentSrc || poster.src;
-
   video.addEventListener('ended', () => video.classList.add('is-ended'));
-
   const href = link.getAttribute('href');
   const ext = href.split('.').pop().split(/[?#]/)[0].toLowerCase();
   const source = document.createElement('source');
@@ -35,16 +33,10 @@ export default function decorate(block) {
   if (videoLink) {
     const poster = block.querySelector('picture img');
     const video = buildBackgroundVideo(videoLink, poster);
-
-    // Remove the authored link (and any poster picture) from the content flow...
     (videoLink.closest('p') || videoLink).remove();
     const picture = block.querySelector('picture');
     if (picture) (picture.closest('p') || picture).remove();
-
-    // ...add the video as the first direct child so it fills the block.
     block.prepend(video);
-
-    // Drop the now-empty authored row/cell wrappers left behind.
     block.querySelectorAll(':scope > div').forEach((row) => {
       if (!row.textContent.trim() && !row.querySelector('img, picture, video, a, button')) {
         row.remove();
