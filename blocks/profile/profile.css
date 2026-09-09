@@ -85,13 +85,14 @@ main > .profile-container:not(.bg-gradient-a) {
   z-index: -1;
   border-radius: inherit;
 }
+
 .profile .profile-card-overlay::before {
   backdrop-filter: blur(var(--profile-overlay-blur)) saturate(130%);
   mask: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, var(--color-gray-1000) 70%);
   will-change: backdrop-filter, opacity;
 }
 
-profile .profile-card-overlay::after {
+.profile .profile-card-overlay::after {
   backdrop-filter: blur(16px) saturate(120%);
   mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, var(--color-gray-1000) 70%);
   will-change: backdrop-filter, opacity;
@@ -237,6 +238,7 @@ profile .profile-card-overlay::after {
   backdrop-filter: blur(10px) saturate(120%);
   mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 60%) 35%, var(--color-gray-1000) 70%);
 }
+
 .profile.overlap .profile-card-overlay p {
   font-size: var(--body-size-m);
   font-weight: var(--font-weight-medium);
@@ -338,6 +340,7 @@ profile .profile-card-overlay::after {
   line-height: 16.5px;
   color: var(--profile-name-color);
 }
+
 .profile .profile-card-role {
   margin: var(--spacing-25) 0 0;
   font-size: 11px;
