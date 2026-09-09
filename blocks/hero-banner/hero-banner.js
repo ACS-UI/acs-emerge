@@ -5,7 +5,6 @@ const VIDEO_TYPES = {
   ogv: 'video/ogg',
 };
 
-
 function buildBackgroundVideo(link, poster) {
   const video = document.createElement('video');
   // Attributes required for silent autoplay across browsers. No `loop`.
@@ -23,7 +22,6 @@ function buildBackgroundVideo(link, poster) {
 
   return video;
 }
-
 
 export default function decorate(block) {
   const videoLink = block.querySelector(
