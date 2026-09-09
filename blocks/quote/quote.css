@@ -29,10 +29,8 @@ main > .quote-container {
   line-height: 0;
 }
 
-@media (width < 768px) {
-  main .quote-container[data-background-text]::before {
-    padding-inline: 0;
-  }
+main .quote-container[data-background-text]::before {
+  padding-inline: 0;
 }
 
 .quote .quote-image picture,
@@ -109,6 +107,10 @@ main > .quote-container {
 
   main > .quote-container {
     margin-top: var(--spacing-750);
+  }
+
+  main .quote-container[data-background-text]::before {
+    padding-inline: var(--spacing-300);
   }
 }
 
