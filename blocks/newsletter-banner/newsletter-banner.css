@@ -25,12 +25,30 @@
   color: var(--newsletter-banner-text-color);
 }
 
+main > .newsletter-banner-container {
+  margin-top: var(--spacing-400);
+}
+
+@media (width >= 768px) {
+  main > .newsletter-banner-container {
+    margin-top: var(--spacing-750);
+  }
+}
+
+/* Mobile-first default (<768px): weight/color already matched "bold, grey";
+   only size needed reducing. */
 main .newsletter-banner-container > .default-content-wrapper:first-child p {
   margin: 0 0 var(--spacing-250);
   color: var(--color-gray-700);
-  font-size: var(--title-size-xl);
+  font-size: var(--title-size-s);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-400);
+}
+
+@media (width >= 768px) {
+  main .newsletter-banner-container > .default-content-wrapper:first-child p {
+    font-size: var(--title-size-xl);
+  }
 }
 
 main .newsletter-banner-container > .default-content-wrapper:last-child {
@@ -40,15 +58,25 @@ main .newsletter-banner-container > .default-content-wrapper:last-child {
 main .newsletter-banner-container > .default-content-wrapper:last-child p {
   margin: 0 0 var(--spacing-200);
   color: var(--color-gray-1000);
-  font-size: var(--body-size-l);
+  font-size: var(--body-size-s);
   font-weight: var(--font-weight-regular);
   line-height: 1.5;
 }
 
 main .newsletter-banner-container > .default-content-wrapper:last-child p:has(strong) {
-  font-size: var(--heading-size-s);
+  font-size: var(--heading-size-xs);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-400);
+}
+
+@media (width >= 768px) {
+  main .newsletter-banner-container > .default-content-wrapper:last-child p {
+    font-size: var(--body-size-l);
+  }
+
+  main .newsletter-banner-container > .default-content-wrapper:last-child p:has(strong) {
+    font-size: var(--heading-size-s);
+  }
 }
 
 main .newsletter-banner-container > .default-content-wrapper:last-child p:last-child {

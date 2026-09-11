@@ -4,10 +4,10 @@
   --pillars-label-color: var(--color-gray-1000);
   --pillars-text-color: var(--color-gray-800);
   --pillars-rule-color: var(--color-gray-300);
-  --pillars-eyebrow-size: var(--body-size-l);
-  --pillars-heading-size: var(--heading-size-l);
-  --pillars-label-size: var(--detail-size-l);
-  --pillars-text-size: var(--body-size-l);
+  --pillars-eyebrow-size: var(--body-size-m);
+  --pillars-heading-size: var(--heading-size-m);
+  --pillars-label-size: var(--detail-size-m);
+  --pillars-text-size: var(--body-size-m);
   --pillars-col-gap: 36px 10px 0 0;
   --pillars-row-gap: 28px;
   --pillars-rule-space: 28px;

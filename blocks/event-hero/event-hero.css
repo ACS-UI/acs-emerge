@@ -128,19 +128,29 @@
 
 @media (width >= 768px) {
   .event-hero {
-    flex-direction: row;
-    align-items: stretch;
-    gap: var(--spacing-600);
+    display: grid;
+    grid-template-columns: minmax(0, 40%) minmax(0, 60%);
+    grid-template-areas:
+      "head    media"
+      "about   media"
+      "details media"
+      "cta     media";
+    align-items: start;
+    gap: var(--spacing-300) var(--spacing-600);
   }
 
   .event-hero .event-hero-content {
-    flex: 1 1 40%;
-    max-width: 40%;
-    gap: var(--spacing-300);
+    display: contents;
   }
 
+  .event-hero .event-hero-head { grid-area: head; }
+  .event-hero .event-hero-about { grid-area: about; }
+  .event-hero .event-hero-details { grid-area: details; }
+  .event-hero .event-hero-cta { grid-area: cta; }
+
   .event-hero .event-hero-media {
-    flex: 1 1 60%;
+    grid-area: media;
+    align-self: stretch;
   }
 
   .event-hero .event-hero-about,

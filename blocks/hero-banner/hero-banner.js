@@ -5,20 +5,14 @@ const VIDEO_TYPES = {
   ogv: 'video/ogg',
 };
 
-/**
- * Builds a full-bleed, autoplaying background video from a link to a video file.
- * @param {HTMLAnchorElement} link Anchor pointing at the video file
- * @param {HTMLImageElement} [poster] Optional poster image shown before/while loading
- * @returns {HTMLVideoElement}
- */
 function buildBackgroundVideo(link, poster) {
   const video = document.createElement('video');
-  // Attributes required for silent autoplay across browsers.
-  ['autoplay', 'muted', 'playsinline', 'loop'].forEach((attr) => video.setAttribute(attr, ''));
+  // Attributes required for silent autoplay across browsers. No `loop`.
+  ['autoplay', 'muted', 'playsinline'].forEach((attr) => video.setAttribute(attr, ''));
   video.muted = true; // property form is required for autoplay in Safari/Chrome
   video.setAttribute('aria-hidden', 'true');
   if (poster) video.poster = poster.currentSrc || poster.src;
-
+  video.addEventListener('ended', () => video.classList.add('is-ended'));
   const href = link.getAttribute('href');
   const ext = href.split('.').pop().split(/[?#]/)[0].toLowerCase();
   const source = document.createElement('source');
@@ -29,10 +23,6 @@ function buildBackgroundVideo(link, poster) {
   return video;
 }
 
-/**
- * Loads and decorates the hero-banner block as a full-bleed background video only.
- * @param {Element} block The block element
- */
 export default function decorate(block) {
   const videoLink = block.querySelector(
     'a[href$=".mp4"], a[href$=".webm"], a[href$=".mov"], a[href$=".ogv"]',
@@ -41,16 +31,10 @@ export default function decorate(block) {
   if (videoLink) {
     const poster = block.querySelector('picture img');
     const video = buildBackgroundVideo(videoLink, poster);
-
-    // Remove the authored link (and any poster picture) from the content flow...
     (videoLink.closest('p') || videoLink).remove();
     const picture = block.querySelector('picture');
     if (picture) (picture.closest('p') || picture).remove();
-
-    // ...add the video as the first direct child so it fills the block.
     block.prepend(video);
-
-    // Drop the now-empty authored row/cell wrappers left behind.
     block.querySelectorAll(':scope > div').forEach((row) => {
       if (!row.textContent.trim() && !row.querySelector('img, picture, video, a, button')) {
         row.remove();

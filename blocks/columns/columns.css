@@ -15,6 +15,7 @@
 .columns > div {
   display: flex;
   flex-direction: column;
+  gap: var(--spacing-300);
 }
 
 .columns img {
@@ -35,10 +36,16 @@
 
 .columns > div > .columns-intro-col p {
   margin: 0 0 var(--spacing-100);
+  font-size: var(--title-size-s);
 }
 
 .columns > div > .columns-intro-col :is(h1, h2, h3, h4, h5, h6) {
   margin: 0;
+  font-size: var(--heading-size-l);
+}
+
+.columns > div:has(> .columns-intro-col) > div:not(.columns-intro-col) {
+  font-size: var(--body-size-m);
 }
 
 @media (width >= 768px) {

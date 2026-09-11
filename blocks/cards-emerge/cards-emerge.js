@@ -46,7 +46,6 @@ export default function decorate(block) {
     ul.append(li);
   });
 
-  // Decorative butterfly; wrapped beside the <ul> since <img> can't be a direct child of it.
   const listWrapper = document.createElement('div');
   listWrapper.className = 'cards-emerge-list-wrapper';
 
