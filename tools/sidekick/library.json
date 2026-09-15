@@ -1,0 +1,124 @@
+{
+  "total": 29,
+  "offset": 0,
+  "limit": 29,
+  "data": [
+    {
+      "name": "Agenda",
+      "path": "/tools/sidekick/blocks/agenda"
+    },
+    {
+      "name": "Callout",
+      "path": "/tools/sidekick/blocks/callout"
+    },
+    {
+      "name": "Cards",
+      "path": "/tools/sidekick/blocks/cards"
+    },
+    {
+      "name": "Cards Emerge",
+      "path": "/tools/sidekick/blocks/cards-emerge"
+    },
+    {
+      "name": "Cards Working",
+      "path": "/tools/sidekick/blocks/cards-working"
+    },
+    {
+      "name": "Challenge",
+      "path": "/tools/sidekick/blocks/challenge"
+    },
+    {
+      "name": "Client Cards",
+      "path": "/tools/sidekick/blocks/client-cards"
+    },
+    {
+      "name": "Client Detail",
+      "path": "/tools/sidekick/blocks/client-detail"
+    },
+    {
+      "name": "Columns",
+      "path": "/tools/sidekick/blocks/columns"
+    },
+    {
+      "name": "Commitment Cards",
+      "path": "/tools/sidekick/blocks/commitment-cards"
+    },
+    {
+      "name": "Event Cards",
+      "path": "/tools/sidekick/blocks/event-cards"
+    },
+    {
+      "name": "Event Hero",
+      "path": "/tools/sidekick/blocks/event-hero"
+    },
+    {
+      "name": "Event Highlights",
+      "path": "/tools/sidekick/blocks/event-highlights"
+    },
+    {
+      "name": "Fragment",
+      "path": "/tools/sidekick/blocks/fragment"
+    },
+    {
+      "name": "Gallery Carousel",
+      "path": "/tools/sidekick/blocks/gallery-carousel"
+    },
+    {
+      "name": "Hero",
+      "path": "/tools/sidekick/blocks/hero"
+    },
+    {
+      "name": "Hero Banner",
+      "path": "/tools/sidekick/blocks/hero-banner"
+    },
+    {
+      "name": "Newsletter Banner",
+      "path": "/tools/sidekick/blocks/newsletter-banner"
+    },
+    {
+      "name": "Photo Gallery",
+      "path": "/tools/sidekick/blocks/photo-gallery"
+    },
+    {
+      "name": "Pillars",
+      "path": "/tools/sidekick/blocks/pillars"
+    },
+    {
+      "name": "Profile",
+      "path": "/tools/sidekick/blocks/profile"
+    },
+    {
+      "name": "Profile Details",
+      "path": "/tools/sidekick/blocks/profile-details"
+    },
+    {
+      "name": "Quote",
+      "path": "/tools/sidekick/blocks/quote"
+    },
+    {
+      "name": "Recording",
+      "path": "/tools/sidekick/blocks/recording"
+    },
+    {
+      "name": "Session Resources Carousel",
+      "path": "/tools/sidekick/blocks/session-resources-carousel"
+    },
+    {
+      "name": "Success",
+      "path": "/tools/sidekick/blocks/success"
+    },
+    {
+      "name": "Team",
+      "path": "/tools/sidekick/blocks/team"
+    },
+    {
+      "name": "Testimonial",
+      "path": "/tools/sidekick/blocks/testimonial"
+    },
+    {
+      "name": "Widget",
+      "path": "/tools/sidekick/blocks/widget"
+    }
+  ],
+  ":type": "sheet"
+}

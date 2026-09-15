@@ -1,0 +1,14 @@
+{
+  "project": "ACS Emerge",
+  "plugins": [
+    {
+      "id": "library",
+      "title": "Library",
+      "environments": ["edit"],
+      "url": "/tools/sidekick/library.html",
+      "isPalette": true,
+      "passConfig": true,
+      "passReferrer": true
+    }
+  ]
+}
