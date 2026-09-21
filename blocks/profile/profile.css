@@ -488,10 +488,6 @@ main > .profile-container:not(.bg-gradient-a) {
   .profile.carousel .carousel-view-all {
     width: auto;
   }
-
- .profile.carousel .carousel-intro > .carousel-view-all {
-    display: none;
-  }
 }
 
 .profile.overlap .profile-card-divider {

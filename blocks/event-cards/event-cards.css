@@ -246,6 +246,7 @@ main > .event-cards-container {
 }
 
 .event-cards.carousel .carousel :is(h1,h2,h3,h4,h5,h6) {
+  margin-top: var(--spacing-250);
   font-weight: var(--font-weight-regular);
   font-size: var(--heading-size-xxl);
   line-height: var(--line-height-1100);
@@ -304,7 +305,7 @@ main > .event-cards-container {
   align-items: center;
   gap: 0;
   line-height: 20px;
-  margin-top: var(--spacing-250);
+  margin-top: var(--spacing-200);
   border: 1px solid transparent;
   border-radius: 2.4em;
   padding: 0.6em 1.5em;
