@@ -112,3 +112,40 @@ indices:
       tags:
         select: head > meta[name="services"]
         value: attribute(el, 'content')
+
+  # Events: one row per event detail page under /events/, feeding a
+  # query-index-driven events listing/cards block. Cards link to these pages.
+  events:
+    # require a child segment so the folder page `/events` is not indexed
+    include:
+      - '/events/*'
+    exclude:
+      - '/events'
+    target: /events/query-index.json
+    properties:
+      # event name (og:title is auto-derived from the page's first heading)
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, 'content')
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, 'content')
+      image:
+        select: head > meta[property="og:image"]
+        value: attribute(el, 'content')
+      # event calendar date, authored as page metadata (e.g. "2026-08-11")
+      date:
+        select: head > meta[name="date"]
+        value: attribute(el, 'content')
+      # start time, authored as page metadata (e.g. "9 AM IST")
+      time:
+        select: head > meta[name="time"]
+        value: attribute(el, 'content')
+      # headcount / community size, authored as page metadata (e.g. "500")
+      attendees:
+        select: head > meta[name="attendees"]
+        value: attribute(el, 'content')
+      # event length, authored as page metadata (e.g. "2 hours")
+      duration:
+        select: head > meta[name="duration"]
+        value: attribute(el, 'content')
