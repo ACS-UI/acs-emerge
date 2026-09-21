@@ -328,7 +328,7 @@ main > .success-container {
   }
 
   .success.carousel .carousel-view-all {
-    display: none;
+    width: auto;
   }
 
   .success.carousel .carousel-intro h2,
