@@ -314,11 +314,11 @@ export default async function decorate(block) {
 
   const pauseBtn = el('button', { type: 'button', class: 'hero-slider-pause', 'aria-live': 'polite' }, 'Pause slideshow');
   let paused = false; // user pressed pause
-  let held = false; // hover / focus inside
+  let held = false; // keyboard focus inside
   let current = -1;
   // With progress bars the selected bar is the clock (the slide advances on its animationend),
   // so bar and slide can never drift apart. Without bars a timer keeps its remaining time
-  // across hover / focus / pause instead of starting over.
+  // across keyboard focus / pause instead of starting over.
   const barClock = nav === 'bars' && navItems.length > 0;
   let timer;
   let remaining = speed;
@@ -380,11 +380,10 @@ export default async function decorate(block) {
     schedule();
   });
 
-  // pause while pointer or focus is inside (resume when it leaves)
+  // keeps playing under the pointer; pauses only while keyboard focus is inside (so a
+  // keyboard user can read the slide) and resumes when focus leaves
   const hold = (on) => { held = on; schedule(); };
-  viewport.addEventListener('mouseenter', () => hold(true));
-  viewport.addEventListener('mouseleave', () => hold(false));
-  block.addEventListener('focusin', () => hold(true));
+  block.addEventListener('focusin', (e) => { if (e.target.matches(':focus-visible')) hold(true); });
   block.addEventListener('focusout', (e) => { if (!block.contains(e.relatedTarget)) hold(false); });
 
   viewport.addEventListener('keydown', (e) => {

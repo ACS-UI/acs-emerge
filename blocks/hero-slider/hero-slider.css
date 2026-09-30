@@ -84,8 +84,14 @@
     --hero-slider-image-out: 0.35s ease-in 0.05s;
     --hero-slider-speed: 5s;
 
+    /* layout: the design system's page container, same as the other Beautystack components */
+    --hero-slider-max-width: var(--layout-container-max, 1200px);
+    --hero-slider-page-gutter: var(--layout-gutter-mobile, 16px);
+
     position: relative;
     overflow: hidden;
+    max-width: min(var(--hero-slider-max-width), 100% - 2 * var(--hero-slider-page-gutter));
+    margin-inline: auto;
     background: var(--hero-slider-bg);
     font-family: var(--hero-slider-font);
     -webkit-font-smoothing: antialiased;
@@ -613,5 +619,12 @@
     .hero-slider.nav-bars .hero-slider-nav-item,
     .hero-slider.nav-bars .hero-slider-nav-item.is-selected {
         width: var(--hero-slider-bar-width-desktop);
+    }
+}
+
+/* the design system's desktop page gutter starts at 960px (as on the hero) */
+@media (width >= 960px) {
+    .hero-slider {
+        --hero-slider-page-gutter: var(--layout-gutter-desktop, 40px);
     }
 }
