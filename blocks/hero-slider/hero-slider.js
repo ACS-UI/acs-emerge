@@ -1,5 +1,7 @@
-import { loadCSS, createOptimizedPicture, toClassName } from '../../scripts/aem.js';
-import { el, readConfig, pick } from '../../scripts/beautystack.js';
+import { createOptimizedPicture, toClassName } from '../../scripts/aem.js';
+import {
+  el, readConfig, pick, loadBeautystack,
+} from '../../scripts/beautystack.js';
 
 /*
  * Hero Slider (revlon.com homepage slideshow)
@@ -165,7 +167,8 @@ function cropped(child) {
 }
 
 export default async function decorate(block) {
-  const fontCss = loadCSS('https://use.typekit.net/dnl7slg.css').catch(() => {});
+  // Beautystack (Revlon) tokens + brand font; every token alias has a literal fallback
+  const fontCss = loadBeautystack();
   const cfg = readConfig(block, CONFIG);
   const reduced = window.matchMedia?.(REDUCED).matches;
   const autoplay = onOff(cfg.autoplay, true) && !reduced;
