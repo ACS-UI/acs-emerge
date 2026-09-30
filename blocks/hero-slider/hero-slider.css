@@ -513,12 +513,14 @@
     animation: hero-slider-bar 0s linear forwards;
 }
 
-.hero-slider.nav-bars.is-playing .hero-slider-nav-item.is-selected::after {
+/* with autoplay the bar fills over the slide's time; it freezes in place while held or paused */
+.hero-slider.nav-bars.autoplay .hero-slider-nav-item.is-selected::after {
     animation-duration: var(--hero-slider-speed);
+    animation-play-state: paused;
 }
 
-.hero-slider.nav-bars.is-paused .hero-slider-nav-item.is-selected::after {
-    animation-duration: 0s;
+.hero-slider.nav-bars.is-playing .hero-slider-nav-item.is-selected::after {
+    animation-play-state: running;
 }
 
 /* ---- pause (visually hidden until focused) ---- */

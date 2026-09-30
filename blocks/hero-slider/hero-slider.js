@@ -292,6 +292,7 @@ export default async function decorate(block) {
 
   block.classList.add(`transition-${transition}`, `nav-${nav}`);
   if (animate) block.classList.add('animated');
+  if (autoplay && slides.length > 1) block.classList.add('autoplay');
 
   const viewport = el('div', {
     class: 'hero-slider-viewport', role: 'region', 'aria-roledescription': 'carousel', 'aria-label': 'Featured', tabindex: '0',
@@ -315,14 +316,25 @@ export default async function decorate(block) {
   let paused = false; // user pressed pause
   let held = false; // hover / focus inside
   let current = -1;
+  // With progress bars the selected bar is the clock (the slide advances on its animationend),
+  // so bar and slide can never drift apart. Without bars a timer keeps its remaining time
+  // across hover / focus / pause instead of starting over.
+  const barClock = nav === 'bars' && navItems.length > 0;
   let timer;
+  let remaining = speed;
+  let startedAt = 0;
 
-  function schedule() {
+  function schedule(restart = false) {
     clearTimeout(timer);
-    block.classList.toggle('is-playing', autoplay && !paused && !held && slides.length > 1);
-    if (!autoplay || paused || held || slides.length < 2) return;
+    if (restart) remaining = speed;
+    else if (startedAt) remaining = Math.max(0, remaining - (performance.now() - startedAt));
+    startedAt = 0;
+    const playing = autoplay && !paused && !held && slides.length > 1;
+    block.classList.toggle('is-playing', playing);
+    if (!playing || barClock) return;
+    startedAt = performance.now();
     // eslint-disable-next-line no-use-before-define
-    timer = setTimeout(() => goTo(current + 1), speed);
+    timer = setTimeout(() => goTo(current + 1), remaining);
   }
 
   function goTo(index) {
@@ -352,7 +364,13 @@ export default async function decorate(block) {
       }
     });
     slideEls[next].querySelectorAll('video').forEach((v) => v.play?.().catch(() => {}));
-    schedule();
+    schedule(true);
+  }
+
+  if (barClock && autoplay) {
+    navEl.addEventListener('animationend', (e) => {
+      if (e.animationName === 'hero-slider-bar' && e.target === navItems[current]) goTo(current + 1);
+    });
   }
 
   pauseBtn.addEventListener('click', () => {
