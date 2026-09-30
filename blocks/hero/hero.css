@@ -1160,3 +1160,10 @@
 .hero .ds-hero__panel-media--ground {
     background: var(--hero-ground);
 }
+
+/* the component stacks every direct panel child in one cell (`.ds-hero__panel > *`);
+   the optimised <picture> wrapper is display: contents, so its img is the grid item
+   and needs the same cell */
+.hero .ds-hero__panel > picture > img {
+    grid-area: stack;
+}
