@@ -82,6 +82,14 @@
     }
 }
 
+/* optimised <picture>s are `display: contents` so their <img> lays out as the component
+   expects; the <source> children must not become layout items of the parent (grid/flex) */
+:where(.hero, .search-suggestions, .article-cards, .filters-sort-panel)
+    picture
+    > source {
+    display: none;
+}
+
 .hero,
 .search-suggestions,
 .article-cards,

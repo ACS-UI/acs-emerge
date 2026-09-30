@@ -176,6 +176,11 @@
     display: contents;
 }
 
+/* sources of a display: contents picture must not become layout items */
+.hero-slider .hero-slider-media picture > source {
+    display: none;
+}
+
 .hero-slider .hero-slider-image {
     display: block;
     width: 100%;
