@@ -15,7 +15,7 @@ import {
  *                                    facet text: "Label (count)"; bold = pre-applied
  *   Sort          | list of options  bold = selected (default: first)
  *
- * Config rows:
+ * Config rows, authored first, before the groups:
  *   Results   number of products after filtering  (default 0)
  *   Total     unfiltered total; reads "31 of 108 products" when set
  *   Sticky    true | false  keep the sidebar in view while scrolling (default false)

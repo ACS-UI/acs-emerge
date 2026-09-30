@@ -86,7 +86,8 @@ export function loadBeautystack() {
 }
 
 /**
- * Pulls authored config rows (`key | value`) out of a block.
+ * Pulls authored config rows (`key | value`) out of a block. By convention they are
+ * authored first, before the content, but they are recognised in any position.
  * Only rows whose first cell matches one of `keys` (after toClassName) are treated
  * as config; they are removed from the block. Aliases map several authored
  * spellings to one config name.

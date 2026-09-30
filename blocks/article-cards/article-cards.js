@@ -5,14 +5,14 @@ import {
 /*
  * Article Cards (Beautystack Molecules/Article Card in an Organisms/Card Collection band)
  *
- * Rows:
+ * Rows (after the config rows):
  *   [optional] one cell with a heading (+ subtitle paragraph)  -> band header
  *   card rows: image | headline, short description, date, link  -> one card each
  *   [optional] one cell holding only a link to a .json index   -> cards from the index
  *   [optional] one cell holding only a link, last               -> band CTA
  * Everything show/hide (headline, subtitle, CTA, description, date, image) is authoring.
  *
- * Config rows:
+ * Config rows, authored first, before the content:
  *   Columns    2 | 3 | 4           most columns at full width (default 4)
  *   Alignment  left | center       header alignment (default left)
  *   Ground     paper | paper-alt | inverse (dark)   band background (default paper)

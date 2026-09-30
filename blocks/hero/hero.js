@@ -13,7 +13,7 @@ import {
  *   hero (image)         Image (legacy)
  *   hero (inverse)       Inverse (legacy)
  *
- * Config rows (things authoring cannot express):
+ * Config rows, authored first, before the content (things authoring cannot express):
  *   Backdrop         solid | overlay            (not on secondary)
  *   Content Tone     dark | paper | alt
  *   Block Placement  left | center | right      (not on secondary: there the

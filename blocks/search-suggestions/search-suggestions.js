@@ -11,7 +11,7 @@ import {
  *   Products    | list of products, each an image + name (optionally linked)
  * No group authored = the no-results state.
  *
- * Config rows:
+ * Config rows, authored first, before the groups:
  *   Query        what the shopper typed; used in the see-all / no-results action
  *   Search Page  where the see-all action goes (default /search), gets ?q=<query>
  */
