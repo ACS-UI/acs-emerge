@@ -1,0 +1,1 @@
+import{j as e}from"./iframe-6dx3hp_4.js";function t({text:o,attribution:s}){return e.jsxs("blockquote",{className:"ds-quote",children:[e.jsx("p",{className:"ds-quote__text",children:o}),s&&e.jsx("footer",{className:"ds-quote__attribution",children:s})]})}t.__docgenInfo={description:"",methods:[],displayName:"Quote"};export{t as Q};
