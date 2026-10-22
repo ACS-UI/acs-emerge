@@ -35,7 +35,11 @@ header .nav-wrapper:has(nav[aria-expanded='true']) {
 }
 
 @media (width >= 1024px) {
-  body:has(main > .hero-banner-container:first-child) > header {
+  header {
+    height: var(--nav-height-desktop);
+  }
+
+  body:has(main > .hero-banner-container:first-child .hero-banner.has-video) > header {
     --nav-brand-color: var(--color-white);
     --nav-link-color: var(--color-gray-400);
     --nav-link-hover-color: var(--color-white);
@@ -43,7 +47,7 @@ header .nav-wrapper:has(nav[aria-expanded='true']) {
     height: 0;
   }
 
-  body:has(main > .hero-banner-container:first-child) .nav-wrapper {
+  body:has(main > .hero-banner-container:first-child .hero-banner.has-video) > header .nav-wrapper {
     position: absolute;
     inset: 0 0 auto;
     background-color: transparent;
