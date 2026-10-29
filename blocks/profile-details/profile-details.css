@@ -34,7 +34,7 @@
 .profile-details .profile-details-image img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 .profile-details .profile-details-content {
